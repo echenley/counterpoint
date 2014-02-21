@@ -1,6 +1,6 @@
 body {
   font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
-  font-size:16pt;
+  font-size:120%;
   margin:0;
   background-color:#ffffff;
 }
@@ -27,7 +27,7 @@ body {
   left:0;
   right:0;
   text-align:center;
-  font-size:50pt;
+  font-size:3em;
   font-weight:bold;
 }
 
@@ -49,7 +49,7 @@ body {
   position:absolute;
   top:10px;
   right:10px;
-  font-size:16pt;
+  font-size:1em;
 }
 
 #navbar {
@@ -74,7 +74,7 @@ body {
   padding:0;
   line-height:34px;
   text-align:center;
-  font-size:14pt;
+  font-size:1em;
   background-color:#ffffff;
 }
 
@@ -103,8 +103,8 @@ body {
 }
 
 #content h1 {
-  line-height:60px;
-  font-size:40pt;
+  line-height:1.2em;
+  font-size:2.8em;
   font-weight:normal;
 }
 
@@ -121,15 +121,16 @@ body {
 }
 
 #content p {
-  line-height:32px;
+  line-height:1.7em;
 }
 
 #content p:first-of-type:first-letter {
-  display:inline-block;
-  position:relative;
+  display:block;
   float:left;
-  font-size:560%;
-  padding:34px 10px 10px 0;
+  height:0.7em;
+  line-height:0.7em;
+  font-size:5.8em;
+  margin:12px 8px -10px 2px;
 }
 
 #content a {
@@ -145,7 +146,7 @@ body {
 #content code {
   display:inline-block;
   font-family:"Courier New", Courier, monospace;
-  font-size:11pt;
+  font-size:0.8em;
   padding-left:10px;
   padding-right:10px;
 }
@@ -158,10 +159,10 @@ body {
 
 #content blockquote.code {
   font-family:"Courier New", Courier, monospace;
-  font-size:11pt;
+  font-size:0.8em;
   white-space:nowrap;
   overflow:auto;
-  line-height:130%;
+  line-height:1.3em;
 }
 
 #content hr {
@@ -177,7 +178,7 @@ body {
   min-width:800px;
   height:60px;
   line-height:60px;
-  font-size:10pt;
+  font-size:0.6em;
   text-align:center;
   background-color:#596781;
   color:#ffffff;
