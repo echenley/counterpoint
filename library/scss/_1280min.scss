@@ -1,0 +1,47 @@
+// 1280px corresponds to max-width of container //
+
+@media screen and (min-width: 1280px) {
+  body { font-size: 95%; }
+  
+  h1 { font-size: 5em; }
+  
+  ul.page-numbers { padding-right: $margin-1280; }
+  
+  #archive-page {
+    #searchform { margin-top: $margin-1280; }
+    h3 { margin: $margin-1280 0; }
+  }
+  
+  #container {
+    
+    div#sidebar { 
+      margin-left: $margin-1280;
+      padding: $margin-1280 0;
+    }
+    
+    section#content {
+       padding: $margin-1280 0;
+       
+      .post-header { height: 360px; }
+      
+      #archive, #post-list {
+        margin-right: $margin-1280;
+        .archive-header {
+          margin-right: $margin-1280;
+          margin-bottom: $margin-1280;
+        }
+        li { margin-bottom: $margin-1280; }
+        li.odd .thumbnail { margin-left: $margin-1280; }
+        li.even {
+          padding: $margin-1280;
+          .thumbnail { margin-right: $margin-1280; }
+        }
+      }
+      
+      article#page { margin-top: $margin-1280; }
+      
+      article { margin-bottom: $margin-1280; }
+      div#article-bottom { margin-top: $margin-1280; }
+    }
+  }
+}

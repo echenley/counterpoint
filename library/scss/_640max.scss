@@ -1,0 +1,127 @@
+@media screen and (max-width: 640px) {
+ 
+  h1 { 
+    font-size: 2.4em;
+    padding: 0 5%;
+    text-align: left;
+    border: none;
+    line-height: 74px;
+    background-color: $highlight;
+    a { padding: 0; }
+  }
+  h2 { padding-left: 0; }
+      
+  #container {
+    padding: 0 0 5% 0;
+    
+    div#sidebar {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      height: auto;
+      width: 100%;
+      max-width: 100%;
+    
+      nav#site-nav {
+          
+        h1 .menu-link {
+          position: absolute;
+          display: block;
+          top: 0;
+          right: 0;
+          width: 74px;
+          padding: 0;
+          background: rgba(62,62,62,0.9);
+          color: $bg-color;
+          font-size: 130%;
+          text-align: center;
+          z-index: 10;
+        }
+        
+        > ul {
+          z-index: 10;
+          position: absolute;
+          top: 74px;
+          left: 0;
+          right: 0;
+          height: 0;
+          width: 100%;
+          background: rgba(62,62,62,0.9);
+          overflow: hidden;
+          
+          li {
+            margin-bottom: -1px;
+            border: 1px solid transparent;
+            
+            a {
+              height: 50px;
+              line-height: 50px;
+              color: $bg-color;
+            }
+            
+            a:hover {
+              background-color: transparent;
+              text-decoration: underline;
+            }
+            
+            ul.sub-menu {
+              background-color: transparent;
+            }
+          }
+          
+          li.active {
+            -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+            border: 1px solid $bg-color;
+            > a {
+              background-color: transparent;
+              text-decoration: underline;
+            }
+            ul.sub-menu {
+              border-top: 1px solid $bg-color;
+              height: auto;
+            }
+          }
+        }
+      
+        > ul.active {
+          height: auto;
+          padding: 5% 20%;
+        }
+      }
+        
+      #sidebar-widget {
+        display: none;
+      }
+    }
+    
+    #content {
+      width: 100%;
+      padding-top: 0;
+      float: none;
+      
+      .post-header h2 .post-title,
+      article,
+      .archive-header,
+      #comments-section,
+      ul.page-numbers {
+        width: $post-width-640;
+        margin: 0 auto;
+        padding-left: 0;
+      }
+      
+      .archive-header h3 { padding: 5% 0; }
+      #archive li:first-child { padding-top: 0; }
+      #post-list, #archive {
+        width: 100%;
+        
+        li {
+          width: 100%;
+          padding: (100% - $post-width-640) / 2;
+          margin: 0;
+        }
+        li.even .thumbnail { margin-right: 5%; }
+        li.odd .thumbnail { margin-left: 5%; }
+      }
+    }
+  }
+}

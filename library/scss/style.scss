@@ -1,0 +1,483 @@
+/****************************************
+  Theme Name:   Counterpoint 
+      Author:   Evan Henley
+  Author URI:   http://henleyedition.com
+/****************************************/
+
+$primary-color:   #4f4f4f;  // text color
+$bg-color:        #fff;     // background
+$highlight:       #f4f4f4;  // light gray highlight
+$link-color:      #c44d58;  // linkz
+$line-color:      #dedede;  // borders and <hr>
+$container-size:  1280px;   // max container width
+
+$container-margin: 3%;
+$standard-margin:  3vw;
+$margin-1280:      36px;
+$nav-width:        .26;
+$content-width:    .68;     // .6 left over for nav margins
+$post-width:       80.9%; 
+$post-width-900:   100% - ($container-margin / $content-width);
+$post-width-640:   90%;
+
+// typefaces (base, <code>) //
+
+$serif:           'Merriweather', TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+$monospace:       'Inconsolata', 'Courier New', Courier, monospace;
+
+// mixins //
+
+@mixin transition($transition...) {
+  $prefixes: ('-webkit', '-moz', '-ms', '');
+  @each $prefix in $prefixes {
+    #{$prefix}-transition: $transition;
+  }
+  transition: $transition;
+}
+
+@mixin form-input {
+  max-width: 100%;
+  margin: 0;
+  padding: 0.5em 0.8em;
+  border: 2px solid $line-color;
+  line-height: 1.5em;
+  @include transition(background 0.2s);
+}
+
+// Reset/Normalize Code //
+
+@import '_reset'; 
+
+// Clearfix //
+
+.cf {
+  zoom: 1;
+  
+  &:before, &:after {
+    content: "";
+    display: table;
+  }
+  
+  &:after {
+    clear: both;
+  }
+}
+
+// Wordpress Classes //
+
+.alignright { float: right; }
+.alignleft { float: left; }
+
+// Main Styles //
+
+html { height: 100%; }
+
+body {
+  font-family: $serif;
+  font-size: 95%;
+  color: $primary-color;
+  background-color: $primary-color;
+  height: 100%;
+}
+
+#container {
+  margin: 0 auto;
+  max-width: $container-size;
+  min-height: 100%;
+  background-color: $bg-color;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+// Headings //
+
+h1 {
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: center;
+  line-height: 1.4em;
+  font-size: 5.2vw;
+  border-top: 2px solid $primary-color;
+  border-bottom: 2px solid $primary-color;
+  a {
+    display: block;
+    color: $primary-color;
+    padding: 0.3em 0;
+  }
+  .menu-link { display: none; }
+}
+
+h2 {
+  position: absolute;
+  display: block;
+  bottom: 0;
+  width: 100%;
+  font-size: 1.8em;
+  font-weight: normal;
+  line-height: 1.4em;
+  background: rgba(34,34,34,0.6);
+  color: $bg-color;
+  
+  > * {
+    display: block;
+    width: $post-width;
+    padding: 0.5em 0 0.5em 0.5em;
+    background: none;
+    text-align: left;
+  }
+}
+
+h3 {
+  display: block;
+  padding: 0.8em 0;
+  font-size: 1.3em;
+  font-weight: bold;
+  line-height: 1.4em;
+  border-top: 2px solid $primary-color;
+  border-bottom: 2px solid $primary-color;
+}
+
+h4 {
+  display: block;
+  padding: 0.4em 0;
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1em;
+}
+
+// Forms //
+
+input[type=submit],
+input[type=text],
+input[type=email],
+input[type=url],
+textarea {
+  border-radius: 0;
+  -webkit-appearance: none; // removes iphone shadow //
+}
+
+#searchform {
+  
+  label { display: none; }
+  
+  input {
+    width: 100%;
+    @include form-input;
+  }
+}
+
+// Archives //
+
+.archive-header {
+  width: $content-width;
+  margin-right: $standard-margin;
+  margin-bottom: $standard-margin;
+  h3 {
+    font-size: 1.5em;
+    border: none;
+    padding: 0;
+  }
+}
+
+#archive-page {
+  #searchform { margin-top: $standard-margin; }
+  h3 { margin: $standard-margin 0; }
+  ul { margin: 0; padding: 0; }
+  ul.topics li, ul.monthly li {
+    display: inline;
+  }
+}
+
+// Widget Areas //
+
+div#sidebar #sidebar-widget {
+  position: absolute;
+  bottom: 3vw;
+  width: 100%;
+}
+
+section#post-meta { text-align: left; }
+
+div#article-bottom {
+  margin-top: $standard-margin;
+  padding: 1em 0;
+}
+
+div#article-bottom {
+  background-color: $highlight;
+  text-align: center;
+}
+
+.simple-social-icons ul li a { @include transition(background 0.2s); }
+
+// Main Navigation (sidebar.php) //
+
+div#sidebar {
+  position: fixed;
+  height: 100%;
+  width: $nav-width * 100%;
+  max-width: $container-size * $nav-width;
+  margin-left: $standard-margin;
+  padding: $standard-margin 0;
+  
+  nav#site-nav {
+    
+    h1 {} // see 'Headings' above //
+    
+    > ul {
+      width: 100%;
+      list-style: none;
+      font-size: 1.1em;
+      
+      li {
+        width: 100%;
+        line-height: 2.8em;
+        text-align: center;
+        
+        a {
+          display: block;
+          color: $primary-color;
+          @include transition(background-color 0.2s, color 0.2s);
+        }
+        
+        a:hover {
+          background-color: $primary-color;
+          color: $bg-color;
+        }
+        
+        ul.sub-menu {
+          position: relative;
+          height: 0;
+          background-color: $highlight;
+          overflow: hidden;
+        }
+      }    
+        
+      li.active {
+        > a {
+          background-color: $primary-color;
+          color: $bg-color;
+        }
+        ul.sub-menu {
+          height: auto;
+        }
+      }
+      
+      li.menu-item-has-children { cursor: pointer; }
+    }
+  }
+}
+
+section#content {
+  float: right;
+  width: $content-width * 100%;
+  max-width: $container-size * $content-width;
+  line-height: 2em;
+  text-align: justify;
+  padding: $standard-margin 0;
+  
+  a {
+    color: $link-color;
+    @include transition(color 0.2s);
+  }
+  
+  a:hover { color: darken($link-color, 20%); }
+  
+  code, blockquote {
+    display: block;
+    margin: 0.4em $standard-margin;
+    padding: 0.8em;
+    background-color: $highlight;
+    border: 2px solid $line-color;
+  }
+  
+  code {
+    display: block;
+    font-family: $monospace;
+    max-height: 20em;
+    white-space: nowrap;
+    overflow: auto;
+    line-height: 1.5em;
+  }
+  
+  section#post-meta {
+    display: block;
+    overflow: hidden;
+    line-height: 40px;
+    time.timestamp {
+      float: right;
+      font-style: italic;
+    }
+  }
+  
+  // Front-Page and Archives (index.php, archive.php) //
+
+  #archive, #post-list {
+    margin-right: $standard-margin;
+    
+    li {
+      position: relative;
+      display: block;
+      width: 100%;
+      margin-bottom: $standard-margin;
+      
+      .thumbnail {
+        position: relative;
+        display: block;
+        
+        h2 { display: none; }
+      }
+      
+      h3.post-title {
+        overflow: hidden;
+        text-align: left;
+        padding: 0;
+        
+        a {
+          display: block;
+          padding: 0.8em 0;
+          color: inherit;
+        }
+      }
+      
+      .excerpt {
+        margin-top: 0.4em;
+        margin-bottom: -9px;
+      }
+      
+      .read-more {
+        display: inline;
+        float: right;
+      }
+    }
+    
+    li.odd {
+      background-color: #fff;
+      
+      .thumbnail {
+        float: right;
+        width: (100% - ($container-margin / ($content-width - 0.03))) / 1.618;        // golden ratio (1:1.618) between thumbnail and .post-info (minus internal margin)
+        padding-top: (100% - ($container-margin / ($content-width - 0.03))) / 2.618;  // width and height also share golden ratio relationship
+        margin-left: $standard-margin;
+      }
+    }
+    
+    li.even { 
+      padding: $standard-margin;
+      background-color: $highlight;
+      
+      .thumbnail {
+        float: left;
+        width: (100% - ($container-margin / ($content-width - 0.09))) / 1.618;        // golden ratio (1:1.618) between thumbnail and .post-info (minus internal margin)
+        padding-top: (100% - ($container-margin / ($content-width - 0.09))) / 2.618;  // width and height also share golden ratio relationship
+        margin-right: $standard-margin;
+      }
+    }
+    
+    li:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  // Page Numbers //
+  
+  ul.page-numbers {
+    width: auto;
+    margin: $standard-margin $standard-margin 0 0;
+    text-align: center;
+    li {
+      display: inline;
+      margin-left: -4px;
+      * {
+        display: inline-block;
+        padding: 4px 12px;
+      }
+    }
+  }
+  
+  // Headers (single.php, page.php, archive-post.php) //
+  
+  header.post-header {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 28vw;
+    min-height: 260px;
+  }
+  
+  // Main Content (single.php, page.php, archive.php) //
+  
+  article#post > p:first-of-type:first-letter {
+    display: block;
+    float: left;
+    height: 1em;
+    line-height: 1em;
+    font-family: $monospace;
+    font-size: 7.1em;
+    margin: -10px 10px -8px 6px;
+  }
+  
+  article#page { margin-top: 2vw; }
+  
+  article {
+    position: relative;
+    width: $post-width;
+    margin-bottom: $standard-margin;
+
+    img {
+      display: block;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    
+    > p {
+      padding: 0.6em 0;
+      &:last-of-type { padding-bottom: 0; }
+    }
+    
+    section#post-meta {
+      margin: 1.2em 0 0 0;
+    }
+    
+    .wp-caption {
+      margin: 0 auto;
+      text-align: center;
+      max-width: 100%;
+      margin: 0.4em 0;
+    }
+    
+    .wp-caption-text {
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      line-height: 1.8em;
+      font-size: 0.8em;
+    }
+    
+    iframe {
+      display: block;
+    }
+    
+    hr {
+      height: 0;
+      width: 80%;
+      border: 0;
+      border-bottom: 2px solid $line-color;
+    }
+    
+
+  }
+}
+
+@import '_comments';
+@import '_1280min';
+@import '_900max';
+@import '_640max';
+@import '_480max';

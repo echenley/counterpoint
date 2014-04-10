@@ -1,0 +1,125 @@
+/*Comment Output*/
+
+#comments-section {
+  position: relative;
+  display: block;
+  width: $post-width;
+  
+  .commentlist {
+    margin: 0.8em 0;
+    
+    li {
+      padding: 0.8em;
+      overflow: auto;
+      
+      li { margin-left: 0.8em; }
+    }
+    
+    li.bypostauthor > div > .vcard .comment-author-info cite:after {
+      content: ' (author)';
+    }
+    
+    .vcard {
+      display: block;
+      width: 100%;
+      height: 32px;
+      line-height: 32px;
+      
+      .comment-author-info {
+        float: left;
+          
+        cite { font-weight: bold; }
+      }
+      
+      time { float: right; }
+      
+      img.avatar {
+        float: left;
+        margin-right: 0.8em;
+        border: 1px solid $line-color;
+      }
+    }
+    
+    .odd { background-color:  $highlight; }
+    .even { background-color: $bg-color; }
+    
+    .comment-content {
+      clear: both;
+      padding: 0.8em 0;
+      font-size: 0.9em;
+      
+      p {
+        line-height: 1.7em;
+      }
+    }
+  }
+
+  .respond-form {
+
+    h3#comment-form-title { margin-bottom: $standard-margin; }
+    
+    form {
+  
+      li {
+        list-style-type: none;
+        clear: both;
+        margin-bottom: 0.8em;
+  
+        label,
+        small {
+          display: none;
+        }
+      }
+  
+      input[type=text],
+      input[type=email],
+      input[type=url],
+      textarea {
+        @include form-input;
+  
+        // form validation //
+        &:invalid {
+          outline: none;
+          border-color: #fbc2c4;
+          background-color: #f6e7eb;
+          -webkit-box-shadow: none;
+          -moz-box-shadow: none;
+          -ms-box-shadow: none;
+          box-shadow: none;
+        }
+      }
+  
+      input[type=text],
+      input[type=email],
+      input[type=url] {
+        width: 400px;
+        min-width: 250px;
+      }
+  
+      textarea {
+        resize: none;
+        width: 100%;
+        height: 15em;
+      }
+    }
+  }
+  
+  .button, .button:visited {
+    display: inline-block;
+    margin: 0;
+    padding: 0.8em 2em;
+    text-decoration: none;
+    border: 2px solid $line-color;
+    border-bottom-color: darken($line-color, 30%);
+    border-right-color: darken($line-color, 30%);
+    color: darken($line-color, 30%);
+    background-color: $bg-color;
+    cursor: pointer;
+    
+    &:active {
+      border-color: $line-color;
+      border-top-color: darken($line-color, 30%);
+      border-left-color: darken($line-color, 30%);
+    }
+  }
+}

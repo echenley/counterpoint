@@ -1,0 +1,23 @@
+@media screen and (max-width: 900px) {
+  
+  body { font-size: 90%; }
+  
+  #container {
+  
+    div#sidebar nav#site-nav > ul {
+      font-size: 1em;
+    }
+    
+    #post-list li .thumbnail h2 span,
+    .post-header h2 .post-title,
+    section#content article,
+    #comments-section {
+      width: $post-width-900;
+    }
+    
+    #post-list {
+      li.odd div.thumbnail { width: (100% - ($container-margin / ($content-width - 0.03))) / 2.618; }
+      li.even div.thumbnail { width: (100% - ($container-margin / ($content-width - 0.09))) / 2.618; }
+    }
+  }
+}
