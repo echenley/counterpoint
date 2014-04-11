@@ -94,7 +94,7 @@
       }
     }
     
-    #content {
+    section#content {
       width: 100%;
       padding-top: 0;
       float: none;
@@ -105,7 +105,7 @@
       #comments-section,
       ul.page-numbers {
         width: $post-width-640;
-        margin: 0 auto;
+        margin: 0 auto 5%;
         padding-left: 0;
       }
       

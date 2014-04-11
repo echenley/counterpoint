@@ -12,6 +12,13 @@
     h3 { margin: $margin-1280 0; }
   }
   
+  img.alignright, .wp-caption.alignright {
+    margin: 1em 0 0 $margin-1280;
+  }
+  img.alignleft, .wp-caption.alignleft {
+    margin: 1em $margin-1280 0 0;
+  }
+  
   #container {
     
     div#sidebar { 

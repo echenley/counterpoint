@@ -6,11 +6,9 @@ get_header(); ?>
 <?php get_sidebar(); ?>
 
 <section id="content">
-  <?php if ( has_post_thumbnail() ) {
-    $src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full');
-  } ?>
-    
-  <header class="post-header" style="background: url(<?php echo $src[0]; ?>); background-position: center; background-size: cover;">
+  <?php $imgSrc = has_post_thumbnail() ? wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full')[0] : (get_template_directory_uri() . '/library/images/archive.jpg'); ?>
+  
+  <header class="post-header" style="background: url(<?php echo $imgSrc; ?>); background-position: center; background-size: cover;">
     <h2><span class="post-title"><?php the_title(); ?></span></h2>
   </header>
 

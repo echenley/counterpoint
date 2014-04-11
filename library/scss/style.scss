@@ -6,7 +6,7 @@
 
 $primary-color:   #4f4f4f;  // text color
 $bg-color:        #fff;     // background
-$highlight:       #f4f4f4;  // light gray highlight
+$highlight:       #f9f9f9;  // light gray highlight
 $link-color:      #c44d58;  // linkz
 $line-color:      #dedede;  // borders and <hr>
 $container-size:  1280px;   // max container width
@@ -20,12 +20,12 @@ $post-width:       80.9%;
 $post-width-900:   100% - ($container-margin / $content-width);
 $post-width-640:   90%;
 
-// typefaces (base, <code>) //
+// Typefaces (base, <code>) //
 
 $serif:           'Merriweather', TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
 $monospace:       'Inconsolata', 'Courier New', Courier, monospace;
 
-// mixins //
+// Mixins //
 
 @mixin transition($transition...) {
   $prefixes: ('-webkit', '-moz', '-ms', '');
@@ -65,8 +65,54 @@ $monospace:       'Inconsolata', 'Courier New', Courier, monospace;
 
 // Wordpress Classes //
 
+.aligncenter {
+  display: block;
+  margin: 0 auto;
+}
 .alignright { float: right; }
 .alignleft { float: left; }
+
+img.alignright, .wp-caption.alignright {
+  margin: 1em 0 0 $standard-margin;
+}
+img.alignleft, .wp-caption.alignleft {
+  margin: 1em $standard-margin 0 0;
+}
+img.centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img[class*="align"],
+img[class*="wp-image-"] {
+  height: auto; // Make sure images with WordPress-added height and width >attributes are scaled correctly //
+}
+img.size-full {
+  max-width: 100%;
+  width: auto; // Prevent stretching of full-size images with height and >>width attributes in IE8 //
+}
+
+.wp-caption {
+  text-align: center;
+  max-width: 100%;
+}
+
+.wp-caption-text {
+  text-align: center;
+  padding: 0.4em 0;
+  font-size: 0.8em;
+  font-style: italic;
+  background-color: $highlight;
+}
+
+.sticky .post-meta:before {
+  content: 'Sticky';
+  float: left;
+  padding: 0 1em;
+  font-weight: bold;
+  background-color: #fff0b2;
+}
 
 // Main Styles //
 
@@ -179,6 +225,7 @@ textarea {
   width: $content-width;
   margin-right: $standard-margin;
   margin-bottom: $standard-margin;
+  text-align: center;
   h3 {
     font-size: 1.5em;
     border: none;
@@ -203,11 +250,12 @@ div#sidebar #sidebar-widget {
   width: 100%;
 }
 
-section#post-meta { text-align: left; }
+section.post-meta { text-align: left; }
 
 div#article-bottom {
   margin-top: $standard-margin;
   padding: 1em 0;
+  color: #999;
 }
 
 div#article-bottom {
@@ -290,14 +338,35 @@ section#content {
   
   a:hover { color: darken($link-color, 20%); }
   
-  code, blockquote {
-    display: block;
-    margin: 0.4em $standard-margin;
-    padding: 0.8em;
-    background-color: $highlight;
-    border: 2px solid $line-color;
+  blockquote { 
+    font-style: italic;
+    &:after {
+      content: no-close-quote;
+    }
   }
   
+  code, blockquote {
+    background: $highlight;
+    border-left: 10px solid $line-color;
+    margin: 0.6em 0;
+    padding: 1.2em;
+    quotes: "\201C""\201D""\2018""\2019";
+  }
+  
+  blockquote:before {
+    content: open-quote;
+    float: left;
+    margin-right: .25em;
+    margin-top: .1em;
+    height: 0;
+    font-size: 4em;
+    color: $line-color;
+  }
+  
+  blockquote p {
+    display: inline;
+  }
+    
   code {
     display: block;
     font-family: $monospace;
@@ -307,7 +376,14 @@ section#content {
     line-height: 1.5em;
   }
   
-  section#post-meta {
+  code:before {
+    content: '</>';
+    float: right;
+    font-size: 2em;
+    color: $line-color;
+  }
+  
+  section.post-meta {
     display: block;
     overflow: hidden;
     line-height: 40px;
@@ -358,15 +434,11 @@ section#content {
       }
     }
     
-    li.odd {
-      background-color: #fff;
-      
-      .thumbnail {
-        float: right;
-        width: (100% - ($container-margin / ($content-width - 0.03))) / 1.618;        // golden ratio (1:1.618) between thumbnail and .post-info (minus internal margin)
-        padding-top: (100% - ($container-margin / ($content-width - 0.03))) / 2.618;  // width and height also share golden ratio relationship
-        margin-left: $standard-margin;
-      }
+    li.odd .thumbnail {
+      float: right;
+      width: (100% - ($container-margin / ($content-width - 0.03))) / 1.618;        // golden ratio (1:1.618) between thumbnail and .post-info (minus internal margin)
+      padding-top: (100% - ($container-margin / ($content-width - 0.03))) / 2.618;  // width and height also share golden ratio relationship
+      margin-left: $standard-margin;
     }
     
     li.even { 
@@ -419,9 +491,8 @@ section#content {
     float: left;
     height: 1em;
     line-height: 1em;
-    font-family: $monospace;
-    font-size: 7.1em;
-    margin: -10px 10px -8px 6px;
+    font-size: 6.2em;
+    margin: 4px 10px -10px 6px;
   }
   
   article#page { margin-top: 2vw; }
@@ -434,7 +505,6 @@ section#content {
     img {
       display: block;
       max-width: 100%;
-      margin: 0 auto;
     }
     
     > p {
@@ -442,23 +512,8 @@ section#content {
       &:last-of-type { padding-bottom: 0; }
     }
     
-    section#post-meta {
+    section.post-meta {
       margin: 1.2em 0 0 0;
-    }
-    
-    .wp-caption {
-      margin: 0 auto;
-      text-align: center;
-      max-width: 100%;
-      margin: 0.4em 0;
-    }
-    
-    .wp-caption-text {
-      text-align: center;
-      margin: 0;
-      padding: 0;
-      line-height: 1.8em;
-      font-size: 0.8em;
     }
     
     iframe {

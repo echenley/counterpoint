@@ -9,6 +9,9 @@
   
   function new_excerpt_length($length) { return 60; }
   add_filter('excerpt_length', 'new_excerpt_length');
+  
+  function remove_caption_padding($width) { return $width - 10; }
+  add_filter( 'img_caption_shortcode_width', 'remove_caption_padding' );
 
   // Register Menu //
   
@@ -62,7 +65,7 @@
     $first_img = $matches[1][0];
   
     if(empty($first_img)) {
-      return false;
+      return false; //(get_template_directory_uri() . '/library/images/no-image.png')
     }
     return $first_img;
   }
