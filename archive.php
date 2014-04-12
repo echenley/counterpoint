@@ -24,8 +24,9 @@
   
   <ul id="archive">
   <?php $even = false;
-  while(have_posts()): the_post(); ?>
-    <li class="<?php echo $even ? 'even' : 'odd'; if (is_sticky()) { echo ' sticky'; }; ?>">
+  while(have_posts()): the_post();
+    $class = $even ? 'even' : 'odd'; ?>
+    <li <?php post_class($class); ?>>
     
     <?php // Checks for post thumbnail => gets first image => randomizes color //
       $imgSrc = function() { 

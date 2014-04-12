@@ -73,10 +73,10 @@ $monospace:       'Inconsolata', 'Courier New', Courier, monospace;
 .alignleft { float: left; }
 
 img.alignright, .wp-caption.alignright {
-  margin: 1em 0 0 $standard-margin;
+  margin: 0.6em 0 0.6em $standard-margin;
 }
 img.alignleft, .wp-caption.alignleft {
-  margin: 1em $standard-margin 0 0;
+  margin: 0.6em $standard-margin 0.6em 0;
 }
 img.centered {
   display: block;
@@ -93,18 +93,26 @@ img.size-full {
   width: auto; // Prevent stretching of full-size images with height and >>width attributes in IE8 //
 }
 
+.gallery {
+  .wp-caption-text { background: none; }
+  img { margin: 0; padding: 0; }
+}
+
 .wp-caption {
-  text-align: center;
   max-width: 100%;
+  background: $highlight;
 }
 
 .wp-caption-text {
+  display: block;
   text-align: center;
-  padding: 0.4em 0;
-  font-size: 0.8em;
+  padding: 2em 0;
   font-style: italic;
-  background-color: $highlight;
+  line-height: 1.1em;
+  background: $highlight;
 }
+
+// Sticky Posts //
 
 .sticky .post-meta:before {
   content: 'Sticky';
@@ -114,7 +122,7 @@ img.size-full {
   background-color: #fff0b2;
 }
 
-// Main Styles //
+// Macro Structure //
 
 html { height: 100%; }
 
@@ -133,25 +141,108 @@ body {
   background-color: $bg-color;
 }
 
-em {
-  font-style: italic;
+// Miscellaneous Tags //
+
+kbd { font-family: $monospace; }
+pre, code, blockquote { background: $highlight; }
+
+pre, blockquote {
+  margin: 0.6em 0;
+  padding: 1.2em;
+  border-left: 10px solid $line-color;
 }
 
-strong {
-  font-weight: bold;
+pre, code { font-family: $monospace; }
+
+pre {
+  max-height: 20em;
+  overflow: auto;
+  line-height: 1.5em;
+  &:before {
+    content: '</>';
+    float: right;
+    font-size: 2em;
+    color: $line-color;
+  }
+}
+
+code {
+  padding: 0.4em;
+  border-left: 5px solid $line-color;
+}
+
+blockquote { 
+  font-style: italic;
+  quotes: "\201C""\201D""\2018""\2019";
+  p { display: inline; }
+  &:after { content: no-close-quote; }
+  &:before {
+    content: open-quote;
+    float: left;
+    margin-right: .25em;
+    margin-top: .1em;
+    height: 0;
+    font-size: 4em;
+    color: $line-color;
+  }
+}
+
+dt { font-weight: bold; }
+dd {}
+
+q {
+  quotes: "\201C""\201D""\2018""\2019";
+  &:before { content: open-quote; }
+  &:after { content: close-quote; }
+}
+
+// Tables //
+
+table {
+  margin: 0.6em auto;
+  max-width: 100%;
+  border: 1px solid $line-color;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  th, td {
+    padding: 0.6em 1.2em;
+    border: 1px solid $line-color;
+  }
+  th {
+    background: darken($highlight, 5%);
+    font-weight: bold;
+  }
+  td { background: $highlight; }
+  tr:hover td { background: darken($highlight, 2%); }
+}
+
+// Lists //
+
+article {
+  ul {
+    list-style: disc inside;
+    ul,ol { margin-left: 2em; }
+  }
+  ol {
+    list-style: decimal inside;
+    ul,ol { margin-left: 2em; }
+  }
 }
 
 // Headings //
 
-h1 {
+h1,h2,h3 {
+  border-top: 2px solid $primary-color;
+  border-bottom: 2px solid $primary-color;
+}
+
+h1 {  // Blog Header Title Only //
   position: relative;
   display: block;
   width: 100%;
   text-align: center;
   line-height: 1.4em;
   font-size: 5.2vw;
-  border-top: 2px solid $primary-color;
-  border-bottom: 2px solid $primary-color;
   a {
     display: block;
     color: $primary-color;
@@ -161,20 +252,27 @@ h1 {
 }
 
 h2 {
+  display: block;
+  padding: 0.8em 0;
+  font-size: 1.6em;
+  font-weight: bold;
+  line-height: 1.4em;
+}
+
+div.post-title {
   position: absolute;
   display: block;
   bottom: 0;
   width: 100%;
-  font-size: 1.8em;
-  font-weight: normal;
-  line-height: 1.4em;
   background: rgba(34,34,34,0.6);
   color: $bg-color;
-  
-  > * {
-    display: block;
+  h2 {  // Post Titles Only (archive-post.php, page.php, single.php) //
     width: $post-width;
     padding: 0.5em 0 0.5em 0.5em;
+    border: none;
+    font-size: 1.8em;
+    font-weight: normal;
+    line-height: 1.4em;
     background: none;
     text-align: left;
   }
@@ -186,17 +284,17 @@ h3 {
   font-size: 1.3em;
   font-weight: bold;
   line-height: 1.4em;
-  border-top: 2px solid $primary-color;
-  border-bottom: 2px solid $primary-color;
 }
 
 h4 {
   display: block;
   padding: 0.4em 0;
-  font-size: 1em;
   font-weight: bold;
-  line-height: 1em;
+  font-size: 1.1em;
 }
+
+h5 { font-weight: bold; }
+h6 { font-style: italic; }
 
 // Forms //
 
@@ -210,12 +308,38 @@ textarea {
 }
 
 #searchform {
-  
   label { display: none; }
-  
   input {
     width: 100%;
     @include form-input;
+  }
+}
+
+form.post-password-form {
+  label {
+    text-align: right;
+    width: 100%;
+  }
+  input[type=password] { @include form-input; }
+}
+
+input[type=submit], input[type=submit]:visited {
+  display: inline-block;
+  margin: 0;
+  padding: 0.5em 2em;
+  line-height: 1.5em;
+  text-decoration: none;
+  border: 2px solid $line-color;
+  border-bottom-color: darken($line-color, 30%);
+  border-right-color: darken($line-color, 30%);
+  color: darken($line-color, 30%);
+  background-color: $bg-color;
+  cursor: pointer;
+  
+  &:active {
+    border-color: $line-color;
+    border-top-color: darken($line-color, 30%);
+    border-left-color: darken($line-color, 30%);
   }
 }
 
@@ -338,51 +462,6 @@ section#content {
   
   a:hover { color: darken($link-color, 20%); }
   
-  blockquote { 
-    font-style: italic;
-    &:after {
-      content: no-close-quote;
-    }
-  }
-  
-  code, blockquote {
-    background: $highlight;
-    border-left: 10px solid $line-color;
-    margin: 0.6em 0;
-    padding: 1.2em;
-    quotes: "\201C""\201D""\2018""\2019";
-  }
-  
-  blockquote:before {
-    content: open-quote;
-    float: left;
-    margin-right: .25em;
-    margin-top: .1em;
-    height: 0;
-    font-size: 4em;
-    color: $line-color;
-  }
-  
-  blockquote p {
-    display: inline;
-  }
-    
-  code {
-    display: block;
-    font-family: $monospace;
-    max-height: 20em;
-    white-space: nowrap;
-    overflow: auto;
-    line-height: 1.5em;
-  }
-  
-  code:before {
-    content: '</>';
-    float: right;
-    font-size: 2em;
-    color: $line-color;
-  }
-  
   section.post-meta {
     display: block;
     overflow: hidden;
@@ -407,8 +486,6 @@ section#content {
       .thumbnail {
         position: relative;
         display: block;
-        
-        h2 { display: none; }
       }
       
       h3.post-title {
@@ -486,7 +563,7 @@ section#content {
   
   // Main Content (single.php, page.php, archive.php) //
   
-  article#post > p:first-of-type:first-letter {
+  article#post > p:nth-child(2):first-letter {
     display: block;
     float: left;
     height: 1em;
@@ -502,23 +579,13 @@ section#content {
     width: $post-width;
     margin-bottom: $standard-margin;
 
-    img {
-      display: block;
-      max-width: 100%;
-    }
+    img { max-width: 100%; }
     
-    > p {
-      padding: 0.6em 0;
-      &:last-of-type { padding-bottom: 0; }
-    }
+    p { padding: 0.6em 0; }
     
-    section.post-meta {
-      margin: 1.2em 0 0 0;
-    }
+    section.post-meta { margin: 1.2em 0 0 0; }
     
-    iframe {
-      display: block;
-    }
+    iframe { display: block; }
     
     hr {
       height: 0;

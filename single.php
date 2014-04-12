@@ -18,7 +18,7 @@
     };
   ?>
   <header class="post-header" style="background: <?php echo $imgSrc(); ?>;">
-    <h2><span class="post-title"><?php the_title(); ?></span></h2>
+    <div class="post-title"><h2><?php the_title(); ?></h2></div>
   </header>
   
   <article id="post">
@@ -29,6 +29,7 @@
       </section>
       <?php the_content();
     endwhile; ?>
+    <?php wp_link_pages(); ?>
     <div id="article-bottom"><?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('article-bottom')) : ?><?php endif; ?></div>
   </article>
   

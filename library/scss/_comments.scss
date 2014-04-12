@@ -103,23 +103,4 @@
       }
     }
   }
-  
-  .button, .button:visited {
-    display: inline-block;
-    margin: 0;
-    padding: 0.8em 2em;
-    text-decoration: none;
-    border: 2px solid $line-color;
-    border-bottom-color: darken($line-color, 30%);
-    border-right-color: darken($line-color, 30%);
-    color: darken($line-color, 30%);
-    background-color: $bg-color;
-    cursor: pointer;
-    
-    &:active {
-      border-color: $line-color;
-      border-top-color: darken($line-color, 30%);
-      border-left-color: darken($line-color, 30%);
-    }
-  }
 }

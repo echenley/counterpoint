@@ -3,7 +3,7 @@
   
 <section id="content">
   <header class="post-header" style="background: url(<?php echo get_template_directory_uri(); ?>/library/images/404.png); background-position: center; background-size: cover;">
-    <h2><span class="post-title">433 Not Found</span></h2>
+    <div class="post-title"><h2>433 Not Found</h2></div>
   </header>
     
   <article id="error">

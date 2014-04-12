@@ -65,7 +65,7 @@
     $first_img = $matches[1][0];
   
     if(empty($first_img)) {
-      return false; //(get_template_directory_uri() . '/library/images/no-image.png')
+      return false;
     }
     return $first_img;
   }

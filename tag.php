@@ -8,11 +8,12 @@
   
   <ul id="archive">
   <?php $even = false;
-  while(have_posts()): the_post(); ?>
-    <li class="<?php echo $even ? 'even' : 'odd'; if (is_sticky()) { echo ' sticky'; }; ?>">
+  while(have_posts()): the_post();
+    $class = $even ? 'even' : 'odd'; ?>
+    <li <?php post_class($class); ?>>
     
     <?php // Checks for post thumbnail => gets first image => randomizes color //
-      $imgSrc = function() { 
+      $imgSrc = function() {
         if (has_post_thumbnail()) {
           return 'url(' . wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full')[0] . '); background-position: center; background-size: cover';
         } else {
