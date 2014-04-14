@@ -4,7 +4,7 @@
   position: relative;
   display: block;
   width: $post-width;
-  
+  .comment-subscription-form { display: none; }
   .commentlist {
     margin: 0.8em 0;
     

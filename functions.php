@@ -12,8 +12,20 @@
   
   function remove_caption_padding($width) { return $width - 10; }
   add_filter( 'img_caption_shortcode_width', 'remove_caption_padding' );
+  
+  // jQuery Insert From Google //
+  
+  if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
+  function my_jquery_enqueue() {
+    wp_deregister_script('jquery');
+    wp_register_script('jquery', "http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js", false, null);
+    wp_enqueue_script('jquery');
+  }
 
-  // Register Menu //
+  // Remove Admin Bar //
+  add_filter('show_admin_bar', '__return_false');
+
+  // Register Sidebar Menu //
   
   function register_my_menu() {
     register_nav_menu('sidebar',__( 'Sidebar' ));
@@ -78,8 +90,8 @@
       <div id="comment-<?php comment_ID(); ?>">
         <header class="comment-author vcard">
           <img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5( get_comment_author_email() ); ?>?s=64" class="load-gravatar avatar avatar-48 photo" height="32" width="32" src="<?php echo get_template_directory_uri(); ?>/library/images/nothing.png" />
-          <div class="comment-author-info"><?php printf('<cite class="fn">%s</cite>', get_comment_author_link()) ?>
-          <?php edit_comment_link(__('Edit'),' &#183; ','') ?>
+          <div class="comment-author-info"><?php printf('<cite class="fn">%s</cite>', get_comment_author_link()); ?>
+          <?php edit_comment_link(__('Edit'),' &#183; ',''); ?>
           <?php comment_reply_link(array_merge( $args, array('before' => ' &#183; ','depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
           </div>
           <time datetime="<?php echo comment_time('Y-m-j'); ?>"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>"><?php comment_time('F jS, Y'); ?> </a></time>
@@ -90,9 +102,9 @@
           </div>
         <?php endif; ?>
         <section class="comment-content">
-          <?php comment_text() ?>
+          <?php comment_text(); ?>
         </section>
-      </article>
+      </div>
     <?php // </li> is added by WordPress automatically
   } // don't remove this bracket!
   

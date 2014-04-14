@@ -6,7 +6,7 @@
 
 $primary-color:   #4f4f4f;  // text color
 $bg-color:        #fff;     // background
-$highlight:       #f9f9f9;  // light gray highlight
+$highlight:       #f6f6f6;  // light gray highlight
 $link-color:      #c44d58;  // linkz
 $line-color:      #dedede;  // borders and <hr>
 $container-size:  1280px;   // max container width
@@ -67,7 +67,8 @@ $monospace:       'Inconsolata', 'Courier New', Courier, monospace;
 
 .aligncenter {
   display: block;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 .alignright { float: right; }
 .alignleft { float: left; }
@@ -78,7 +79,7 @@ img.alignright, .wp-caption.alignright {
 img.alignleft, .wp-caption.alignleft {
   margin: 0.6em $standard-margin 0.6em 0;
 }
-img.centered {
+img.aligncenter {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -174,14 +175,15 @@ code {
 blockquote { 
   font-style: italic;
   quotes: "\201C""\201D""\2018""\2019";
-  p { display: inline; }
+  p:first-child { display: inline; }
+  p:nth-child(2) { margin-top: 0.6em; }
   &:after { content: no-close-quote; }
   &:before {
     content: open-quote;
     float: left;
+    height: 0;
     margin-right: .25em;
     margin-top: .1em;
-    height: 0;
     font-size: 4em;
     color: $line-color;
   }
@@ -242,7 +244,7 @@ h1 {  // Blog Header Title Only //
   width: 100%;
   text-align: center;
   line-height: 1.4em;
-  font-size: 5.2vw;
+  font-size: 4.6vw;
   a {
     display: block;
     color: $primary-color;
@@ -378,7 +380,7 @@ section.post-meta { text-align: left; }
 
 div#article-bottom {
   margin-top: $standard-margin;
-  padding: 1em 0;
+//  padding: 1em 0;
   color: #999;
 }
 
@@ -395,7 +397,6 @@ div#sidebar {
   position: fixed;
   height: 100%;
   width: $nav-width * 100%;
-  max-width: $container-size * $nav-width;
   margin-left: $standard-margin;
   padding: $standard-margin 0;
   
@@ -450,7 +451,6 @@ div#sidebar {
 section#content {
   float: right;
   width: $content-width * 100%;
-  max-width: $container-size * $content-width;
   line-height: 2em;
   text-align: justify;
   padding: $standard-margin 0;
@@ -458,9 +458,9 @@ section#content {
   a {
     color: $link-color;
     @include transition(color 0.2s);
+    
+    &:hover { color: darken($link-color, 20%); }
   }
-  
-  a:hover { color: darken($link-color, 20%); }
   
   section.post-meta {
     display: block;
