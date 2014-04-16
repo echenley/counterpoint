@@ -13,6 +13,15 @@
   function remove_caption_padding($width) { return $width - 10; }
   add_filter( 'img_caption_shortcode_width', 'remove_caption_padding' );
   
+  // Add Custom Favicon to Admin Pages //
+  
+  function add_favicon() {
+    $favicon_url = get_template_directory_uri() . '/library/images/favicon-admin.ico';
+    echo '<link rel="shortcut icon" href="' . $favicon_url . '">';
+  }
+  add_action('login_head', 'add_favicon');
+  add_action('admin_head', 'add_favicon');
+  
   // jQuery Insert From Google //
   
   if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
@@ -23,6 +32,7 @@
   }
 
   // Remove Admin Bar //
+  
   add_filter('show_admin_bar', '__return_false');
 
   // Register Sidebar Menu //

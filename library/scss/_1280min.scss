@@ -7,11 +7,6 @@
   
   ul.page-numbers { padding-right: $margin-1280; }
   
-  #archive-page {
-    #searchform { margin-top: $margin-1280; }
-    h3 { margin: $margin-1280 0; }
-  }
-  
   img.alignright, .wp-caption.alignright {
     margin: 1em 0 0 $margin-1280;
   }
@@ -22,14 +17,14 @@
   #container {
     
     div#sidebar {
-      width: ($container-size - 2 * $margin-1280) * .276;
+      width: $nav-width * $container-size;
       margin-left: $margin-1280;
       padding: $margin-1280 0;
     }
     
     section#content {
-       width: ($container-size - 2 * $margin-1280) * .724;
-       padding: $margin-1280 0;
+      width: $content-width * 100%;
+      padding: $margin-1280 0;
        
       .post-header { height: 360px; }
       
@@ -47,8 +42,12 @@
         }
       }
       
-      article#page { margin-top: $margin-1280; }
+      #archive-page {
+        #searchform { margin-top: $margin-1280; }
+        h3 { margin: $margin-1280 0; }
+      }
       
+      article#page { margin-top: $margin-1280; }
       article { margin-bottom: $margin-1280; }
       div#article-bottom { margin-top: $margin-1280; }
     }

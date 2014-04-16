@@ -13,7 +13,7 @@ $container-size:  1280px;   // max container width
 
 $container-margin: 3%;
 $standard-margin:  3vw;
-$margin-1280:      36px;
+$margin-1280:      37px;
 $nav-width:        .26;
 $content-width:    .68;     // .6 left over for nav margins
 $post-width:       80.9%; 
@@ -148,7 +148,7 @@ kbd { font-family: $monospace; }
 pre, code, blockquote { background: $highlight; }
 
 pre, blockquote {
-  margin: 0.6em 0;
+  margin: 1.2em 0;
   padding: 1.2em;
   border-left: 10px solid $line-color;
 }
@@ -380,8 +380,8 @@ section.post-meta { text-align: left; }
 
 div#article-bottom {
   margin-top: $standard-margin;
-//  padding: 1em 0;
-  color: #999;
+  padding: 1em 0;
+  color: #666;
 }
 
 div#article-bottom {
@@ -581,17 +581,19 @@ section#content {
 
     img { max-width: 100%; }
     
-    p { padding: 0.6em 0; }
+    p { margin: 1.2em 0; }
     
     section.post-meta { margin: 1.2em 0 0 0; }
     
     iframe { display: block; }
     
     hr {
+      display: block;
       height: 0;
       width: 80%;
+      margin: 1.2em auto;
       border: 0;
-      border-bottom: 2px solid $line-color;
+      border: 1px solid $line-color;
     }
     
 
