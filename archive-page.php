@@ -9,7 +9,9 @@ get_header(); ?>
   <?php $imgSrc = has_post_thumbnail() ? wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full')[0] : (get_template_directory_uri() . '/library/images/archive.jpg'); ?>
   
   <header class="post-header" style="background: url(<?php echo $imgSrc; ?>); background-position: center; background-size: cover;">
-    <div class="post-title"><h2><?php the_title(); ?></h2></div>
+    <div class="post-title"><h2>
+      <?php echo $post->post_title ? the_title(false) : "Archive"; // Default title: "Archive" ?>
+    </h2></div>
   </header>
 
   <article id="archive-page">

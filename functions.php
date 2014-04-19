@@ -13,26 +13,6 @@
   function remove_caption_padding($width) { return $width - 10; }
   add_filter( 'img_caption_shortcode_width', 'remove_caption_padding' );
   
-  // Post Header Function Call //
-  
-  function post_thumb_style($post_id) { // Checks for post thumbnail || gets first image || randomizes color //
-    
-    if (has_post_thumbnail($post_id)) {
-      $img_id = get_post_thumbnail_id($post_id);
-      $alt_text = get_post_meta($img_id, '_wp_attachment_image_alt', true);
-      if ($alt_text === '') { $alt_text = get_the_title($post_id); };
-      return 'style="background: url(' . wp_get_attachment_image_src($img_id, 'full')[0] . '); background-position: center; background-size: cover" title="' . $alt_text . '"';
-    } else {
-      $firstImg = catch_that_image($post_id);
-      if ($firstImg) {
-        return 'style="background: url(' . $firstImg . '); background-position: center; background-size: cover"';
-      } else {
-        $rand = array('3','4', '5', '6', '7');
-        return 'style="background: #' . $rand[rand(0,4)].$rand[rand(0,4)].$rand[rand(0,4)].$rand[rand(0,4)].$rand[rand(0,4)].$rand[rand(0,4)] . '"';
-      };
-    };
-  };
-  
   // Add Custom Favicon to Admin Pages //
   
   function add_favicon() {
@@ -106,11 +86,28 @@
     $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
     $first_img = $matches[1][0];
   
-    if(empty($first_img)) {
+    if ( empty($first_img) )
       return false;
-    }
     return $first_img;
   }
+  
+  // Post Header Function Call //
+  
+  function post_thumb_style($post_id) { // Checks for post thumbnail || gets first image || randomizes color //
+    
+    if (has_post_thumbnail($post_id)) {
+      $img_id = get_post_thumbnail_id($post_id);
+      $alt_text = get_post_meta($img_id, '_wp_attachment_image_alt', true);
+      if ( !$alt_text )
+        $alt_text = get_the_title($post_id);
+      return 'style="background: url(' . wp_get_attachment_image_src($img_id, 'full')[0] . '); background-position: center; background-size: cover" title="' . $alt_text . '"';
+    } else {
+      $firstImg = catch_that_image($post_id);
+      if ($firstImg)
+        return 'style="background: url(' . $firstImg . '); background-position: center; background-size: cover"';
+      return 'style="background: #4f4f4f;"';
+    };
+  };
 
   // Comment Layout //
 
@@ -140,6 +137,7 @@
   
   // Password Protected Form //
   
+  add_filter( 'the_password_form', 'my_password_form' );
   function my_password_form() {
     global $post;
     $label = 'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID );
@@ -149,7 +147,6 @@
     ';
     return $o;
   }
-  add_filter( 'the_password_form', 'my_password_form' );
   
   // Numeric Page Nav //
   
@@ -180,7 +177,7 @@
     
   }
   
-  // Adds 'next_and_number' option for wp_link_pages arg 'next_or_number' //
+  // Adds 'next_and_number' option for wp_link_pages() arg 'next_or_number' //
   
   add_filter('wp_link_pages_args','add_next_and_number');
   function add_next_and_number($args){
@@ -207,15 +204,17 @@
     return $args;
   }
   
+  // Better Version of wp_link_pages(), courtesy of c.bavota @ http://bavotasan.com/2012/a-better-wp_link_pages-for-wordpress/ //
+  
   function counterpoint_link_pages( $args = '' ) {
     $defaults = array(
-      'before' => '<div class="post-pagination">', 
-      'after' => '</div>',
+      'before' => '<nav class="post-pagination">', 
+      'after' => '</nav>',
       'link_before' => '',
       'link_after' => '',
       'next_or_number' => 'number', 
-      'nextpagelink' => __( 'Next Page &rarr;' ),
-      'previouspagelink' => __( '&larr; Previous Page' ),
+      'nextpagelink' => __( 'Next &rarr;' ),
+      'previouspagelink' => __( '&larr; Previous' ),
       'pagelink' => '%',
       'echo' => 1
     );
@@ -233,12 +232,16 @@
         for ( $i = 1; $i < ( $numpages + 1 ); $i = $i + 1 ) {
           $j = str_replace( '%', $i, $pagelink );
           $output .= ' ';
+          
+          // adds <a href"*"> # or <span> # for current page //
           if ( $i != $page || ( ( ! $more ) && ( $page == 1 ) ) )
             $output .= _wp_link_page( $i );
           else
             $output .= '<span class="current">';
-  
+            
           $output .= $text_before . $j . $text_after;
+  
+          // adds </a> or </span> //
           if ( $i != $page || ( ( ! $more ) && ( $page == 1 ) ) )
             $output .= '</a>';
           else
@@ -262,10 +265,9 @@
         }
       }
     }
-  
+    
     if ( $echo )
       echo $output;
-  
     return $output;
   }
 ?>

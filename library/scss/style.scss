@@ -27,12 +27,11 @@ $monospace:       'Inconsolata', 'Courier New', Courier, monospace;
 
 // Mixins //
 
-@mixin transition($transition...) {
+@mixin prefix($property, $value) {
   $prefixes: ('-webkit', '-moz', '-ms', '');
   @each $prefix in $prefixes {
-    #{$prefix}-transition: $transition;
+    #{$prefix}-#{$property}: $value;
   }
-  transition: $transition;
 }
 
 @mixin form-input {
@@ -41,7 +40,7 @@ $monospace:       'Inconsolata', 'Courier New', Courier, monospace;
   padding: 0.5em 0.8em;
   border: 2px solid $line-color;
   line-height: 1.5em;
-  @include transition(background 0.2s);
+  @include prefix('transition', background 0.2s);
 }
 
 // Reset/Normalize Code //
@@ -122,7 +121,7 @@ img.size-full {
   margin: 0 !important;
   padding: 0.6em 1.2em;
   font-style: italic;
-  line-height: 1.1em;
+  line-height: 1.4em;
   background: $highlight;
 }
 
@@ -199,6 +198,14 @@ blockquote {
     margin-top: .1em;
     font-size: 4em;
     color: $line-color;
+  }
+  cite {
+    display: block;
+    text-align: right;
+    &:before {
+      content: '\2014 \20';
+      color: $line-color;
+    }
   }
 }
 
@@ -403,7 +410,7 @@ div#article-bottom {
   text-align: center;
 }
 
-.simple-social-icons ul li a { @include transition(background 0.2s); }
+.simple-social-icons ul li a { @include prefix('transition', background 0.2s); }
 
 // Main Navigation (sidebar.php) //
 
@@ -431,7 +438,7 @@ div#sidebar {
         a {
           display: block;
           color: $primary-color;
-          @include transition(background-color 0.2s, color 0.2s);
+          @include prefix(transition, all 0.2s);
         }
         
         a:hover {
@@ -471,7 +478,7 @@ section#content {
   
   a {
     color: $link-color;
-    @include transition(color 0.2s);
+    @include prefix('transition', color 0.2s);
     
     &:hover { color: darken($link-color, 20%); }
   }
@@ -556,26 +563,26 @@ section#content {
   @mixin pagination {
     position: relative;
     clear: both;
-    margin-top: $standard-margin;
     background: $highlight;
     text-align: center;
     * {
       display: inline-block;
-      padding: 0.6em 1.2em;
+      padding: 0.6em;
     }
   }
   
   nav.pagination {
     @include pagination;
-    margin-right: $standard-margin;
+    margin: $standard-margin $standard-margin 0 0;
     * {
       &.prev { position: absolute; left: 0; }
       &.next { position: absolute; right: 0; }
     }
   }
   
-  div.post-pagination {
+  nav.post-pagination {
     @include pagination;
+    margin: 1.2em 0;
     * {
       &:first-child:not(.current) { position: absolute; left: 0; }
       &:last-child:not(.current) { position: absolute; right: 0; }

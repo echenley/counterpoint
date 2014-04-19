@@ -12,7 +12,9 @@
     $class = $even ? 'even' : 'odd'; ?>
     <li <?php post_class($class); ?>>
       <a href="<?php the_permalink(); ?>"><div class="thumbnail" <?php echo post_thumb_style($post->ID); ?> ></div></a>
-      <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+      <h3 class="post-title"><a href="<?php the_permalink(); ?>">
+        <?php echo $post->post_title ? the_title(false) : "Untitled"; // Default title: "Untitled" ?>
+      </a></h3>
       <section class="post-meta">
         <time datetime="<?php echo get_the_date('Y-m-j'); ?>" class="timestamp"><?php the_time( get_option( 'date_format' ) ); ?></time>
       </section>

@@ -98,7 +98,15 @@
       padding-top: 0;
       float: none;
       
-      .post-header h2 .post-title,
+      nav.pagination {
+        margin: 5% 0 0 0;
+        * {
+          &.prev { padding-left: 0; left: 5%; }
+          &.next { padding-right: 0; right: 5%; }
+        }
+      }
+      
+      .post-header .post-title h2,
       article,
       .archive-header,
       #comments-section,

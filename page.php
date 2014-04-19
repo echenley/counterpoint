@@ -4,7 +4,9 @@
 <section id="content">
 
   <header class="post-header" <?php echo post_thumb_style($post->ID); ?> >
-    <div class="post-title"><h2><?php the_title(); ?></h2></div>
+    <div class="post-title"><h2>
+      <?php echo $post->post_title ? the_title(false) : "Untitled"; // Default title: "Untitled" ?>
+    </h2></div>
   </header>
     
   <article id="page">
