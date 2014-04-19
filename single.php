@@ -2,22 +2,7 @@
 <?php get_sidebar(); ?>
 
 <section id="content">
-  <?php // Checks for post thumbnail => gets first image => randomizes color //
-    $imgSrc = function() { 
-      if (has_post_thumbnail()) {
-        return 'url(' . wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full')[0] . '); background-position: center; background-size: cover';
-      } else {
-        $firstImg = catch_that_image();
-        if ($firstImg) {
-          return 'url(' . $firstImg . '); background-position: center; background-size: cover';
-        } else {
-          $rand = array('4', '5', '6', '7', '8');
-          return '#'.$rand[rand(0,4)].$rand[rand(0,4)].$rand[rand(0,4)].$rand[rand(0,4)].$rand[rand(0,4)].$rand[rand(0,4)];
-        };
-      };
-    };
-  ?>
-  <header class="post-header" style="background: <?php echo $imgSrc(); ?>;">
+  <header class="post-header" <?php echo post_thumb_style($post->ID); ?> >
     <div class="post-title"><h2><?php the_title(); ?></h2></div>
   </header>
   
@@ -28,14 +13,15 @@
         <time datetime="<?php echo get_the_date('Y-m-j'); ?>" class="timestamp"><?php the_time( get_option( 'date_format' ) ); ?></time>
       </section>
       <?php the_content();
-    endwhile; ?>
-    <?php wp_link_pages(); ?>
+    endwhile;
+    counterpoint_link_pages(array('next_or_number' => 'next_and_number')); ?>
     <div id="article-bottom"><?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('article-bottom')) : ?><?php endif; ?></div>
   </article>
   
   <section id="comments-section">
     <?php comments_template(); ?>
   </section>
+  
 </section>
 
 <?php get_footer(); ?>

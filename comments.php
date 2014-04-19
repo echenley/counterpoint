@@ -4,7 +4,7 @@
 
   if ( post_password_required() ) { ?>
     <div class="alert alert-help">
-      <p class="nocomments"><?php _e('This post is password protected. Enter the password to view comments.', 'henley-edition' ); ?></p>
+      <p class="nocomments"><?php _e('This post is password protected. Enter the password to view comments.', 'counterpoint' ); ?></p>
     </div>
   <?php
     return;

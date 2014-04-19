@@ -22,7 +22,7 @@ $post-width-640:   90%;
 
 // Typefaces (base, <code>) //
 
-$serif:            TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+$serif:           'Merriweather', TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
 $monospace:       'Inconsolata', 'Courier New', Courier, monospace;
 
 // Mixins //
@@ -73,6 +73,11 @@ $monospace:       'Inconsolata', 'Courier New', Courier, monospace;
 .alignright { float: right; }
 .alignleft { float: left; }
 
+img.alignright, .wp-caption.alignright,
+img.alignleft, .wp-caption.alignleft {
+  max-width: 50%;
+}
+
 img.alignright, .wp-caption.alignright {
   margin: 0.6em 0 0.6em $standard-margin;
 }
@@ -96,18 +101,26 @@ img.size-full {
 
 .gallery {
   .wp-caption-text { background: none; }
-  img { margin: 0; padding: 0; }
+  img {
+    border: none !important;
+    padding: 1px !important;
+  }
 }
 
 .wp-caption {
   max-width: 100%;
-  background: $highlight;
+  line-height: 0;
+  img {
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+  }
 }
 
 .wp-caption-text {
-  display: block;
   text-align: center;
-  padding: 2em 0;
+  margin: 0 !important;
+  padding: 0.6em 1.2em;
   font-style: italic;
   line-height: 1.1em;
   background: $highlight;
@@ -318,11 +331,15 @@ textarea {
 }
 
 form.post-password-form {
-  label {
-    text-align: right;
-    width: 100%;
+  clear: both;
+  text-align: center;
+  label { display: none; }
+  input[type=password] {
+    width: 200px;
+    max-width: 100%;
+    @include form-input;
   }
-  input[type=password] { @include form-input; }
+  input[type=submit] { margin-left: 1.2em; }
 }
 
 input[type=submit], input[type=submit]:visited {
@@ -382,9 +399,6 @@ div#article-bottom {
   margin-top: $standard-margin;
   padding: 1em 0;
   color: #666;
-}
-
-div#article-bottom {
   background-color: $highlight;
   text-align: center;
 }
@@ -472,6 +486,8 @@ section#content {
     }
   }
   
+  div#page-nav { text-align: center; }
+  
   // Front-Page and Archives (index.php, archive.php) //
 
   #archive, #post-list {
@@ -537,17 +553,32 @@ section#content {
   
   // Page Numbers //
   
-  ul.page-numbers {
-    width: auto;
-    margin: $standard-margin $standard-margin 0 0;
+  @mixin pagination {
+    position: relative;
+    clear: both;
+    margin-top: $standard-margin;
+    background: $highlight;
     text-align: center;
-    li {
-      display: inline;
-      margin-left: -4px;
-      * {
-        display: inline-block;
-        padding: 4px 12px;
-      }
+    * {
+      display: inline-block;
+      padding: 0.6em 1.2em;
+    }
+  }
+  
+  nav.pagination {
+    @include pagination;
+    margin-right: $standard-margin;
+    * {
+      &.prev { position: absolute; left: 0; }
+      &.next { position: absolute; right: 0; }
+    }
+  }
+  
+  div.post-pagination {
+    @include pagination;
+    * {
+      &:first-child:not(.current) { position: absolute; left: 0; }
+      &:last-child:not(.current) { position: absolute; right: 0; }
     }
   }
   
@@ -563,7 +594,7 @@ section#content {
   
   // Main Content (single.php, page.php, archive.php) //
   
-  article#post > p:nth-child(2):first-letter {
+  article#post > p:first-of-type:not(.no-dropcap):first-letter {
     display: block;
     float: left;
     height: 1em;
@@ -578,15 +609,10 @@ section#content {
     position: relative;
     width: $post-width;
     margin-bottom: $standard-margin;
-
     img { max-width: 100%; }
-    
     p { margin: 1.2em 0; }
-    
     section.post-meta { margin: 1.2em 0 0 0; }
-    
     iframe { display: block; }
-    
     hr {
       display: block;
       height: 0;
