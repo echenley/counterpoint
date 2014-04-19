@@ -106,7 +106,12 @@
         }
       }
       
-      .post-header .post-title h2,
+      .post-header .post-title h2 {
+        width: $post-width-640;
+        margin: 0 auto;
+        padding-left: 0;
+      }
+      
       article,
       .archive-header,
       #comments-section,
@@ -120,7 +125,6 @@
       #archive li:first-child { padding-top: 0; }
       #post-list, #archive {
         width: 100%;
-        
         li {
           width: 100%;
           padding: (100% - $post-width-640) / 2;
