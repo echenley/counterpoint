@@ -1,0 +1,10 @@
+@media print {
+  header.post-header { border: 1px solid $primary-color; }
+  div#sidebar { display: none; }
+  section#content {
+    width: 100%;
+    article { width: 100%; }
+    div#article-bottom { display: none; }
+  }
+  #comments-section { display: none; }
+}
