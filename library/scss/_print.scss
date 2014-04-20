@@ -1,9 +1,23 @@
 @media print {
-  header.post-header { border: 1px solid $primary-color; }
   div#sidebar { display: none; }
   section#content {
     width: 100%;
-    article { width: 100%; }
+    
+    header.post-header {
+      height: auto;
+      min-height: 0;
+      .post-title {
+        position: relative;
+        color: $primary-color;
+      }
+    }
+    
+    article {
+      width: 100%;
+      iframe, embed { display: none; }
+      pre { max-height: none; }
+    }
+    
     div#article-bottom { display: none; }
   }
   #comments-section { display: none; }
