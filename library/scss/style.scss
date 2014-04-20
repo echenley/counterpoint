@@ -168,7 +168,6 @@ pre, blockquote {
 pre, code { font-family: $monospace; }
 
 pre {
-  max-height: 20em;
   overflow: auto;
   line-height: 1.5em;
   &:before {

@@ -7,7 +7,7 @@
   function custom_excerpt_more( $more ) { return ' &hellip; '; }
   add_filter( 'excerpt_more', 'custom_excerpt_more' );
   
-  function new_excerpt_length($length) { return 60; }
+  function new_excerpt_length($length) { return 70; }
   add_filter('excerpt_length', 'new_excerpt_length');
   
   function remove_caption_padding($width) { return $width - 10; }
