@@ -494,7 +494,7 @@ section#content {
   
   div#page-nav { text-align: center; }
   
-  // Front-Page and Archives (index.php, archive.php) //
+  // Front-Page, Archives, Attachment (index.php, archive.php, attachment.php) //
 
   #archive, #post-list {
     margin-right: $standard-margin;
@@ -588,7 +588,7 @@ section#content {
     }
   }
   
-  // Headers (single.php, page.php, archive-post.php) //
+  // Post Headers //
   
   header.post-header {
     position: relative;
@@ -598,7 +598,14 @@ section#content {
     min-height: 260px;
   }
   
-  // Main Content (single.php, page.php, archive.php) //
+  header.attachment-header {
+    h3 {
+      border: none;
+      text-align: center;
+    }
+  }
+  
+  // Post Content (single.php, page.php) //
   
   article#post > p:first-of-type:not(.no-dropcap):first-letter {
     display: block;
@@ -610,6 +617,12 @@ section#content {
   }
   
   article#page { margin-top: 2vw; }
+  article#attachment {
+    width: 100%;
+    padding-right: $standard-margin;
+    .post-meta { margin: 0 0 1.2em 0; }
+    img { display: block; margin: 0 auto; }
+  }
   
   article {
     position: relative;
