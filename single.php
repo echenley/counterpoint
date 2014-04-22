@@ -19,7 +19,7 @@
     endwhile;
     counterpoint_link_pages(array('next_or_number' => 'next_and_number')); ?>
     <div id="article-bottom"><?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('article-bottom')) : ?><?php endif; ?></div>
-    <?php next_prev_nav(); ?>
+    <?php adjacent_post_nav(); ?>
   </article>
   
   <section id="comments-section">

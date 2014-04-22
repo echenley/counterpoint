@@ -668,7 +668,12 @@ section#content {
     img { max-width: 100%; }
     p { margin: 1.2em 0; }
     section.post-meta { margin: 1.2em 0 0 0; }
-    iframe { display: block; max-width: 100% !important; }
+    iframe {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 100% !important;
+    }
     hr {
       display: block;
       height: 0;

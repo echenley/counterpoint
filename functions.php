@@ -79,12 +79,11 @@
 
   // Returns the first image in a post (in lieu of Featured Image) //
   
-  function catch_that_image() {
-    global $post, $posts;
+  function catch_that_image($post_id) {
     $first_img = '';
     ob_start();
     ob_end_clean();
-    $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
+    $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', get_post($post_id)->post_content, $matches);
     $first_img = $matches[1][0];
   
     if ( empty($first_img) )
@@ -178,7 +177,7 @@
   
   // Next and Previous Post Nav //
   
-  function next_prev_nav() {
+  function adjacent_post_nav() {
     $next_post = get_next_post();
     $prev_post = get_previous_post();
     $is_next = is_object($next_post);
