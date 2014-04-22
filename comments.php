@@ -1,4 +1,8 @@
 <?php
+/*
+ *  Comment layout borrowed from Bones Theme (http://themble.com/bones/)
+ */
+
   if ( ! empty($_SERVER['SCRIPT_FILENAME']) && 'comments.php' == basename( $_SERVER['SCRIPT_FILENAME'] ) )
     die ('Please do not load this page directly. Thanks!');
 
@@ -9,9 +13,8 @@
   <?php
     return;
   }
-?>
-
-<?php if ( have_comments() ) : ?>
+  
+if ( have_comments() ) : ?>
   <h3 id="comments"><?php comments_number( __( '<span>No</span> Responses', 'counterpoint' ), __( '<span>One</span> Response', 'counterpoint' ), _n( '<span>%</span> Response', '<span>%</span> Responses', get_comments_number(), 'counterpoint' ) );?> to &#8220;<?php the_title(); ?>&#8221;</h3>
   
   <ol class="commentlist">

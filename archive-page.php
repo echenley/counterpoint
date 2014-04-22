@@ -14,7 +14,7 @@ get_header(); ?>
     </h2></div>
   </header>
 
-  <article id="archive-page">
+  <article id="archive-page" <?php post_class(); ?>>
     
     <?php while(have_posts()): the_post(); ?>
       <?php the_content(); ?>

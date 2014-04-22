@@ -9,11 +9,19 @@
     </h2></div>
   </header>
     
-  <article id="page">
-    <?php while(have_posts()): the_post(); ?>
-      <?php the_content(); ?>
-    <?php endwhile; ?>
+  <article id="page" <?php post_class(); ?>>
+    <?php
+      while(have_posts()): the_post();
+        counterpoint_link_pages(array('next_or_number' => 'next_and_number'));
+        the_content();
+      endwhile;
+      counterpoint_link_pages(array('next_or_number' => 'next_and_number'));
+    ?>
   </article>
+  
+  <section id="comments-section">
+    <?php comments_template(); ?>
+  </section>
   
 </section>
 

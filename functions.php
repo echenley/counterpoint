@@ -1,5 +1,6 @@
 <?php
   add_theme_support( 'post-thumbnails' );
+  add_theme_support( 'automatic-feed-links' );
   
   function BlogAddress() { return get_bloginfo('wpurl'); }
   add_shortcode('url','BlogAddress');
@@ -94,17 +95,16 @@
   // Post Header Function Call //
   
   function post_thumb_style($post_id) { // Checks for post thumbnail || gets first image || randomizes color //
-    
-    if (has_post_thumbnail($post_id)) {
+    if ( has_post_thumbnail($post_id) ) {
       $img_id = get_post_thumbnail_id($post_id);
       $alt_text = get_post_meta($img_id, '_wp_attachment_image_alt', true);
       if ( !$alt_text )
         $alt_text = get_the_title($post_id);
       return 'style="background: url(' . wp_get_attachment_image_src($img_id, 'full')[0] . '); background-position: center; background-size: cover" title="' . $alt_text . '"';
     } else {
-      $firstImg = catch_that_image($post_id);
-      if ($firstImg)
-        return 'style="background: url(' . $firstImg . '); background-position: center; background-size: cover"';
+      $first_img = catch_that_image($post_id);
+      if ( $first_img )
+        return 'style="background: url(' . $first_img . '); background-position: center; background-size: cover"';
       return 'style="background: #4f4f4f;"';
     };
   };

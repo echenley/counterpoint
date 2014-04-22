@@ -44,13 +44,14 @@ jQuery(document).ready(function() {
   jQuery('nav#site-nav ul .menu-item-has-children').click(function() {
     jQuery(this).toggleClass('active');
   });
-});
 
-// Hides Mobile Menu on Unfocus //
-jQuery(document).mouseup(function (e) {
-  var container = jQuery('nav#site-nav');
-  if (!container.is(e.target) && container.has(e.target).length === 0) {
-    jQuery('ul', container).removeClass('active');
-  }
+  // Hides Mobile Menu on Unfocus //
+  jQuery(document).mouseup(function (e) {
+    var container = jQuery('nav#site-nav');
+    if (!container.is(e.target) && container.has(e.target).length === 0) {
+      jQuery('ul', container).removeClass('active');
+    }
+  });
+  
 });
 
