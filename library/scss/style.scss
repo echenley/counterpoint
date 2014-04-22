@@ -372,9 +372,10 @@ input[type=submit], input[type=submit]:visited {
 
 .archive-header {
   width: $content-width;
-  margin-right: $standard-margin;
+  padding: 1.2em $standard-margin 1.2em 0;
   margin-bottom: $standard-margin;
   text-align: center;
+  background: $highlight;
   h3 {
     font-size: 1.5em;
     border: none;
@@ -398,8 +399,6 @@ div#sidebar #sidebar-widget {
   bottom: 3vw;
   width: 100%;
 }
-
-section.post-meta { text-align: left; }
 
 div#article-bottom {
   margin-top: $standard-margin;
@@ -515,7 +514,6 @@ section#content {
   a {
     color: $link-color;
     @include prefix('transition', color 0.2s);
-    
     &:hover { color: darken($link-color, 20%); }
   }
   
@@ -525,13 +523,14 @@ section#content {
     display: block;
     overflow: hidden;
     line-height: 40px;
+    text-align: left;
     time.timestamp {
       float: right;
       font-style: italic;
     }
   }
   
-  div#page-nav { text-align: center; }
+  div.categories { margin-top: 1.2em; }
   
   // Front-Page, Archives, Attachment (index.php, archive.php, attachment.php) //
 
@@ -543,17 +542,14 @@ section#content {
       display: block;
       width: 100%;
       margin-bottom: $standard-margin;
-      
       .thumbnail {
         position: relative;
         display: block;
       }
-      
       h3.post-title {
         overflow: hidden;
         text-align: left;
         padding: 0;
-        
         a {
           display: block;
           padding: 0.8em 0;
@@ -603,16 +599,17 @@ section#content {
     clear: both;
     background: $highlight;
     text-align: center;
-    * {
+    padding: 0.6em 0;
+    > * {
       display: inline-block;
-      padding: 0.6em;
+      padding: 0 0.6em;
     }
   }
   
   nav.pagination {
     @include pagination;
     margin: $standard-margin $standard-margin 0 0;
-    * {
+    > * {
       &.prev { position: absolute; left: 0; }
       &.next { position: absolute; right: 0; }
     }
@@ -621,9 +618,11 @@ section#content {
   nav.post-pagination {
     @include pagination;
     margin: 1.2em 0;
-    * {
-      &:first-child:not(.current) { position: absolute; left: 0.6em; }
-      &:last-child:not(.current) { position: absolute; right: 0.6em; }
+    padding-left: 7em;
+    padding-right: 7em;
+    > * {
+      &:first-child:not(.current) { position: absolute; left: 0; top: 0.6em; }
+      &:last-child:not(.current) { position: absolute; right: 0; top: 0.6em; }
     }
   }
   
@@ -668,7 +667,7 @@ section#content {
     width: $post-width;
     margin-bottom: $standard-margin;
     img { max-width: 100%; }
-    section.post-meta { margin: 1.2em 0 0 0; }
+    .post-meta { margin: 1.2em 0 0 0; }
     iframe {
       display: block;
       margin-left: auto;

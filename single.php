@@ -11,7 +11,7 @@
   <article id="post" <?php post_class(); ?>>
     <?php while(have_posts()): the_post(); ?>
       <section class="post-meta">
-        <?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('article-top')) : ?><?php endif; ?>
+        <?php counterpoint_categories(); ?>
         <time datetime="<?php echo get_the_date('Y-m-j'); ?>" class="timestamp"><?php the_time( get_option( 'date_format' ) ); ?></time>
       </section>
       <?php counterpoint_link_pages(array('next_or_number' => 'next_and_number'));

@@ -57,16 +57,6 @@
     ));
     
     register_sidebar(array(
-      'name' => 'Article Top',
-      'id'   => 'article-top',
-      'description'   => 'Area the top of each post, next to the timestamp.',
-      'before_widget' => '<div id="%1$s" class="widget %2$s">',
-      'after_widget'  => '</div>',
-      'before_title'  => '<h4>',
-      'after_title'   => '</h4>'
-    ));
-    
-    register_sidebar(array(
       'name' => 'Article Bottom',
       'id'   => 'article-bottom',
       'description'   => 'Area at the bottom of each post, before the comments.',
@@ -220,7 +210,23 @@
         }
       } ?>
     </nav>
-  <?php }
+  <?php
+  }
+  
+  // Show Categories and Tags //
+  
+  function counterpoint_categories() {
+    $categories = get_the_category();
+    $separator = ', ';
+    $output = 'Topics: ';
+    if($categories){
+      foreach($categories as $category) {
+        $output .= '<a href="' . get_category_link( $category->term_id ) . '"';
+        $output .= ' title="' . esc_attr( sprintf( __( "View all posts in %s" ), $category->name ) ) . '">' . $category->cat_name . '</a>' . $separator;
+      }
+    echo trim($output, $separator);
+    }
+  }
   
   // Adds 'next_and_number' option for wp_link_pages() arg 'next_or_number' //
   

@@ -113,7 +113,6 @@
       }
       
       article,
-      .archive-header,
       #comments-section,
       ul.page-numbers {
         width: $post-width-640;
@@ -121,7 +120,11 @@
         padding: 0;
       }
       
-      .archive-header h3 { padding: 5% 0; }
+      .archive-header {
+        width: $post-width-640;
+        margin: 5% auto 5%;
+        padding: 1.2em;
+      }
       #archive li:first-child { padding-top: 0; }
       #post-list, #archive {
         width: 100%;
