@@ -40,17 +40,16 @@
       }
     }
     
-    .odd { background-color:  $highlight; }
-    .even { background-color: $bg-color; }
+    .odd {
+      background: $highlight;
+      blockquote { background: $bg-color; }
+    }
+    .even { background: $bg-color; }
     
     .comment-content {
       clear: both;
       padding: 0.8em 0;
       font-size: 0.9em;
-      
-      p {
-        line-height: 1.7em;
-      }
     }
   }
 
@@ -59,7 +58,7 @@
     h3#comment-form-title { margin-bottom: $standard-margin; }
     
     form {
-  
+    
       li {
         list-style-type: none;
         clear: both;
@@ -82,10 +81,7 @@
           outline: none;
           border-color: #fbc2c4;
           background-color: #f6e7eb;
-          -webkit-box-shadow: none;
-          -moz-box-shadow: none;
-          -ms-box-shadow: none;
-          box-shadow: none;
+          @include prefix('box-shadow', none);
         }
       }
   

@@ -519,6 +519,8 @@ section#content {
     &:hover { color: darken($link-color, 20%); }
   }
   
+  p { margin: 1.2em 0; }
+  
   section.post-meta {
     display: block;
     overflow: hidden;
@@ -666,7 +668,6 @@ section#content {
     width: $post-width;
     margin-bottom: $standard-margin;
     img { max-width: 100%; }
-    p { margin: 1.2em 0; }
     section.post-meta { margin: 1.2em 0 0 0; }
     iframe {
       display: block;
