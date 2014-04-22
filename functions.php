@@ -174,8 +174,54 @@
       };
       echo '</nav>';
     }
-    
   }
+  
+  // Next and Previous Post Nav //
+  
+  function next_prev_nav() {
+    $next_post = get_next_post();
+    $prev_post = get_previous_post();
+    $is_next = is_object($next_post);
+    $is_prev = is_object($prev_post); ?>
+    <nav id="post-nav" class="cf">
+      <?php
+      if ( $is_next && $is_prev ) {
+        $nurl = get_permalink($next_post->ID);
+        $ntitle = get_the_title($next_post->ID);
+        $purl = get_permalink($prev_post->ID);
+        $ptitle = get_the_title($prev_post->ID); ?>
+        
+        <div class="next-post half-width" <?php echo post_thumb_style($next_post->ID); ?>>
+          <a href="<?php echo esc_url($nurl); ?>" title="<?php echo esc_attr($ntitle); ?>">&larr; Next</a>
+        </div>
+        <div class="prev-post half-width" <?php echo post_thumb_style($prev_post->ID); ?>>
+          <a href="<?php echo esc_url($purl); ?>" title="<?php echo esc_attr($ptitle); ?>">Previous &rarr;</a>
+        </div>
+        
+      <?php
+      } else {
+        if ( $is_next ) {
+          $nurl = get_permalink($next_post->ID);
+          $ntitle = get_the_title($next_post->ID); ?>
+          
+          <div class="next-post full-width" <?php echo post_thumb_style($next_post->ID); ?>>
+            <a href="<?php echo esc_url($nurl); ?>" title="<?php echo esc_attr($ntitle); ?>">&larr; Next</a>
+          </div>
+          
+        <?php
+        } else if ( $is_prev ) {
+          $purl = get_permalink($prev_post->ID);
+          $ptitle = get_the_title($prev_post->ID); ?>
+          
+          <div class="prev-post full-width" <?php echo post_thumb_style($prev_post->ID); ?>>
+            <a href="<?php echo esc_url($purl); ?>" title="<?php echo esc_attr($ptitle); ?>">Previous &rarr;</a>
+          </div>
+          
+        <?php
+        }
+      } ?>
+    </nav>
+  <?php }
   
   // Adds 'next_and_number' option for wp_link_pages() arg 'next_or_number' //
   

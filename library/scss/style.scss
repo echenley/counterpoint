@@ -476,25 +476,29 @@ nav#post-nav {
   z-index: 10;
   div {
     display: block;
-    width: 50%;
     overflow: hidden;
     @include prefix('transition', all 0.2s);
     -webkit-backface-visibility: hidden;
     -webkit-transform: translateZ(0);
     opacity: 0.8;
-    &:hover {
-      opacity: 1;
-    }
-    a {
+    &:hover { opacity: 1; }
+    a, span {
       display: block;
       width: 100%;
-      padding: (50% / 1.618) 0;
       font-size: 1.8em;
       line-height: 0;
       color: $bg-color;
       text-align: center;
       &:hover { color: $bg-color; }
     }
+  }
+  div.half-width {
+    width: 50%;
+    a, span { padding: (50% / 1.618) 0; }
+  }
+  div.full-width {
+    width: 100%;
+    a, span { padding: (25% / 1.618) 0; }
   }
   div.next-post { float: left; }
   div.prev-post { float: right; }
