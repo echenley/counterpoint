@@ -35,6 +35,7 @@
         <time datetime="<?php echo get_the_date('Y-m-j'); ?>" class="timestamp"><?php the_time( get_option( 'date_format' ) ); ?></time>
       </section>
       <div class="excerpt cf"><?php echo get_the_excerpt(); ?><a class="read-more" href="<?php the_permalink(); ?>"> Keep reading &rarr;</a></div>
+      <div class="categories"><?php counterpoint_categories(); ?></div>
     </li>
   <?php $even = !$even;
   endwhile; ?>
