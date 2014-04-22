@@ -31,16 +31,13 @@
       padding: $margin-1280 0;
       
       .post-header { height: 360px; }
+      .archive-header {
+        padding-right: $margin-1280;
+        margin-bottom: $margin-1280;
+      }
       
       #archive, #post-list {
         margin-right: $margin-1280;
-        
-        .archive-header {
-          padding-right: $margin-1280;
-          margin-right: $margin-1280;
-          margin-bottom: $margin-1280;
-        }
-        
         li { margin-bottom: $margin-1280; }
         li.odd .thumbnail { margin-left: $margin-1280; }
         li.even {
