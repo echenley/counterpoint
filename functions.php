@@ -219,7 +219,7 @@
     $categories = get_the_category();
     $separator = ', ';
     $output = _n('Topic', 'Topics', count($categories), 'counterpoint') . ': ';
-    if($categories){
+    if($categories) {
       foreach($categories as $category) {
         $output .= '<a href="' . get_category_link( $category->term_id ) . '"';
         $output .= ' title="' . esc_attr( sprintf( __( "View all posts in %s", "counterpoint" ), $category->name ) ) . '">' . $category->cat_name . '</a>' . $separator;

@@ -10,8 +10,8 @@
     
   <article id="page" <?php post_class(); ?>>
   <?php
-    while(have_posts()): the_post();
-      counterpoint_link_pages(array('next_or_number' => 'next_and_number'));
+    while(have_posts()): the_post(); ?>
+      <?php counterpoint_link_pages(array('next_or_number' => 'next_and_number'));
       the_content();
     endwhile;
     counterpoint_link_pages(array('next_or_number' => 'next_and_number')); ?>

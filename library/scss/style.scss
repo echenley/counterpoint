@@ -330,7 +330,6 @@ header.post-header {
 .archive-header, .attachment-header {
   width: $content-width;
   padding: 1.2em $standard-margin 1.2em 0;
-  margin-bottom: 1.2em;
   text-align: center;
   background: $highlight;
   h3 {
@@ -339,6 +338,8 @@ header.post-header {
     padding: 0;
   }
 }
+.attachment-header { margin-bottom: 1.2em; }
+.archive-header { margin-bottom: $standard-margin; }
 
 // Forms //
 
@@ -529,15 +530,22 @@ section#content {
   
   p { margin: 1.2em 0; }
   
+  // Post Meta //
+  
   section.post-meta {
     display: block;
     overflow: hidden;
     line-height: 40px;
-    text-align: left;
-    time.timestamp {
+    .timestamp, .edit-link {
       float: right;
-      font-style: italic;
     }
+    .timestamp { font-style: italic; }
+  }
+
+  article .post-meta {
+    margin: 1.2em 0 0 0;
+    background: $highlight;
+    padding: 0.3em 1.2em;
   }
   
   div.categories { margin-top: 1.2em; }
@@ -660,7 +668,6 @@ section#content {
     width: $post-width;
     margin-bottom: $standard-margin;
     img { max-width: 100%; }
-    .post-meta { margin: 1.2em 0 0 0; }
     iframe {
       display: block;
       margin-left: auto;
