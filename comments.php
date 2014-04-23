@@ -40,7 +40,7 @@ if ( have_comments() ) : ?>
     
       <?php if ( is_user_logged_in() ) : ?>
   
-        <p class="comments-logged-in-as"><?php _e( 'Logged in as', 'counterpoint' ); ?> <a href="<?php echo get_option( 'siteurl' ); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. <a href="<?php echo wp_logout_url( get_permalink() ); ?>" title="<?php _e( 'Log out of this account', 'counterpoint' ); ?>"><?php _e( 'Log out &rarr;', 'counterpoint' ); ?></a></p>
+        <div class="comments-logged-in-as"><?php _e( 'Logged in as', 'counterpoint' ); ?> <a href="<?php echo get_option( 'siteurl' ); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a><a href="<?php echo wp_logout_url( get_permalink() ); ?>" class="logout-link" title="<?php _e( 'Log out of this account', 'counterpoint' ); ?>"><?php _e( 'Log out &rarr;', 'counterpoint' ); ?></a></div>
   
       <?php else : ?>
   

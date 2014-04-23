@@ -213,7 +213,7 @@
   <?php
   }
   
-  // Show Categories and Tags //
+  // Display Categories //
   
   function counterpoint_categories() {
     $categories = get_the_category();

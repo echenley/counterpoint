@@ -535,7 +535,6 @@ section#content {
   section.post-meta {
     display: block;
     overflow: hidden;
-    line-height: 40px;
     .timestamp, .edit-link {
       float: right;
     }
@@ -545,7 +544,7 @@ section#content {
   article .post-meta {
     margin: 1.2em 0 0 0;
     background: $highlight;
-    padding: 0.3em 1.2em;
+    padding: 0.6em 1.2em;
   }
   
   div.categories { margin-top: 1.2em; }

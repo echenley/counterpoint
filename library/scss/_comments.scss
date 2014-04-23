@@ -55,7 +55,14 @@
 
     h3#comment-form-title { margin-bottom: $standard-margin; }
     
-    form {
+    form#commentform {
+    
+      .comments-logged-in-as {
+        background: $highlight;
+        padding: 0.6em 1.2em;
+        
+        .logout-link { float: right; }
+      }
     
       li {
         list-style-type: none;
