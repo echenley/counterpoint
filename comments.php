@@ -66,12 +66,9 @@ if ( have_comments() ) : ?>
   
       <?php endif; ?>
     
-      <p><textarea name="comment" id="comment" placeholder="<?php _e( 'Your Comment here*', 'counterpoint' ); ?>"></textarea></p>
-    
-      <p>
-        <input name="submit" type="submit" id="submit" class="button" value="<?php _e( 'Submit &rarr;', 'counterpoint' ); ?>" />
-        <?php comment_id_fields(); ?>
-      </p>
+      <p style="line-height: 0;"><textarea name="comment" id="comment" placeholder="<?php _e( 'Your Comment here*', 'counterpoint' ); ?>"></textarea></p>
+      <p style="line-height: 0;"><input name="submit" type="submit" id="submit" class="button" value="<?php _e( 'Submit &rarr;', 'counterpoint' ); ?>" /></p>
+      <?php comment_id_fields(); ?>
       
       <?php do_action( 'comment_form', $post->ID ); ?>
     </form>
