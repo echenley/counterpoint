@@ -24,15 +24,11 @@ if ( have_comments() ) : ?>
 
 <?php if ( comments_open() ) : ?>
   <section id="respond" class="respond-form">
-    <h3 id="comment-form-title"><?php comment_form_title( __( 'Leave a Reply', 'counterpoint' ), __( 'Leave a Reply to %s', 'counterpoint' )); ?></h3>
-  
-    <div id="cancel-comment-reply">
-      <p class="small"><?php cancel_comment_reply_link(); ?></p>
-    </div>
-  
+    <h3 id="comment-form-title"><?php comment_form_title( __( 'Leave a Reply', 'counterpoint' ), __( 'Leave a Reply to %s&nbsp;&middot;&nbsp;' . get_cancel_comment_reply_link('Cancel Reply') . '', 'counterpoint' )); ?></h3>
+
   <?php if ( get_option('comment_registration') && !is_user_logged_in() ) : ?>
     <div class="alert alert-help">
-      <p><?php printf( __( 'You must be %1$slogged in%2$s to post a comment.', 'counterpoint' ), '<a href="<?php echo wp_login_url( get_permalink() ); ?>">', '</a>' ); ?></p>
+      <p><?php printf( __( 'You must be %1$slogged in%2$s to post a comment.', 'counterpoint' ), '<a href="' . wp_login_url( get_permalink() ) . '">', '</a>' ); ?></p>
     </div>
   <?php else : ?>
   

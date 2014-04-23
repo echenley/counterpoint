@@ -7,6 +7,9 @@
   </header>
   
   <ul id="archive">
+  
+  <?php get_search_form(); ?>
+  
   <?php $even = false;
   while(have_posts()): the_post();
     $class = $even ? 'even' : 'odd'; ?>
