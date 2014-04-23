@@ -47,9 +47,9 @@
   
   if (function_exists('register_sidebar')) {
     register_sidebar(array(
-      'name' => 'Sidebar Bottom',
+      'name' => __('Sidebar Bottom', 'counterpoint'),
       'id'   => 'sidebar-bottom',
-      'description'   => 'Area at the bottom of the sidebar.',
+      'description'   => __('Area at the bottom of the sidebar.', 'counterpoint'),
       'before_widget' => '<div id="%1$s" class="widget %2$s">',
       'after_widget'  => '</div>',
       'before_title'  => '<h4>',
@@ -57,9 +57,9 @@
     ));
     
     register_sidebar(array(
-      'name' => 'Article Bottom',
+      'name' => __('Article Bottom', 'counterpoint'),
       'id'   => 'article-bottom',
-      'description'   => 'Area at the bottom of each post, before the comments.',
+      'description'   => __('Area at the bottom of each post, before the comments.', 'counterpoint'),
       'before_widget' => '<div id="%1$s" class="widget %2$s">',
       'after_widget'  => '</div>',
       'before_title'  => '<h4>',
@@ -83,7 +83,7 @@
   
   // Post Header Function Call //
   
-  function post_thumb_style($post_id) { // Checks for post thumbnail || gets first image || randomizes color //
+  function post_thumb_style($post_id) { // Checks for post thumbnail || if none, gets first image || else, default color //
     if ( has_post_thumbnail($post_id) ) {
       $img_id = get_post_thumbnail_id($post_id);
       $alt_text = get_post_meta($img_id, '_wp_attachment_image_alt', true);
@@ -107,10 +107,10 @@
         <header class="comment-author vcard">
           <img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5( get_comment_author_email() ); ?>?s=64" class="load-gravatar avatar avatar-48 photo" height="32" width="32" src="<?php echo get_template_directory_uri(); ?>/library/images/nothing.png" />
           <div class="comment-author-info"><?php printf('<cite class="fn">%s</cite>', get_comment_author_link()); ?>
-          <?php edit_comment_link(__('Edit'),' &#183; ',''); ?>
-          <?php comment_reply_link(array_merge( $args, array('before' => ' &#183; ','depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
+          <?php edit_comment_link(__('Edit'), ' &#183; ', ''); ?>
+          <?php comment_reply_link(array_merge($args, array('before' => ' &#183; ','depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
           </div>
-          <time datetime="<?php echo comment_time('Y-m-j'); ?>"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>"><?php comment_time('F jS, Y'); ?></a></time>
+          <time datetime="<?php echo comment_time('Y-m-j'); ?>"><a href="<?php echo esc_html( get_comment_link( $comment->comment_ID ) ) ?>"><?php comment_time('F jS, Y'); ?></a></time>
         </header>
         <?php if ($comment->comment_approved == '0') : ?>
           <div class="alert alert-info">
@@ -129,11 +129,11 @@
   add_filter( 'the_password_form', 'my_password_form' );
   function my_password_form() {
     global $post;
-    $label = 'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID );
-    $o = '<p class="no-dropcap">' . __( "This post is password protected. Enter the password to view it." ) . '</p>
-    <form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" method="post" class="post-password-form"><label for="' . $label . '">' . __( "Password:" ) . ' </label><input name="post_password" id="' . $label . '" type="password" maxlength="20" placeholder="Enter Password*" /><input type="submit" name="Submit" value="' . esc_attr__( "Submit" ) . '" />
-    </form>
-    ';
+    $label = 'pwbox-' . ( empty( $post->ID ) ? rand() : $post->ID );
+    $o = '<p class="no-dropcap">' . __( "This post is password protected. Enter the password to view it.", "counterpoint" ) . '</p>
+      <form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" method="post" class="post-password-form">
+        <label for="' . $label . '">' . __( "Password:" ) . ' </label><input name="post_password" id="' . $label . '" type="password" maxlength="20" placeholder="Enter Password*" /><input type="submit" name="Submit" value="' . esc_attr__( "Submit", "counterpoint" ) . '" />
+      </form>';
     return $o;
   }
   
@@ -149,8 +149,8 @@
       'format'    => '',
       'current'   => max( 1, get_query_var('paged') ),
       'total'     => $wp_query->max_num_pages,
-      'prev_text' => __('&larr; Newer'),
-      'next_text' => __('Older &rarr;'),
+      'prev_text' => __('&larr; Newer', 'counterpoint'),
+      'next_text' => __('Older &rarr;', 'counterpoint'),
       'type'      => 'array',
       'end_size'  => 3,
       'mid_size'  => 3
@@ -181,20 +181,20 @@
         $ptitle = get_the_title($prev_post->ID); ?>
         
         <div class="next-post half-width" <?php echo post_thumb_style($next_post->ID); ?>>
-          <a href="<?php echo esc_url($nurl); ?>" title="<?php echo esc_attr($ntitle); ?>">&larr; Next</a>
+          <a href="<?php echo esc_url($nurl); ?>" title="<?php echo esc_attr($ntitle); ?>">&larr; <?php _e('Next', 'counterpoint'); ?></a>
         </div>
         <div class="prev-post half-width" <?php echo post_thumb_style($prev_post->ID); ?>>
-          <a href="<?php echo esc_url($purl); ?>" title="<?php echo esc_attr($ptitle); ?>">Previous &rarr;</a>
+          <a href="<?php echo esc_url($purl); ?>" title="<?php echo esc_attr($ptitle); ?>"><?php _e('Previous', 'counterpoint'); ?> &rarr;</a>
         </div>
         
       <?php
-      } else {
+      } else { // if first or last post //
         if ( $is_next ) {
           $nurl = get_permalink($next_post->ID);
           $ntitle = get_the_title($next_post->ID); ?>
           
           <div class="next-post full-width" <?php echo post_thumb_style($next_post->ID); ?>>
-            <a href="<?php echo esc_url($nurl); ?>" title="<?php echo esc_attr($ntitle); ?>">&larr; Next</a>
+            <a href="<?php echo esc_url($nurl); ?>" title="<?php echo esc_attr($ntitle); ?>">&larr; <?php _e('Next', 'counterpoint'); ?></a>
           </div>
           
         <?php
@@ -203,7 +203,7 @@
           $ptitle = get_the_title($prev_post->ID); ?>
           
           <div class="prev-post full-width" <?php echo post_thumb_style($prev_post->ID); ?>>
-            <a href="<?php echo esc_url($purl); ?>" title="<?php echo esc_attr($ptitle); ?>">Previous &rarr;</a>
+            <a href="<?php echo esc_url($purl); ?>" title="<?php echo esc_attr($ptitle); ?>"><?php _e('Previous', 'counterpoint'); ?> &rarr;</a>
           </div>
           
         <?php
@@ -218,11 +218,11 @@
   function counterpoint_categories() {
     $categories = get_the_category();
     $separator = ', ';
-    $output = 'Topics: ';
+    $output = _n('Topic', 'Topics', count($categories), 'counterpoint') . ': ';
     if($categories){
       foreach($categories as $category) {
         $output .= '<a href="' . get_category_link( $category->term_id ) . '"';
-        $output .= ' title="' . esc_attr( sprintf( __( "View all posts in %s" ), $category->name ) ) . '">' . $category->cat_name . '</a>' . $separator;
+        $output .= ' title="' . esc_attr( sprintf( __( "View all posts in %s", "counterpoint" ), $category->name ) ) . '">' . $category->cat_name . '</a>' . $separator;
       }
     echo trim($output, $separator);
     }
@@ -264,8 +264,8 @@
       'link_before' => '',
       'link_after' => '',
       'next_or_number' => 'number', 
-      'nextpagelink' => __( 'Next &rarr;' ),
-      'previouspagelink' => __( '&larr; Previous' ),
+      'nextpagelink' => __('Next &rarr;', 'counterpoint'),
+      'previouspagelink' => __('&larr; Previous', 'counterpoint'),
       'pagelink' => '%',
       'echo' => 1
     );

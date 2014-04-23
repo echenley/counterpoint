@@ -317,6 +317,29 @@ h4 {
 h5 { font-weight: bold; }
 h6 { font-style: italic; }
 
+// Post Headers //
+
+header.post-header {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 28vw;
+  min-height: 260px;
+}
+
+.archive-header, .attachment-header {
+  width: $content-width;
+  padding: 1.2em $standard-margin 1.2em 0;
+  margin-bottom: 1.2em;
+  text-align: center;
+  background: $highlight;
+  h3 {
+    font-size: 1.5em;
+    border: none;
+    padding: 0;
+  }
+}
+
 // Forms //
 
 input[type=submit],
@@ -369,19 +392,6 @@ input[type=submit], input[type=submit]:visited {
 }
 
 // Archives //
-
-.archive-header {
-  width: $content-width;
-  padding: 1.2em $standard-margin 1.2em 0;
-  margin-bottom: $standard-margin;
-  text-align: center;
-  background: $highlight;
-  h3 {
-    font-size: 1.5em;
-    border: none;
-    padding: 0;
-  }
-}
 
 #archive-page {
   #searchform { margin-top: $standard-margin; }
@@ -623,23 +633,6 @@ section#content {
     > * {
       &:first-child:not(.current) { position: absolute; left: 0; top: 0.6em; }
       &:last-child:not(.current) { position: absolute; right: 0; top: 0.6em; }
-    }
-  }
-  
-  // Post Headers //
-  
-  header.post-header {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 28vw;
-    min-height: 260px;
-  }
-  
-  header.attachment-header {
-    h3 {
-      border: none;
-      text-align: center;
     }
   }
   

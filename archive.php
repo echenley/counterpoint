@@ -7,16 +7,12 @@
       <?php
         if ( is_day() ) :
           printf( __( 'Daily Archives: %s', 'counterpoint' ), get_the_date() );
-  
         elseif ( is_month() ) :
           printf( __( 'Monthly Archives: %s', 'counterpoint' ), get_the_date( _x( 'F Y', 'monthly archives date format', 'counterpoint' ) ) );
-  
         elseif ( is_year() ) :
           printf( __( 'Yearly Archives: %s', 'counterpoint' ), get_the_date( _x( 'Y', 'yearly archives date format', 'counterpoint' ) ) );
-  
         else :
           _e( 'Archives', 'counterpoint' );
-  
         endif;
       ?>
     </h3>
@@ -29,12 +25,12 @@
     <li <?php post_class($class); ?>>
       <a href="<?php the_permalink(); ?>"><div class="thumbnail" <?php echo post_thumb_style($post->ID); ?> ></div></a>
       <h3 class="post-title"><a href="<?php the_permalink(); ?>">
-        <?php echo $post->post_title ? the_title(false) : "Untitled"; // Default title: "Untitled" ?>
+      <?php echo $post->post_title ? the_title(false) : __( 'Untitled', 'counterpoint' ); /* Default title: "Untitled" */ ?>
       </a></h3>
       <section class="post-meta">
         <time datetime="<?php echo get_the_date('Y-m-j'); ?>" class="timestamp"><?php the_time( get_option( 'date_format' ) ); ?></time>
       </section>
-      <div class="excerpt cf"><?php echo get_the_excerpt(); ?><a class="read-more" href="<?php the_permalink(); ?>"> Keep reading &rarr;</a></div>
+      <div class="excerpt cf"><?php echo get_the_excerpt(); ?><a class="read-more" href="<?php the_permalink(); ?>"><?php _e( 'Keep reading &rarr;', 'counterpoint'); ?></a></div>
       <div class="categories"><?php counterpoint_categories(); ?></div>
     </li>
   <?php $even = !$even;

@@ -40,7 +40,7 @@ if ( have_comments() ) : ?>
     
       <?php if ( is_user_logged_in() ) : ?>
   
-        <p class="comments-logged-in-as"><?php _e( 'Logged in as', 'counterpoint' ); ?> <a href="<?php echo get_option( 'siteurl' ); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. <a href="<?php echo wp_logout_url( get_permalink() ); ?>" title="<?php _e( 'Log out of this account', 'counterpoint' ); ?>"><?php _e( 'Log out', 'counterpoint' ); ?> <?php _e( '&rarr;', 'counterpoint' ); ?></a></p>
+        <p class="comments-logged-in-as"><?php _e( 'Logged in as', 'counterpoint' ); ?> <a href="<?php echo get_option( 'siteurl' ); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. <a href="<?php echo wp_logout_url( get_permalink() ); ?>" title="<?php _e( 'Log out of this account', 'counterpoint' ); ?>"><?php _e( 'Log out &rarr;', 'counterpoint' ); ?></a></p>
   
       <?php else : ?>
   
@@ -52,7 +52,7 @@ if ( have_comments() ) : ?>
           </li>
       
           <li>
-            <label for="email"><?php _e( 'Mail', 'counterpoint' ); ?> <?php if ($req) _e( '(required)'); ?></label>
+            <label for="email"><?php _e( 'Email', 'counterpoint' ); ?> <?php if ($req) _e( '(required)'); ?></label>
             <input type="email" name="email" id="email" value="<?php echo esc_attr($comment_author_email); ?>" placeholder="<?php _e( 'Your E-Mail*', 'counterpoint' ); ?>" <?php if ($req) echo "aria-required='true'"; ?> />
             <small><?php _e("(will not be published)", 'counterpoint' ); ?></small>
           </li>
@@ -66,7 +66,7 @@ if ( have_comments() ) : ?>
   
       <?php endif; ?>
     
-      <p><textarea name="comment" id="comment" placeholder="<?php _e( 'Your Comment here...', 'counterpoint' ); ?>"></textarea></p>
+      <p><textarea name="comment" id="comment" placeholder="<?php _e( 'Your Comment here*', 'counterpoint' ); ?>"></textarea></p>
     
       <p>
         <input name="submit" type="submit" id="submit" class="button" value="<?php _e( 'Submit &rarr;', 'counterpoint' ); ?>" />

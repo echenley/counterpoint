@@ -3,7 +3,7 @@
 
 <section id="content">
   <header class="archive-header">
-    <h3><?php printf( __( 'Search Results For: %s', 'counterpoint' ), get_search_query( '', false ) ); ?></h3>
+    <h3><?php printf( __('Search Results For: %s', 'counterpoint'), get_search_query('', false)); ?></h3>
   </header>
   
   <ul id="archive">
@@ -13,12 +13,12 @@
     <li <?php post_class($class); ?>>
       <a href="<?php the_permalink(); ?>"><div class="thumbnail" <?php echo post_thumb_style($post->ID); ?> ></div></a>
       <h3 class="post-title"><a href="<?php the_permalink(); ?>">
-        <?php echo $post->post_title ? the_title(false) : "Untitled"; // Default title: "Untitled" ?>
+        <?php echo $post->post_title ? the_title(false) : __( 'Untitled', 'counterpoint' ); /* Default title: "Untitled" */ ?>
       </a></h3>
       <section class="post-meta">
         <time datetime="<?php echo get_the_date('Y-m-j'); ?>" class="timestamp"><?php the_time( get_option( 'date_format' ) ); ?></time>
       </section>
-      <div class="excerpt cf"><?php echo get_the_excerpt(); ?><a class="read-more" href="<?php the_permalink(); ?>"> Keep reading &rarr;</a></div>
+      <div class="excerpt cf"><?php echo get_the_excerpt(); ?><a class="read-more" href="<?php the_permalink(); ?>"><?php _e( 'Keep reading &rarr;', 'counterpoint'); ?></a></div>
       <div class="categories"><?php counterpoint_categories(); ?></div>
     </li>
   <?php $even = !$even;
