@@ -17,7 +17,6 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
     <?php wp_head(); ?>
-    <script src="<?php echo get_template_directory_uri(); ?>/library/js/scripts.js"></script>
   </head>
   <body <?php body_class(); ?>>
     <div id="container" class="cf">

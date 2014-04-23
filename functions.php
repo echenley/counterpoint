@@ -25,11 +25,12 @@
   
   // jQuery Insert From Google //
   
-  if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
-  function my_jquery_enqueue() {
+  add_action("wp_enqueue_scripts", "counterpoint_scripts", 11);
+  function counterpoint_scripts() {
     wp_deregister_script('jquery');
     wp_register_script('jquery', 'http' . ($_SERVER['SERVER_PORT'] == 443 ? 's' : '') . '://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js', false, null);
     wp_enqueue_script('jquery');
+    wp_enqueue_script( 'script-name', get_template_directory_uri() . '/library/js/scripts.js', array('jquery'));
   }
 
   // Remove Admin Bar //
