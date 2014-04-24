@@ -424,6 +424,7 @@ div#article-bottom {
   color: #666;
   background-color: $highlight;
   text-align: center;
+  &:empty { display: none; }
 }
 
 .simple-social-icons ul li a { @include prefix(transition, background 0.2s); }
@@ -478,37 +479,38 @@ div#sidebar {
 // Post Navigation //
 
 nav#post-nav {
-  width: 100%;
   margin-top: $standard-margin;
-  z-index: 10;
+  clear: both;
   div {
     display: block;
     overflow: hidden;
-    @include prefix(transition, all 0.2s);
     -webkit-backface-visibility: hidden;
     -webkit-transform: translateZ(0);
-    opacity: 0.8;
-    &:hover { opacity: 1; }
     a, span {
       display: block;
       width: 100%;
       font-size: 1.8em;
       line-height: 0;
       color: $bg-color;
+      background: rgba(0,0,0,0.1);
       text-align: center;
-      &:hover { color: $bg-color; }
+      @include prefix(transition, all 0.2s);
+      &:hover {
+        color: rgba(255,255,255,0.4);
+        background: rgba(0,0,0,0);
+      }
     }
+    &.half-width {
+      width: 50%;
+      a, span { padding: (50% / 1.618) 0; }
+    }
+    &.full-width {
+      width: 100%;
+      a, span { padding: (25% / 1.618) 0; }
+    }
+    &.next-post { float: left; }
+    &.prev-post { float: right; }
   }
-  div.half-width {
-    width: 50%;
-    a, span { padding: (50% / 1.618) 0; }
-  }
-  div.full-width {
-    width: 100%;
-    a, span { padding: (25% / 1.618) 0; }
-  }
-  div.next-post { float: left; }
-  div.prev-post { float: right; }
 }
 
 section#content {
