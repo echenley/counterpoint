@@ -290,7 +290,7 @@ header.post-header {
   min-height: 260px; }
 
 .archive-header, .attachment-header {
-  width: 68%;
+  width: 100%;
   padding: 1.2em 3vw 1.2em 1.2em;
   text-align: center;
   background: #f6f6f6; }
