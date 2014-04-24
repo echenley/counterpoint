@@ -3,7 +3,7 @@
 @media screen and (min-width: $container-size) {
 
   body { font-size: 95%; }
-  h1 { font-size: 4em; }
+  h1 { font-size: 3em; }
   
   ul.page-numbers { padding-right: $margin-1280; }
   
@@ -22,6 +22,8 @@
       width: $nav-width * $container-size;
       margin-left: $margin-1280;
       padding: $margin-1280 0;
+      
+      #site-nav > ul { font-size: 1.3em; }
     }
     
     nav#post-nav { margin-top: $margin-1280; }

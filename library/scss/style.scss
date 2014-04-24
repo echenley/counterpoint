@@ -7,7 +7,7 @@
 $primary-color:   #4f4f4f;  // text color
 $bg-color:        #fff;     // background
 $highlight:       #f6f6f6;  // light gray highlight
-$link-color:      #c44d58;  // linkz
+$link-color:      #c44;  // linkz
 $line-color:      #dedede;  // borders and <hr>
 $container-size:  1280px;   // max container width
 
@@ -40,7 +40,7 @@ $monospace:       'Inconsolata', 'Courier New', Courier, monospace;
   padding: 0.5em 0.8em;
   border: 2px solid $line-color;
   line-height: 1.5em;
-  @include prefix('transition', background 0.2s);
+  @include prefix(transition, background 0.2s);
 }
 
 // Reset/Normalize Code //
@@ -266,7 +266,7 @@ h1 {  // Blog Header Title Only //
   width: 100%;
   text-align: center;
   line-height: 1.4em;
-  font-size: 4.6vw;
+  font-size: 3.6vw;
   a {
     display: block;
     color: $primary-color;
@@ -333,7 +333,7 @@ header.post-header {
 
 .archive-header, .attachment-header {
   width: $content-width;
-  padding: 1.2em $standard-margin 1.2em 0;
+  padding: 1.2em $standard-margin 1.2em 1.2em;
   text-align: center;
   background: $highlight;
   h3 {
@@ -426,62 +426,51 @@ div#article-bottom {
   text-align: center;
 }
 
-.simple-social-icons ul li a { @include prefix('transition', background 0.2s); }
+.simple-social-icons ul li a { @include prefix(transition, background 0.2s); }
 
 // Main Navigation (sidebar.php) //
 
 div#sidebar {
   position: fixed;
-  height: 100%;
   width: $nav-width * 100%;
   margin-left: $standard-margin;
   padding: $standard-margin 0;
   
-  nav#site-nav {
+  nav#site-nav > ul {
+    width: 100%;
+    list-style: none;
+    font-size: 1.6vw;
     
-    h1 {} // see 'Headings' above //
-    
-    > ul {
-      width: 100%;
-      list-style: none;
-      font-size: 1.1em;
+    li {
+      text-align: center;
       
-      li {
-        width: 100%;
-        line-height: 2.8em;
-        text-align: center;
-        
-        a {
-          display: block;
-          color: $primary-color;
-          @include prefix(transition, all 0.2s);
-        }
-        
-        a:hover {
-          background-color: $primary-color;
-          color: $bg-color;
-        }
-        
-        ul.sub-menu {
-          position: relative;
-          height: 0;
-          background-color: $highlight;
-          overflow: hidden;
-        }
-      }    
-        
-      li.active {
-        > a {
-          background-color: $primary-color;
-          color: $bg-color;
-        }
-        ul.sub-menu {
-          height: auto;
-        }
+      a {
+        display: block;
+        padding: 1em 0;
+        color: $primary-color;
+        @include prefix(transition, all 0.2s);
       }
       
-      li.menu-item-has-children { cursor: pointer; }
+      a:hover {
+        background-color: $primary-color;
+        color: $bg-color;
+      }
+      
+      ul.sub-menu {
+        display: none;
+        background-color: $highlight;
+      }
+      
+      &.active {
+        > a {
+          background: $primary-color;
+          color: $bg-color;
+        }
+        > ul.sub-menu { display: block; }
+      }
     }
+    
+    li.menu-item-has-children { cursor: pointer; }
   }
 }
 
@@ -494,7 +483,7 @@ nav#post-nav {
   div {
     display: block;
     overflow: hidden;
-    @include prefix('transition', all 0.2s);
+    @include prefix(transition, all 0.2s);
     -webkit-backface-visibility: hidden;
     -webkit-transform: translateZ(0);
     opacity: 0.8;
@@ -531,7 +520,7 @@ section#content {
   
   a {
     color: $link-color;
-    @include prefix('transition', color 0.2s);
+    @include prefix(transition, color 0.2s);
     &:hover { color: darken($link-color, 20%); }
   }
   

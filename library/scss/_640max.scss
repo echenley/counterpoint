@@ -8,7 +8,20 @@
     line-height: 74px;
     background-color: $highlight;
     a { padding: 0; }
+    .menu-link {
+      position: absolute;
+      display: block;
+      top: 0;
+      right: 0;
+      width: 74px;
+      padding: 0;
+      background: rgba(62,62,62,0.9);
+      color: $bg-color;
+      font-size: 130%;
+      text-align: center;
+    }
   }
+  
   h2 { padding-left: 0; }
       
   #container {
@@ -23,41 +36,28 @@
       max-width: 100%;
     
       nav#site-nav {
-          
-        h1 .menu-link {
-          position: absolute;
-          display: block;
-          top: 0;
-          right: 0;
-          width: 74px;
-          padding: 0;
-          background: rgba(62,62,62,0.9);
-          color: $bg-color;
-          font-size: 130%;
-          text-align: center;
-          z-index: 10;
-        }
         
         > ul {
           z-index: 10;
           position: absolute;
+          display: none;
           top: 74px;
           left: 0;
           right: 0;
-          height: 0;
           width: 100%;
           background: rgba(62,62,62,0.9);
-          overflow: hidden;
+          
+          &.active {
+            z-index: 1000;
+            display: block;
+            padding: 5% 20%;
+          }
           
           li {
             margin-bottom: -1px;
             border: 1px solid transparent;
             
-            a {
-              height: 50px;
-              line-height: 50px;
-              color: $bg-color;
-            }
+            a { color: $bg-color; }
             
             a:hover {
               background-color: transparent;
@@ -77,20 +77,12 @@
             }
             ul.sub-menu {
               border-top: 1px solid $bg-color;
-              height: auto;
+              display: block;
             }
           }
         }
-      
-        > ul.active {
-          height: auto;
-          padding: 5% 20%;
-        }
       }
-        
-      #sidebar-widget {
-        display: none;
-      }
+      #sidebar-widget { display: none; }
     }
     
     section#content {

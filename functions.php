@@ -30,7 +30,7 @@
     wp_deregister_script('jquery');
     wp_register_script('jquery', 'http' . ($_SERVER['SERVER_PORT'] == 443 ? 's' : '') . '://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js', false, null);
     wp_enqueue_script('jquery');
-    wp_enqueue_script( 'script-name', get_template_directory_uri() . '/library/js/scripts.js', array('jquery'));
+    wp_enqueue_script( 'counterpoint-scripts', get_template_directory_uri() . '/library/js/scripts.js', array('jquery'), true);
   }
 
   // Remove Admin Bar //
@@ -75,10 +75,8 @@
     ob_start();
     ob_end_clean();
     $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', get_post($post_id)->post_content, $matches);
+    if ( empty($output) ) return false;
     $first_img = $matches[1][0];
-  
-    if ( empty($first_img) )
-      return false;
     return $first_img;
   }
   
@@ -95,7 +93,7 @@
       $first_img = catch_that_image($post_id);
       if ( $first_img )
         return 'style="background: url(' . $first_img . '); background-position: center; background-size: cover"';
-      return 'style="background: #4f4f4f;"';
+      return 'style="background: url(' . get_template_directory_uri() . '/library/images/no-featured-image.jpg' . '); background-position: center; background-size: cover"';
     };
   };
 
