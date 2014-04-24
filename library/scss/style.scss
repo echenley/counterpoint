@@ -145,7 +145,6 @@ html { height: 100%; }
 body {
   font-family: $serif;
   font-size: 95%;
-  color: $primary-color;
   background-color: $primary-color;
   height: 100%;
 }
@@ -155,6 +154,7 @@ body {
   max-width: $container-size;
   min-height: 100%;
   background-color: $bg-color;
+  color: $primary-color;
 }
 
 // Miscellaneous Tags //
@@ -332,7 +332,7 @@ header.post-header {
 }
 
 .archive-header, .attachment-header {
-  width: $content-width;
+  width: $content-width * 100%;
   padding: 1.2em $standard-margin 1.2em 1.2em;
   text-align: center;
   background: $highlight;
