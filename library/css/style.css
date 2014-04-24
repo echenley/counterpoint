@@ -398,6 +398,8 @@ div#article-bottom {
 
 div#sidebar {
   position: fixed;
+  top: 0;
+  bottom: 0;
   width: 26%;
   margin-left: 3vw;
   padding: 3vw 0; }

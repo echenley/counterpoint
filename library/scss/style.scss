@@ -432,6 +432,7 @@ div#article-bottom {
 
 div#sidebar {
   position: fixed;
+  top: 0; bottom: 0;
   width: $nav-width * 100%;
   margin-left: $standard-margin;
   padding: $standard-margin 0;
