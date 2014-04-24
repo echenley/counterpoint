@@ -818,24 +818,26 @@ section#content {
           z-index: 1000;
           display: block;
           padding: 5% 20%; }
+        #container div#sidebar nav#site-nav > ul > li {
+          border: 1px solid transparent;
+          margin-bottom: 10px; }
+          #container div#sidebar nav#site-nav > ul > li.active {
+            border: 1px solid white; }
         #container div#sidebar nav#site-nav > ul li {
-          margin-bottom: -1px;
-          border: 1px solid transparent; }
-          #container div#sidebar nav#site-nav > ul li a {
-            color: white; }
-          #container div#sidebar nav#site-nav > ul li a:hover {
-            background-color: transparent;
-            text-decoration: underline; }
-          #container div#sidebar nav#site-nav > ul li ul.sub-menu {
-            background-color: transparent; }
-        #container div#sidebar nav#site-nav > ul li.active {
-          border: 1px solid white; }
+          background-color: transparent; }
           #container div#sidebar nav#site-nav > ul li.active > a {
             background-color: transparent;
             text-decoration: underline; }
-          #container div#sidebar nav#site-nav > ul li.active ul.sub-menu {
+          #container div#sidebar nav#site-nav > ul li.active > ul.sub-menu {
             border-top: 1px solid white;
             display: block; }
+          #container div#sidebar nav#site-nav > ul li a {
+            color: white; }
+            #container div#sidebar nav#site-nav > ul li a:hover {
+              background-color: transparent;
+              text-decoration: underline; }
+          #container div#sidebar nav#site-nav > ul li ul.sub-menu {
+            background-color: transparent; }
       #container div#sidebar #sidebar-widget {
         display: none; }
     #container section#content {

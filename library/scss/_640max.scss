@@ -53,31 +53,37 @@
             padding: 5% 20%;
           }
           
-          li {
-            margin-bottom: -1px;
+          > li { 
             border: 1px solid transparent;
-            
-            a { color: $bg-color; }
-            
-            a:hover {
-              background-color: transparent;
-              text-decoration: underline;
-            }
-            
-            ul.sub-menu {
-              background-color: transparent;
-            }
+            margin-bottom: 10px;
+            &.active { border: 1px solid $bg-color; }
           }
           
-          li.active {
-            border: 1px solid $bg-color;
-            > a {
-              background-color: transparent;
-              text-decoration: underline;
+          li {
+            background-color: transparent;
+            
+            &.active {
+              > a {
+                background-color: transparent;
+                text-decoration: underline;
+              }
+              > ul.sub-menu {
+                border-top: 1px solid $bg-color;
+                display: block;
+              }
             }
+            
+            a {
+              color: $bg-color;
+              &:hover {
+                background-color: transparent;
+                text-decoration: underline;
+              }
+            }
+
+            
             ul.sub-menu {
-              border-top: 1px solid $bg-color;
-              display: block;
+              background-color: transparent;
             }
           }
         }
