@@ -15,7 +15,7 @@
     ?>
     
     <section class="post-meta">
-      <time datetime="<?php echo get_the_date('Y-m-j'); ?>" class="timestamp"><?php the_time( get_option( 'date_format' ) ); ?></time>
+      <?php counterpoint_posted_on(); ?>
     </section>
     
     <div class="photometa">

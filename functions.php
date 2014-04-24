@@ -227,6 +227,14 @@
     }
   }
   
+  // Display Timestamp //
+  function counterpoint_posted_on() {
+    printf('<time datetime="%1$s" class="timestamp">%2$s</time>',
+    esc_attr( get_the_date('c') ),
+    esc_html( get_the_date() )
+    );
+  }
+  
   // Adds 'next_and_number' option for wp_link_pages() arg 'next_or_number' //
   
   add_filter('wp_link_pages_args','add_next_and_number');

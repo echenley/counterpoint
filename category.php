@@ -16,7 +16,7 @@
         <?php echo $post->post_title ? the_title(false) : __( 'Untitled', 'counterpoint' ); /* Default title: "Untitled" */ ?>
       </a></h3>
       <section class="post-meta">
-        <time datetime="<?php echo get_the_date('Y-m-j'); ?>" class="timestamp"><?php the_time( get_option( 'date_format' ) ); ?></time>
+        <?php counterpoint_posted_on(); ?>
       </section>
       <div class="excerpt cf"><?php echo get_the_excerpt(); ?><a class="read-more" href="<?php the_permalink(); ?>"><?php _e( 'Keep reading &rarr;', 'counterpoint'); ?></a></div>
       <div class="categories"><?php counterpoint_categories(); ?></div>
