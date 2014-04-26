@@ -12,7 +12,6 @@
     </title>
     <link rel="shortcut icon" type="image/ico" href="<?php echo get_template_directory_uri(); ?>/favicon.ico">
     <?php wp_head(); ?>
-    <script>!window.jQuery && document.write(unescape('%3Cscript src="<?php echo get_template_directory_uri(); ?>/library/jquery-1.11.0-min.js"%3E%3C/script%3E'))</script>
   </head>
   <body <?php body_class(); ?>>
     <div id="container" class="cf">
