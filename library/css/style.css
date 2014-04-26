@@ -86,11 +86,20 @@ img.size-full {
   max-width: 100%;
   width: auto; }
 
-.gallery .wp-caption-text {
-  background: none; }
-.gallery img {
-  border: none !important;
-  padding: 1px !important; }
+.gallery {
+  clear: both;
+  margin: auto;
+  width: 100%; }
+  .gallery .gallery-item {
+    float: left;
+    margin-top: 10px;
+    text-align: center;
+    width: 33%; }
+  .gallery img {
+    border: 2px solid #dedede; }
+  .gallery .gallery-caption {
+    margin-left: 0;
+    background: none !important; }
 
 .wp-caption {
   max-width: 100%;
@@ -132,6 +141,24 @@ body {
   min-height: 100%;
   background-color: white;
   color: #4f4f4f; }
+
+section#content {
+  position: relative;
+  float: right;
+  width: 68%;
+  line-height: 2em;
+  text-align: justify;
+  padding: 3vw 0; }
+  section#content a {
+    color: #cc4444;
+    -webkit-transition: color 0.2s;
+    -moz-transition: color 0.2s;
+    -ms-transition: color 0.2s;
+    -transition: color 0.2s; }
+    section#content a:hover {
+      color: #862424; }
+  section#content p {
+    margin: 1.2em 0; }
 
 kbd {
   font-family: "Inconsolata", "Courier New", Courier, monospace; }
@@ -184,9 +211,6 @@ blockquote {
       content: '\2014 \20';
       color: #dedede; }
 
-dt {
-  font-weight: bold; }
-
 q {
   quotes: "\201C" "\201D" "\2018" "\2019"; }
   q:before {
@@ -211,13 +235,13 @@ table {
   table tr:hover td {
     background: #f1f1f1; }
 
-article ul {
+#content article ul {
   list-style: disc inside; }
-  article ul ul, article ul ol {
+  #content article ul ul, #content article ul ol {
     margin-left: 2em; }
-article ol {
+#content article ol {
   list-style: decimal inside; }
-  article ol ul, article ol ol {
+  #content article ol ul, #content article ol ol {
     margin-left: 2em; }
 
 h1, h2, h3 {
@@ -365,31 +389,18 @@ input[type=submit], input[type=submit]:visited {
     border-top-color: #929292;
     border-left-color: #929292; }
 
-#archive #searchform {
-  margin-bottom: 3vw; }
-
-#archive-page #searchform {
-  margin-top: 3vw; }
-#archive-page h3 {
-  margin: 3vw 0; }
-#archive-page ul {
-  margin: 0;
-  padding: 0; }
-#archive-page ul.topics li, #archive-page ul.monthly li {
-  display: inline; }
-
-div#sidebar #sidebar-widget {
+#sidebar #sidebar-widget {
   position: absolute;
   bottom: 3vw;
   width: 100%; }
 
-div#article-bottom {
+#article-bottom {
   margin-top: 3vw;
   padding: 1em 0;
   color: #666;
   background-color: #f6f6f6;
   text-align: center; }
-  div#article-bottom:empty {
+  #article-bottom:empty {
     display: none; }
 
 .simple-social-icons ul li a {
@@ -398,20 +409,33 @@ div#article-bottom {
   -ms-transition: background 0.2s;
   -transition: background 0.2s; }
 
-div#sidebar {
+.post-meta {
+  display: block;
+  overflow: hidden; }
+  .post-meta .timestamp, .post-meta .edit-link {
+    float: right; }
+  .post-meta .timestamp {
+    font-style: italic; }
+
+article .post-meta {
+  margin: 1.2em 0 0 0;
+  background: #f6f6f6;
+  padding: 0.6em 1.2em; }
+
+#sidebar {
   position: fixed;
   top: 0;
   bottom: 0;
   width: 26%;
   margin-left: 3vw;
   padding: 3vw 0; }
-  div#sidebar nav#site-nav > ul {
+  #sidebar nav#site-nav > ul {
     width: 100%;
     list-style: none;
     font-size: 1.6vw; }
-    div#sidebar nav#site-nav > ul li {
+    #sidebar nav#site-nav > ul li {
       text-align: center; }
-      div#sidebar nav#site-nav > ul li a {
+      #sidebar nav#site-nav > ul li a {
         display: block;
         padding: 1em 0;
         color: #4f4f4f;
@@ -419,18 +443,18 @@ div#sidebar {
         -moz-transition: all 0.2s;
         -ms-transition: all 0.2s;
         -transition: all 0.2s; }
-      div#sidebar nav#site-nav > ul li a:hover {
+      #sidebar nav#site-nav > ul li a:hover {
         background-color: #4f4f4f;
         color: white; }
-      div#sidebar nav#site-nav > ul li ul.sub-menu {
+      #sidebar nav#site-nav > ul li ul.sub-menu {
         display: none;
         background-color: #f6f6f6; }
-      div#sidebar nav#site-nav > ul li.active > a {
+      #sidebar nav#site-nav > ul li.active > a {
         background: #4f4f4f;
         color: white; }
-      div#sidebar nav#site-nav > ul li.active > ul.sub-menu {
+      #sidebar nav#site-nav > ul li.active > ul.sub-menu {
         display: block; }
-    div#sidebar nav#site-nav > ul li.menu-item-has-children {
+    #sidebar nav#site-nav > ul li.menu-item-has-children {
       cursor: pointer; }
 
 nav#post-nav {
@@ -469,146 +493,138 @@ nav#post-nav {
     nav#post-nav div.prev-post {
       float: right; }
 
-section#content {
+nav.pagination {
   position: relative;
-  float: right;
-  width: 68%;
-  line-height: 2em;
-  text-align: justify;
-  padding: 3vw 0; }
-  section#content a {
-    color: #cc4444;
-    -webkit-transition: color 0.2s;
-    -moz-transition: color 0.2s;
-    -ms-transition: color 0.2s;
-    -transition: color 0.2s; }
-    section#content a:hover {
-      color: #862424; }
-  section#content p {
-    margin: 1.2em 0; }
-  section#content section.post-meta {
-    display: block;
-    overflow: hidden; }
-    section#content section.post-meta .timestamp, section#content section.post-meta .edit-link {
-      float: right; }
-    section#content section.post-meta .timestamp {
-      font-style: italic; }
-  section#content article .post-meta {
-    margin: 1.2em 0 0 0;
-    background: #f6f6f6;
-    padding: 0.6em 1.2em; }
-  section#content div.categories {
+  clear: both;
+  background: #f6f6f6;
+  text-align: center;
+  padding: 0.6em 0;
+  margin: 3vw 3vw 0 0; }
+  nav.pagination > * {
+    display: inline-block;
+    padding: 0 0.6em; }
+  nav.pagination > *.prev {
+    position: absolute;
+    left: 0; }
+  nav.pagination > *.next {
+    position: absolute;
+    right: 0; }
+
+nav.post-pagination {
+  position: relative;
+  clear: both;
+  background: #f6f6f6;
+  text-align: center;
+  padding: 0.6em 0;
+  margin: 1.2em 0;
+  padding-left: 7em;
+  padding-right: 7em; }
+  nav.post-pagination > * {
+    display: inline-block;
+    padding: 0 0.6em; }
+  nav.post-pagination > *:first-child:not(.current) {
+    position: absolute;
+    left: 0;
+    top: 0.6em; }
+  nav.post-pagination > *:last-child:not(.current) {
+    position: absolute;
+    right: 0;
+    top: 0.6em; }
+
+#archive, #post-list {
+  margin-right: 3vw; }
+  #archive div.categories, #post-list div.categories {
     margin-top: 1.2em; }
-  section#content #archive, section#content #post-list {
-    margin-right: 3vw; }
-    section#content #archive li, section#content #post-list li {
-      position: relative;
-      display: block;
-      width: 100%;
-      margin-bottom: 3vw; }
-      section#content #archive li .thumbnail, section#content #post-list li .thumbnail {
-        position: relative;
-        display: block; }
-      section#content #archive li h3.post-title, section#content #post-list li h3.post-title {
-        overflow: hidden;
-        text-align: left;
-        padding: 0; }
-        section#content #archive li h3.post-title a, section#content #post-list li h3.post-title a {
-          display: block;
-          padding: 0.8em 0;
-          color: inherit; }
-      section#content #archive li .excerpt, section#content #post-list li .excerpt {
-        margin-top: 0.4em;
-        margin-bottom: -9px; }
-      section#content #archive li .read-more, section#content #post-list li .read-more {
-        display: inline;
-        float: right; }
-    section#content #archive li.odd .thumbnail, section#content #post-list li.odd .thumbnail {
-      float: right;
-      width: 58.95217%;
-      padding-top: 36.43415%;
-      margin-left: 3vw; }
-    section#content #archive li.even, section#content #post-list li.even {
-      padding: 3vw;
-      background-color: #f6f6f6; }
-      section#content #archive li.even .thumbnail, section#content #post-list li.even .thumbnail {
-        float: left;
-        width: 58.66209%;
-        padding-top: 36.25487%;
-        margin-right: 3vw; }
-    section#content #archive li:last-child, section#content #post-list li:last-child {
-      margin-bottom: 0; }
-  section#content nav.pagination {
+  #archive li, #post-list li {
     position: relative;
-    clear: both;
-    background: #f6f6f6;
-    text-align: center;
-    padding: 0.6em 0;
-    margin: 3vw 3vw 0 0; }
-    section#content nav.pagination > * {
-      display: inline-block;
-      padding: 0 0.6em; }
-    section#content nav.pagination > *.prev {
-      position: absolute;
-      left: 0; }
-    section#content nav.pagination > *.next {
-      position: absolute;
-      right: 0; }
-  section#content nav.post-pagination {
-    position: relative;
-    clear: both;
-    background: #f6f6f6;
-    text-align: center;
-    padding: 0.6em 0;
-    margin: 1.2em 0;
-    padding-left: 7em;
-    padding-right: 7em; }
-    section#content nav.post-pagination > * {
-      display: inline-block;
-      padding: 0 0.6em; }
-    section#content nav.post-pagination > *:first-child:not(.current) {
-      position: absolute;
-      left: 0;
-      top: 0.6em; }
-    section#content nav.post-pagination > *:last-child:not(.current) {
-      position: absolute;
-      right: 0;
-      top: 0.6em; }
-  section#content article#post > p:first-of-type:not(.no-dropcap):first-letter {
     display: block;
-    float: left;
-    height: 1em;
-    line-height: 1em;
-    font-size: 6.2em;
-    margin: 4px 10px -10px 6px; }
-  section#content article#page {
-    margin-top: 2vw; }
-  section#content article#attachment {
     width: 100%;
-    padding-right: 3vw; }
-    section#content article#attachment .post-meta {
-      margin: 0 0 1.2em 0; }
-    section#content article#attachment img {
-      display: block;
-      margin: 0 auto; }
-  section#content article {
-    position: relative;
-    width: 80.9%;
     margin-bottom: 3vw; }
-    section#content article img {
-      max-width: 100%; }
-    section#content article iframe {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 100% !important; }
-    section#content article hr {
-      display: block;
-      height: 0;
-      width: 80%;
-      margin: 1.2em auto;
-      border: 0;
-      border: 1px solid #dedede; }
+    #archive li .thumbnail, #post-list li .thumbnail {
+      position: relative;
+      display: block; }
+    #archive li h3.post-title, #post-list li h3.post-title {
+      overflow: hidden;
+      text-align: left;
+      padding: 0; }
+      #archive li h3.post-title a, #post-list li h3.post-title a {
+        display: block;
+        padding: 0.8em 0;
+        color: inherit; }
+    #archive li .excerpt, #post-list li .excerpt {
+      margin-top: 0.4em;
+      margin-bottom: -9px; }
+    #archive li .read-more, #post-list li .read-more {
+      display: inline;
+      float: right; }
+  #archive li.odd .thumbnail, #post-list li.odd .thumbnail {
+    float: right;
+    width: 58.95217%;
+    padding-top: 36.43415%;
+    margin-left: 3vw; }
+  #archive li.even, #post-list li.even {
+    padding: 3vw;
+    background-color: #f6f6f6; }
+    #archive li.even .thumbnail, #post-list li.even .thumbnail {
+      float: left;
+      width: 58.66209%;
+      padding-top: 36.25487%;
+      margin-right: 3vw; }
+  #archive li:last-child, #post-list li:last-child {
+    margin-bottom: 0; }
+
+#archive #searchform {
+  margin-bottom: 3vw; }
+
+#archive-page #searchform {
+  margin-top: 3vw; }
+#archive-page h3 {
+  margin: 3vw 0; }
+#archive-page ul {
+  margin: 0;
+  padding: 0; }
+#archive-page ul.topics li, #archive-page ul.monthly li {
+  display: inline; }
+
+article {
+  position: relative;
+  width: 80.9%;
+  margin-bottom: 3vw; }
+  article img {
+    max-width: 100%; }
+  article iframe {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100% !important; }
+  article hr {
+    display: block;
+    height: 0;
+    width: 80%;
+    margin: 1.2em auto;
+    border: 0;
+    border: 1px solid #dedede; }
+
+#post > p:first-of-type:not(.no-dropcap):first-letter {
+  display: block;
+  float: left;
+  height: 1em;
+  line-height: 1em;
+  font-size: 6.2em;
+  margin: 4px 10px -10px 6px; }
+
+#page {
+  margin-top: 2vw; }
+
+#attachment {
+  width: 100%;
+  padding-right: 3vw; }
+  #attachment .post-meta {
+    margin: 0 0 1.2em 0;
+    background: none; }
+  #attachment img {
+    display: block;
+    margin: 0 auto; }
 
 #comments-section {
   position: relative;

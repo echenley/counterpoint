@@ -27,10 +27,21 @@
   
   add_action("wp_enqueue_scripts", "counterpoint_scripts", 11);
   function counterpoint_scripts() {
+    wp_enqueue_style('merriweather-font',
+      'http' . ($_SERVER['SERVER_PORT'] == 443 ? 's' : '') . '://fonts.googleapis.com/css?family=Merriweather:400,400italic,700');
+    wp_enqueue_style('inconsolata-font',
+      'http' . ($_SERVER['SERVER_PORT'] == 443 ? 's' : '') . '://fonts.googleapis.com/css?family=Inconsolata');
+    wp_enqueue_style('counterpoint-style',
+      get_template_directory_uri() . '/library/css/style.css');
+  
     wp_deregister_script('jquery');
-    wp_register_script('jquery', 'http' . ($_SERVER['SERVER_PORT'] == 443 ? 's' : '') . '://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js', false, null);
+    wp_register_script('jquery',
+      'http' . ($_SERVER['SERVER_PORT'] == 443 ? 's' : '') . '://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js',
+      array(), '1.11.0', true);
     wp_enqueue_script('jquery');
-    wp_enqueue_script( 'counterpoint-scripts', get_template_directory_uri() . '/library/js/scripts.js', array('jquery'), true);
+    wp_enqueue_script('counterpoint-scripts',
+      get_template_directory_uri() . '/library/js/scripts-min.js',
+      array('jquery'), '', true);
   }
 
   // Remove Admin Bar //
@@ -104,7 +115,7 @@
     <li <?php comment_class(); ?>>
       <div id="comment-<?php comment_ID(); ?>">
         <header class="comment-author vcard">
-          <img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5( get_comment_author_email() ); ?>?s=64" class="load-gravatar avatar avatar-48 photo" height="32" width="32" src="<?php echo get_template_directory_uri(); ?>/library/images/nothing.png" />
+          <img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5( get_comment_author_email() ); ?>?s=64" class="load-gravatar avatar avatar-48 photo" height="32" width="32" src="<?php echo get_template_directory_uri(); ?>/libr ary/images/nothing.png" />
           <div class="comment-author-info"><?php printf('<cite class="fn">%s</cite>', get_comment_author_link()); ?>
           <?php edit_comment_link(__('Edit'), ' &#183; ', ''); ?>
           <?php comment_reply_link(array_merge($args, array('before' => ' &#183; ','depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
@@ -248,12 +259,12 @@
         $i = $page - 1;
         if ( $i && $more ) {
           $prev .= _wp_link_page($i);
-          $prev .= $args['link_before'] . $args['previouspagelink'] . $args['link_after'] . '</a>';
+          $prev .= $args['text_before'] . $args['previouspagelink'] . $args['text_after'] . '</a>';
         }
         $i = $page + 1;
         if ( $i <= $numpages && $more ) {
           $next .= _wp_link_page($i);
-          $next .= $args['link_before'] . $args['nextpagelink'] . $args['link_after'] . '</a>';
+          $next .= $args['text_before'] . $args['nextpagelink'] . $args['text_after'] . '</a>';
         }
       }
       $args['before'] = $args['before'] . $prev;
@@ -268,8 +279,8 @@
     $defaults = array(
       'before' => '<nav class="post-pagination">', 
       'after' => '</nav>',
-      'link_before' => '',
-      'link_after' => '',
+      'text_before' => '',
+      'text_after' => '',
       'next_or_number' => 'number', 
       'nextpagelink' => __('Next &rarr;', 'counterpoint'),
       'previouspagelink' => __('&larr; Previous', 'counterpoint'),
@@ -328,4 +339,5 @@
       echo $output;
     return $output;
   }
+  
 ?>

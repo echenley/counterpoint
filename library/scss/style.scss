@@ -98,11 +98,24 @@ img.size-full {
   width: auto; // Prevent stretching of full-size images with height and >>width attributes in IE8 //
 }
 
+// Gallery and Captions //
+
 .gallery {
-  .wp-caption-text { background: none; }
+  clear: both;
+  margin: auto;
+  width: 100%;
+  .gallery-item {
+    float: left;
+    margin-top: 10px;
+    text-align: center;
+    width: 33%;
+  }
   img {
-    border: none !important;
-    padding: 1px !important;
+    border: 2px solid $line-color;
+  }
+  .gallery-caption {
+    margin-left: 0;
+    background: none !important;
   }
 }
 
@@ -155,6 +168,25 @@ body {
   min-height: 100%;
   background-color: $bg-color;
   color: $primary-color;
+}
+
+// Main Content Styles //
+
+section#content {
+  position: relative;
+  float: right;
+  width: $content-width * 100%;
+  line-height: 2em;
+  text-align: justify;
+  padding: $standard-margin 0;
+  
+  a {
+    color: $link-color;
+    @include prefix(transition, color 0.2s);
+    &:hover { color: darken($link-color, 20%); }
+  }
+  
+  p { margin: 1.2em 0; }
 }
 
 // Miscellaneous Tags //
@@ -211,9 +243,6 @@ blockquote {
   }
 }
 
-dt { font-weight: bold; }
-dd {}
-
 q {
   quotes: "\201C""\201D""\2018""\2019";
   &:before { content: open-quote; }
@@ -242,7 +271,7 @@ table {
 
 // Lists //
 
-article {
+#content article {
   ul {
     list-style: disc inside;
     ul,ol { margin-left: 2em; }
@@ -397,28 +426,15 @@ input[type=submit], input[type=submit]:visited {
   }
 }
 
-// Archives //
-
-#archive #searchform { margin-bottom: $standard-margin; }
-
-#archive-page {
-  #searchform { margin-top: $standard-margin; }
-  h3 { margin: $standard-margin 0; }
-  ul { margin: 0; padding: 0; }
-  ul.topics li, ul.monthly li {
-    display: inline;
-  }
-}
-
 // Widget Areas //
 
-div#sidebar #sidebar-widget {
+#sidebar #sidebar-widget {
   position: absolute;
   bottom: 3vw;
   width: 100%;
 }
 
-div#article-bottom {
+#article-bottom {
   margin-top: $standard-margin;
   padding: 1em 0;
   color: #666;
@@ -429,9 +445,26 @@ div#article-bottom {
 
 .simple-social-icons ul li a { @include prefix(transition, background 0.2s); }
 
+// Post Meta Info //
+  
+.post-meta {
+  display: block;
+  overflow: hidden;
+  .timestamp, .edit-link {
+    float: right;
+  }
+  .timestamp { font-style: italic; }
+}
+
+article .post-meta {
+  margin: 1.2em 0 0 0;
+  background: $highlight;
+  padding: 0.6em 1.2em;
+}
+
 // Main Navigation (sidebar.php) //
 
-div#sidebar {
+#sidebar {
   position: fixed;
   top: 0; bottom: 0;
   width: $nav-width * 100%;
@@ -513,176 +546,157 @@ nav#post-nav {
   }
 }
 
-section#content {
-  position: relative;
-  float: right;
-  width: $content-width * 100%;
-  line-height: 2em;
-  text-align: justify;
-  padding: $standard-margin 0;
-  
-  a {
-    color: $link-color;
-    @include prefix(transition, color 0.2s);
-    &:hover { color: darken($link-color, 20%); }
-  }
-  
-  p { margin: 1.2em 0; }
-  
-  // Post Meta //
-  
-  section.post-meta {
-    display: block;
-    overflow: hidden;
-    .timestamp, .edit-link {
-      float: right;
-    }
-    .timestamp { font-style: italic; }
-  }
+// Page Numbers //
 
-  article .post-meta {
-    margin: 1.2em 0 0 0;
-    background: $highlight;
-    padding: 0.6em 1.2em;
+@mixin pagination {
+  position: relative;
+  clear: both;
+  background: $highlight;
+  text-align: center;
+  padding: 0.6em 0;
+  > * {
+    display: inline-block;
+    padding: 0 0.6em;
   }
+}
+
+nav.pagination {
+  @include pagination;
+  margin: $standard-margin $standard-margin 0 0;
+  > * {
+    &.prev { position: absolute; left: 0; }
+    &.next { position: absolute; right: 0; }
+  }
+}
+
+nav.post-pagination {
+  @include pagination;
+  margin: 1.2em 0;
+  padding-left: 7em;
+  padding-right: 7em;
+  > * {
+    &:first-child:not(.current) { position: absolute; left: 0; top: 0.6em; }
+    &:last-child:not(.current) { position: absolute; right: 0; top: 0.6em; }
+  }
+}
+
+// Front-Page, Archives, Attachment (index.php, archive.php, attachment.php) //
+
+#archive, #post-list {
+  margin-right: $standard-margin;
   
   div.categories { margin-top: 1.2em; }
   
-  // Front-Page, Archives, Attachment (index.php, archive.php, attachment.php) //
-
-  #archive, #post-list {
-    margin-right: $standard-margin;
-    
-    li {
+  li {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-bottom: $standard-margin;
+    .thumbnail {
       position: relative;
       display: block;
-      width: 100%;
-      margin-bottom: $standard-margin;
-      .thumbnail {
-        position: relative;
+    }
+    h3.post-title {
+      overflow: hidden;
+      text-align: left;
+      padding: 0;
+      a {
         display: block;
-      }
-      h3.post-title {
-        overflow: hidden;
-        text-align: left;
-        padding: 0;
-        a {
-          display: block;
-          padding: 0.8em 0;
-          color: inherit;
-        }
-      }
-      
-      .excerpt {
-        margin-top: 0.4em;
-        margin-bottom: -9px;
-      }
-      
-      .read-more {
-        display: inline;
-        float: right;
+        padding: 0.8em 0;
+        color: inherit;
       }
     }
     
-    li.odd .thumbnail {
+    .excerpt {
+      margin-top: 0.4em;
+      margin-bottom: -9px;
+    }
+    
+    .read-more {
+      display: inline;
       float: right;
-      width: (100% - ($container-margin / ($content-width - 0.03))) / 1.618;        // golden ratio (1:1.618) between thumbnail and .post-info (minus internal margin)
-      padding-top: (100% - ($container-margin / ($content-width - 0.03))) / 2.618;  // width and height also share golden ratio relationship
-      margin-left: $standard-margin;
     }
+  }
+  
+  li.odd .thumbnail {
+    float: right;
+    width: (100% - ($container-margin / ($content-width - 0.03))) / 1.618;        // golden ratio (1:1.618) between thumbnail and .post-info (minus internal margin)
+    padding-top: (100% - ($container-margin / ($content-width - 0.03))) / 2.618;  // width and height also share golden ratio relationship
+    margin-left: $standard-margin;
+  }
+  
+  li.even { 
+    padding: $standard-margin;
+    background-color: $highlight;
     
-    li.even { 
-      padding: $standard-margin;
-      background-color: $highlight;
-      
-      .thumbnail {
-        float: left;
-        width: (100% - ($container-margin / ($content-width - 0.09))) / 1.618;        // golden ratio (1:1.618) between thumbnail and .post-info (minus internal margin)
-        padding-top: (100% - ($container-margin / ($content-width - 0.09))) / 2.618;  // width and height also share golden ratio relationship
-        margin-right: $standard-margin;
-      }
-    }
-    
-    li:last-child {
-      margin-bottom: 0;
+    .thumbnail {
+      float: left;
+      width: (100% - ($container-margin / ($content-width - 0.09))) / 1.618;        // golden ratio (1:1.618) between thumbnail and .post-info (minus internal margin)
+      padding-top: (100% - ($container-margin / ($content-width - 0.09))) / 2.618;  // width and height also share golden ratio relationship
+      margin-right: $standard-margin;
     }
   }
   
-  // Page Numbers //
-  
-  @mixin pagination {
-    position: relative;
-    clear: both;
-    background: $highlight;
-    text-align: center;
-    padding: 0.6em 0;
-    > * {
-      display: inline-block;
-      padding: 0 0.6em;
-    }
+  li:last-child {
+    margin-bottom: 0;
   }
-  
-  nav.pagination {
-    @include pagination;
-    margin: $standard-margin $standard-margin 0 0;
-    > * {
-      &.prev { position: absolute; left: 0; }
-      &.next { position: absolute; right: 0; }
-    }
-  }
-  
-  nav.post-pagination {
-    @include pagination;
-    margin: 1.2em 0;
-    padding-left: 7em;
-    padding-right: 7em;
-    > * {
-      &:first-child:not(.current) { position: absolute; left: 0; top: 0.6em; }
-      &:last-child:not(.current) { position: absolute; right: 0; top: 0.6em; }
-    }
-  }
-  
-  // Post Content (single.php, page.php) //
-  
-  article#post > p:first-of-type:not(.no-dropcap):first-letter {
-    display: block;
-    float: left;
-    height: 1em;
-    line-height: 1em;
-    font-size: 6.2em;
-    margin: 4px 10px -10px 6px;
-  }
-  
-  article#page { margin-top: 2vw; }
-  article#attachment {
-    width: 100%;
-    padding-right: $standard-margin;
-    .post-meta { margin: 0 0 1.2em 0; }
-    img { display: block; margin: 0 auto; }
-  }
-  
-  article {
-    position: relative;
-    width: $post-width;
-    margin-bottom: $standard-margin;
-    img { max-width: 100%; }
-    iframe {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 100% !important;
-    }
-    hr {
-      display: block;
-      height: 0;
-      width: 80%;
-      margin: 1.2em auto;
-      border: 0;
-      border: 1px solid $line-color;
-    }
-    
+}
 
+#archive #searchform { margin-bottom: $standard-margin; }
+
+// Archive Page //
+
+#archive-page {
+  #searchform { margin-top: $standard-margin; }
+  h3 { margin: $standard-margin 0; }
+  ul { margin: 0; padding: 0; }
+  ul.topics li, ul.monthly li {
+    display: inline;
   }
+}
+
+// Post Content (single.php, page.php) //
+
+article {
+  position: relative;
+  width: $post-width;
+  margin-bottom: $standard-margin;
+  img { max-width: 100%; }
+  iframe {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100% !important;
+  }
+  hr {
+    display: block;
+    height: 0;
+    width: 80%;
+    margin: 1.2em auto;
+    border: 0;
+    border: 1px solid $line-color;
+  }
+}
+
+#post > p:first-of-type:not(.no-dropcap):first-letter {
+  display: block;
+  float: left;
+  height: 1em;
+  line-height: 1em;
+  font-size: 6.2em;
+  margin: 4px 10px -10px 6px;
+}
+
+#page { margin-top: 2vw; }
+
+#attachment {
+  width: 100%;
+  padding-right: $standard-margin;
+  .post-meta {
+    margin: 0 0 1.2em 0;
+    background: none;
+  }
+  img { display: block; margin: 0 auto; }
 }
 
 @import '_comments';
