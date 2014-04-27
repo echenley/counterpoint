@@ -3,7 +3,7 @@
   html { -webkit-text-size-adjust: none; }
   body { font-size: 95%; }
   
-  h1 { font-size: 2.1em; }
+  h1 { font-size: 1.9em; }
   h2 { font-size: 1.5em; }
   
   section#content {
@@ -19,6 +19,7 @@
         .thumbnail {
           width: 100%;
           padding-top: (100% / 1.618);
+          margin-left: 0; margin-right: 0;
         }
       }
       
