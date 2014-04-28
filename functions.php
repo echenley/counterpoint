@@ -29,8 +29,6 @@
   function counterpoint_scripts() {
     wp_enqueue_style('merriweather-font',
       'http' . ($_SERVER['SERVER_PORT'] == 443 ? 's' : '') . '://fonts.googleapis.com/css?family=Merriweather:400,400italic,700');
-    wp_enqueue_style('inconsolata-font',
-      'http' . ($_SERVER['SERVER_PORT'] == 443 ? 's' : '') . '://fonts.googleapis.com/css?family=Inconsolata');
     wp_enqueue_style('counterpoint-style',
       get_template_directory_uri() . '/library/css/style.css');
   
@@ -117,7 +115,7 @@
         <header class="comment-author vcard">
           <img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5( get_comment_author_email() ); ?>?s=64" class="load-gravatar avatar avatar-48 photo" height="32" width="32" src="<?php echo get_template_directory_uri(); ?>/libr ary/images/nothing.png" />
           <div class="comment-author-info"><?php printf('<cite class="fn">%s</cite>', get_comment_author_link()); ?>
-          <?php edit_comment_link(__('Edit'), ' &#183; ', ''); ?>
+          <?php edit_comment_link(__('Edit', 'counterpoint'), ' &#183; ', ''); ?>
           <?php comment_reply_link(array_merge($args, array('before' => ' &#183; ','depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
           </div>
           <time datetime="<?php echo comment_time('Y-m-j'); ?>"><a href="<?php echo esc_html( get_comment_link( $comment->comment_ID ) ) ?>"><?php comment_time('F jS, Y'); ?></a></time>

@@ -23,7 +23,7 @@ $post-width-640:   90%;
 // Typefaces (base, <code>) //
 
 $serif:           'Merriweather', TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
-$monospace:       'Inconsolata', 'Courier New', Courier, monospace;
+$monospace:       'Courier New', Courier, monospace;
 
 // Mixins //
 
@@ -203,11 +203,14 @@ pre, blockquote {
 pre, code { font-family: $monospace; }
 
 pre {
+  position: relative;
   overflow: auto;
   line-height: 1.5em;
+  -ms-word-wrap: initial;
+  word-wrap: initial;
   &:before {
     content: '</>';
-    float: right;
+    float: left;
     font-size: 2em;
     color: $line-color;
   }
@@ -430,7 +433,7 @@ input[type=submit], input[type=submit]:visited {
 
 #sidebar #sidebar-widget {
   position: absolute;
-  bottom: 3vw;
+  bottom: 0;
   width: 100%;
 }
 

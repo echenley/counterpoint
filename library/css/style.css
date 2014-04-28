@@ -31,13 +31,13 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-*, *:before, *:after {
+*:before, *:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   -box-sizing: border-box; }
 
-* {
+*:not(pre) {
   -ms-word-wrap: break-word;
   word-wrap: break-word; }
 
@@ -161,7 +161,7 @@ section#content {
     margin: 1.2em 0; }
 
 kbd {
-  font-family: "Inconsolata", "Courier New", Courier, monospace; }
+  font-family: "Courier New", Courier, monospace; }
 
 pre, code, blockquote {
   background: #f6f6f6; }
@@ -172,14 +172,17 @@ pre, blockquote {
   border-left: 10px solid #dedede; }
 
 pre, code {
-  font-family: "Inconsolata", "Courier New", Courier, monospace; }
+  font-family: "Courier New", Courier, monospace; }
 
 pre {
+  position: relative;
   overflow: auto;
-  line-height: 1.5em; }
+  line-height: 1.5em;
+  -ms-word-wrap: initial;
+  word-wrap: initial; }
   pre:before {
     content: '</>';
-    float: right;
+    float: left;
     font-size: 2em;
     color: #dedede; }
 
@@ -391,7 +394,7 @@ input[type=submit], input[type=submit]:visited {
 
 #sidebar #sidebar-widget {
   position: absolute;
-  bottom: 3vw;
+  bottom: 0;
   width: 100%; }
 
 #article-bottom {
@@ -732,11 +735,11 @@ article {
   .wp-caption.alignleft {
     margin: 1em 37px 0 0; }
 
-  #container div#sidebar {
+  #container #sidebar {
     width: 332.8px;
     margin-left: 37px;
     padding: 37px 0; }
-    #container div#sidebar #site-nav > ul {
+    #container #sidebar #site-nav > ul {
       font-size: 1.3em; }
   #container nav#post-nav {
     margin-top: 37px; }
