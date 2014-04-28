@@ -433,7 +433,7 @@ input[type=submit], input[type=submit]:visited {
 
 #sidebar #sidebar-widget {
   position: absolute;
-  bottom: 0;
+  bottom: $standard-margin;
   width: 100%;
 }
 

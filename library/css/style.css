@@ -394,7 +394,7 @@ input[type=submit], input[type=submit]:visited {
 
 #sidebar #sidebar-widget {
   position: absolute;
-  bottom: 0;
+  bottom: 3vw;
   width: 100%; }
 
 #article-bottom {
@@ -741,6 +741,8 @@ article {
     padding: 37px 0; }
     #container #sidebar #site-nav > ul {
       font-size: 1.3em; }
+    #container #sidebar #sidebar-widget {
+      margin-bottom: 37px; }
   #container nav#post-nav {
     margin-top: 37px; }
   #container section#content {
