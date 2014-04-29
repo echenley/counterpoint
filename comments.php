@@ -10,8 +10,7 @@
     <div class="alert alert-help">
       <p class="nocomments"><?php _e('This post is password protected. Enter the password to view comments.', 'counterpoint' ); ?></p>
     </div>
-  <?php
-    return;
+  <?php return;
   }
   
 if ( have_comments() ) : ?>
@@ -25,49 +24,60 @@ if ( have_comments() ) : ?>
 
 <?php if ( comments_open() ) : ?>
   <section id="respond" class="respond-form">
-    <h3 id="comment-form-title"><?php comment_form_title( __( 'Leave a Reply', 'counterpoint' ), __( 'Leave a Reply to %s&nbsp;&middot;&nbsp;' . get_cancel_comment_reply_link('Cancel Reply') . '', 'counterpoint' )); ?></h3>
+  
+  <h3 id="comment-form-title"><?php comment_form_title( __( 'Leave a Reply', 'counterpoint' ), __( 'Leave a Reply to %s', 'counterpoint' )); ?></h3>
 
   <?php if ( get_option('comment_registration') && !is_user_logged_in() ) : ?>
     <div class="alert alert-help">
       <p><?php printf( __( 'You must be %1$slogged in%2$s to post a comment.', 'counterpoint' ), '<a href="' . wp_login_url( get_permalink() ) . '">', '</a>' ); ?></p>
     </div>
-  <?php else : ?>
-  
-    <form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform">
     
+  <?php else : ?>
+
+    <form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform">
+      
       <?php if ( is_user_logged_in() ) : ?>
   
-        <div class="comments-logged-in-as"><?php _e( 'Logged in as', 'counterpoint' ); ?> <a href="<?php echo get_option( 'siteurl' ); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a><a href="<?php echo wp_logout_url( get_permalink() ); ?>" class="logout-link" title="<?php _e( 'Log out of this account', 'counterpoint' ); ?>"><?php _e( 'Log out &rarr;', 'counterpoint' ); ?></a></div>
+      <div class="logged-in-as">
+        <?php _e( 'Logged in as', 'counterpoint' ); ?>
+        <a href="<?php echo get_option( 'siteurl' ); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>
+        <a href="<?php echo wp_logout_url( get_permalink() ); ?>" class="logout-link" title="<?php _e( 'Log out of this account', 'counterpoint' ); ?>"><?php _e( 'Log out &rarr;', 'counterpoint' ); ?></a>
+      </div>
   
       <?php else : ?>
   
-        <ul id="comment-form-elements">
-  
-          <li>
-            <label for="author"><?php _e( 'Name', 'counterpoint' ); ?> <?php if ($req) _e( '(required)'); ?></label>
-            <input type="text" name="author" id="author" value="<?php echo esc_attr($comment_author); ?>" placeholder="<?php _e( 'Your Name*', 'counterpoint' ); ?>" <?php if ($req) echo "aria-required='true'"; ?> />
-          </li>
-      
-          <li>
-            <label for="email"><?php _e( 'Email', 'counterpoint' ); ?> <?php if ($req) _e( '(required)'); ?></label>
-            <input type="email" name="email" id="email" value="<?php echo esc_attr($comment_author_email); ?>" placeholder="<?php _e( 'Your E-Mail*', 'counterpoint' ); ?>" <?php if ($req) echo "aria-required='true'"; ?> />
-            <small><?php _e("(will not be published)", 'counterpoint' ); ?></small>
-          </li>
-      
-          <li>
-            <label for="url"><?php _e( 'Website', 'counterpoint' ); ?></label>
-            <input type="url" name="url" id="url" value="<?php echo esc_attr($comment_author_url); ?>" placeholder="<?php _e( 'Got a website?', 'counterpoint' ); ?>" />
-          </li>
-      
-        </ul>
+      <ul id="comment-form-elements">
+
+        <li>
+          <label for="author"><?php _e( 'Name', 'counterpoint' ); ?> <?php if ($req) _e( '(required)'); ?></label>
+          <input type="text" name="author" id="author" value="<?php echo esc_attr($comment_author); ?>" placeholder="<?php _e( 'Your Name*', 'counterpoint' ); ?>" <?php if ($req) echo "aria-required='true'"; ?> />
+        </li>
+    
+        <li>
+          <label for="email"><?php _e( 'Email', 'counterpoint' ); ?> <?php if ($req) _e( '(required)'); ?></label>
+          <input type="email" name="email" id="email" value="<?php echo esc_attr($comment_author_email); ?>" placeholder="<?php _e( 'Your E-Mail*', 'counterpoint' ); ?>" <?php if ($req) echo "aria-required='true'"; ?> />
+          <small><?php _e("(will not be published)", 'counterpoint' ); ?></small>
+        </li>
+    
+        <li>
+          <label for="url"><?php _e( 'Website', 'counterpoint' ); ?></label>
+          <input type="url" name="url" id="url" value="<?php echo esc_attr($comment_author_url); ?>" placeholder="<?php _e( 'Got a website?', 'counterpoint' ); ?>" />
+        </li>
+    
+      </ul>
   
       <?php endif; ?>
-    
-      <p style="line-height: 0;"><textarea name="comment" id="comment" placeholder="<?php _e( 'Your Comment here*', 'counterpoint' ); ?>"></textarea></p>
-      <p style="line-height: 0;"><input name="submit" type="submit" id="submit" class="button" value="<?php _e( 'Submit &rarr;', 'counterpoint' ); ?>" /></p>
-      <?php comment_id_fields(); ?>
+        
+      <div class="form-element"><textarea name="comment" id="comment" placeholder="<?php _e( 'Your Comment Here*', 'counterpoint' ); ?>"></textarea></div>
+      <div class="submit-div">
+        <input name="submit" type="submit" id="submit" class="button" value="<?php _e( 'Submit &rarr;', 'counterpoint' ); ?>" />
+        <?php cancel_comment_reply_link('Cancel Reply'); ?>
+      </div>
       
-      <?php do_action( 'comment_form', $post->ID ); ?>
+      <?php
+        comment_id_fields();
+        do_action( 'comment_form', $post->ID );
+      ?>
     </form>
   <?php endif; // If registration required and not logged in ?>
   </section>

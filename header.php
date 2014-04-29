@@ -11,7 +11,8 @@
       ?>
     </title>
     <link rel="shortcut icon" type="image/ico" href="<?php echo get_template_directory_uri(); ?>/favicon.ico">
-    <?php wp_head(); ?>
+    <?php 
+    if ( is_singular() ) wp_enqueue_script('comment-reply'); wp_head(); ?>
   </head>
   <body <?php body_class(); ?>>
     <div id="container" class="cf">

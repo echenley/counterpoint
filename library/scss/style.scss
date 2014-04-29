@@ -6,7 +6,7 @@
 
 $primary-color:   #4f4f4f;  // text color
 $bg-color:        #fff;     // background
-$highlight:       #f6f6f6;  // light gray highlight
+$highlight:       #f3f3f3;  // light gray highlight
 $link-color:      #c44;  // linkz
 $line-color:      #dedede;  // borders and <hr>
 $container-size:  1280px;   // max container width
@@ -32,15 +32,6 @@ $monospace:       'Courier New', Courier, monospace;
   @each $prefix in $prefixes {
     #{$prefix}-#{$property}: $value;
   }
-}
-
-@mixin form-input {
-  max-width: 100%;
-  margin: 0;
-  padding: 0.5em 0.8em;
-  border: 2px solid $line-color;
-  line-height: 1.5em;
-  @include prefix(transition, background 0.2s);
 }
 
 // Reset/Normalize Code //
@@ -98,6 +89,11 @@ img.size-full {
   width: auto; // Prevent stretching of full-size images with height and >>width attributes in IE8 //
 }
 
+.alert {
+  background: rgba(0,0,0,0.04);
+  padding: 0.6em 1.2em;
+}
+
 // Gallery and Captions //
 
 .gallery {
@@ -146,7 +142,7 @@ img.size-full {
     float: left;
     padding: 0.3em 1em;
     font-weight: bold;
-    background-color: #fff0b2;
+    background: #fff0b2;
   }
   .timestamp { padding: 0.3em 0; }
 }
@@ -158,7 +154,7 @@ html { height: 100%; }
 body {
   font-family: $serif;
   font-size: 95%;
-  background-color: $primary-color;
+  background: $primary-color;
   height: 100%;
 }
 
@@ -166,7 +162,7 @@ body {
   margin: 0 auto;
   max-width: $container-size;
   min-height: 100%;
-  background-color: $bg-color;
+  background: $bg-color;
   color: $primary-color;
 }
 
@@ -182,7 +178,7 @@ section#content {
   
   a {
     color: $link-color;
-    @include prefix(transition, color 0.2s);
+    @include prefix(transition, all 0.2s);
     &:hover { color: darken($link-color, 20%); }
   }
   
@@ -210,7 +206,7 @@ pre {
   word-wrap: initial;
   &:before {
     content: '</>';
-    float: left;
+    float: right;
     font-size: 2em;
     color: $line-color;
   }
@@ -246,10 +242,13 @@ blockquote {
   }
 }
 
-q {
-  quotes: "\201C""\201D""\2018""\2019";
-  &:before { content: open-quote; }
-  &:after { content: close-quote; }
+hr {
+  display: block;
+  height: 0;
+  width: 80%;
+  margin: 1.2em auto;
+  border: 0;
+  border: 1px solid $line-color;
 }
 
 // Tables //
@@ -379,6 +378,23 @@ header.post-header {
 
 // Forms //
 
+@mixin form-input {
+  max-width: 100%;
+  margin: 0;
+  padding: 0.5em 0.8em;
+  line-height: 1.5em;
+  font-size: 13px;
+}
+
+input,select,textarea {
+  outline: none;
+  border: 2px solid $line-color;
+  @include prefix(transition, all 0.2s);
+  &:focus {
+    border-color: #66c2ff;
+  }
+}
+
 input[type=submit],
 input[type=text],
 input[type=email],
@@ -412,14 +428,15 @@ form.post-password-form {
 input[type=submit], input[type=submit]:visited {
   display: inline-block;
   margin: 0;
-  padding: 0.5em 2em;
-  line-height: 1.5em;
-  text-decoration: none;
+  padding: 0 20px;
+  height: 34px;
+  background: $bg-color;
   border: 2px solid $line-color;
   border-bottom-color: darken($line-color, 30%);
   border-right-color: darken($line-color, 30%);
   color: darken($line-color, 30%);
-  background-color: $bg-color;
+  text-decoration: none;
+  font-size: 13px;
   cursor: pointer;
   
   &:active {
@@ -441,12 +458,12 @@ input[type=submit], input[type=submit]:visited {
   margin-top: $standard-margin;
   padding: 1em 0;
   color: #666;
-  background-color: $highlight;
+  background: $highlight;
   text-align: center;
   &:empty { display: none; }
 }
 
-.simple-social-icons ul li a { @include prefix(transition, background 0.2s); }
+.simple-social-icons ul li a { @include prefix(transition, all 0.2s); }
 
 // Post Meta Info //
   
@@ -490,13 +507,13 @@ article .post-meta {
       }
       
       a:hover {
-        background-color: $primary-color;
+        background: $primary-color;
         color: $bg-color;
       }
       
       ul.sub-menu {
         display: none;
-        background-color: $highlight;
+        background: $highlight;
       }
       
       &.active {
@@ -630,7 +647,7 @@ nav.post-pagination {
   
   li.even { 
     padding: $standard-margin;
-    background-color: $highlight;
+    background: $highlight;
     
     .thumbnail {
       float: left;
@@ -670,14 +687,6 @@ article {
     margin-left: auto;
     margin-right: auto;
     max-width: 100% !important;
-  }
-  hr {
-    display: block;
-    height: 0;
-    width: 80%;
-    margin: 1.2em auto;
-    border: 0;
-    border: 1px solid $line-color;
   }
 }
 

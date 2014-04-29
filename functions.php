@@ -40,6 +40,9 @@
     wp_enqueue_script('counterpoint-scripts',
       get_template_directory_uri() . '/library/js/scripts-min.js',
       array('jquery'), '', true);
+
+    if ( (!is_admin()) && is_singular() && comments_open() && get_option('thread_comments') )
+      wp_enqueue_script( 'comment-reply' );
   }
 
   // Remove Admin Bar //
@@ -113,7 +116,7 @@
     <li <?php comment_class(); ?>>
       <div id="comment-<?php comment_ID(); ?>">
         <header class="comment-author vcard">
-          <img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5( get_comment_author_email() ); ?>?s=64" class="load-gravatar avatar avatar-48 photo" height="32" width="32" src="<?php echo get_template_directory_uri(); ?>/libr ary/images/nothing.png" />
+          <img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5( get_comment_author_email() ); ?>?s=64" class="load-gravatar avatar avatar-48 photo" height="32" width="32" src="<?php echo get_template_directory_uri(); ?>/library/images/nothing.png" />
           <div class="comment-author-info"><?php printf('<cite class="fn">%s</cite>', get_comment_author_link()); ?>
           <?php edit_comment_link(__('Edit', 'counterpoint'), ' &#183; ', ''); ?>
           <?php comment_reply_link(array_merge($args, array('before' => ' &#183; ','depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
