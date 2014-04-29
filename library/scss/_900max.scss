@@ -2,21 +2,18 @@
   
   body { font-size: 90%; }
   
-  #container {
+  #sidebar nav#site-nav > ul {
+    font-size: 1em;
+  }
   
-    div#sidebar nav#site-nav > ul {
-      font-size: 1em;
-    }
-    
-    .post-header .post-title h2,
-    section#content article,
-    #comments-section {
-      width: $post-width-900;
-    }
-    
-    #post-list {
-      li.odd div.thumbnail { width: (100% - ($container-margin / ($content-width - 0.03))) / 2.618; }
-      li.even div.thumbnail { width: (100% - ($container-margin / ($content-width - 0.09))) / 2.618; }
-    }
+  header.post-header .post-title h2,
+  article,
+  #comments-section {
+    width: $post-width-900;
+  }
+  
+  #post-list {
+    li.odd div.thumbnail { width: (100% - ($container-margin / ($content-width - 0.03))) / 2.618; }
+    li.even div.thumbnail { width: (100% - ($container-margin / ($content-width - 0.09))) / 2.618; }
   }
 }

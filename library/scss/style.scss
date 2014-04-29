@@ -309,20 +309,27 @@ h2 {
   text-align: left; 
 }
 
-div.post-title {
-  position: absolute;
+header.post-header {
+  position: relative;
   display: block;
-  bottom: 0;
   width: 100%;
-  background: rgba(34,34,34,0.6);
-  color: $bg-color;
-  h2 {  // Post Titles Only (archive-post.php, page.php, single.php) //
-    width: $post-width;
-    padding: 0.5em 0 0.5em 0.5em;
-    border: none;
-    font-size: 1.8em;
-    font-weight: normal;
-    background: none;
+  height: 28vw;
+  min-height: 260px;
+  .post-title {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    width: 100%;
+    background: rgba(34,34,34,0.6);
+    color: $bg-color;
+    h2 {  // Post Titles Only (archive-post.php, page.php, single.php) //
+      width: $post-width;
+      padding: 0.5em 0 0.5em 0.5em;
+      border: none;
+      font-size: 1.8em;
+      font-weight: normal;
+      background: none;
+    }
   }
 }
 
@@ -343,14 +350,6 @@ h5 { font-weight: bold; }
 h6 { font-style: italic; }
 
 // Post Headers //
-
-header.post-header {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 28vw;
-  min-height: 260px;
-}
 
 .archive-header, .attachment-header {
   width: 100%;

@@ -271,20 +271,26 @@ h2 {
   font-weight: bold;
   text-align: left; }
 
-div.post-title {
-  position: absolute;
+header.post-header {
+  position: relative;
   display: block;
-  bottom: 0;
   width: 100%;
-  background: rgba(34, 34, 34, 0.6);
-  color: white; }
-  div.post-title h2 {
-    width: 80.9%;
-    padding: 0.5em 0 0.5em 0.5em;
-    border: none;
-    font-size: 1.8em;
-    font-weight: normal;
-    background: none; }
+  height: 28vw;
+  min-height: 260px; }
+  header.post-header .post-title {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    width: 100%;
+    background: rgba(34, 34, 34, 0.6);
+    color: white; }
+    header.post-header .post-title h2 {
+      width: 80.9%;
+      padding: 0.5em 0 0.5em 0.5em;
+      border: none;
+      font-size: 1.8em;
+      font-weight: normal;
+      background: none; }
 
 h3 {
   padding: 0.8em 0;
@@ -302,13 +308,6 @@ h5 {
 
 h6 {
   font-style: italic; }
-
-header.post-header {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 28vw;
-  min-height: 260px; }
 
 .archive-header, .attachment-header {
   width: 100%;
@@ -792,15 +791,17 @@ article {
   body {
     font-size: 90%; }
 
-  #container div#sidebar nav#site-nav > ul {
+  #sidebar nav#site-nav > ul {
     font-size: 1em; }
-  #container .post-header .post-title h2,
-  #container section#content article,
-  #container #comments-section {
+
+  header.post-header .post-title h2,
+  article,
+  #comments-section {
     width: 95.58824%; }
-  #container #post-list li.odd div.thumbnail {
+
+  #post-list li.odd div.thumbnail {
     width: 36.43415%; }
-  #container #post-list li.even div.thumbnail {
+  #post-list li.even div.thumbnail {
     width: 36.25487%; } }
 @media screen and (max-width: 640px) {
   #sidebar #title {
@@ -877,40 +878,50 @@ article {
     width: 100%;
     padding-top: 0;
     float: none; }
-    section#content nav.pagination {
-      margin: 5% 0 0 0; }
-      section#content nav.pagination *.prev {
-        padding-left: 0;
-        left: 5%; }
-      section#content nav.pagination *.next {
-        padding-right: 0;
-        right: 5%; }
-    section#content .post-header .post-title h2 {
-      width: 90%;
-      margin: 0 auto;
-      padding-left: 0; }
-    section#content .archive-header, section#content .attachment-header {
-      width: 90%;
-      margin: 5% auto 5%;
-      padding: 1.2em; }
-    section#content article,
-    section#content #comments-section,
-    section#content ul.page-numbers {
-      width: 90%;
-      margin: 0 auto 5%;
-      padding: 0; }
-    section#content #archive li:first-child {
-      padding-top: 0; }
-    section#content #archive, section#content #post-list {
-      width: 100%; }
-      section#content #archive li, section#content #post-list li {
-        width: 100%;
-        padding: 5%;
-        margin: 0; }
-      section#content #archive li.even .thumbnail, section#content #post-list li.even .thumbnail {
-        margin-right: 5%; }
-      section#content #archive li.odd .thumbnail, section#content #post-list li.odd .thumbnail {
-        margin-left: 5%; } }
+
+  nav.pagination {
+    margin: 5% 0 0 0; }
+    nav.pagination *.prev {
+      padding-left: 0;
+      left: 5%; }
+    nav.pagination *.next {
+      padding-right: 0;
+      right: 5%; }
+
+  header.post-header .post-title h2,
+  .archive-header, .attachment-header,
+  article,
+  #comments-section,
+  ul.page-numbers {
+    width: 90%; }
+
+  header.post-header .post-title h2 {
+    margin: 0 auto;
+    padding-left: 0; }
+
+  .archive-header, .attachment-header {
+    margin: 5% auto 5%;
+    padding: 1.2em; }
+
+  article,
+  #comments-section,
+  ul.page-numbers {
+    margin: 0 auto 5%;
+    padding: 0; }
+
+  #archive li:first-child {
+    padding-top: 0; }
+
+  #archive, #post-list {
+    width: 100%; }
+    #archive li, #post-list li {
+      width: 100%;
+      padding: 5%;
+      margin: 0; }
+    #archive li.even .thumbnail, #post-list li.even .thumbnail {
+      margin-right: 5%; }
+    #archive li.odd .thumbnail, #post-list li.odd .thumbnail {
+      margin-left: 5%; } }
 @media screen and (max-width: 480px) {
   html {
     -webkit-text-size-adjust: none; }
