@@ -464,7 +464,7 @@ input[type=submit], input[type=submit]:visited {
 }
 
 article .post-meta {
-  margin: 1.2em 0 0 0;
+  margin: 1.2em 0;
   background: $highlight;
   padding: 0.6em 1.2em;
 }
@@ -599,7 +599,11 @@ nav.post-pagination {
 #archive, #post-list {
   margin-right: $standard-margin;
   
-  div.categories { margin-top: 1.2em; }
+  .categories { margin-top: 2.4em; }
+  .categories, .tags {
+    font-size: 0.8em;
+    line-height: 1.8em;
+  }
   
   li {
     position: relative;

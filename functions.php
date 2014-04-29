@@ -235,7 +235,7 @@
         $output .= '<a href="' . get_category_link( $category->term_id ) . '"';
         $output .= ' title="' . esc_attr( sprintf( __( "View all posts in %s", "counterpoint" ), $category->name ) ) . '">' . $category->cat_name . '</a>' . $separator;
       }
-    echo trim($output, $separator);
+      echo trim($output, $separator);
     }
   }
   
