@@ -200,7 +200,6 @@ pre, blockquote {
 pre, code { font-family: $monospace; }
 
 pre {
-  position: relative;
   overflow: auto;
   line-height: 1.5em;
   -ms-word-wrap: initial;
@@ -216,7 +215,6 @@ blockquote {
   font-style: italic;
   quotes: "\201C""\201D""\2018""\2019";
   p:first-child { display: inline; }
-  p:nth-child(2) { margin-top: 0.6em; }
   &:after { content: no-close-quote; }
   &:before {
     content: open-quote;
