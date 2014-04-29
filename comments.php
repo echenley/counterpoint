@@ -68,7 +68,7 @@ if ( have_comments() ) : ?>
   
       <?php endif; ?>
         
-      <div class="form-element"><textarea name="comment" id="comment" placeholder="<?php _e( 'Your Comment Here*', 'counterpoint' ); ?>"></textarea></div>
+      <div class="form-element"><textarea name="comment" id="comment" placeholder="<?php _e( 'Type Your Comment Here*', 'counterpoint' ); ?>"></textarea></div>
       <div class="submit-div">
         <input name="submit" type="submit" id="submit" class="button" value="<?php _e( 'Submit &rarr;', 'counterpoint' ); ?>" />
         <?php cancel_comment_reply_link('Cancel Reply'); ?>

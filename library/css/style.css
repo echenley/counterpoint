@@ -803,16 +803,16 @@ article {
   #container #post-list li.even div.thumbnail {
     width: 36.25487%; } }
 @media screen and (max-width: 640px) {
-  h1 {
+  #sidebar #title {
     font-size: 2.4em;
     padding: 0 5%;
     text-align: left;
     border: none;
     line-height: 74px;
     background-color: #f3f3f3; }
-    h1 a {
+    #sidebar #title a {
       padding: 0; }
-    h1 .menu-link {
+    #sidebar #title .menu-link {
       position: absolute;
       display: block;
       top: 0;
@@ -830,14 +830,14 @@ article {
   #container {
     padding: 0 0 5% 0; }
 
-  div#sidebar {
+  #sidebar {
     position: relative;
     margin: 0;
     padding: 0;
     height: auto;
     width: 100%;
     max-width: 100%; }
-    div#sidebar nav#site-nav > ul {
+    #sidebar nav#site-nav > ul {
       z-index: 10;
       position: absolute;
       display: none;
@@ -846,31 +846,31 @@ article {
       right: 0;
       width: 100%;
       background: rgba(62, 62, 62, 0.9); }
-      div#sidebar nav#site-nav > ul.active {
+      #sidebar nav#site-nav > ul.active {
         z-index: 1000;
         display: block;
         padding: 5% 20%; }
-      div#sidebar nav#site-nav > ul > li {
+      #sidebar nav#site-nav > ul > li {
         border: 1px solid transparent;
         margin-bottom: 10px; }
-        div#sidebar nav#site-nav > ul > li.active {
+        #sidebar nav#site-nav > ul > li.active {
           border: 1px solid white; }
-      div#sidebar nav#site-nav > ul li {
+      #sidebar nav#site-nav > ul li {
         background-color: transparent; }
-        div#sidebar nav#site-nav > ul li.active > a {
+        #sidebar nav#site-nav > ul li.active > a {
           background-color: transparent;
           text-decoration: underline; }
-        div#sidebar nav#site-nav > ul li.active > ul.sub-menu {
+        #sidebar nav#site-nav > ul li.active > ul.sub-menu {
           border-top: 1px solid white;
           display: block; }
-        div#sidebar nav#site-nav > ul li a {
+        #sidebar nav#site-nav > ul li a {
           color: white; }
-          div#sidebar nav#site-nav > ul li a:hover {
+          #sidebar nav#site-nav > ul li a:hover {
             background-color: transparent;
             text-decoration: underline; }
-        div#sidebar nav#site-nav > ul li ul.sub-menu {
+        #sidebar nav#site-nav > ul li ul.sub-menu {
           background-color: transparent; }
-    div#sidebar #sidebar-widget {
+    #sidebar #sidebar-widget {
       display: none; }
 
   section#content {
@@ -918,8 +918,8 @@ article {
   body {
     font-size: 95%; }
 
-  h1 {
-    font-size: 1.9em; }
+  #sidebar #title {
+    font-size: 1.8em; }
 
   h2 {
     font-size: 1.5em; }
