@@ -204,12 +204,6 @@ pre {
   line-height: 1.5em;
   -ms-word-wrap: initial;
   word-wrap: initial;
-  &:before {
-    content: '</>';
-    float: right;
-    font-size: 2em;
-    color: $line-color;
-  }
 }
 
 code {

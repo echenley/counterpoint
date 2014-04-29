@@ -184,11 +184,6 @@ pre {
   line-height: 1.5em;
   -ms-word-wrap: initial;
   word-wrap: initial; }
-  pre:before {
-    content: '</>';
-    float: right;
-    font-size: 2em;
-    color: #dedede; }
 
 code {
   padding: 0.4em;
