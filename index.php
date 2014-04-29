@@ -19,6 +19,7 @@
       </section>
       <div class="excerpt cf"><?php echo get_the_excerpt(); ?><a class="read-more" href="<?php the_permalink(); ?>" title="<?php echo $title_of_post; ?>"><?php _e( 'Keep reading &rarr;', 'counterpoint'); ?></a></div>
       <div class="categories"><?php counterpoint_categories(); ?></div>
+      <div class="tags"><?php the_tags(); ?></div>
     </li>
   <?php $even = !$even;
   endwhile; ?>
