@@ -592,6 +592,8 @@ nav.post-pagination {
     &:first-child:not(.current) { position: absolute; left: 0; top: 0.6em; }
     &:last-child:not(.current) { position: absolute; right: 0; top: 0.6em; }
   }
+  
+  &:empty { display: none; }
 }
 
 // Front-Page, Archives, Attachment (index.php, archive.php, attachment.php) //

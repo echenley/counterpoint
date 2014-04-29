@@ -536,6 +536,8 @@ nav.post-pagination {
     position: absolute;
     right: 0;
     top: 0.6em; }
+  nav.post-pagination:empty {
+    display: none; }
 
 #archive, #post-list {
   margin-right: 3vw; }
