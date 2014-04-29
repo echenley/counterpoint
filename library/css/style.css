@@ -171,6 +171,7 @@ pre, code, blockquote {
   background: #f3f3f3; }
 
 pre, blockquote {
+  clear: both;
   margin: 1.2em 0;
   padding: 1.2em;
   border-left: 10px solid #dedede; }
@@ -249,15 +250,14 @@ table {
 
 h1, h2, h3 {
   border-top: 2px solid #4f4f4f;
-  border-bottom: 2px solid #4f4f4f; }
+  border-bottom: 2px solid #4f4f4f;
+  line-height: 1.4em; }
 
 h1 {
   position: relative;
-  display: block;
   width: 100%;
-  text-align: center;
-  line-height: 1.4em;
-  font-size: 3.6vw; }
+  font-size: 3.6vw;
+  padding: 0.4em 0; }
   h1 a {
     display: block;
     color: #4f4f4f;
@@ -266,11 +266,10 @@ h1 {
     display: none; }
 
 h2 {
-  display: block;
-  padding: 0.8em 0;
+  padding: 0.7em 0;
   font-size: 1.6em;
   font-weight: bold;
-  line-height: 1.4em; }
+  text-align: left; }
 
 div.post-title {
   position: absolute;
@@ -285,20 +284,15 @@ div.post-title {
     border: none;
     font-size: 1.8em;
     font-weight: normal;
-    line-height: 1.4em;
-    background: none;
-    text-align: left; }
+    background: none; }
 
 h3 {
-  display: block;
   padding: 0.8em 0;
   font-size: 1.3em;
   font-weight: bold;
-  line-height: 1.4em;
   text-align: left; }
 
 h4 {
-  display: block;
   padding: 0.4em 0;
   font-weight: bold;
   font-size: 1.1em; }
@@ -435,6 +429,9 @@ article .post-meta {
   width: 26%;
   margin-left: 3vw;
   padding: 3vw 0; }
+  #sidebar #title {
+    text-align: center;
+    padding: 0; }
   #sidebar nav#site-nav > ul {
     width: 100%;
     list-style: none;

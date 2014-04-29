@@ -191,6 +191,7 @@ kbd { font-family: $monospace; }
 pre, code, blockquote { background: $highlight; }
 
 pre, blockquote {
+  clear: both;
   margin: 1.2em 0;
   padding: 1.2em;
   border-left: 10px solid $line-color;
@@ -280,18 +281,19 @@ table {
 
 // Headings //
 
+h1,h2,h3,h4 {  }
+
 h1,h2,h3 {
   border-top: 2px solid $primary-color;
   border-bottom: 2px solid $primary-color;
+  line-height: 1.4em;
 }
 
 h1 {  // Blog Title //
   position: relative;
-  display: block;
   width: 100%;
-  text-align: center;
-  line-height: 1.4em;
   font-size: 3.6vw;
+  padding: 0.4em 0;
   a {
     display: block;
     color: $primary-color;
@@ -301,11 +303,10 @@ h1 {  // Blog Title //
 }
 
 h2 {
-  display: block;
-  padding: 0.8em 0;
+  padding: 0.7em 0;
   font-size: 1.6em;
   font-weight: bold;
-  line-height: 1.4em;
+  text-align: left; 
 }
 
 div.post-title {
@@ -321,23 +322,18 @@ div.post-title {
     border: none;
     font-size: 1.8em;
     font-weight: normal;
-    line-height: 1.4em;
     background: none;
-    text-align: left;
   }
 }
 
 h3 {
-  display: block;
   padding: 0.8em 0;
   font-size: 1.3em;
   font-weight: bold;
-  line-height: 1.4em;
   text-align: left; 
 }
 
 h4 {
-  display: block;
   padding: 0.4em 0;
   font-weight: bold;
   font-size: 1.1em;
@@ -484,6 +480,11 @@ article .post-meta {
   width: $nav-width * 100%;
   margin-left: $standard-margin;
   padding: $standard-margin 0;
+  
+  #title {
+    text-align: center;
+    padding: 0;
+  }
   
   nav#site-nav > ul {
     width: 100%;
