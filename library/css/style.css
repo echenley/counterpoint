@@ -799,9 +799,9 @@ article {
   #comments-section {
     width: 95.58824%; }
 
-  #post-list li.odd div.thumbnail {
+  #post-list li.odd .thumbnail {
     width: 36.43415%; }
-  #post-list li.even div.thumbnail {
+  #post-list li.even .thumbnail {
     width: 36.25487%; } }
 @media screen and (max-width: 640px) {
   #sidebar #title {
@@ -918,8 +918,10 @@ article {
       width: 100%;
       padding: 5%;
       margin: 0; }
-    #archive li.even .thumbnail, #post-list li.even .thumbnail {
-      margin-right: 5%; }
+    #archive li.even, #post-list li.even {
+      padding: 5%; }
+      #archive li.even .thumbnail, #post-list li.even .thumbnail {
+        margin-right: 5%; }
     #archive li.odd .thumbnail, #post-list li.odd .thumbnail {
       margin-left: 5%; } }
 @media screen and (max-width: 480px) {
@@ -935,15 +937,15 @@ article {
   h2 {
     font-size: 1.5em; }
 
-  section#content #archive li .thumbnail, section#content #post-list li .thumbnail {
+  #archive li .thumbnail, #post-list li .thumbnail {
     float: none;
     margin-bottom: 5.55556%; }
-  section#content #archive li.odd .thumbnail, section#content #archive li.even .thumbnail, section#content #post-list li.odd .thumbnail, section#content #post-list li.even .thumbnail {
+  #archive li.odd .thumbnail, #archive li.even .thumbnail, #post-list li.odd .thumbnail, #post-list li.even .thumbnail {
     width: 100%;
     padding-top: 61.8047%;
     margin-left: 0;
     margin-right: 0; }
-  section#content #archive h3.post-title, section#content #post-list h3.post-title {
+  #archive h3.post-title, #post-list h3.post-title {
     clear: both; } }
 @media print {
   div#sidebar {

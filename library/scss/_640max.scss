@@ -137,7 +137,10 @@
       padding: (100% - $post-width-640) / 2;
       margin: 0;
     }
-    li.even .thumbnail { margin-right: 5%; }
+    li.even {
+      padding: (100% - $post-width-640) / 2;
+      .thumbnail { margin-right: 5%; }
+    }
     li.odd .thumbnail { margin-left: 5%; }
   }
 }

@@ -6,24 +6,21 @@
   #sidebar #title { font-size: 1.8em; }
   h2 { font-size: 1.5em; }
   
-  section#content {
-  
-    #archive, #post-list {
-  
-      li .thumbnail {
-        float: none;
-        margin-bottom: (5% * (100% / $post-width-640));
-      }
-      
-      li.odd, li.even {
-        .thumbnail {
-          width: 100%;
-          padding-top: (100% / 1.618);
-          margin-left: 0; margin-right: 0;
-        }
-      }
-      
-      h3.post-title { clear: both; }
+  #archive, #post-list {
+
+    li .thumbnail {
+      float: none;
+      margin-bottom: (5% * (100% / $post-width-640));
     }
+    
+    li.odd, li.even {
+      .thumbnail {
+        width: 100%;
+        padding-top: (100% / 1.618);
+        margin-left: 0; margin-right: 0;
+      }
+    }
+    
+    h3.post-title { clear: both; }
   }
 }
