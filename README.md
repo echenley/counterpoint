@@ -1,3 +1,3 @@
 Counterpoint Wordpress Theme
 ============================
-Designed from the ground up to be fast, understated, and fully responsive.
+Elegant, understated, and fully responsive theme with fixed sidebar and minimalist aesthetics. Featured images are the main visual element and are used for both post headers and front page thumbnails, and are thus encouraged. Looks fantastic on all devices.
