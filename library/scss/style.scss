@@ -55,6 +55,9 @@ $monospace:       'Courier New', Courier, monospace;
 
 // Wordpress Classes //
 
+// eliminate stupid smiley face at bottom of page //
+img#wpstats{ display: none; }
+
 .aligncenter {
   display: block;
   margin-left: auto;
