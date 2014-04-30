@@ -30,6 +30,8 @@
   // Theme Support //
   add_theme_support( 'post-thumbnails' );
   add_theme_support( 'automatic-feed-links' );
+  
+  if ( ! isset( $content_width ) ) $content_width = 1280;
 
 
   // Clean up wp_head. Borrowed from Bones Theme ( http://themble.com/bones ) //
