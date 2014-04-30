@@ -537,11 +537,11 @@ nav#post-nav {
       font-size: 1.8em;
       line-height: 0;
       color: $bg-color;
-      background: rgba($bg-color,0.2);
+      background: rgba($primary-color,0.2);
       text-align: center;
       @include prefix(transition, all 0.2s);
       &:hover {
-        color: rgba($bg-color,0.4);
+        color: rgba($bg-color,0.2);
         background: rgba(0,0,0,0);
       }
     }

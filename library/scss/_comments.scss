@@ -5,10 +5,13 @@
   display: block;
   width: $post-width;
   
-  h3#comments, #respond h3#comment-form-title { margin: $standard-margin 0; }
-  > #respond hr, .commentlist #respond h3#comment-form-title { display: none; }
-  .logged-in-as { margin-bottom: 0.6em; }
+  h3#comments, h3#reply-title { margin: $standard-margin 0; }
   .comment-subscription-form { display: none; }
+  .form-allowed-tags { display: none; }
+  .logged-in-as {
+    padding: 0.6em 1.2em;
+    background: rgba(0,0,0,0.04);
+  }
   
   .commentlist {
     margin: 1.2em 0;
@@ -46,33 +49,35 @@
     
     .odd {
       background: $highlight;
-      > #respond #commentform, blockquote { background: $bg-color; }
+      > blockquote { background: $bg-color; }
     }
     .even {
       background: $bg-color;
       > #respond #commentform { background: $highlight; }
     }
     
-    .comment-content {
-      clear: both;
-    }
+    .comment-content { clear: both; }
   }
 
-  #commentform {
-
-    .logout-link { float: right; }
-    .form-element { line-height: 0; }
+  #respond {
+    p { margin: 0.8em 0; }
     
-    li {
-      list-style-type: none;
-      clear: both;
-      margin: 0; padding: 0;
-      margin-bottom: 1.2em;
-
-      label,
-      small {
-        display: none;
+    a[title*='Log out'] { float: right; }
+    #cancel-comment-reply-link {
+      font-size: 0.8em;
+      font-weight: normal;
+      &:before {
+        content: '\20 \00b7 \20';
+        color: $primary-color;
+        &:visited, &:hover { color: $primary-color; }
       }
+    }
+    
+    label {
+      position: absolute;
+      left: -999em;
+      width: 1em;
+      overflow: hidden;
     }
 
     input[type=text],
@@ -97,12 +102,7 @@
       min-width: 250px;
     }
     
-    input[type=submit], #cancel-comment-reply-link { margin-top: 1.2em; }
-    #cancel-comment-reply-link:before {
-      content: '\20 \00b7 \20';
-      color: $primary-color;
-    }
-    
+    .comment-form-comment { line-height: 0; }
     textarea {
       resize: none;
       width: 100%;
@@ -110,10 +110,19 @@
     }
   }
   
+  // Styles For Replies To Comments //
   .commentlist {
-    #commentform {
-      padding: 0.8em;
-      margin: 0 0 0 0.8em;
+    h3#reply-title {
+      margin: 0.6em 0;
+      border: none;
+      padding: 0;
     }
+    #commentform p:last-child { margin-bottom: 0; }
+    #respond {
+      padding: 0.8em;
+      margin: 0.8em 0 0 0.8em;
+    }
+    .odd > #respond { background: $bg-color; }
+    .even > #respond { background: $highlight; }
   }
 }

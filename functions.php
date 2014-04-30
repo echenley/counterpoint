@@ -219,6 +219,7 @@
 
 
   // Comment Layout //
+  
   function counterpoint_comments( $comment, $args, $depth ) {
    $GLOBALS['comment'] = $comment; ?>
     <li <?php comment_class(); ?>>
