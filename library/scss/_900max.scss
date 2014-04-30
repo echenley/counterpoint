@@ -15,7 +15,7 @@
   }
   
   #archive {
-    li.odd .thumbnail { width: (100% - ($container-margin / ($content-width - 0.03))) / 2.618; }
-    li.even .thumbnail { width: (100% - ($container-margin / ($content-width - 0.09))) / 2.618; }
+    li:nth-child(2n+1) .thumbnail { width: (100% - ($container-margin / ($content-width - 0.03))) / 2.618; }
+    li:nth-child(2n) .thumbnail { width: (100% - ($container-margin / ($content-width - 0.09))) / 2.618; }
   }
 }

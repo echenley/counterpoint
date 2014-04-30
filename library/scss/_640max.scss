@@ -141,10 +141,10 @@
       margin: 0;
       &:first-child { padding-top: 0; }
     }
-    li.even {
+    li:nth-child(2n+1) .thumbnail { margin-left: 5%; }
+    li:nth-child(2n) {
       padding: (100% - $post-width-640) / 2;
       .thumbnail { margin-right: 5%; }
     }
-    li.odd .thumbnail { margin-left: 5%; }
   }
 }

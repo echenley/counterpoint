@@ -13,7 +13,7 @@
       margin-bottom: (5% * (100% / $post-width-640));
     }
     
-    li.odd, li.even {
+    li:nth-child(2n+1), li:nth-child(2n) {
       .thumbnail {
         width: 100%;
         padding-top: (100% / 1.618);

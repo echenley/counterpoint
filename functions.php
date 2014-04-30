@@ -400,11 +400,10 @@
   // Main Index/Archive Loop Function (index.php, archive.php, search.php, tag.php, category.php) //
   function counterpoint_archive_loop() { ?>
     <ul id="archive">
-    <?php $even = false;
+    <?php
     while(have_posts()): the_post();
-      global $post;
-      $class = $even ? 'even' : 'odd'; ?>
-      <li <?php post_class($class); ?>>
+      global $post; ?>
+      <li <?php post_class(); ?>>
         <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><div class="thumbnail" <?php echo post_thumb_style($post->ID); ?> ></div></a>
         <h3 class="post-title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
           <?php the_title(); ?>
@@ -417,7 +416,7 @@
         <div class="categories"><?php counterpoint_categories(); ?></div>
         <div class="tags"><?php the_tags(); ?></div>
       </li>
-    <?php $even = !$even;
+    <?php
     endwhile; ?>
     </ul>
   <?php
