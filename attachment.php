@@ -19,11 +19,11 @@
     </section>
     
     <div class="photometa">
-      <span class="photographername"><?php echo $photographer; ?></span><a href="<?php echo $photographerurl ?>" target="_blank" class="photographerurl"><?php echo $photographerurl ?></a>
+      <span class="photographername"><?php echo $photographer; ?></span><a href="<?php echo $photographerurl; ?>" target="_blank" class="photographerurl"><?php echo $photographerurl; ?></a>
     </div>
     <div class="entry-attachment">
     
-    <?php if ( wp_attachment_is_image( $post->ID ) ) : $att_image = wp_get_attachment_image_src( $post->ID, "full")[0]; ?>
+    <?php if ( wp_attachment_is_image( $post->ID ) ) : $att_image = wp_get_attachment_image_src( $post->ID, 'full')[0]; ?>
       <a href="<?php echo wp_get_attachment_url($post->ID); ?>" title="<?php printf( __( 'Attachment: %s', 'counterpoint' ), get_the_title() ); ?>" rel="attachment"><img src="<?php echo $att_image; ?>"  class="attachment-medium" alt="<?php $post->post_excerpt; ?>" /></a>
     <?php else : ?>
       <a href="<?php echo wp_get_attachment_url($post->ID) ?>" title="<?php esc_attr_e( get_the_title($post->ID), 1 ) ?>" rel="attachment"><?php echo wp_basename($post->guid); ?></a>

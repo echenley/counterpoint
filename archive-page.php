@@ -10,7 +10,7 @@ get_header(); ?>
   
   <header class="post-header" style="background: url(<?php echo $imgSrc; ?>); background-position: center; background-size: cover;">
     <div class="post-title"><h2>
-      <?php echo $post->post_title ? the_title(false) : __( 'Untitled', 'counterpoint' ); /* Default title: "Untitled" */ ?>
+      <?php the_title(); ?>
     </h2></div>
   </header>
 

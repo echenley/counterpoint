@@ -4,7 +4,7 @@
 <section id="content">
   <header class="post-header" <?php echo post_thumb_style($post->ID); ?> >
     <div class="post-title"><h2>
-      <?php echo $post->post_title ? the_title(false) : __( 'Untitled', 'counterpoint' ); /* Default title: "Untitled" */ ?>
+      <?php the_title(); ?>
     </h2></div>
   </header>
   
@@ -16,10 +16,11 @@
         <?php counterpoint_posted_on(); ?>
         <?php edit_post_link( __( 'Edit', 'counterpoint' ), '<span class="edit-link">', ' &middot;&nbsp;</span>' ); ?>
       </section>
-      <?php counterpoint_link_pages(array('next_or_number' => 'next_and_number'));
+      <?php
+      wp_link_pages();
       the_content();
-    endwhile;
-    counterpoint_link_pages(array('next_or_number' => 'next_and_number')); ?>
+      wp_link_pages();
+    endwhile; ?>
     <div id="article-bottom"><?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('article-bottom')) : ?><?php endif; ?></div>
     <?php adjacent_post_nav(); ?>
   </article>

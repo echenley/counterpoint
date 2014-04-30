@@ -1,21 +1,129 @@
 <?php
+/*
+  Theme Name: Counterpoint
+  Author: Evan Henley
+  Author URL: http://henleyedition.com/
+  
+  Contents
+  ----------------------
+  1.  Theme Support
+  2.  Clean Up wp_head (and associated functions)
+  3.  Small Customizations
+  4.  Custom Favicon For Admin
+  5.  Enqueue Scripts and Styles
+  6.  Remove Admin Bar
+  7.  Register Menus
+  8.  Register Widget Space
+  9.  Catch That Image
+  10. Post-Header Function Call
+  11. Comment Layout
+  12. Password Protected Form
+  13. Numeric Page Navigation
+  14. Next and Previous Post Navigation
+  15. Display Categories
+  16. Display Timestamp
+  17. Custom Link Pages
+  18. Index/Archive Loop Function
+
+ */
+ 
+  // Theme Support //
   add_theme_support( 'post-thumbnails' );
   add_theme_support( 'automatic-feed-links' );
+
+
+  // Clean up wp_head. Borrowed from Bones Theme ( http://themble.com/bones ) //
+  remove_action( 'wp_head', 'rsd_link' );                                // EditURI link
+  remove_action( 'wp_head', 'wlwmanifest_link' );                        // windows live writer
+  remove_action( 'wp_head', 'index_rel_link' );                          // index link
+  remove_action( 'wp_head', 'parent_post_rel_link', 10, 0 );             // previous link
+  remove_action( 'wp_head', 'start_post_rel_link', 10, 0 );              // start link
+  remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );  // links for adjacent posts
+  remove_action( 'wp_head', 'wp_generator' );                            // WP version
+  add_filter( 'style_loader_src', 'counterpoint_remove_wp_ver_css_js', 9999 );  // remove WP version from css
+  add_filter( 'script_loader_src', 'counterpoint_remove_wp_ver_css_js', 9999 ); // remove Wp version from scripts
+  add_filter( 'wp_title', 'rw_title', 10, 3 );                           // Better header
+  add_filter( 'the_generator', 'counterpoint_rss_version' );             // remove WP version from RSS
   
-  function BlogAddress() { return get_bloginfo('wpurl'); }
-  add_shortcode('url','BlogAddress');
+  // Better Title. ( http://www.deluxeblogtips.com/2012/03/better-title-meta-tag.html ) //
+  function rw_title( $title, $sep, $seplocation ) {
+    global $page, $paged;
   
-  function custom_excerpt_more( $more ) { return ' &hellip; '; }
-  add_filter( 'excerpt_more', 'custom_excerpt_more' );
+    // Don't affect in feeds.
+    if ( is_feed() ) return $title;
   
+    // Add the blog's name
+    if ( 'right' == $seplocation )
+      $title .= get_bloginfo( 'name' );
+    else
+      $title = get_bloginfo( 'name' ) . $title;
+  
+    // Add the blog description for the home/front page.
+    $site_description = get_bloginfo( 'description', 'display' );
+  
+    if ( $site_description && ( is_home() || is_front_page() ) )
+      $title .= " {$sep} {$site_description}";
+  
+    // Add a page number if necessary:
+    if ( $paged >= 2 || $page >= 2 )
+      $title .= " {$sep} " . sprintf( __( 'Page %s', 'dbt' ), max( $paged, $page ) );
+  
+    return $title;
+  }
+  
+  // remove WP version from RSS //
+  function counterpoint_rss_version() { return ''; }
+  
+  // remove WP version from scripts //
+  function counterpoint_remove_wp_ver_css_js( $src ) {
+    if ( strpos( $src, 'ver=' ) )
+      $src = remove_query_arg( 'ver', $src );
+    return $src;
+  }
+  
+  
+  // Small Customizations //
+  
+  // Adds [url] shortcode //
+  function blog_address() { return site_url(); }
+  add_shortcode( 'url', 'blog_address' );
+  
+  // Custom Excerpt More. Replaces [...] with 'Keep Reading' link //
+  function counterpoint_excerpt_more( $more ) {
+    return ' &hellip; <a class="read-more" href="' . esc_attr(get_the_permalink()) . '" title="' . esc_attr( get_the_title() ) . '">' . __( 'Keep reading &rarr;', 'counterpoint') . '</a>';
+  }
+  add_filter( 'excerpt_more', 'counterpoint_excerpt_more' );
+  
+  // Removes junk from around images //
+  function counterpoint_filter_ptags_on_images($content){
+    return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
+  }
+  add_filter( 'the_content', 'counterpoint_filter_ptags_on_images' );
+
+  // Excerpt Length //
   function new_excerpt_length($length) { return 70; }
   add_filter('excerpt_length', 'new_excerpt_length');
   
+  // Remove Caption Padding //
   function remove_caption_padding($width) { return $width - 10; }
   add_filter( 'img_caption_shortcode_width', 'remove_caption_padding' );
   
-  // Add Custom Favicon to Admin Pages //
+  // Default Title //
+  function counterpoint_default_title($title) {
+    $title = __('Untitled', 'counterpoint');
+    return $title;
+  }
+  add_filter( 'default_title', 'counterpoint_default_title' );
   
+  // If title field is left blank //
+  function counterpoint_no_title($title) {
+    if ( $title == '' ) $title = __('Untitled', 'counterpoint');
+    return $title;
+  }
+  add_filter( 'the_title', 'counterpoint_no_title' );
+  
+  
+  // Add Custom Favicon to Admin Pages //
   function add_favicon() {
     $favicon_url = get_template_directory_uri() . '/library/images/favicon-admin.ico';
     echo '<link rel="shortcut icon" href="' . $favicon_url . '">';
@@ -23,8 +131,8 @@
   add_action('login_head', 'add_favicon');
   add_action('admin_head', 'add_favicon');
   
-  // jQuery Insert From Google //
   
+  // Enqueue Scripts and Styles. jQuery Insert From Google //
   add_action("wp_enqueue_scripts", "counterpoint_scripts", 11);
   function counterpoint_scripts() {
     wp_enqueue_style('merriweather-font',
@@ -45,19 +153,19 @@
       wp_enqueue_script( 'comment-reply' );
   }
 
+
   // Remove Admin Bar //
-  
   add_filter('show_admin_bar', '__return_false');
 
+
   // Register Sidebar Menu //
-  
   function register_my_menu() {
-    register_nav_menu('sidebar',__( 'Sidebar' ));
+    register_nav_menu('sidebar',__( 'Sidebar', 'counterpoint' ));
   }
   add_action('init', 'register_my_menu');
   
-  // Widget Space //
   
+  // Register Widget Space //
   if (function_exists('register_sidebar')) {
     register_sidebar(array(
       'name' => __('Sidebar Bottom', 'counterpoint'),
@@ -80,8 +188,8 @@
     ));
   }
 
-  // Returns the first image in a post (in lieu of Featured Image) //
-  
+
+  // Catch That Image. Returns the first image in a post (in lieu of Featured Image) //
   function catch_that_image($post_id) {
     $first_img = '';
     ob_start();
@@ -92,25 +200,25 @@
     return $first_img;
   }
   
-  // Post Header Function Call //
   
+  // Post Header Function Call //
   function post_thumb_style($post_id) { // Checks for post thumbnail || if none, gets first image || else, default color //
     if ( has_post_thumbnail($post_id) ) {
       $img_id = get_post_thumbnail_id($post_id);
       $alt_text = get_post_meta($img_id, '_wp_attachment_image_alt', true);
       if ( !$alt_text )
         $alt_text = get_the_title($post_id);
-      return 'style="background: url(' . wp_get_attachment_image_src($img_id, 'full')[0] . '); background-position: center; background-size: cover" title="' . $alt_text . '"';
+      return 'style="background: url(' . esc_attr( wp_get_attachment_image_src($img_id, 'full')[0] ) . '); background-position: center; background-size: cover" title="' . esc_attr( $alt_text ) . '"';
     } else {
       $first_img = catch_that_image($post_id);
       if ( $first_img )
-        return 'style="background: url(' . $first_img . '); background-position: center; background-size: cover"';
-      return 'style="background: url(' . get_template_directory_uri() . '/library/images/no-featured-image.jpg' . '); background-position: center; background-size: cover"';
+        return 'style="background: url(' . esc_attr( $first_img ) . '); background-position: center; background-size: cover" title="' . esc_attr( get_the_title() ) .'"';
+      return 'style="background: url(' . get_template_directory_uri() . '/library/images/no-featured-image.jpg' . '); background-position: center; background-size: cover" title="' . esc_attr( get_the_title() ) .'"';
     };
   };
 
-  // Comment Layout //
 
+  // Comment Layout //
   function counterpoint_comments( $comment, $args, $depth ) {
    $GLOBALS['comment'] = $comment; ?>
     <li <?php comment_class(); ?>>
@@ -135,21 +243,21 @@
     <?php // </li> is added by WordPress automatically
   } // don't remove this bracket!
   
-  // Password Protected Form //
   
+  // Password Protected Form //
   add_filter( 'the_password_form', 'my_password_form' );
   function my_password_form() {
     global $post;
     $label = 'pwbox-' . ( empty( $post->ID ) ? rand() : $post->ID );
-    $o = '<p class="no-dropcap">' . __( "This post is password protected. Enter the password to view it.", "counterpoint" ) . '</p>
+    $o = '<p class="no-dropcap">' . __( 'This post is password protected. Enter the password to view it.', 'counterpoint' ) . '</p>
       <form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" method="post" class="post-password-form">
-        <label for="' . $label . '">' . __( "Password:" ) . ' </label><input name="post_password" id="' . $label . '" type="password" maxlength="20" placeholder="Enter Password*" /><input type="submit" name="Submit" value="' . esc_attr__( "Submit", "counterpoint" ) . '" />
+        <label for="' . $label . '">' . __( 'Password:', 'counterpoint' ) . ' </label><input name="post_password" id="' . $label . '" type="password" maxlength="20" placeholder="Enter Password*" /><input type="submit" name="Submit" value="' . esc_attr__( 'Submit', 'counterpoint' ) . '" />
       </form>';
     return $o;
   }
   
-  // Numeric Page Nav //
   
+  // Numeric Page Navigation //
   function counterpoint_page_nav() {
     global $wp_query;
     $bignum = 999999999;
@@ -176,8 +284,8 @@
     }
   }
   
-  // Next and Previous Post Nav //
   
+  // Next and Previous Post Navigation //
   function adjacent_post_nav() {
     $next_post = get_next_post();
     $prev_post = get_previous_post();
@@ -224,8 +332,8 @@
   <?php
   }
   
-  // Display Categories //
   
+  // Display Categories //
   function counterpoint_categories() {
     $categories = get_the_category();
     $separator = ', ';
@@ -233,11 +341,12 @@
     if($categories) {
       foreach($categories as $category) {
         $output .= '<a href="' . get_category_link( $category->term_id ) . '"';
-        $output .= ' title="' . esc_attr( sprintf( __( "View all posts in %s", "counterpoint" ), $category->name ) ) . '">' . $category->cat_name . '</a>' . $separator;
+        $output .= ' title="' . esc_attr( sprintf( __( 'View all posts in %s', 'counterpoint' ), $category->name ) ) . '">' . $category->cat_name . '</a>' . $separator;
       }
       echo trim($output, $separator);
     }
   }
+  
   
   // Display Timestamp //
   function counterpoint_posted_on() {
@@ -247,12 +356,22 @@
     );
   }
   
-  // Adds 'next_and_number' option for wp_link_pages() arg 'next_or_number' //
   
-  add_filter('wp_link_pages_args','add_next_and_number');
-  function add_next_and_number($args){
+  // Custom Link Pages. Adds 'next_and_number' option for wp_link_pages() arg 'next_or_number' //
+  add_filter('wp_link_pages_args','counterpoint_link_pages_args');
+  function counterpoint_link_pages_args($args){
+    $cp_defaults = array(
+      'next_or_number'   => 'next_and_number',
+      'before'           => '<nav class="post-pagination">',
+      'after'            => '</nav>',
+      'pagelink'         => '<span>%</span>',
+      'nextpagelink'     => '<span>' . __('Next &rarr;', 'counterpoint') . '</span>',
+      'previouspagelink' => '<span>' . __('&larr; Previous', 'counterpoint') . '</span>'
+    );
+    $args = wp_parse_args( $cp_defaults, $args ); // overwrites $args with $cp_defaults //
+    
     if($args['next_or_number'] == 'next_and_number') {
-      global $page, $numpages, $multipage, $more, $pagenow;
+      global $page, $numpages, $multipage, $more;
       $args['next_or_number'] = 'number';
       $prev = '';
       $next = '';
@@ -260,12 +379,12 @@
         $i = $page - 1;
         if ( $i && $more ) {
           $prev .= _wp_link_page($i);
-          $prev .= $args['text_before'] . $args['previouspagelink'] . $args['text_after'] . '</a>';
+          $prev .= $args['link_before'] . $args['previouspagelink'] . $args['link_after'] . '</a>';
         }
         $i = $page + 1;
         if ( $i <= $numpages && $more ) {
           $next .= _wp_link_page($i);
-          $next .= $args['text_before'] . $args['nextpagelink'] . $args['text_after'] . '</a>';
+          $next .= $args['link_before'] . $args['nextpagelink'] . $args['link_after'] . '</a>';
         }
       }
       $args['before'] = $args['before'] . $prev;
@@ -274,71 +393,31 @@
     return $args;
   }
   
-  // Better Version of wp_link_pages(), courtesy of c.bavota @ http://bavotasan.com/2012/a-better-wp_link_pages-for-wordpress/ //
   
-  function counterpoint_link_pages( $args = '' ) {
-    $defaults = array(
-      'before' => '<nav class="post-pagination">', 
-      'after' => '</nav>',
-      'text_before' => '',
-      'text_after' => '',
-      'next_or_number' => 'number', 
-      'nextpagelink' => __('Next &rarr;', 'counterpoint'),
-      'previouspagelink' => __('&larr; Previous', 'counterpoint'),
-      'pagelink' => '%',
-      'echo' => 1
-    );
-  
-    $r = wp_parse_args( $args, $defaults );
-    $r = apply_filters( 'wp_link_pages_args', $r );
-    extract( $r, EXTR_SKIP );
-  
-    global $page, $numpages, $multipage, $more, $pagenow;
-    
-    $output = '';
-    if ( $multipage ) {
-      if ( 'number' == $next_or_number ) {
-        $output .= $before;
-        for ( $i = 1; $i < ( $numpages + 1 ); $i = $i + 1 ) {
-          $j = str_replace( '%', $i, $pagelink );
-          $output .= ' ';
-          
-          // adds <a href"*"> # or <span> # for current page //
-          if ( $i != $page || ( ( ! $more ) && ( $page == 1 ) ) )
-            $output .= _wp_link_page( $i );
-          else
-            $output .= '<span class="current">';
-            
-          $output .= $text_before . $j . $text_after;
-  
-          // adds </a> or </span> //
-          if ( $i != $page || ( ( ! $more ) && ( $page == 1 ) ) )
-            $output .= '</a>';
-          else
-            $output .= '</span>';
-        }
-        $output .= $after;
-      } else {
-        if ( $more ) {
-          $output .= $before;
-          $i = $page - 1;
-          if ( $i && $more ) {
-            $output .= _wp_link_page( $i );
-            $output .= $text_before . $previouspagelink . $text_after . '</a>';
-          }
-          $i = $page + 1;
-          if ( $i <= $numpages && $more ) {
-            $output .= _wp_link_page( $i );
-            $output .= $text_before . $nextpagelink . $text_after . '</a>';
-          }
-          $output .= $after;
-        }
-      }
-    }
-    
-    if ( $echo )
-      echo $output;
-    return $output;
+  // Main Index/Archive Loop Function (index.php, archive.php, search.php, tag.php, category.php) //
+  function counterpoint_archive_loop() { ?>
+    <ul id="archive">
+    <?php $even = false;
+    while(have_posts()): the_post();
+      global $post;
+      $class = $even ? 'even' : 'odd'; ?>
+      <li <?php post_class($class); ?>>
+        <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><div class="thumbnail" <?php echo post_thumb_style($post->ID); ?> ></div></a>
+        <h3 class="post-title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+          <?php the_title(); ?>
+        </a></h3>
+        <section class="post-meta">
+          <?php counterpoint_posted_on(); ?>
+        </section>
+        <div class="excerpt cf"><?php echo get_the_excerpt(); ?></div>
+        <hr>
+        <div class="categories"><?php counterpoint_categories(); ?></div>
+        <div class="tags"><?php the_tags(); ?></div>
+      </li>
+    <?php $even = !$even;
+    endwhile; ?>
+    </ul>
+  <?php
   }
   
 ?>

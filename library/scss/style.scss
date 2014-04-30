@@ -586,9 +586,10 @@ nav.post-pagination {
   margin: 1.2em 0;
   padding-left: 7em;
   padding-right: 7em;
-  > * {
-    &:first-child:not(.current) { position: absolute; left: 0; top: 0.6em; }
-    &:last-child:not(.current) { position: absolute; right: 0; top: 0.6em; }
+  
+  > a {
+    &:first-child { position: absolute; left: 0; top: 0.6em; }
+    &:last-child { position: absolute; right: 0; top: 0.6em; }
   }
   
   &:empty { display: none; }
@@ -596,10 +597,9 @@ nav.post-pagination {
 
 // Front-Page, Archives, Attachment (index.php, archive.php, attachment.php) //
 
-#archive, #post-list {
+#archive {
   margin-right: $standard-margin;
   
-  .categories { margin-top: 2.4em; }
   .categories, .tags {
     font-size: 0.8em;
     line-height: 1.8em;
