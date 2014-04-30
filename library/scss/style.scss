@@ -28,9 +28,9 @@ $monospace:       'Courier New', Courier, monospace;
 // Mixins //
 
 @mixin prefix($property, $value) {
-  $prefixes: ('-webkit', '-moz', '-ms', '');
+  $prefixes: ('-webkit-', '-moz-', '-ms-', '');
   @each $prefix in $prefixes {
-    #{$prefix}-#{$property}: $value;
+    #{$prefix}#{$property}: $value;
   }
 }
 

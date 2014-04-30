@@ -113,9 +113,12 @@
     width: $post-width-640;
   }
   
-  header.post-header .post-title h2 {
-    margin: 0 auto;
-    padding-left: 0;
+  header.post-header {
+    margin-top: -5%;
+    .post-title h2 {
+      margin: 0 auto;
+      padding-left: 0;
+    }
   }
   
   .archive-header, .attachment-header {
