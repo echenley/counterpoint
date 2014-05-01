@@ -4,8 +4,10 @@
 
   body { font-size: 95%; }
   
-  header#header #title a { padding: 0 $margin-1280; }
-  header#header #tagline { padding-right: $margin-1280;}
+  #header {
+    #title a { padding: 0 $margin-1280; }
+    #tagline { padding-right: $margin-1280; }
+  }
   
   h3#comments, h3#reply-title { margin: $margin-1280 0; }
   
@@ -22,45 +24,42 @@
   
   #header-widget { padding-right: $margin-1280; }
   
-  #container {
+  #sidebar {
+    width: $nav-width * $container-size;
+    margin-left: $margin-1280;
+    padding: $margin-1280 0;
+    #sidebar-widget { bottom: $margin-1280; }
+  }
   
-    #sidebar {
-      width: $nav-width * $container-size;
-      margin-left: $margin-1280;
-      padding: $margin-1280 0;
-      #sidebar-widget { bottom: $margin-1280; }
-    }
-    
-    nav#post-nav { margin-top: $margin-1280; }
-    
-    section#content {
-      width: $content-width * 100%;
-      padding: $margin-1280 0;
-      
-      .post-header { height: 360px; }
-      .archive-header, .attachment-header {
-        padding-right: $margin-1280;
-      }
-      .archive-header { margin-bottom: $margin-1280; }
-      
-      #archive {
-        margin-right: $margin-1280;
-        li { margin-bottom: $margin-1280; }
-        li:nth-child(2n+1) .thumbnail { margin-left: $margin-1280; }
-        li:nth-child(2n) {
-          padding: $margin-1280;
-          .thumbnail { margin-right: $margin-1280; }
-        }
-      }
-      
-      #archive #searchform { margin-bottom: $standard-margin; }
-      
-      nav.pagination { margin: $margin-1280 $margin-1280 0 0; }
-      
-      article#attachment { padding-right: $margin-1280; }
-      article#page { margin-top: $margin-1280; }
-      article { margin-bottom: $margin-1280; }
-      div#article-bottom { margin-top: $margin-1280; }
+  nav#post-nav { margin-top: $margin-1280; }
+  
+  #content {
+    width: $content-width * 100%;
+    padding: $margin-1280 0;
+  }
+  
+  .post-header { height: 360px; }
+  .archive-header, .attachment-header {
+    padding-right: $margin-1280;
+  }
+  .archive-header { margin-bottom: $margin-1280; }
+  
+  #archive {
+    margin-right: $margin-1280;
+    li { margin-bottom: $margin-1280; }
+    li:nth-child(2n+1) .thumbnail { margin-left: $margin-1280; }
+    li:nth-child(2n) {
+      padding: $margin-1280;
+      .thumbnail { margin-right: $margin-1280; }
     }
   }
+  
+  #archive #searchform { margin-bottom: $standard-margin; }
+  
+  nav.pagination { margin: $margin-1280 $margin-1280 0 0; }
+  
+  article#attachment { padding-right: $margin-1280; }
+  article#page { margin-top: $margin-1280; }
+  article { margin-bottom: $margin-1280; }
+  div#article-bottom { margin-top: $margin-1280; }
 }

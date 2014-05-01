@@ -154,6 +154,8 @@ img.size-full {
 
 // Miscellaneous Tags //
 
+a { @include prefix(transition, all 0.2s); }
+
 kbd { font-family: $monospace; }
 pre, code, blockquote { background: $highlight; }
 
@@ -234,7 +236,7 @@ table {
 
 // Lists //
 
-#content article {
+article {
   ul {
     list-style: disc inside;
     ul,ol { margin-left: 2em; }
@@ -376,7 +378,7 @@ h2 {
   text-align: left; 
 }
 
-header.post-header {
+.post-header {
   position: relative;
   display: block;
   width: 100%;
@@ -450,7 +452,7 @@ body {
   color: $primary-color;
 }
 
-header#header {
+#header {
   z-index: 10;
   position: relative;
   padding: 0;
@@ -479,7 +481,7 @@ header#header {
 
 // Main Content Styles //
 
-section#content {
+#content {
   position: relative;
   float: right;
   width: $content-width * 100%;
@@ -489,7 +491,6 @@ section#content {
   
   a {
     color: $link-color;
-    @include prefix(transition, all 0.2s);
     &:hover { color: $link-hover; }
   }
   
@@ -504,57 +505,56 @@ section#content {
   width: $nav-width * 100%;
   margin-left: $standard-margin;
   padding: $standard-margin 0;
+}
   
-  nav#site-nav {
+#site-nav {
+  
+  > ul {
+    width: 100%;
+    list-style: none;
+    font-size: 1.1em;
     
-    > ul {
-      width: 100%;
-      list-style: none;
-      font-size: 1.1em;
+    li {
+      text-align: right;
+      border-color: $bg-color;
+      @include prefix(transition, all 0.2s);
       
-      li {
-        text-align: right;
-        border-color: $bg-color;
-        @include prefix(transition, all 0.2s);
-        
-        a {
-          display: block;
-          padding: 0.8em 0;
-          color: $primary-color;
-          border-color: $line-color;
-          line-height: 1.4;
-          @include prefix(transition, all 0.2s);
-        }
-        
-        a:hover {
+      a {
+        display: block;
+        padding: 0.8em 0;
+        color: $primary-color;
+        border-color: $line-color;
+        line-height: 1.4;
+      }
+      
+      a:hover {
+        padding-right: 0.4em;
+        padding-left: 0;
+        color: $link-hover;
+        border-right: 0.4em solid $link-hover !important;
+      }
+      
+      ul.sub-menu {
+        display: none;
+        li a { padding-right: 0.4em; }
+      }
+      
+      &.active {
+        > a {
           padding-right: 0.4em;
-          padding-left: 0;
+          padding-left: 0.4em;
           color: $link-hover;
           border-right: 0.4em solid $link-hover !important;
         }
-        
-        ul.sub-menu {
-          display: none;
-          li a { padding-right: 0.4em; }
+        > ul.sub-menu {
+          display: block;
+          li a { border-right: 0.4em solid rgba(0,0,0,0.1); }
         }
-        
-        &.active {
-          > a {
-            padding-right: 0.4em;
-            padding-left: 0.4em;
-            color: $link-hover;
-            border-right: 0.4em solid $link-hover !important;
-          }
-          > ul.sub-menu {
-            display: block;
-            li a { border-right: 0.4em solid rgba(0,0,0,0.1); }
-          }
-        }
-        &.inactive { opacity: 0.4; }
       }
-      
-      li.menu-item-has-children { cursor: pointer; }
+      &.inactive { opacity: 0.4; }
     }
+    
+    li.menu-item-has-children { cursor: pointer; }
   }
 }
 
@@ -568,7 +568,7 @@ nav#post-nav {
     overflow: hidden;
     -webkit-backface-visibility: hidden;
     -webkit-transform: translateZ(0);
-    a, span {
+    a {
       display: block;
       width: 100%;
       font-size: 1.8em;
@@ -576,9 +576,8 @@ nav#post-nav {
       color: $bg-color;
       background: rgba($primary-color,0.2);
       text-align: center;
-      @include prefix(transition, all 0.2s);
       &:hover {
-        color: rgba($bg-color,0.2);
+        color: $bg-color;
         background: rgba(0,0,0,0);
       }
     }

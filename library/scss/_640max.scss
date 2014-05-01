@@ -1,6 +1,6 @@
 @media screen and (max-width: 640px) {
  
-  header#header {
+  #header {
     text-align: left;
     #title { 
       font-size: 1.8em;
@@ -33,51 +33,50 @@
     width: 100%;
     max-width: 100%;
     z-index: 1000;
-  
-    nav#site-nav {
+    #sidebar-widget { display: none; }
+  }
+  #site-nav {
+    
+    > ul {
+      display: none;
+      width: 100%;
+      background: rgba($highlight,0.95);
+      border-bottom: 1px solid $line-color;
+      padding: 5%;
       
-      > ul {
-        display: none;
+      &.active { display: block; }
+      
+      li {
+        clear: both;
         width: 100%;
-        background: rgba($highlight,0.95);
-        border-bottom: 1px solid $line-color;
-        padding: 5%;
+        text-align: right;
         
-        &.active { display: block; }
-        
-        li {
-          clear: both;
-          width: 100%;
-          text-align: right;
-          
-          &.active {
-            > a {
-              padding: 1em;
-            }
-            > ul.sub-menu {
-              display: block;
-            }
-          }
-          
-          a {
+        &.active {
+          > a {
             padding: 1em;
-            &:hover {
-              background-color: transparent;
-              padding: 1em;
-            }
           }
-
-          
-          ul.sub-menu {
+          > ul.sub-menu {
+            display: block;
+          }
+        }
+        
+        a {
+          padding: 1em;
+          &:hover {
             background-color: transparent;
+            padding: 1em;
           }
+        }
+
+        
+        ul.sub-menu {
+          background-color: transparent;
         }
       }
     }
-    #sidebar-widget { display: none; }
   }
   
-  section#content {
+  #content {
     width: 100%;
     padding-top: 0;
     float: none;
@@ -91,7 +90,7 @@
     }
   }
   
-  header.post-header,
+  .post-header,
   .archive-header, .attachment-header,
   article, #attachment,
   #comments-section,
@@ -99,7 +98,7 @@
     width: $post-width-640;
   }
   
-  header.post-header {
+  .post-header {
     margin: 5% auto 0 auto;
     padding-left: 0;
   }
