@@ -188,6 +188,16 @@
       'before_title'  => '<h4>',
       'after_title'   => '</h4>'
     ));
+    
+    register_sidebar(array(
+      'name' => __('Header Right', 'counterpoint'),
+      'id'   => 'header-right',
+      'description'   => __('Area at the right side of the header.', 'counterpoint'),
+      'before_widget' => '<div id="%1$s" class="widget %2$s">',
+      'after_widget'  => '</div>',
+      'before_title'  => '<h4>',
+      'after_title'   => '</h4>'
+    ));
   }
 
 

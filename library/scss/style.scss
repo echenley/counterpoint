@@ -320,6 +320,14 @@ input[type=submit], input[type=submit]:visited {
   width: 100%;
 }
 
+#header-widget {
+  float: right;
+  padding-right: $standard-margin;
+  height: 74px;
+  line-height: 74px;
+  overflow: hidden;
+}
+
 #article-bottom {
   margin-top: $standard-margin;
   padding: 1em 0;
@@ -328,8 +336,6 @@ input[type=submit], input[type=submit]:visited {
   text-align: center;
   &:empty { display: none; }
 }
-
-.simple-social-icons ul li a { @include prefix(transition, all 0.2s); }
 
 // Post Meta Info //
   
@@ -466,8 +472,7 @@ header#header {
   }
   .menu-link { display: none; }
   #tagline {
-    position: absolute;
-    right: 0;
+    float: right;
     padding-right: $standard-margin;
     line-height: 74px;
     vertical-align: top;
