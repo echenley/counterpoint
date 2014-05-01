@@ -8,6 +8,7 @@ $primary-color:   #4f4f4f;  // text color
 $bg-color:        #fff;     // background
 $highlight:       #f3f3f3;  // light gray highlight
 $link-color:      #c44;     // linkz
+$link-hover:      darken($link-color, 20%);
 $line-color:      #dedede;  // borders and <hr>
 $container-size:  1280px;   // max container width
 
@@ -16,7 +17,7 @@ $standard-margin:  3.5vw;
 $margin-1280:      44px;
 $nav-width:        .2;
 $content-width:    .73;
-$post-width:       80.9%; 
+$post-width:       80.9%;
 $post-width-900:   100% - ($container-margin / $content-width);
 $post-width-640:   90%;
 
@@ -211,6 +212,7 @@ hr {
 
 // Tables //
 
+/*
 table {
   margin: 0.6em auto;
   max-width: 100%;
@@ -228,6 +230,7 @@ table {
   td { background: $highlight; }
   tr:hover td { background: darken($highlight, 2%); }
 }
+*/
 
 // Lists //
 
@@ -322,7 +325,7 @@ input[type=submit], input[type=submit]:visited {
 
 #header-widget {
   float: right;
-  padding-right: $standard-margin;
+  margin-right: $standard-margin;
   height: 74px;
   line-height: 74px;
   overflow: hidden;
@@ -417,7 +420,6 @@ h6 { font-style: italic; }
 .archive-header, .attachment-header {
   width: 100%;
   padding: 1.2em $standard-margin 1.2em 1.2em;
-  text-align: center;
   background: $highlight;
   h3 {
     font-size: 1.5em;
@@ -456,7 +458,7 @@ header#header {
   line-height: 74px;
   width: 100%;
   max-width: 100%;
-  background-color: $highlight;
+  background: $highlight;
   border-bottom: 1px solid $line-color;
   overflow: hidden;
   
@@ -488,7 +490,7 @@ section#content {
   a {
     color: $link-color;
     @include prefix(transition, all 0.2s);
-    &:hover { color: darken($link-color, 20%); }
+    &:hover { color: $link-hover; }
   }
   
   p { margin: 1.2em 0; }
@@ -742,6 +744,7 @@ article {
   width: 100%;
   padding-right: $standard-margin;
   .post-meta {
+    padding-right: 0;
     margin: 0 0 1.2em 0;
     background: none;
   }

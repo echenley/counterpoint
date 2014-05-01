@@ -56,7 +56,7 @@
   });
   
   // Desktop Menu Control //
-  $('nav#site-nav li.menu-item-has-children a').click(function() {
+  $('nav#site-nav li.menu-item-has-children > a').click(function() {
     $(this).parent().toggleClass('active');
   });
 

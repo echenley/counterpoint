@@ -16,7 +16,7 @@
       color: $primary-color;
       text-align: center;
       @include prefix(transition, all 0.2s);
-      &:hover { background: $line-color; }
+      &:hover { color: $link-hover; }
     }
     #header-widget { display: none; }
   }
