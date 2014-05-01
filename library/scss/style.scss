@@ -471,13 +471,6 @@ header#header {
     }
   }
   .menu-link { display: none; }
-  #tagline {
-    float: right;
-    padding-right: $standard-margin;
-    line-height: 74px;
-    vertical-align: top;
-  }
-  
 }
 
 // Main Content Styles //
@@ -515,7 +508,7 @@ section#content {
     > ul {
       width: 100%;
       list-style: none;
-      font-size: 1em;
+      font-size: 1.1em;
       
       li {
         text-align: right;
