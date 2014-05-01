@@ -37,7 +37,7 @@
       var header_height = $('header#header').height(),
           scroll        = $(window).scrollTop(),
           limit         = 74,
-          target        = $('nav#site-nav');
+          target        = $('#sidebar');
       if ( scroll >= 0 && scroll < header_height ) {
         var top = header_height - scroll;
         target.css({ top: top });
@@ -50,9 +50,13 @@
   });
   
   // Mobile Menu Control //
-  $('.menu-link').click(function() {
-    $('nav#site-nav > ul').toggleClass('active');
-    return false;
+  $('a.menu-link').click(function() {
+    var site_nav = $('nav#site-nav > ul');
+    if ( site_nav.css('display') === 'none' ) {
+      site_nav.css({ 'display': 'block' });
+    } else {
+      site_nav.css({ 'display': 'none' });
+    }
   });
   
   // Desktop Menu Control //
@@ -71,9 +75,9 @@
 
   // Hides Mobile Menu on Unfocus //
   $(document).mouseup(function (e) {
-    var container = $('nav#site-nav');
+    var container = $('nav#site-nav, .menu-link');
     if (!container.is(e.target) && container.has(e.target).length === 0) {
-      $('> ul', container).removeClass('active');
+      $('nav#site-nav > ul').css({ 'display': 'none' });
     }
   });
 

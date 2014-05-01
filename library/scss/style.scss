@@ -500,14 +500,12 @@ section#content {
 
 #sidebar {
   position: fixed;
-  top: 0; bottom: 0;
+  top: 74px; bottom: 0;
   width: $nav-width * 100%;
   margin-left: $standard-margin;
   padding: $standard-margin 0;
   
   nav#site-nav {
-    position: relative;
-    top: 74px;
     
     > ul {
       width: 100%;

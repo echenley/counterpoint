@@ -14,5 +14,5 @@
           <a class="title-link" href="<?php echo home_url('/'); ?>"><?php bloginfo('name'); ?></a>
         </h1>
         <span id="header-widget"><?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('header-right')) : ?><?php endif; ?></span>
-        <a href="#menu" class="menu-link">&#9776;</a>
+        <a href="#" class="menu-link">&#9776;</a>
       </header>
