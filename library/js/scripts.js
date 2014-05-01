@@ -51,12 +51,7 @@
   
   // Mobile Menu Control //
   $('a.menu-link').click(function() {
-    var site_nav = $('nav#site-nav > ul');
-    if ( site_nav.css('display') === 'none' ) {
-      site_nav.css({ 'display': 'block' });
-    } else {
-      site_nav.css({ 'display': 'none' });
-    }
+    $('nav#site-nav > ul').toggleClass('active');
   });
   
   // Desktop Menu Control //
@@ -77,7 +72,7 @@
   $(document).mouseup(function (e) {
     var container = $('nav#site-nav, .menu-link');
     if (!container.is(e.target) && container.has(e.target).length === 0) {
-      $('nav#site-nav > ul').css({ 'display': 'none' });
+      $('nav#site-nav > ul').removeClass('active');
     }
   });
 

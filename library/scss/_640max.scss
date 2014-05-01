@@ -43,6 +43,8 @@
         border-bottom: 1px solid $line-color;
         padding: 5%;
         
+        &.active { display: block; }
+        
         li {
           clear: both;
           width: 100%;
