@@ -60,8 +60,8 @@
     var clicked = $(this).parent();
     if ( clicked.hasClass('active') ) {
       clicked.siblings().removeClass('inactive active');
-      clicked.removeClass('active');
       clicked.find('li').removeClass('inactive active');
+      clicked.removeClass('active');
     } else {
       clicked.siblings().addClass('inactive').removeClass('active');
       clicked.siblings().find( $('li') ).removeClass('inactive active');
@@ -71,7 +71,7 @@
 
   // Hides Mobile Menu on Unfocus //
   $(document).mouseup(function (e) {
-    var container = $('header#header');
+    var container = $('nav#site-nav');
     if (!container.is(e.target) && container.has(e.target).length === 0) {
       $('> ul', container).removeClass('active');
     }

@@ -41,47 +41,35 @@
         z-index: 10;
         position: absolute;
         display: none;
-        left: 0;
         right: 0;
         width: 100%;
-        background: rgba(62,62,62,0.9);
+        background: rgba($highlight,0.95);
+        border-bottom: 1px solid $line-color;
         
         &.active {
           z-index: 1000;
           display: block;
-          padding: 5% 20%;
-        }
-        
-        > li { 
-          margin-bottom: 0.5em;
-          border: 1px solid transparent;
-          &.active { border: 1px solid $bg-color; }
+          padding: 5%;
         }
         
         li {
-          text-align: center;
-          background-color: transparent;
+          clear: both;
+          width: 100%;
+          text-align: right;
           
           &.active {
             > a {
-              background-color: transparent;
-              text-decoration: underline;
               padding: 1em;
-              border-right: none;
             }
             > ul.sub-menu {
-              border-top: 1px solid $bg-color;
               display: block;
             }
           }
           
           a {
-            color: $bg-color;
             padding: 1em;
             &:hover {
               background-color: transparent;
-              text-decoration: underline;
-              border: none;
               padding: 1em;
             }
           }
