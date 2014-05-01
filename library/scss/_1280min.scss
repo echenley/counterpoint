@@ -4,10 +4,6 @@
 
   body { font-size: 95%; }
   
-  article {
-    h2,h3,h4,h5,h6 { margin: $margin-1280 0; }
-  }
-  
   header#header #title a { padding: 0 $margin-1280; }
   header#header #tagline { padding-right: $margin-1280;}
   
@@ -24,8 +20,7 @@
     margin: 1em $margin-1280 0 0;
   }
   
-  
-    #header-widget { padding-right: $margin-1280; }
+  #header-widget { padding-right: $margin-1280; }
   
   #container {
   
