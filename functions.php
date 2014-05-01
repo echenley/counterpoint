@@ -6,24 +6,25 @@
   
   Contents
   ----------------------
-  1.  Theme Support
-  2.  Clean Up wp_head (and associated functions)
-  3.  Small Customizations
-  4.  Custom Favicon For Admin
-  5.  Enqueue Scripts and Styles
-  6.  Remove Admin Bar
-  7.  Register Menus
-  8.  Register Widget Space
-  9.  Catch That Image
-  10. Post-Header Function Call
-  11. Comment Layout
-  12. Password Protected Form
-  13. Numeric Page Navigation
-  14. Next and Previous Post Navigation
-  15. Display Categories
-  16. Display Timestamp
-  17. Custom Link Pages
-  18. Index/Archive Loop Function
+  *  Theme Support
+  *  Translation-Ready Function
+  *  Clean Up wp_head (and associated functions)
+  *  Small Customizations
+  *  Custom Favicon For Admin
+  *  Enqueue Scripts and Styles
+  *  Remove Admin Bar
+  *  Register Menus
+  *  Register Widget Space
+  *  Catch That Image
+  *  Post-Header Function Call
+  *  Comment Layout
+  *  Password Protected Form
+  *  Numeric Page Navigation
+  *  Next and Previous Post Navigation
+  *  Display Categories
+  *  Display Timestamp
+  *  Custom Link Pages
+  *  Index/Archive Loop Function
 
  */
  
@@ -33,8 +34,23 @@
   
   if ( ! isset( $content_width ) ) $content_width = 1280;
 
+  
+  /* Translation-Ready Function - via Sté Kerwer, http://dukeo.com/how-to-make-your-wordpress-theme-translation-ready/ */
+  load_theme_textdomain( 'counterpoint', get_template_directory_uri() . '/languages' );
+  $locale = get_locale();
+  $locale_file = get_template_directory_uri() . "/languages/$locale.php";
+  if ( is_readable($locale_file) )
+    require_once($locale_file);
 
-  // Clean up wp_head. Borrowed from Bones Theme ( http://themble.com/bones ) //
+  /* 
+   * Clean up wp_head.
+   *
+   * Code courtesy of Bones Theme ( http://themble.com/bones )
+   * Eddie Machado
+   * License: WTFPL
+   * License URI: http://sam.zoy.org/wtfpl/
+  */
+  
   remove_action( 'wp_head', 'rsd_link' );                                // EditURI link
   remove_action( 'wp_head', 'wlwmanifest_link' );                        // windows live writer
   remove_action( 'wp_head', 'index_rel_link' );                          // index link
@@ -320,26 +336,24 @@
         </div>
         
       <?php
-      } else { // if first or last post //
-        if ( $is_next ) {
-          $nurl = get_permalink($next_post->ID);
-          $ntitle = get_the_title($next_post->ID); ?>
-          
-          <div class="next-post full-width" <?php echo post_thumb_style($next_post->ID); ?>>
-            <a href="<?php echo esc_url($nurl); ?>" title="<?php echo esc_attr($ntitle); ?>">&larr; <?php _e('Next', 'counterpoint'); ?></a>
-          </div>
-          
-        <?php
-        } else if ( $is_prev ) {
-          $purl = get_permalink($prev_post->ID);
-          $ptitle = get_the_title($prev_post->ID); ?>
-          
-          <div class="prev-post full-width" <?php echo post_thumb_style($prev_post->ID); ?>>
-            <a href="<?php echo esc_url($purl); ?>" title="<?php echo esc_attr($ptitle); ?>"><?php _e('Previous', 'counterpoint'); ?> &rarr;</a>
-          </div>
-          
-        <?php
-        }
+      } else if ( $is_next ) {  // if first post //
+        $nurl = get_permalink($next_post->ID);
+        $ntitle = get_the_title($next_post->ID); ?>
+        
+        <div class="next-post full-width" <?php echo post_thumb_style($next_post->ID); ?>>
+          <a href="<?php echo esc_url($nurl); ?>" title="<?php echo esc_attr($ntitle); ?>">&larr; <?php _e('Next', 'counterpoint'); ?></a>
+        </div>
+        
+      <?php
+      } else if ( $is_prev ) { // if last post //
+        $purl = get_permalink($prev_post->ID);
+        $ptitle = get_the_title($prev_post->ID); ?>
+        
+        <div class="prev-post full-width" <?php echo post_thumb_style($prev_post->ID); ?>>
+          <a href="<?php echo esc_url($purl); ?>" title="<?php echo esc_attr($ptitle); ?>"><?php _e('Previous', 'counterpoint'); ?> &rarr;</a>
+        </div>
+        
+      <?php
       } ?>
     </nav>
   <?php

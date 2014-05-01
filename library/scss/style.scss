@@ -10,18 +10,27 @@ $highlight:       #f3f3f3;  // light gray highlight
 $link-color:      #c44;     // linkz
 $link-hover:      darken($link-color, 20%);
 $line-color:      #dedede;  // borders and <hr>
-$container-size:  1280px;   // max container width
 
+$container-size:  1280px;   // max container width
 $container-margin: 3.5%;
 $standard-margin:  3.5vw;
 $margin-1280:      44px;
 $nav-width:        .2;
-$content-width:    .73;
+$content-width:    .73;     // .07 left over for margins
 $post-width:       80.9%;
 $post-width-900:   100% - ($container-margin / $content-width);
 $post-width-640:   90%;
 
+
 // Typefaces (base, <code>) //
+
+/*
+ * Font:        Merriweather
+ * Author:      Eben Sorkin
+ * Author URI:  http://ebensorkin.wordpress.com/
+ * License:     SIL Open Font License, 1.1
+ * License URI: http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL
+*/
 
 $serif:           'Merriweather', TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
 $monospace:       'Courier New', Courier, monospace;
@@ -35,12 +44,12 @@ $monospace:       'Courier New', Courier, monospace;
   }
 }
 
-// Reset/Normalize Code //
 
+// Reset/Normalize Code //
 @import '_reset'; 
 
-// Clearfix //
 
+// Clearfix //
 .cf {
   zoom: 1;
   
@@ -53,6 +62,7 @@ $monospace:       'Courier New', Courier, monospace;
     clear: both;
   }
 }
+
 
 // Wordpress Classes //
 
@@ -98,6 +108,7 @@ img.size-full {
   padding: 0.6em 1.2em;
 }
 
+
 // Gallery and Captions //
 
 .gallery {
@@ -137,6 +148,7 @@ img.size-full {
   line-height: 1.4;
   background: $highlight;
 }
+
 
 // Sticky Posts //
 
@@ -213,8 +225,8 @@ hr {
   border: 1px solid $line-color;
 }
 
-// Tables //
 
+// Tables //
 
 table {
   margin: 0.6em auto;
@@ -234,6 +246,7 @@ table {
   tr:hover td { background: darken($highlight, 2%); }
 }
 
+
 // Lists //
 
 article {
@@ -246,6 +259,7 @@ article {
     ul,ol { margin-left: 2em; }
   }
 }
+
 
 // Forms //
 
@@ -317,6 +331,7 @@ input[type=submit], input[type=submit]:visited {
   }
 }
 
+
 // Widget Areas //
 
 #sidebar #sidebar-widget {
@@ -341,6 +356,7 @@ input[type=submit], input[type=submit]:visited {
   text-align: center;
   &:empty { display: none; }
 }
+
 
 // Post Meta Info //
   
@@ -417,6 +433,7 @@ h4 {
 h5 { font-weight: bold; }
 h6 { font-style: italic; }
 
+
 // Post Headers //
 
 .archive-header, .attachment-header {
@@ -479,6 +496,7 @@ body {
   .menu-link { display: none; }
 }
 
+
 // Main Content Styles //
 
 #content {
@@ -496,6 +514,7 @@ body {
   
   p { margin: 1.2em 0; }
 }
+
 
 // Top-Level Navigation (sidebar.php) //
 
@@ -518,6 +537,7 @@ body {
       text-align: right;
       border-color: $bg-color;
       @include prefix(transition, all 0.2s);
+      overflow: hidden;
       
       a {
         display: block;
@@ -535,8 +555,10 @@ body {
       }
       
       ul.sub-menu {
-        display: none;
-        li a { padding-right: 0.4em; }
+        height: 0;
+        > li > a {
+          @include prefix(transition, all 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19));
+        }
       }
       
       &.active {
@@ -547,16 +569,20 @@ body {
           border-right: 0.4em solid $link-hover !important;
         }
         > ul.sub-menu {
-          display: block;
-          li a { border-right: 0.4em solid rgba(0,0,0,0.1); }
+          height: auto;
+          > li > a {
+            border-right: 0.4em solid rgba(0,0,0,0.12);
+            padding-right: 0.4em;
+          }
         }
       }
-      &.inactive { opacity: 0.4; }
+      &.inactive > a { opacity: 0.4; border-right: none !important; }
     }
     
     li.menu-item-has-children { cursor: pointer; }
   }
 }
+
 
 // Post Navigation //
 
@@ -631,6 +657,7 @@ nav.post-pagination {
   &:empty { display: none; }
 }
 
+
 // Front-Page, Archives, Attachment (index.php, archive.php, attachment.php) //
 
 #archive {
@@ -699,6 +726,7 @@ nav.post-pagination {
 
 #archive #searchform { margin-bottom: $standard-margin; }
 
+
 // Archive Page //
 
 #archive-page {
@@ -709,6 +737,7 @@ nav.post-pagination {
   }
   .tag-cloud { line-height: 1.4; }
 }
+
 
 // Post Content (single.php, page.php) //
 

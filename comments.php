@@ -1,6 +1,11 @@
 <?php
 
-// Comment layout borrowed from Bones Theme ( http://themble.com/bones ) //
+/*
+ * Comment layout inspired by Bones Theme ( http://themble.com/bones )
+ * Author: Eddie Machado
+ * License: WTFPL
+ * License URI: http://sam.zoy.org/wtfpl/
+*/
 
   if ( ! empty($_SERVER['SCRIPT_FILENAME']) && 'comments.php' == basename( $_SERVER['SCRIPT_FILENAME'] ) )
     die ('Please do not load this page directly. Thanks!');
