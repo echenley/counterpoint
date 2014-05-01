@@ -521,7 +521,7 @@ section#content {
         
         a {
           display: block;
-          padding: 0.8em 0 0.8em 0.8em;
+          padding: 0.8em 0;
           color: $primary-color;
           border-color: $line-color;
           line-height: 1.4;
@@ -530,14 +530,13 @@ section#content {
         
         a:hover {
           padding-right: 0.4em;
-          padding-left: 0.4em;
-          background: rgba(0,0,0,0.04);
-          border-right: 0.4em solid $line-color;
+          padding-left: 0;
+          color: $link-hover;
+          border-right: 0.4em solid $link-hover !important;
         }
         
         ul.sub-menu {
           display: none;
-          background: $highlight;
           li a { padding-right: 0.4em; }
         }
         
@@ -545,15 +544,15 @@ section#content {
           > a {
             padding-right: 0.4em;
             padding-left: 0.4em;
-            color: $bg-color;
-            background: lighten($primary-color, 10%);
-            border-right: 0.4em solid $primary-color;
+            color: $link-hover;
+            border-right: 0.4em solid $link-hover !important;
           }
           > ul.sub-menu {
             display: block;
-            border-bottom: 0.4em solid $bg-color;
+            li a { border-right: 0.4em solid $line-color; }
           }
         }
+        &.inactive { opacity: 0.2; }
       }
       
       li.menu-item-has-children { cursor: pointer; }
