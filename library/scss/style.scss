@@ -458,11 +458,13 @@ header#header {
   max-width: 100%;
   background-color: $highlight;
   border-bottom: 1px solid $line-color;
+  overflow: hidden;
   
   #title {
     display: inline;
     font-size: 2.4em;
     border: none;
+    max-width: 100%;
     a {
       display: inline-block;
       line-height: 74px;
@@ -538,7 +540,6 @@ section#content {
         }
         
         &.active {
-          border-bottom: 0.4em solid $bg-color;
           > a {
             padding-right: 0.4em;
             padding-left: 0.4em;
@@ -548,6 +549,7 @@ section#content {
           }
           > ul.sub-menu {
             display: block;
+            border-bottom: 0.4em solid $bg-color;
           }
         }
       }
