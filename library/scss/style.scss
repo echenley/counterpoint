@@ -457,12 +457,12 @@ header#header {
   width: 100%;
   max-width: 100%;
   background-color: $highlight;
+  border-bottom: 1px solid $line-color;
   
   #title {
     display: inline;
     font-size: 2.4em;
     border: none;
-    color: $primary-color;
     a {
       display: inline-block;
       line-height: 74px;
