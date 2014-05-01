@@ -519,6 +519,7 @@ section#content {
       
       li {
         text-align: right;
+        border-color: $bg-color;
         @include prefix(transition, all 0.2s);
         
         a {
@@ -540,16 +541,16 @@ section#content {
         ul.sub-menu {
           display: none;
           background: $highlight;
-          margin-bottom: 0.4em;
           li a { padding-right: 0.4em; }
         }
         
         &.active {
+          border-bottom: 0.4em solid $bg-color;
           > a {
             padding-right: 0.4em;
             padding-left: 0.4em;
             color: $bg-color;
-            background: $primary-color;
+            background: lighten($primary-color, 10%);
             border-right: 0.4em solid $primary-color;
           }
           > ul.sub-menu {
