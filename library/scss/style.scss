@@ -182,16 +182,17 @@ blockquote {
   font-style: italic;
   quotes: "\201C""\201D""\2018""\2019";
   p:first-child { display: inline; }
-  &:after { content: no-close-quote; }
   &:before {
     content: open-quote;
     float: left;
-    height: 0;
+    height: 0.2em;
     margin-right: .25em;
-    margin-top: .1em;
+    margin-top: -.1em;
     font-size: 4em;
     color: $line-color;
+    line-height: 1;
   }
+  &:after { content: no-close-quote; }
   cite {
     display: block;
     text-align: right;
@@ -212,7 +213,7 @@ hr {
 
 // Tables //
 
-/*
+
 table {
   margin: 0.6em auto;
   max-width: 100%;
@@ -230,7 +231,6 @@ table {
   td { background: $highlight; }
   tr:hover td { background: darken($highlight, 2%); }
 }
-*/
 
 // Lists //
 
