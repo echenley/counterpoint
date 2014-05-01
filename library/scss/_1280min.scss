@@ -3,7 +3,13 @@
 @media screen and (min-width: $container-size) {
 
   body { font-size: 95%; }
-  h1 { font-size: 3em; }
+  
+  article {
+    h2,h3,h4,h5,h6 { margin: $margin-1280 0; }
+  }
+  
+  header#header #title a { padding: 0 $margin-1280; }
+  header#header #tagline { padding-right: $margin-1280; }
   
   h3#comments, h3#reply-title { margin: $margin-1280 0; }
   
@@ -24,8 +30,6 @@
       width: $nav-width * $container-size;
       margin-left: $margin-1280;
       padding: $margin-1280 0;
-      
-      #site-nav > ul { font-size: 1.3em; }
       #sidebar-widget { bottom: $margin-1280; }
     }
     

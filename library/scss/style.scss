@@ -7,15 +7,15 @@
 $primary-color:   #4f4f4f;  // text color
 $bg-color:        #fff;     // background
 $highlight:       #f3f3f3;  // light gray highlight
-$link-color:      #c44;  // linkz
+$link-color:      #c44;     // linkz
 $line-color:      #dedede;  // borders and <hr>
 $container-size:  1280px;   // max container width
 
-$container-margin: 3%;
-$standard-margin:  3vw;
-$margin-1280:      37px;
-$nav-width:        .26;
-$content-width:    .68;     // .6 left over for nav margins
+$container-margin: 3.5%;
+$standard-margin:  3.5vw;
+$margin-1280:      44px;
+$nav-width:        .21;
+$content-width:    .72;
 $post-width:       80.9%; 
 $post-width-900:   100% - ($container-margin / $content-width);
 $post-width-640:   90%;
@@ -93,7 +93,7 @@ img.size-full {
 }
 
 .alert {
-  background: rgba(0,0,0,0.04);
+  background: rgba(0,0,0,0.05);
   padding: 0.6em 1.2em;
 }
 
@@ -133,7 +133,7 @@ img.size-full {
   margin: 0 !important;
   padding: 0.6em 1.2em;
   font-style: italic;
-  line-height: 1.4em;
+  line-height: 1.4;
   background: $highlight;
 }
 
@@ -150,43 +150,6 @@ img.size-full {
   .timestamp { padding: 0.3em 0; }
 }
 
-// Macro Structure //
-
-html { height: 100%; }
-
-body {
-  font-family: $serif;
-  font-size: 95%;
-  background: $primary-color;
-  height: 100%;
-}
-
-#container {
-  margin: 0 auto;
-  max-width: $container-size;
-  min-height: 100%;
-  background: $bg-color;
-  color: $primary-color;
-}
-
-// Main Content Styles //
-
-section#content {
-  position: relative;
-  float: right;
-  width: $content-width * 100%;
-  line-height: 2em;
-  text-align: justify;
-  padding: $standard-margin 0;
-  
-  a {
-    color: $link-color;
-    @include prefix(transition, all 0.2s);
-    &:hover { color: darken($link-color, 20%); }
-  }
-  
-  p { margin: 1.2em 0; }
-}
 
 // Miscellaneous Tags //
 
@@ -204,7 +167,7 @@ pre, code { font-family: $monospace; }
 
 pre {
   overflow: auto;
-  line-height: 1.5em;
+  line-height: 1.5;
   -ms-word-wrap: initial;
   word-wrap: initial;
 }
@@ -241,9 +204,8 @@ blockquote {
 hr {
   display: block;
   height: 0;
-  width: 80%;
+  width: 100%;
   margin: 1.2em auto;
-  border: 0;
   border: 1px solid $line-color;
 }
 
@@ -280,99 +242,13 @@ table {
   }
 }
 
-// Headings //
-
-h1,h2,h3,h4 {  }
-
-h1,h2,h3 {
-  border-top: 2px solid $primary-color;
-  border-bottom: 2px solid $primary-color;
-  line-height: 1.4em;
-}
-
-h1 {  // Blog Title //
-  position: relative;
-  width: 100%;
-  font-size: 3.6vw;
-  padding: 0.4em 0;
-  a {
-    display: block;
-    color: $primary-color;
-    padding: 0.3em 0;
-  }
-  .menu-link { display: none; }
-}
-
-h2 {
-  padding: 0.7em 0;
-  font-size: 1.6em;
-  font-weight: bold;
-  text-align: left; 
-}
-
-header.post-header {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 28vw;
-  min-height: 260px;
-  .post-title {
-    position: absolute;
-    display: block;
-    bottom: 0;
-    width: 100%;
-    background: rgba(34,34,34,0.6);
-    color: $bg-color;
-    h2 {  // Post Titles Only (archive-post.php, page.php, single.php) //
-      width: $post-width;
-      padding: 0.5em 0 0.5em 0.5em;
-      border: none;
-      font-size: 1.8em;
-      font-weight: normal;
-      background: none;
-    }
-  }
-}
-
-h3 {
-  padding: 0.8em 0;
-  font-size: 1.3em;
-  font-weight: bold;
-  text-align: left; 
-}
-
-h4 {
-  padding: 0.4em 0;
-  font-weight: bold;
-  font-size: 1.1em;
-}
-
-h5 { font-weight: bold; }
-h6 { font-style: italic; }
-
-// Post Headers //
-
-.archive-header, .attachment-header {
-  width: 100%;
-  padding: 1.2em $standard-margin 1.2em 1.2em;
-  text-align: center;
-  background: $highlight;
-  h3 {
-    font-size: 1.5em;
-    border: none;
-    padding: 0;
-  }
-}
-.attachment-header { margin-bottom: 1.2em; }
-.archive-header { margin-bottom: $standard-margin; }
-
 // Forms //
 
 @mixin form-input {
   max-width: 100%;
   margin: 0;
   padding: 0.5em 0.8em;
-  line-height: 1.5em;
+  line-height: 1.5;
   font-size: 13px;
 }
 
@@ -399,7 +275,7 @@ textarea {
   input {
     width: 100%;
     @include form-input;
-    line-height: 2em;
+    line-height: 2;
   }
 }
 
@@ -472,7 +348,153 @@ article .post-meta {
   padding: 0.6em 1.2em;
 }
 
-// Main Navigation (sidebar.php) //
+
+// Headings //
+
+article {
+  h2,h3,h4,h5,h6 { margin: $standard-margin 0; }
+}
+
+h1,h2,h3 {
+  border-bottom: 2px solid $primary-color;
+  line-height: 1.4;
+}
+
+h2 {
+  padding-bottom: 0.6em;
+  font-size: 1.6em;
+  font-weight: bold;
+  text-align: left; 
+}
+
+header.post-header {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 28vw;
+  min-height: 260px;
+  .post-title {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    width: 100%;
+    background: rgba(34,34,34,0.6);
+    color: $bg-color;
+    h2 {  // Post Titles Only (archive-post.php, page.php, single.php) //
+      width: $post-width;
+      padding: 0.5em 0 0.5em 0.5em;
+      border: none;
+      font-size: 1.8em;
+      font-weight: normal;
+      background: none;
+    }
+  }
+}
+
+h3 {
+  padding-bottom: 0.8em;
+  font-size: 1.3em;
+  font-weight: bold;
+  text-align: left;
+}
+
+h4 {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+h5 { font-weight: bold; }
+h6 { font-style: italic; }
+
+// Post Headers //
+
+.archive-header, .attachment-header {
+  width: 100%;
+  padding: 1.2em $standard-margin 1.2em 1.2em;
+  text-align: center;
+  background: $highlight;
+  h3 {
+    font-size: 1.5em;
+    border: none;
+    padding: 0;
+  }
+}
+.attachment-header { margin-bottom: 1.2em; }
+.archive-header { margin-bottom: $standard-margin; }
+
+
+// Macro Structure //
+
+html { height: 100%; }
+
+body {
+  font-family: $serif;
+  font-size: 95%;
+  background: $primary-color;
+  height: 100%;
+}
+
+#container {
+  margin: 0 auto;
+  max-width: $container-size;
+  min-height: 100%;
+  background: $bg-color;
+  color: $primary-color;
+}
+
+header#header {
+  z-index: 10;
+  position: relative;
+  padding: 0;
+  height: 74px;
+  line-height: 74px;
+  width: 100%;
+  max-width: 100%;
+  background-color: $highlight;
+  
+  #title {
+    display: inline;
+    font-size: 2.4em;
+    border: none;
+    color: $primary-color;
+    a {
+      display: inline-block;
+      line-height: 74px;
+      padding: 0 $standard-margin;
+      color: $primary-color;
+    }
+  }
+  .menu-link { display: none; }
+  #tagline {
+    position: absolute;
+    right: 0;
+    padding-right: $standard-margin;
+    line-height: 74px;
+    vertical-align: top;
+  }
+  
+}
+
+// Main Content Styles //
+
+section#content {
+  position: relative;
+  float: right;
+  width: $content-width * 100%;
+  line-height: 2;
+  text-align: justify;
+  padding: $standard-margin 0;
+  
+  a {
+    color: $link-color;
+    @include prefix(transition, all 0.2s);
+    &:hover { color: darken($link-color, 20%); }
+  }
+  
+  p { margin: 1.2em 0; }
+}
+
+// Top-Level Navigation (sidebar.php) //
 
 #sidebar {
   position: fixed;
@@ -481,46 +503,58 @@ article .post-meta {
   margin-left: $standard-margin;
   padding: $standard-margin 0;
   
-  #title {
-    text-align: center;
-    padding: 0;
-  }
-  
-  nav#site-nav > ul {
-    width: 100%;
-    list-style: none;
-    font-size: 1.6vw;
+  nav#site-nav {
+    position: relative;
+    top: 74px;
     
-    li {
-      text-align: center;
+    > ul {
+      width: 100%;
+      list-style: none;
+      font-size: 1em;
       
-      a {
-        display: block;
-        padding: 1em 0;
-        color: $primary-color;
+      li {
+        text-align: right;
         @include prefix(transition, all 0.2s);
-      }
-      
-      a:hover {
-        background: $primary-color;
-        color: $bg-color;
-      }
-      
-      ul.sub-menu {
-        display: none;
-        background: $highlight;
-      }
-      
-      &.active {
-        > a {
-          background: $primary-color;
-          color: $bg-color;
+        
+        a {
+          display: block;
+          padding: 0.8em 0 0.8em 0.8em;
+          color: $primary-color;
+          border-color: $line-color;
+          line-height: 1.4;
+          @include prefix(transition, all 0.2s);
         }
-        > ul.sub-menu { display: block; }
+        
+        a:hover {
+          padding-right: 0.4em;
+          padding-left: 0.4em;
+          background: rgba(0,0,0,0.04);
+          border-right: 0.4em solid $line-color;
+        }
+        
+        ul.sub-menu {
+          display: none;
+          background: $highlight;
+          margin-bottom: 0.4em;
+          li a { padding-right: 0.4em; }
+        }
+        
+        &.active {
+          > a {
+            padding-right: 0.4em;
+            padding-left: 0.4em;
+            color: $bg-color;
+            background: $primary-color;
+            border-right: 0.4em solid $primary-color;
+          }
+          > ul.sub-menu {
+            display: block;
+          }
+        }
       }
+      
+      li.menu-item-has-children { cursor: pointer; }
     }
-    
-    li.menu-item-has-children { cursor: pointer; }
   }
 }
 
@@ -605,7 +639,7 @@ nav.post-pagination {
   
   .categories, .tags {
     font-size: 0.8em;
-    line-height: 1.8em;
+    line-height: 1.8;
   }
   
   li {
@@ -623,14 +657,13 @@ nav.post-pagination {
       padding: 0;
       a {
         display: block;
-        padding: 0.8em 0;
+        padding: 0.6em;
         color: inherit;
       }
     }
     
     .excerpt {
       margin-top: 0.4em;
-      margin-bottom: -9px;
     }
     
     .read-more {
@@ -639,21 +672,23 @@ nav.post-pagination {
     }
   }
   
-  li:nth-child(2n+1) .thumbnail {
-    float: right;
-    width: (100% - ($container-margin / ($content-width - 0.03))) / 1.618;        // golden ratio (1:1.618) between thumbnail and .post-info (minus internal margin)
-    padding-top: (100% - ($container-margin / ($content-width - 0.03))) / 2.618;  // width and height also share golden ratio relationship
-    margin-left: $standard-margin;
+  li:nth-child(odd) {
+    .thumbnail {
+      float: right;
+      width: (100% - ($container-margin / ($content-width - 0.035))) / 1.618;        // golden ratio (1:1.618) between thumbnail and .post-info (minus internal margin)
+      padding-top: (100% - ($container-margin / ($content-width - 0.035))) / 2.618;  // width and height also share golden ratio relationship
+      margin-left: $standard-margin;
+    }
   }
   
-  li:nth-child(2n) { 
+  li:nth-child(even) { 
     padding: $standard-margin;
     background: $highlight;
     
     .thumbnail {
       float: left;
-      width: (100% - ($container-margin / ($content-width - 0.09))) / 1.618;        // golden ratio (1:1.618) between thumbnail and .post-info (minus internal margin)
-      padding-top: (100% - ($container-margin / ($content-width - 0.09))) / 2.618;  // width and height also share golden ratio relationship
+      width: (100% - ($container-margin / ($content-width - 0.105))) / 1.618;        // golden ratio (1:1.618) between thumbnail and .post-info (minus internal margin)
+      padding-top: (100% - ($container-margin / ($content-width - 0.105))) / 2.618;  // width and height also share golden ratio relationship
       margin-right: $standard-margin;
     }
   }
@@ -695,7 +730,7 @@ article {
   display: block;
   float: left;
   height: 1em;
-  line-height: 1em;
+  line-height: 1;
   font-size: 6.2em;
   margin: 4px 10px -10px 6px;
 }

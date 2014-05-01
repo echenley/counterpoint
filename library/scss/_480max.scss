@@ -2,8 +2,7 @@
 
   html { -webkit-text-size-adjust: none; }
   body { font-size: 95%; }
-  
-  #sidebar #title { font-size: 1.8em; }
+  header#header #title { font-size: 1.4em; }
   h2 { font-size: 1.5em; }
   
   #archive {
@@ -13,7 +12,7 @@
       margin-bottom: (5% * (100% / $post-width-640));
     }
     
-    li:nth-child(2n+1), li:nth-child(2n) {
+    li:nth-child(odd), li:nth-child(even) {
       .thumbnail {
         width: 100%;
         padding-top: (100% / 1.618);

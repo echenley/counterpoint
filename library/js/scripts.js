@@ -12,9 +12,9 @@
   }
   
   // stores video aspect ratios for fluid resize //
-  var $allVideos = $('iframe[src*="//www.youtube.com"], iframe[src*="//player.vimeo.com"]');
-  $allVideos.each(function() {
-    $(this).data('aspectRatio', this.height / this.width).removeAttr('height').removeAttr('width');
+  var $all_videos = $('iframe[src*="//www.youtube.com"], iframe[src*="//player.vimeo.com"]');
+  $all_videos.each(function() {
+    $(this).data('aspect_ratio', this.height / this.width).removeAttr('height').removeAttr('width');
   });
   
   $(window).resize(function() {
@@ -23,13 +23,31 @@
     $('h1').css('z-index', 1);
   
     // fluid video width on resize //
-    var vidWidth = $('article').width();
-    $allVideos.each(function() {
+    var vid_width = $('article').width();
+    $all_videos.each(function() {
       var $el = $(this);
-      $el.width(vidWidth).height(vidWidth * $el.data('aspectRatio'));
+      $el.width(vid_width).height(vid_width * $el.data('aspect_ratio'));
     });
     
   }).resize();
+  
+  // Sidebar Behavior //
+  $(window).scroll(function() {
+    if($(window).width() > 640) {
+      var $header_height = $('header#header').height(),
+          $scroll        = $(window).scrollTop(),
+          $limit         = 74,
+          $target        = $('nav#site-nav');
+      if ( $scroll >= 0 && $scroll < $header_height ) {
+        var $top = $header_height - $scroll;
+        $target.css({ top: $top });
+      } else if ( $scroll >= $limit ) {
+        $target.css({ top: 0 });
+      } else {
+        $target.css({ top: $limit });
+      }
+    }
+  });
   
   // Mobile Menu Control //
   $('.menu-link').click(function() {
@@ -38,13 +56,13 @@
   });
   
   // Desktop Menu Control //
-  $('nav#site-nav ul > .menu-item-has-children a').click(function() {
+  $('nav#site-nav li.menu-item-has-children a').click(function() {
     $(this).parent().toggleClass('active');
   });
 
   // Hides Mobile Menu on Unfocus //
   $(document).mouseup(function (e) {
-    var $container = $('nav#site-nav');
+    var $container = $('header#header');
     if (!$container.is(e.target) && $container.has(e.target).length === 0) {
       $('> ul', $container).removeClass('active');
     }

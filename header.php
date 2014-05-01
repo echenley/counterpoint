@@ -10,3 +10,10 @@
   </head>
   <body <?php body_class(); ?>>
     <div id="container" class="cf">
+      <header id="header">
+        <h1 id="title">
+          <a class="title-link" href="<?php echo home_url('/'); ?>"><?php bloginfo('name'); ?></a>
+        </h1>
+        <span id="tagline"><?php bloginfo('description'); ?></span>
+        <a href="#menu" class="menu-link">&#9776;</a>
+      </header>

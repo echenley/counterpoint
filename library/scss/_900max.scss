@@ -2,12 +2,7 @@
   
   body { font-size: 90%; }
   
-  #sidebar nav#site-nav > ul {
-    font-size: 1em;
-  }
-  
   header.post-header .post-title h2,
-  .archive-header, .attachment-header,
   article,
   #comments-section,
   ul.page-numbers  {
@@ -15,7 +10,7 @@
   }
   
   #archive {
-    li:nth-child(2n+1) .thumbnail { width: (100% - ($container-margin / ($content-width - 0.03))) / 2.618; }
-    li:nth-child(2n) .thumbnail { width: (100% - ($container-margin / ($content-width - 0.09))) / 2.618; }
+    li:nth-child(odd) .thumbnail { width: (100% - ($container-margin / ($content-width - 0.035))) / 2.618; }
+    li:nth-child(even) .thumbnail { width: (100% - ($container-margin / ($content-width - 0.105))) / 2.618; }
   }
 }
