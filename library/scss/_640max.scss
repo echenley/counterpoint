@@ -1,14 +1,14 @@
 @media screen and (max-width: 640px) {
  
   header#header {
-    text-align: right;
+    text-align: left;
     #title { 
       font-size: 1.8em;
       a { padding: 0 5%; }
     }
     .menu-link {
       position: absolute;
-      top: 0; left: 0;
+      top: 0; right: 0;
       display: block;
       width: 74px;
       padding: 0;
