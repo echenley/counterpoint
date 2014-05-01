@@ -703,11 +703,11 @@ nav.post-pagination {
 
 #archive-page {
   #searchform { margin-top: $standard-margin; }
-  h3 { margin: $standard-margin 0; }
   ul { margin: 0; padding: 0; }
   ul.topics li, ul.monthly li {
     display: inline;
   }
+  .tag-cloud { line-height: 1.4; }
 }
 
 // Post Content (single.php, page.php) //

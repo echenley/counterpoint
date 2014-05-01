@@ -33,7 +33,7 @@ get_header(); ?>
     </ul>
     
     <h3>Tags</h3>
-    <?php wp_tag_cloud(); ?>
+    <div class="tag-cloud"><?php wp_tag_cloud(); ?></div>
   </article>
 </section>
 
