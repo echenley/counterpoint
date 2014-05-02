@@ -525,6 +525,12 @@ body {
   margin-left: $standard-margin;
   padding: $standard-margin 0;
 }
+
+// Wordpress Admin Bar Fix //
+.admin-bar #sidebar { top: 102px !important; }
+@media screen and (max-width: 782px) {
+  .admin-bar #sidebar { top: 120px !important; }
+}
   
 #site-nav {
   
@@ -541,42 +547,39 @@ body {
       
       a {
         display: block;
-        padding: 0.8em 0;
+        padding: 0.8em 0 0.8em 6px;
         color: $primary-color;
         border-color: $line-color;
         line-height: 1.4;
+        @include prefix(transition, all 0.2s);
       }
       
       a:hover {
-        padding-right: 0.4em;
-        padding-left: 0;
+        padding-right: 6px;
+        border-right: 6px solid $link-hover !important;
         color: $link-hover;
-        border-right: 0.4em solid $link-hover !important;
       }
       
-      ul.sub-menu {
-        height: 0;
-        > li > a {
-          @include prefix(transition, all 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19));
-        }
-      }
+      ul.sub-menu { height: 0; }
       
       &.active {
         > a {
-          padding-right: 0.4em;
-          padding-left: 0.4em;
           color: $link-hover;
-          border-right: 0.4em solid $link-hover !important;
+          padding-right: 6px;
+          border-right: 6px solid $link-hover !important;
         }
         > ul.sub-menu {
           height: auto;
           > li > a {
-            border-right: 0.4em solid rgba(0,0,0,0.12);
-            padding-right: 0.4em;
+            padding-right: 6px;
+            border-right: 6px solid rgba(0,0,0,0.12);
           }
         }
       }
-      &.inactive > a { opacity: 0.4; border-right: none !important; }
+      &.inactive > a {
+        opacity: 0.3;
+        border-right: none;
+      }
     }
     
     li.menu-item-has-children { cursor: pointer; }

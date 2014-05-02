@@ -22,7 +22,7 @@
       wp_link_pages();
     endwhile; ?>
     <div id="article-bottom"><?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('article-bottom')) : ?><?php endif; ?></div>
-    <?php adjacent_post_nav(); ?>
+    <?php counterpoint_adjacent_posts(); ?>
   </article>
   
   <section id="comments-section">

@@ -11,6 +11,7 @@
   *  Clean Up wp_head (and associated functions)
   *  Small Customizations
   *  Custom Favicon For Admin
+  *  Font URL Function (called from enqueue)
   *  Enqueue Scripts and Styles
   *  Remove Admin Bar
   *  Register Menus
@@ -28,29 +29,51 @@
 
  */
  
-  // Theme Support //
-  add_theme_support( 'post-thumbnails' );
-  add_theme_support( 'automatic-feed-links' );
-  
-  if ( ! isset( $content_width ) ) $content_width = 1280;
+  // Content Width Setup //
+  if ( ! isset( $content_width ) ) $content_width = 1080;
 
+
+  /*
+   * Counterpoint Setup
+  */
   
-  /* Translation-Ready Function - via Sté Kerwer, http://dukeo.com/how-to-make-your-wordpress-theme-translation-ready/ */
-  load_theme_textdomain( 'counterpoint', get_template_directory_uri() . '/languages' );
-  $locale = get_locale();
-  $locale_file = get_template_directory_uri() . "/languages/$locale.php";
-  if ( is_readable($locale_file) )
-    require_once($locale_file);
+  if ( ! function_exists( 'counterpoint_setup' ) ) :
+  function counterpoint_setup() {
+  
+    /*
+     * Translation-Ready Function - via Sté Kerwer
+     * http://dukeo.com/how-to-make-your-wordpress-theme-translation-ready/
+    */
+    load_theme_textdomain( 'counterpoint', get_template_directory_uri() . '/languages' );
+    
+    $locale = get_locale();
+    $locale_file = get_template_directory_uri() . "/languages/$locale.php";
+    if ( is_readable($locale_file) )
+      require_once($locale_file);
+      
+    
+    // Theme Support //
+    add_theme_support( 'post-thumbnails' );
+    add_theme_support( 'automatic-feed-links' );
+    
+    
+    // Sidebar Menu //
+    register_nav_menu('sidebar',__( 'Sidebar', 'counterpoint' ));
+  
+  }
+  endif; // End Counterpoint Setup //
+  add_action( 'after_setup_theme', 'counterpoint_setup' );
+
 
   /* 
-   * Clean up wp_head.
+   * Code to clean up wp_head
    *
-   * Code courtesy of Bones Theme ( http://themble.com/bones )
+   * Courtesy of Bones Theme ( http://themble.com/bones )
    * Eddie Machado
    * License: WTFPL
    * License URI: http://sam.zoy.org/wtfpl/
   */
-  
+
   remove_action( 'wp_head', 'rsd_link' );                                // EditURI link
   remove_action( 'wp_head', 'wlwmanifest_link' );                        // windows live writer
   remove_action( 'wp_head', 'index_rel_link' );                          // index link
@@ -60,11 +83,11 @@
   remove_action( 'wp_head', 'wp_generator' );                            // WP version
   add_filter( 'style_loader_src', 'counterpoint_remove_wp_ver_css_js', 9999 );  // remove WP version from css
   add_filter( 'script_loader_src', 'counterpoint_remove_wp_ver_css_js', 9999 ); // remove Wp version from scripts
-  add_filter( 'wp_title', 'rw_title', 10, 3 );                           // Better header
+  add_filter( 'wp_title', 'counterpoint_title', 10, 3 );                 // Better Title
   add_filter( 'the_generator', 'counterpoint_rss_version' );             // remove WP version from RSS
   
   // Better Title. ( http://www.deluxeblogtips.com/2012/03/better-title-meta-tag.html ) //
-  function rw_title( $title, $sep, $seplocation ) {
+  function counterpoint_title( $title, $sep, $seplocation ) {
     global $page, $paged;
   
     // Don't affect in feeds.
@@ -100,11 +123,9 @@
   }
   
   
-  // Small Customizations //
-  
-  // Adds [url] shortcode //
-  function blog_address() { return site_url(); }
-  add_shortcode( 'url', 'blog_address' );
+  /*
+   * Small Customizations
+  */
   
   // Custom Excerpt More. Replaces [...] with 'Keep Reading' link //
   function counterpoint_excerpt_more( $more ) {
@@ -119,12 +140,12 @@
   add_filter( 'the_content', 'counterpoint_filter_ptags_on_images' );
 
   // Excerpt Length //
-  function new_excerpt_length($length) { return 70; }
-  add_filter('excerpt_length', 'new_excerpt_length');
+  function counterpoint_excerpt_length($length) { return 70; }
+  add_filter('excerpt_length', 'counterpoint_excerpt_length');
   
   // Remove Caption Padding //
-  function remove_caption_padding($width) { return $width - 10; }
-  add_filter( 'img_caption_shortcode_width', 'remove_caption_padding' );
+  function counterpoint_caption_padding($width) { return $width - 10; }
+  add_filter( 'img_caption_shortcode_width', 'counterpoint_caption_padding' );
   
   // Default Title //
   function counterpoint_default_title($title) {
@@ -141,46 +162,35 @@
   add_filter( 'the_title', 'counterpoint_no_title' );
   
   
-  // Add Custom Favicon to Admin Pages //
-  function add_favicon() {
-    $favicon_url = get_template_directory_uri() . '/library/images/favicon-admin.ico';
-    echo '<link rel="shortcut icon" href="' . $favicon_url . '">';
-  }
-  add_action('login_head', 'add_favicon');
-  add_action('admin_head', 'add_favicon');
+  // Return Merriweather Font URL (called via enqueue) //
+  function counterpoint_font_url() {
+    $font_url = '';
+    /*
+     * Translators: If there are characters in your language that are not supported
+     * by Lato, translate this to 'off'. Do not translate into your own language.
+     */
+    if ( 'off' !== _x( 'on', 'Merriweather font: on or off', 'counterpoint' ) )
+      $font_url = add_query_arg( 'family', urlencode( 'Merriweather:400,400italic,700' ), '//fonts.googleapis.com/css' );
   
+    return $font_url;
+  }
+
   
   // Enqueue Scripts and Styles. jQuery Insert From Google //
   add_action("wp_enqueue_scripts", "counterpoint_scripts", 11);
   function counterpoint_scripts() {
-    wp_enqueue_style('merriweather-font',
-      'http' . ($_SERVER['SERVER_PORT'] == 443 ? 's' : '') . '://fonts.googleapis.com/css?family=Merriweather:400,400italic,700');
-    wp_enqueue_style('counterpoint-style',
-      get_template_directory_uri() . '/library/css/style.css');
   
-    wp_deregister_script('jquery');
-    wp_register_script('jquery',
-      'http' . ($_SERVER['SERVER_PORT'] == 443 ? 's' : '') . '://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js',
-      array(), '1.11.0', true);
-    wp_enqueue_script('jquery');
-    wp_enqueue_script('counterpoint-scripts',
-      get_template_directory_uri() . '/library/js/scripts-min.js',
+    // CSS //
+    wp_enqueue_style( 'merriweather-font', counterpoint_font_url(), array(), null );
+    wp_enqueue_style('counterpoint-style', get_template_directory_uri() . '/library/css/style.css');
+      
+    // Javascript //
+    wp_enqueue_script('counterpoint-scripts', get_template_directory_uri() . '/library/js/scripts-min.js',
       array('jquery'), '', true);
 
-    if ( (!is_admin()) && is_singular() && comments_open() && get_option('thread_comments') )
+    if ( is_singular() && comments_open() && get_option('thread_comments') )
       wp_enqueue_script( 'comment-reply' );
   }
-
-
-  // Remove Admin Bar //
-  add_filter('show_admin_bar', '__return_false');
-
-
-  // Register Sidebar Menu //
-  function register_my_menu() {
-    register_nav_menu('sidebar',__( 'Sidebar', 'counterpoint' ));
-  }
-  add_action('init', 'register_my_menu');
   
   
   // Register Widget Space //
@@ -217,8 +227,11 @@
   }
 
 
-  // Catch That Image. Returns the first image in a post (in lieu of Featured Image) //
-  function catch_that_image($post_id) {
+  /*
+   * Catch That Image. Returns the first image in a post (in lieu of Featured Image)
+   * http://css-tricks.com/snippets/wordpress/get-the-first-image-from-a-post/
+  */
+  function counterpoint_catch_image($post_id) {
     $first_img = '';
     ob_start();
     ob_end_clean();
@@ -238,7 +251,7 @@
         $alt_text = get_the_title($post_id);
       return 'style="background: url(' . esc_attr( wp_get_attachment_image_src($img_id, 'full')[0] ) . '); background-position: center; background-size: cover" title="' . esc_attr( $alt_text ) . '"';
     } else {
-      $first_img = catch_that_image($post_id);
+      $first_img = counterpoint_catch_image($post_id);
       if ( $first_img )
         return 'style="background: url(' . esc_attr( $first_img ) . '); background-position: center; background-size: cover" title="' . esc_attr( get_the_title() ) .'"';
       return 'style="background: url(' . get_template_directory_uri() . '/library/images/no-featured-image.jpg' . '); background-position: center; background-size: cover" title="' . esc_attr( get_the_title() ) .'"';
@@ -274,8 +287,8 @@
   
   
   // Password Protected Form //
-  add_filter( 'the_password_form', 'my_password_form' );
-  function my_password_form() {
+  add_filter( 'the_password_form', 'counterpoint_password_form' );
+  function counterpoint_password_form() {
     global $post;
     $label = 'pwbox-' . ( empty( $post->ID ) ? rand() : $post->ID );
     $o = '<p class="no-dropcap">' . __( 'This post is password protected. Enter the password to view it.', 'counterpoint' ) . '</p>
@@ -315,7 +328,7 @@
   
   
   // Next and Previous Post Navigation //
-  function adjacent_post_nav() {
+  function counterpoint_adjacent_posts() {
     $next_post = get_next_post();
     $prev_post = get_previous_post();
     $is_next = is_object($next_post);
@@ -384,7 +397,11 @@
   }
   
   
-  // Custom Link Pages. Adds 'next_and_number' option for wp_link_pages() arg 'next_or_number' //
+  /*
+   * Custom Link Pages. Adds 'next_and_number' option for wp_link_pages() arg 'next_or_number'
+   * Adapted from:
+   * http://www.velvetblues.com/web-development-blog/wordpress-number-next-previous-links-wp_link_pages/
+  */
   add_filter('wp_link_pages_args','counterpoint_link_pages_args');
   function counterpoint_link_pages_args($args){
     $cp_defaults = array(

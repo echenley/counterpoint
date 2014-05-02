@@ -6,5 +6,10 @@ May 1, 2014
 * Fixed the issue with the size of the blog title by moving it from the sidebar to a glorious new header. This gives the theme much more breathing room.
 * Redesigned menu
 * Licensing: Added proper licensing information for all the intellectual property I used while making Counterpoint. Script licensing can be found in line. Image licensing is in the readme-images.txt file in /counterpoint/images.
+* Removed favicons
+* functions.php: Removed favicon function
+* functions.php: Added proper counterpoint_setup() function
+* functions.php: Prefixed all relevant functions with "counterpoint_"
 * functions.php: Added translation-ready function (http://dukeo.com/how-to-make-your-wordpress-theme-translation-ready/)
+* functions.php: Replaced google jQuery with native WP version
 * header.php: Removed extra wp_enqueue_script('comment-reply')
