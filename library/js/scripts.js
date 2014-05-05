@@ -34,19 +34,24 @@
   // Sidebar Behavior //
   $(window).scroll(function() {
     if($(window).width() > 640) {
+      var admin_bar = 0;
+      if ( $('body').hasClass('admin-bar') ) {
+        admin_bar += $(window).width() > 782 ? 32 : 46;
+      }
       var header_height = $('#header').height(),
+          combined_height = header_height + admin_bar,
           scroll        = $(window).scrollTop(),
           target        = $('#sidebar');
       if ( scroll >= 0 && scroll < header_height ) {
-        var top = header_height - scroll;
+        var top = combined_height - scroll;
         target.css({ top: top });
       } else if ( scroll >= header_height ) {
-        target.css({ top: 0 });
+        target.css({ top: admin_bar });
       } else {
-        target.css({ top: header_height });
+        target.css({ top: combined_height });
       }
     }
-  });
+  }).scroll();
   
   // Mobile Menu Control //
   $('a.menu-link').click(function() {

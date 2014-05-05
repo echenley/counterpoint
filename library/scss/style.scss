@@ -530,9 +530,9 @@ article { text-align: justify; }
 }
 
 // Wordpress Admin Bar Fix //
-.admin-bar #sidebar { top: 102px !important; }
+.admin-bar #sidebar { top: 102px; }
 @media screen and (max-width: 782px) {
-  .admin-bar #sidebar { top: 120px !important; }
+  .admin-bar #sidebar { top: 120px; }
 }
   
 #site-nav {
