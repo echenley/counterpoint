@@ -14,7 +14,9 @@
   #archive {
     margin: 0;
     li {
-      &:nth-child(even), &:nth-child(odd) { padding: 0; }
+      margin-bottom: 2 * $standard-margin;
+      &:last-child { margin-bottom: $standard-margin; }
+      &:nth-child(odd) { margin-right: 0; }
       .thumbnail { padding-top: (1 / 2.618) * 100%; }
     }
   }

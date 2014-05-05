@@ -121,7 +121,8 @@
     margin: 0 auto;
     li {
       width: 100%;
-      margin-bottom: 5% * (100% / $post-width-640);
+      margin-bottom: 10% * (100% / $post-width-640);
+      &:last-child { margin-bottom: 5% * (100% / $post-width-640); }
       &:nth-child(even), &:nth-child(odd) { padding: 0; }
     }
   }

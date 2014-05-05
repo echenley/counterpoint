@@ -635,6 +635,7 @@ nav#post-nav {
   position: relative;
   clear: both;
   background: $highlight;
+  border-bottom: 1px solid $line-color;
   text-align: center;
   padding: 0.6em 0;
   > * {
