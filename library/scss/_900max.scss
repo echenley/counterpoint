@@ -5,14 +5,17 @@
   #site-nav > ul { font-size: 1em; }
   
   .post-header .post-title h2,
-  article,
+  article:not(.excerpt), #archive li,
   #comments-section,
   ul.page-numbers  {
     width: $post-width-900;
   }
   
   #archive {
-    li:nth-child(odd) .thumbnail { width: (100% - ($container-margin / ($content-width - 0.035))) / 2.618; }
-    li:nth-child(even) .thumbnail { width: (100% - ($container-margin / ($content-width - 0.105))) / 2.618; }
+    margin: 0;
+    li {
+      &:nth-child(even), &:nth-child(odd) { padding: 0; }
+      .thumbnail { padding-top: (1 / 2.618) * 100%; }
+    }
   }
 }

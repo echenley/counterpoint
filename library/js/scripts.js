@@ -34,17 +34,16 @@
   // Sidebar Behavior //
   $(window).scroll(function() {
     if($(window).width() > 640) {
-      var header_height = $('header#header').height(),
+      var header_height = $('#header').height(),
           scroll        = $(window).scrollTop(),
-          limit         = 74,
           target        = $('#sidebar');
       if ( scroll >= 0 && scroll < header_height ) {
         var top = header_height - scroll;
         target.css({ top: top });
-      } else if ( scroll >= limit ) {
+      } else if ( scroll >= header_height ) {
         target.css({ top: 0 });
       } else {
-        target.css({ top: limit });
+        target.css({ top: header_height });
       }
     }
   });

@@ -18,7 +18,7 @@
   }
   
 if ( have_comments() ) : ?>
-  <h3 id="comments"><?php comments_number( __( '<span>No</span> Responses', 'counterpoint' ), __( '<span>One</span> Response', 'counterpoint' ), _n( '<span>%</span> Response', '<span>%</span> Responses', get_comments_number(), 'counterpoint' ) );?> to &#8220;<?php the_title(); ?>&#8221;</h3>
+  <h2 id="comments"><?php comments_number( __( '<span>No</span> Responses', 'counterpoint' ), __( '<span>One</span> Response', 'counterpoint' ), _n( '<span>%</span> Response', '<span>%</span> Responses', get_comments_number(), 'counterpoint' ) );?> to &#8220;<?php the_title(); ?>&#8221;</h2>
   <nav class="post-pagination"><?php paginate_comments_links( array('prev_text' => '&larr; Previous', 'next_text' => 'Next &rarr;') ); ?></nav>
   <ol class="commentlist">
     <?php wp_list_comments( array('type' => 'all', 'callback' => 'counterpoint_comments') ); ?>

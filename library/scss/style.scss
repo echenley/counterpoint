@@ -32,7 +32,7 @@ $post-width-640:   90%;
  * License URI: http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL
 */
 
-$serif:           'Merriweather', TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+$serif:           'Droid Serif', TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
 $monospace:       'Courier New', Courier, monospace;
 
 // Mixins //
@@ -147,20 +147,15 @@ img.size-full {
   font-style: italic;
   line-height: 1.4;
   background: $highlight;
+  border-bottom: 1px solid $line-color;
 }
+
 
 
 // Sticky Posts //
 
-.sticky .post-meta {
-  &:before {
-    content: 'Sticky';
-    float: left;
-    padding: 0.3em 1em;
-    font-weight: bold;
-    background: #fff0b2;
-  }
-  .timestamp { padding: 0.3em 0; }
+.sticky .thumbnail {
+  border-color: #fff0b2 !important;
 }
 
 
@@ -363,16 +358,22 @@ input[type=submit], input[type=submit]:visited {
 .post-meta {
   display: block;
   overflow: hidden;
+  background: $highlight;
+  border-bottom: 1px solid $line-color;
   .timestamp, .edit-link {
     float: right;
   }
   .timestamp { font-style: italic; }
 }
 
-article .post-meta {
+article#post .post-meta {
   margin: 1.2em 0;
-  background: $highlight;
   padding: 0.6em 1.2em;
+}
+
+#archive .post-meta {
+  margin-bottom: 1.2em;
+  padding: 0.3em 0.6em;
 }
 
 
@@ -384,14 +385,13 @@ article {
 
 h1,h2,h3 {
   border-bottom: 2px solid $primary-color;
-  line-height: 1.4;
+  line-height: 1.5;
+  font-variant: small-caps;
 }
 
 h2 {
   padding-bottom: 0.6em;
-  font-size: 1.6em;
-  font-weight: bold;
-  text-align: left; 
+  font-size: 1.8em;
 }
 
 .post-header {
@@ -400,6 +400,9 @@ h2 {
   width: 100%;
   height: 28vw;
   min-height: 260px;
+  max-height: 360px;
+  border: 6px solid $line-color;
+  border-right: 0;
   .post-title {
     position: absolute;
     display: block;
@@ -422,7 +425,6 @@ h3 {
   padding-bottom: 0.8em;
   font-size: 1.3em;
   font-weight: bold;
-  text-align: left;
 }
 
 h4 {
@@ -503,8 +505,7 @@ body {
   position: relative;
   float: right;
   width: $content-width * 100%;
-  line-height: 2;
-  text-align: justify;
+  line-height: 1.8;
   padding: $standard-margin 0;
   
   a {
@@ -514,6 +515,8 @@ body {
   
   p { margin: 1.2em 0; }
 }
+
+article { text-align: justify; }
 
 
 // Top-Level Navigation (sidebar.php) //
@@ -552,6 +555,8 @@ body {
         border-color: $line-color;
         line-height: 1.4;
         @include prefix(transition, all 0.2s);
+        -webkit-backface-visibility: hidden;
+        -webkit-transform: translateZ(0);
       }
       
       a:hover {
@@ -592,6 +597,7 @@ body {
 nav#post-nav {
   margin-top: $standard-margin;
   clear: both;
+  border: 6px solid $line-color;
   div {
     display: block;
     overflow: hidden;
@@ -666,7 +672,8 @@ nav.post-pagination {
 #archive {
   margin-right: $standard-margin;
   
-  .categories, .tags {
+  .tags {
+    margin-top: 1.2em;
     font-size: 0.8em;
     line-height: 1.8;
   }
@@ -674,25 +681,26 @@ nav.post-pagination {
   li {
     position: relative;
     display: block;
-    width: 100%;
+    float: left;
+    width: (100% - ($container-margin / ($content-width - 0.035))) / 2;
     margin-bottom: $standard-margin;
-    .thumbnail {
-      position: relative;
-      display: block;
-    }
-    h3.post-title {
-      overflow: hidden;
-      text-align: left;
-      padding: 0;
+    
+    &:nth-child(odd) { margin-right: $standard-margin; clear: left; }
+    
+    .post-title {
+      padding: 0.4em 0;
+      border: none;
       a {
         display: block;
-        padding: 0.6em;
         color: inherit;
+        &:hover { color: $link-hover; }
       }
     }
     
-    .excerpt {
-      margin-top: 0.4em;
+    .thumbnail {
+      width: 100%;
+      padding-top: (1 / 1.618) * 100%;
+      border: 6px solid $line-color;
     }
     
     .read-more {
@@ -700,40 +708,13 @@ nav.post-pagination {
       float: right;
     }
   }
-  
-  li:nth-child(odd) {
-    .thumbnail {
-      float: right;
-      width: (100% - ($container-margin / ($content-width - 0.035))) / 1.618;        // golden ratio (1:1.618) between thumbnail and .post-info (minus internal margin)
-      padding-top: (100% - ($container-margin / ($content-width - 0.035))) / 2.618;  // width and height also share golden ratio relationship
-      margin-left: $standard-margin;
-    }
-  }
-  
-  li:nth-child(even) { 
-    padding: $standard-margin;
-    background: $highlight;
-    
-    .thumbnail {
-      float: left;
-      width: (100% - ($container-margin / ($content-width - 0.105))) / 1.618;        // golden ratio (1:1.618) between thumbnail and .post-info (minus internal margin)
-      padding-top: (100% - ($container-margin / ($content-width - 0.105))) / 2.618;  // width and height also share golden ratio relationship
-      margin-right: $standard-margin;
-    }
-  }
-  
-  li:last-child {
-    margin-bottom: 0;
-  }
 }
-
-#archive #searchform { margin-bottom: $standard-margin; }
 
 
 // Archive Page //
 
 #archive-page {
-  #searchform { margin-top: 1.2em; }
+  #searchform { margin: 1.2em 0; }
   ul { margin: 0; padding: 0; }
   ul.topics li, ul.monthly li {
     display: inline;
@@ -744,7 +725,7 @@ nav.post-pagination {
 
 // Post Content (single.php, page.php) //
 
-article {
+article:not(.excerpt) {
   position: relative;
   width: $post-width;
   margin-bottom: $standard-margin;

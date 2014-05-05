@@ -4,125 +4,125 @@
   position: relative;
   display: block;
   width: $post-width;
+}
   
-  h3#comments, h3#reply-title { margin: $standard-margin 0; }
-  .comment-subscription-form { display: none; }
-  .form-allowed-tags { display: none; }
-  .logged-in-as {
-    padding: 0.6em 1.2em;
-    background: rgba(0,0,0,0.04);
+h3#comments, h3#reply-title { margin: $standard-margin 0; }
+.comment-subscription-form { display: none; }
+.form-allowed-tags { display: none; }
+.logged-in-as {
+  padding: 0.6em 1.2em;
+  background: rgba(0,0,0,0.04);
+}
+
+.commentlist {
+  margin: 1.2em 0;
+  font-size: 0.9em;
+  
+  li {
+    padding: 0.8em;
+    overflow: auto;
+    li { margin: 0.8em 0 0 0.8em; }
   }
   
-  .commentlist {
-    margin: 1.2em 0;
-    font-size: 0.9em;
+  li.bypostauthor > div > .vcard .comment-author-info cite:after {
+    content: ' (author)';
+  }
+  
+  .vcard {
+    display: block;
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
     
-    li {
-      padding: 0.8em;
-      overflow: auto;
-      li { margin: 0.8em 0 0 0.8em; }
+    .comment-author-info {
+      float: left;
+      cite { font-weight: bold; }
     }
     
-    li.bypostauthor > div > .vcard .comment-author-info cite:after {
-      content: ' (author)';
-    }
+    time { float: right; }
     
-    .vcard {
-      display: block;
-      width: 100%;
-      height: 32px;
-      line-height: 32px;
-      
-      .comment-author-info {
-        float: left;
-        cite { font-weight: bold; }
-      }
-      
-      time { float: right; }
-      
-      img.avatar {
-        float: left;
-        margin-right: 0.8em;
-        border: 1px solid $line-color;
-      }
+    img.avatar {
+      float: left;
+      margin-right: 0.8em;
+      border: 1px solid $line-color;
     }
-    
-    .odd {
-      background: $highlight;
-      > blockquote { background: $bg-color; }
+  }
+  
+  .odd {
+    background: $highlight;
+    > blockquote { background: $bg-color; }
+  }
+  .even {
+    background: $bg-color;
+    > #respond #commentform { background: $highlight; }
+  }
+  
+  .comment-content { clear: both; }
+}
+
+#respond {
+  p { margin: 0.8em 0; }
+  
+  a[title*='Log out'] { float: right; }
+  #cancel-comment-reply-link {
+    font-size: 0.8em;
+    font-weight: normal;
+    &:before {
+      content: '\20 \00b7 \20';
+      color: $primary-color;
+      &:visited, &:hover { color: $primary-color; }
     }
-    .even {
-      background: $bg-color;
-      > #respond #commentform { background: $highlight; }
-    }
-    
-    .comment-content { clear: both; }
+  }
+  
+  label { // Positioned off screen (for screen readers only)
+    position: absolute;
+    left: -999em;
+    width: 1em;
+    overflow: hidden;
   }
 
+  input[type=text],
+  input[type=email],
+  input[type=url],
+  textarea {
+    @include form-input;
+
+    // form validation //
+    &:invalid {
+      outline: none;
+      border-color: #fbc2c4;
+      background-color: #f6e7eb;
+      @include prefix(box-shadow, none)
+    }
+  }
+
+  input[type=text],
+  input[type=email],
+  input[type=url] {
+    width: 400px;
+    min-width: 250px;
+  }
+  
+  .comment-form-comment { line-height: 0; }
+  textarea {
+    resize: none;
+    width: 100%;
+    height: 15em;
+  }
+}
+
+// Styles For Replies To Comments //
+.commentlist {
+  h3#reply-title {
+    margin: 0.6em 0;
+    border: none;
+    padding: 0;
+  }
+  #commentform p.form-submit { margin-bottom: 0; }
   #respond {
-    p { margin: 0.8em 0; }
-    
-    a[title*='Log out'] { float: right; }
-    #cancel-comment-reply-link {
-      font-size: 0.8em;
-      font-weight: normal;
-      &:before {
-        content: '\20 \00b7 \20';
-        color: $primary-color;
-        &:visited, &:hover { color: $primary-color; }
-      }
-    }
-    
-    label { // Positioned off screen (for screen readers only)
-      position: absolute;
-      left: -999em;
-      width: 1em;
-      overflow: hidden;
-    }
-
-    input[type=text],
-    input[type=email],
-    input[type=url],
-    textarea {
-      @include form-input;
-
-      // form validation //
-      &:invalid {
-        outline: none;
-        border-color: #fbc2c4;
-        background-color: #f6e7eb;
-        @include prefix(box-shadow, none)
-      }
-    }
-
-    input[type=text],
-    input[type=email],
-    input[type=url] {
-      width: 400px;
-      min-width: 250px;
-    }
-    
-    .comment-form-comment { line-height: 0; }
-    textarea {
-      resize: none;
-      width: 100%;
-      height: 15em;
-    }
+    padding: 0.8em;
+    margin: 0.8em 0 0 0.8em;
   }
-  
-  // Styles For Replies To Comments //
-  .commentlist {
-    h3#reply-title {
-      margin: 0.6em 0;
-      border: none;
-      padding: 0;
-    }
-    #commentform p.form-submit { margin-bottom: 0; }
-    #respond {
-      padding: 0.8em;
-      margin: 0.8em 0 0 0.8em;
-    }
-    .odd > #respond { background: $bg-color; }
-    .even > #respond { background: $highlight; }
-  }
+  .odd > #respond { background: $bg-color; }
+  .even > #respond { background: $highlight; }
 }

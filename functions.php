@@ -162,15 +162,15 @@
   add_filter( 'the_title', 'counterpoint_no_title' );
   
   
-  // Return Merriweather Font URL (called via enqueue) //
+  // Return Font URL (called via enqueue) //
   function counterpoint_font_url() {
     $font_url = '';
     /*
      * Translators: If there are characters in your language that are not supported
-     * by Lato, translate this to 'off'. Do not translate into your own language.
+     * by the current font, translate this to 'off'. Do not translate into your own language.
      */
     if ( 'off' !== _x( 'on', 'Merriweather font: on or off', 'counterpoint' ) )
-      $font_url = add_query_arg( 'family', urlencode( 'Merriweather:400,400italic,700' ), '//fonts.googleapis.com/css' );
+      $font_url = add_query_arg( 'family', urlencode( 'Droid Serif:400,700,400italic' ), '//fonts.googleapis.com/css' );
   
     return $font_url;
   }
@@ -446,16 +446,13 @@
       global $post; ?>
       <li <?php post_class(); ?>>
         <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><div class="thumbnail" <?php echo post_thumb_style($post->ID); ?> ></div></a>
-        <h3 class="post-title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-          <?php the_title(); ?>
-        </a></h3>
-        <section class="post-meta">
-          <?php counterpoint_posted_on(); ?>
-        </section>
-        <div class="excerpt cf"><?php echo get_the_excerpt(); ?></div>
-        <hr>
-        <div class="categories"><?php counterpoint_categories(); ?></div>
-        <div class="tags"><?php the_tags(); ?></div>
+        <h2 class="post-title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
+        <section class="post-meta"><?php counterpoint_posted_on(); ?></section>
+        <article class="excerpt cf"><?php echo get_the_excerpt(); ?></article>
+        <footer class="tags">
+          <?php counterpoint_categories(); ?><br>
+          <?php the_tags(); ?>
+        </footer>
       </li>
     <?php
     endwhile; ?>

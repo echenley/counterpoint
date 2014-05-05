@@ -5,21 +5,11 @@
   #header #title { font-size: 1.6em; }
   h2 { font-size: 1.5em; }
   
-  #archive {
-
-    li .thumbnail {
-      float: none;
-      margin-bottom: (5% * (100% / $post-width-640));
-    }
-    
+  #archive { 
     li:nth-child(odd), li:nth-child(even) {
       .thumbnail {
-        width: 100%;
         padding-top: (100% / 1.618);
-        margin-left: 0; margin-right: 0;
       }
     }
-    
-    h3.post-title { clear: both; }
   }
 }
