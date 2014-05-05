@@ -243,13 +243,13 @@
   
   
   // Post Header Function Call //
-  function post_thumb_style($post_id) { // Checks for post thumbnail || if none, gets first image || else, default color //
+  function post_thumb_style($post_id, $img_size = 'full') { // Checks for post thumbnail || if none, gets first image || else, default color //
     if ( has_post_thumbnail($post_id) ) {
       $img_id = get_post_thumbnail_id($post_id);
       $alt_text = get_post_meta($img_id, '_wp_attachment_image_alt', true);
       if ( !$alt_text )
         $alt_text = get_the_title($post_id);
-      return 'style="background: url(' . esc_attr( wp_get_attachment_image_src($img_id, 'full')[0] ) . '); background-position: center; background-size: cover" title="' . esc_attr( $alt_text ) . '"';
+      return 'style="background: url(' . esc_attr( wp_get_attachment_image_src($img_id, $img_size)[0] ) . '); background-position: center; background-size: cover" title="' . esc_attr( $alt_text ) . '"';
     } else {
       $first_img = counterpoint_catch_image($post_id);
       if ( $first_img )
@@ -445,7 +445,7 @@
     while(have_posts()): the_post();
       global $post; ?>
       <li <?php post_class(); ?>>
-        <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><div class="thumbnail" <?php echo post_thumb_style($post->ID); ?> ></div></a>
+        <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><div class="thumbnail" <?php echo post_thumb_style($post->ID, 'large'); ?> ></div></a>
         <h2 class="post-title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
         <section class="post-meta"><?php counterpoint_posted_on(); ?></section>
         <article class="excerpt cf"><?php echo get_the_excerpt(); ?></article>
