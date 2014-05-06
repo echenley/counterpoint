@@ -445,10 +445,10 @@
     while(have_posts()): the_post();
       global $post; ?>
       <li <?php post_class(); ?>>
-        <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><div class="thumbnail" <?php echo post_thumb_style($post->ID, 'large'); ?> ></div></a>
+        <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><div class="thumbnail" <?php echo post_thumb_style($post->ID, array(422,273)); ?> ></div></a>
         <h2 class="post-title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
         <section class="post-meta"><?php counterpoint_posted_on(); ?></section>
-        <article class="excerpt cf"><?php echo get_the_excerpt(); ?></article>
+        <article class="excerpt"><?php echo get_the_excerpt(); ?></article>
         <footer class="tags">
           <?php counterpoint_categories(); ?><br>
           <?php the_tags(); ?>

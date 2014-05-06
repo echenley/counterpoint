@@ -16,7 +16,7 @@
     li {
       margin-bottom: 2 * $standard-margin;
       &:last-child { margin-bottom: $standard-margin; }
-      &:nth-child(odd) { margin-right: 0; }
+      &:nth-child(odd), &:nth-child(even) { float: none; margin-right: 0; }
       .thumbnail { padding-top: (1 / 2.618) * 100%; }
     }
   }

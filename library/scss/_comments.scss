@@ -90,8 +90,7 @@ h3#comments, h3#reply-title { margin: $standard-margin 0; }
     // form validation //
     &:invalid {
       outline: none;
-      border-color: #fbc2c4;
-      background-color: #f6e7eb;
+      border-color: #fb8888;
       @include prefix(box-shadow, none)
     }
   }
