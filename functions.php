@@ -455,7 +455,6 @@
         $even = !$even;
       } 
       
-      
       ?>
       <li <?php post_class($even_or_odd); ?>>
         <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
@@ -468,7 +467,10 @@
         <section class="post-meta"><?php counterpoint_posted_on(); ?></section>
         <article class="excerpt cf">
           <?php
-            echo get_the_excerpt();
+            $ismore = @strpos( $post->post_content, '<!--more-->');
+            if ($ismore) : echo get_the_content('');
+            else : echo get_the_excerpt();
+            endif;
             echo ' &hellip; <a class="more-link" href="' . get_the_permalink() . '" title="' . get_the_title() . '">' . __('Keep reading &rarr;', 'counterpoint') . '</a>';
           ?>
         </article>
