@@ -6,7 +6,7 @@
 
 $primary-color:   #4f4f4f;  // text color
 $bg-color:        #fff;     // background
-$highlight:       #f3f3f3;  // light gray highlight
+$highlight:       #f6f6f6;  // light gray highlight
 $link-color:      #c44;     // linkz
 $link-hover:      darken($link-color, 20%);
 $line-color:      #dedede;  // borders and <hr>
@@ -15,8 +15,8 @@ $container-size:  1280px;   // max container width
 $container-margin: 3.5%;
 $standard-margin:  3.5vw;
 $margin-1280:      44px;
-$nav-width:        .2;
-$content-width:    .73;     // .07 left over for margins
+$nav-width:        .19;
+$content-width:    .74;     // .07 left over for margins
 $post-width:       80.9%;
 $post-width-900:   100% - ($container-margin / $content-width);
 $post-width-640:   90%;
@@ -25,11 +25,11 @@ $post-width-640:   90%;
 // Typefaces (base, <code>) //
 
 /*
- * Font:        Merriweather
- * Author:      Eben Sorkin
- * Author URI:  http://ebensorkin.wordpress.com/
- * License:     SIL Open Font License, 1.1
- * License URI: http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL
+ * Font:        Droid Serif
+ * Author:      Steve Matteson
+ * Author URI:  http://www.droidfonts.com/
+ * License:     Apache License, version 2.0
+ * License URI: http://www.apache.org/licenses/LICENSE-2.0.html
 */
 
 $serif:           'Droid Serif', TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
@@ -147,17 +147,7 @@ img.size-full {
   font-style: italic;
   line-height: 1.4;
   background: $highlight;
-  border-bottom: 1px solid $line-color;
 }
-
-
-
-// Sticky Posts //
-
-.sticky .thumbnail {
-  border-color: #fff3c1 !important;
-}
-
 
 // Miscellaneous Tags //
 
@@ -170,7 +160,7 @@ pre, blockquote {
   clear: both;
   margin: 1.2em 0;
   padding: 1.2em;
-  border-left: 10px solid $line-color;
+  border-left: 6px solid $line-color;
 }
 
 pre, code { font-family: $monospace; }
@@ -184,7 +174,7 @@ pre {
 
 code {
   padding: 0.4em;
-  border-left: 5px solid $line-color;
+  border-left: 4px solid $line-color;
 }
 
 blockquote { 
@@ -358,28 +348,38 @@ input[type=submit], input[type=submit]:visited {
   display: block;
   overflow: hidden;
   background: $highlight;
-  border-bottom: 1px solid $line-color;
   .timestamp, .edit-link {
     float: right;
   }
   .timestamp { font-style: italic; }
 }
 
-article#post .post-meta {
+#post .post-meta {
   margin: 1.2em 0;
   padding: 0.6em 1.2em;
 }
 
 #archive .post-meta {
+  text-align: center;
+  margin: 6px 0 6px 0;
+  padding: 0.2em 0.6em;
+  .timestamp { float: none; }
+}
+
+#attachment .post-meta {
+  padding-right: 0;
   margin-bottom: 1.2em;
-  padding: 0.3em 0.6em;
+  background: none;
 }
 
 
 // Headings //
 
 article {
-  h2,h3,h4,h5,h6 { margin: 1.2em 0; }
+  h2,h3,h4,h5,h6 {
+    margin: 1.2em 0;
+    font-weight: normal;
+  }
 }
 
 h1,h2,h3 {
@@ -388,8 +388,8 @@ h1,h2,h3 {
   font-variant: small-caps;
 }
 
+h2, h3 { padding-bottom: 0.6em; }
 h2 {
-  padding-bottom: 0.6em;
   font-size: 1.8em;
 }
 
@@ -402,27 +402,31 @@ h2 {
   max-height: 360px;
   border: 6px solid $line-color;
   border-right: 0;
-  .post-title {
-    position: absolute;
-    display: block;
-    bottom: 0;
-    width: 100%;
-    background: rgba(34,34,34,0.6);
-    color: $bg-color;
-    h2 {  // Post Titles Only (archive-post.php, page.php, single.php) //
-      width: $post-width;
-      padding: 0.5em 0 0.5em 0.5em;
-      border: none;
-      font-size: 1.8em;
-      font-weight: normal;
-      background: none;
-    }
+}
+
+.post-title {
+  position: absolute;
+  display: block;
+  bottom: 0;
+  width: 100%;
+  background: rgba(#000,0.45);
+  color: $bg-color;
+  h2,h3 {  // Post Titles Only (archive-post.php, page.php, single.php) //
+    padding: 0.5em;
+    border: none;
+    font-weight: normal;
+    background: none;
+  }
+  h2 {
+    width: $post-width;
+    padding-right: 0;
   }
 }
 
+.thumbnail h3 { font-size: 1.5em; }
+
 h3 {
-  padding-bottom: 0.8em;
-  font-size: 1.3em;
+  font-size: 1.5em;
   font-weight: bold;
 }
 
@@ -632,7 +636,6 @@ nav#post-nav {
   position: relative;
   clear: both;
   background: $highlight;
-  border-bottom: 1px solid $line-color;
   text-align: center;
   padding: 0.6em 0;
   > * {
@@ -671,6 +674,7 @@ nav.post-pagination {
   margin-right: $standard-margin;
   
   .tags {
+    clear: both;
     margin-top: 1.2em;
     font-size: 0.8em;
     line-height: 1.8;
@@ -680,32 +684,34 @@ nav.post-pagination {
     width: (100% - ($container-margin / ($content-width - 0.07))) / 2;
     margin-bottom: $standard-margin;
     
-    &:nth-child(odd) { 
+    &.odd-post { 
       float: left;
       clear: both;
     }
-    &:nth-child(even) {
+    &.even-post {
       float: right;
     }
     
-    .post-title {
-      padding: 0.4em 0;
-      border: none;
-      a {
-        display: block;
-        color: inherit;
-        &:hover { color: $link-hover; }
-      }
-    }
-    
     .thumbnail {
+      position: relative;
       width: 100%;
       padding-top: (1 / 1.618) * 100%;
       border: 6px solid $line-color;
     }
     
-    .read-more {
+    .more-link {
       float: right;
+    }
+  }
+  
+  // Sticky Posts //
+  
+  .sticky {
+    float: none;
+    width: 100%;
+    .thumbnail {
+      border-color: #fff3c1;
+      padding-top: (1 / 2.618) * 100%;
     }
   }
 }
@@ -752,11 +758,6 @@ article:not(.excerpt) {
 #attachment {
   width: 100%;
   padding-right: $standard-margin;
-  .post-meta {
-    padding-right: 0;
-    margin: 0 0 1.2em 0;
-    background: none;
-  }
   img { display: block; margin: 0 auto; }
 }
 

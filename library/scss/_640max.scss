@@ -4,7 +4,6 @@
     text-align: left;
     #title { 
       font-size: 2em;
-      font-weight: bold;
       a { padding: 0 5%; }
     }
     .menu-link {
@@ -94,7 +93,7 @@
   .post-header,
   .archive-header, .attachment-header,
   article:not(.excerpt), #attachment,
-  #comments-section,
+  #comments-section, #archive,
   ul.page-numbers, {
     width: $post-width-640;
   }
@@ -118,13 +117,12 @@
   }
 
   #archive {
-    width: $post-width-640;
     margin: 0 auto;
-    li {
+    li, .sticky {
       width: 100%;
       margin-bottom: 10% * (100% / $post-width-640);
       &:last-child { margin-bottom: 5% * (100% / $post-width-640); }
-      &:nth-child(even), &:nth-child(odd) { padding: 0; }
+      &.odd-post, &.even-post { padding: 0; }
     }
   }
 }

@@ -123,13 +123,13 @@
   }
   
   
-  /*
+  /**********************
    * Small Customizations
-  */
+   **********************/
   
   // Custom Excerpt More. Replaces [...] with 'Keep Reading' link //
   function counterpoint_excerpt_more( $more ) {
-    return ' &hellip; <a class="read-more" href="' . esc_attr(get_the_permalink()) . '" title="' . esc_attr( get_the_title() ) . '">' . __( 'Keep reading &rarr;', 'counterpoint') . '</a>';
+    return ' &hellip; <a class="more-link" href="' . esc_attr(get_the_permalink()) . '" title="' . esc_attr( get_the_title() ) . '">' . __( 'Keep reading &rarr;', 'counterpoint') . '</a>';
   }
   add_filter( 'excerpt_more', 'counterpoint_excerpt_more' );
   
@@ -442,13 +442,32 @@
   function counterpoint_archive_loop() { ?>
     <ul id="archive">
     <?php
+    $even_or_odd = '';
+    $even = false;
     while(have_posts()): the_post();
-      global $post; ?>
-      <li <?php post_class(); ?>>
-        <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><div class="thumbnail" <?php echo post_thumb_style($post->ID, array(422,273)); ?> ></div></a>
-        <h2 class="post-title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
+      global $post;
+      if (!is_sticky($post->ID)) {
+        $even_or_odd = $even ? 'even-post' : 'odd-post';
+        $even = !$even;
+      }
+      ?>
+      <li <?php post_class($even_or_odd); ?>>
+        <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+          <div class="thumbnail" <?php echo post_thumb_style($post->ID, array(422,273) /* image size */ ); ?> >
+            <div class="post-title"><h3>
+              <?php the_title(); ?>
+            </h3></div>
+          </div>
+        </a>
         <section class="post-meta"><?php counterpoint_posted_on(); ?></section>
-        <article class="excerpt"><?php echo get_the_excerpt(); ?></article>
+        <article class="excerpt">
+        <?php
+          $ismore = @strpos( $post->post_content, '<!--more-->');
+          if ($ismore) : the_content(__('Keep reading &rarr;', 'counterpoint'));
+          else : the_excerpt();
+          endif;
+        ?>
+        </article>
         <footer class="tags">
           <?php counterpoint_categories(); ?><br>
           <?php the_tags(); ?>

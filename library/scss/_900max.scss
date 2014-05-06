@@ -1,12 +1,10 @@
 @media screen and (max-width: 900px) {
   
-  body { font-size: 90%; }
-  
   #site-nav > ul { font-size: 1em; }
   
   .post-header .post-title h2,
   article:not(.excerpt), #archive li,
-  #comments-section,
+  #comments-section, #archive .sticky,
   ul.page-numbers  {
     width: $post-width-900;
   }
@@ -16,7 +14,7 @@
     li {
       margin-bottom: 2 * $standard-margin;
       &:last-child { margin-bottom: $standard-margin; }
-      &:nth-child(odd), &:nth-child(even) { float: none; margin-right: 0; }
+      &.odd-post, &.even-post { float: none; margin-right: 0; }
       .thumbnail { padding-top: (1 / 2.618) * 100%; }
     }
   }
