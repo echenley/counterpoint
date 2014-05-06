@@ -22,7 +22,7 @@
     margin: 1em $margin-1280 0 0;
   }
   
-  #header-widget { padding-right: $margin-1280; }
+  #header-widget { margin-right: $margin-1280; }
   
   #sidebar {
     width: $nav-width * $container-size;
