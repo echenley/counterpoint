@@ -12,8 +12,3 @@ Author:      RWJHughes
 Image URI:   http://en.wikipedia.org/wiki/File:Tacet_Sheetmusic.png
 License:     Licensed under the Creative Commons Attribution-Share Alike 3.0 Unported license.
 License URI: http://creativecommons.org/licenses/by-sa/3.0/deed.en
-
-favicon.ico / favicon-admin.ico
-===============================
-Artist: Elias Gottlob Haussmann (1695–1774)
-Work in Public Domain

@@ -12,8 +12,8 @@
     <div id="container" class="cf">
       <header id="header">
         <h1 id="title">
-          <a class="title-link" href="<?php echo home_url('/'); ?>"><?php bloginfo('name'); ?></a>
+          <a class="title-link" href="<?php echo esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
         </h1>
-        <span id="header-widget"><?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('header-right')) : ?><?php endif; ?></span>
+        <span id="header-widget"><?php dynamic_sidebar('header-right'); ?></span>
         <a href="#" class="menu-link">&#9776;</a>
       </header>

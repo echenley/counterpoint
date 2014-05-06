@@ -21,7 +21,7 @@
       the_content();
       wp_link_pages();
     endwhile; ?>
-    <div id="article-bottom"><?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('article-bottom')) : ?><?php endif; ?></div>
+    <div id="article-bottom"><?php dynamic_sidebar('article-bottom'); ?></div>
     <?php counterpoint_adjacent_posts(); ?>
   </article>
   

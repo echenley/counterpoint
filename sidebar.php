@@ -3,6 +3,6 @@
     <?php wp_nav_menu( array('theme_location' => 'sidebar', 'container' => false) ); ?>
   </nav>
   <div id="sidebar-widget">
-    <?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('sidebar-bottom')) : ?><?php endif; ?>
+    <?php dynamic_sidebar('sidebar-bottom'); ?>
   </div>
 </div>
