@@ -6,7 +6,7 @@
   h2 { font-size: 1.5em; }
   
   #archive { 
-    li.odd-post, li.even-post {
+    .sticky, li.odd-post, li.even-post {
       .thumbnail {
         padding-top: (100% / 1.618);
       }
