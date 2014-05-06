@@ -448,10 +448,13 @@
       global $post;
       
       // skips sticky posts when assigning even/odd //
-      if (!is_sticky($post->ID)) {
+      if (is_home() && is_sticky($post->ID)) {
+        $even_or_odd = '';
+      } else {
         $even_or_odd = $even ? 'even-post' : 'odd-post';
         $even = !$even;
-      }
+      } 
+      
       
       ?>
       <li <?php post_class($even_or_odd); ?>>
