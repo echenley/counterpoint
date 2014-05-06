@@ -6,8 +6,7 @@
     $('.comment img[data-gravatar]').each(function(){
       $(this).attr('src',$(this).attr('data-gravatar'));
     });
-  }
-  else {
+  } else {
     $('.comment img[data-gravatar]').hide();
   }
   
@@ -33,8 +32,12 @@
   
   // Sidebar Behavior //
   $(window).scroll(function() {
+    
+    // No sidebar, no problem //
     if($(window).width() > 640) {
       var admin_bar = 0;
+      
+      // .admin-bar related hacks //
       if ( $('body').hasClass('admin-bar') ) {
         admin_bar += $(window).width() > 782 ? 32 : 46;
       }
