@@ -129,7 +129,7 @@
   
   // Custom Excerpt More. Replaces [...] with 'Keep Reading' link //
   function counterpoint_excerpt_more( $more ) {
-    return ' &hellip; <a class="more-link" href="' . esc_attr(get_the_permalink()) . '" title="' . esc_attr( get_the_title() ) . '">' . __( 'Keep reading &rarr;', 'counterpoint') . '</a>';
+    return '';
   }
   add_filter( 'excerpt_more', 'counterpoint_excerpt_more' );
   
@@ -446,10 +446,13 @@
     $even = false;
     while(have_posts()): the_post();
       global $post;
+      
+      // skips sticky posts when assigning even/odd //
       if (!is_sticky($post->ID)) {
         $even_or_odd = $even ? 'even-post' : 'odd-post';
         $even = !$even;
       }
+      
       ?>
       <li <?php post_class($even_or_odd); ?>>
         <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
@@ -461,12 +464,10 @@
         </a>
         <section class="post-meta"><?php counterpoint_posted_on(); ?></section>
         <article class="excerpt">
-        <?php
-          $ismore = @strpos( $post->post_content, '<!--more-->');
-          if ($ismore) : the_content(__('Keep reading &rarr;', 'counterpoint'));
-          else : the_excerpt();
-          endif;
-        ?>
+          <?php
+            echo get_the_excerpt();
+            echo ' &hellip; <a class="more-link" href="' . get_the_permalink() . '" title="' . get_the_title() . '">' . __('Keep reading &rarr;', 'counterpoint') . '</a>';
+          ?>
         </article>
         <footer class="tags">
           <?php counterpoint_categories(); ?><br>
