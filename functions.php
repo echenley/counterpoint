@@ -176,7 +176,7 @@
   }
 
   
-  // Enqueue Scripts and Styles. jQuery Insert From Google //
+  // Enqueue Scripts, Fonts, and Styles. //
   add_action("wp_enqueue_scripts", "counterpoint_scripts", 11);
   function counterpoint_scripts() {
   

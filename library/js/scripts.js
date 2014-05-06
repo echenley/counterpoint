@@ -33,7 +33,7 @@
   // Sidebar Behavior //
   $(window).scroll(function() {
     
-    // No sidebar, no problem //
+    // No sidebar, skip it //
     if($(window).width() > 640) {
       var admin_bar = 0;
       
