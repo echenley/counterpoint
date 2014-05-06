@@ -466,7 +466,7 @@
           </div>
         </a>
         <section class="post-meta"><?php counterpoint_posted_on(); ?></section>
-        <article class="excerpt">
+        <article class="excerpt cf">
           <?php
             echo get_the_excerpt();
             echo ' &hellip; <a class="more-link" href="' . get_the_permalink() . '" title="' . get_the_title() . '">' . __('Keep reading &rarr;', 'counterpoint') . '</a>';
