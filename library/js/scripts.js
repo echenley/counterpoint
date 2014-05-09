@@ -30,35 +30,52 @@
     
   }).resize();
   
-  // Sidebar Behavior //
-  $(window).scroll(function() {
+
+  var get_header_heights = function() {
+    var header_height   = $('#header').outerHeight(),
+        admin_bar       = $('#wpadminbar').outerHeight() || 0,
+        combined_height = header_height + admin_bar;
+    return [header_height, admin_bar, combined_height];
+  };
+  
+  
+  // Need $(document).ready() in order to interact with admin bar //
+  $(document).ready(function() {
     
-    // No sidebar, skip it //
-    if($(window).width() > 640) {
-      var admin_bar = 0;
+    $('#sidebar').css({ top: get_header_heights()[2] });
+
+    // Sidebar Behavior //
+    $(window).scroll(function() {
+    
+      // No sidebar, skip it //
+      if( $(window).width() > 900 ) {
       
-      // .admin-bar related hacks //
-      if ( $('body').hasClass('admin-bar') ) {
-        admin_bar += $(window).width() > 782 ? 32 : 46;
+        var scroll = $(window).scrollTop(),
+            target = $('#sidebar'),
+            all_header_heights = get_header_heights(),
+            header_height = all_header_heights[0],
+            admin_bar = all_header_heights[1],
+            combined_height = all_header_heights[2];
+            
+        if ( scroll >= 0 && scroll < header_height ) {
+          var top = combined_height - scroll;
+          target.css({ top: top });
+        } else if ( scroll >= header_height ) {
+          target.css({ top: admin_bar });
+        } else {
+          target.css({ top: combined_height });
+        }
       }
-      var header_height = $('#header').height(),
-          combined_height = header_height + admin_bar,
-          scroll        = $(window).scrollTop(),
-          target        = $('#sidebar');
-      if ( scroll >= 0 && scroll < header_height ) {
-        var top = combined_height - scroll;
-        target.css({ top: top });
-      } else if ( scroll >= header_height ) {
-        target.css({ top: admin_bar });
-      } else {
-        target.css({ top: combined_height });
-      }
-    }
-  }).scroll();
+    }).scroll();
+  
+  });
   
   // Mobile Menu Control //
   $('a.menu-link').click(function() {
+    
+    $('#sidebar').css({ top: get_header_heights()[2] });
     $('nav#site-nav > ul').toggleClass('active');
+    
   });
   
   // Desktop Menu Control //

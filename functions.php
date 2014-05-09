@@ -8,7 +8,6 @@
   ----------------------
   *  Theme Support
   *  Translation-Ready Function
-  *  Clean Up wp_head (and associated functions)
   *  Small Customizations
   *  Custom Favicon For Admin
   *  Font URL Function (called from enqueue)
@@ -19,7 +18,6 @@
   *  Catch That Image
   *  Post-Header Function Call
   *  Comment Layout
-  *  Password Protected Form
   *  Numeric Page Navigation
   *  Next and Previous Post Navigation
   *  Display Categories
@@ -28,9 +26,6 @@
   *  Index/Archive Loop Function
 
  */
- 
-  // Content Width Setup //
-  if ( ! isset( $content_width ) ) $content_width = 1080;
 
 
   /*
@@ -41,7 +36,7 @@
   function counterpoint_setup() {
   
     /*
-     * Translation-Ready Function - via Sté Kerwer
+     * Localization Function - via Sté Kerwer
      * http://dukeo.com/how-to-make-your-wordpress-theme-translation-ready/
     */
     load_theme_textdomain( 'counterpoint', get_template_directory_uri() . '/languages' );
@@ -59,34 +54,18 @@
     
     // Sidebar Menu //
     register_nav_menu('sidebar',__( 'Sidebar', 'counterpoint' ));
+    
+    
+    global $content_width;
+    // Content Width Setup //
+    if ( ! isset( $content_width ) ) $content_width = 1080;
   
   }
   endif; // End Counterpoint Setup //
   add_action( 'after_setup_theme', 'counterpoint_setup' );
 
-
-  /* 
-   * Code to clean up wp_head
-   *
-   * Courtesy of Bones Theme ( http://themble.com/bones )
-   * Eddie Machado
-   * License: WTFPL
-   * License URI: http://sam.zoy.org/wtfpl/
-  */
-
-  remove_action( 'wp_head', 'rsd_link' );                                // EditURI link
-  remove_action( 'wp_head', 'wlwmanifest_link' );                        // windows live writer
-  remove_action( 'wp_head', 'index_rel_link' );                          // index link
-  remove_action( 'wp_head', 'parent_post_rel_link', 10, 0 );             // previous link
-  remove_action( 'wp_head', 'start_post_rel_link', 10, 0 );              // start link
-  remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );  // links for adjacent posts
-  remove_action( 'wp_head', 'wp_generator' );                            // WP version
-  add_filter( 'style_loader_src', 'counterpoint_remove_wp_ver_css_js', 9999 );  // remove WP version from css
-  add_filter( 'script_loader_src', 'counterpoint_remove_wp_ver_css_js', 9999 ); // remove Wp version from scripts
-  add_filter( 'wp_title', 'counterpoint_title', 10, 3 );                 // Better Title
-  add_filter( 'the_generator', 'counterpoint_rss_version' );             // remove WP version from RSS
-  
   // Better Title. ( http://www.deluxeblogtips.com/2012/03/better-title-meta-tag.html ) //
+  add_filter( 'wp_title', 'counterpoint_title', 10, 3 ); 
   function counterpoint_title( $title, $sep, $seplocation ) {
     global $page, $paged;
   
@@ -107,7 +86,7 @@
   
     // Add a page number if necessary:
     if ( $paged >= 2 || $page >= 2 )
-      $title .= " {$sep} " . sprintf( __( 'Page %s', 'dbt' ), max( $paged, $page ) );
+      $title .= " {$sep} " . sprintf( __( 'Page %s', 'counterpoint' ), max( $paged, $page ) );
   
     return $title;
   }
@@ -177,7 +156,7 @@
 
   
   // Enqueue Scripts, Fonts, and Styles. //
-  add_action("wp_enqueue_scripts", "counterpoint_scripts", 11);
+  add_action('wp_enqueue_scripts', 'counterpoint_scripts', 11);
   function counterpoint_scripts() {
   
     // CSS //
@@ -194,37 +173,35 @@
   
   
   // Register Widget Space //
-  if (function_exists('register_sidebar')) {
-    register_sidebar(array(
-      'name' => __('Sidebar Bottom', 'counterpoint'),
-      'id'   => 'sidebar-bottom',
-      'description'   => __('Area at the bottom of the sidebar.', 'counterpoint'),
-      'before_widget' => '<div id="%1$s" class="widget %2$s">',
-      'after_widget'  => '</div>',
-      'before_title'  => '<h4>',
-      'after_title'   => '</h4>'
-    ));
-    
-    register_sidebar(array(
-      'name' => __('Article Bottom', 'counterpoint'),
-      'id'   => 'article-bottom',
-      'description'   => __('Area at the bottom of each post, before the comments.', 'counterpoint'),
-      'before_widget' => '<div id="%1$s" class="widget %2$s">',
-      'after_widget'  => '</div>',
-      'before_title'  => '<h4>',
-      'after_title'   => '</h4>'
-    ));
-    
-    register_sidebar(array(
-      'name' => __('Header Right', 'counterpoint'),
-      'id'   => 'header-right',
-      'description'   => __('Area at the right side of the header.', 'counterpoint'),
-      'before_widget' => '<div id="%1$s" class="widget %2$s">',
-      'after_widget'  => '</div>',
-      'before_title'  => '<h4>',
-      'after_title'   => '</h4>'
-    ));
-  }
+  register_sidebar(array(
+    'name' => __('Sidebar Bottom', 'counterpoint'),
+    'id'   => 'sidebar-bottom',
+    'description'   => __('Area at the bottom of the sidebar.', 'counterpoint'),
+    'before_widget' => '<div id="%1$s" class="widget %2$s">',
+    'after_widget'  => '</div>',
+    'before_title'  => '<h4>',
+    'after_title'   => '</h4>'
+  ));
+  
+  register_sidebar(array(
+    'name' => __('Article Bottom', 'counterpoint'),
+    'id'   => 'article-bottom',
+    'description'   => __('Area at the bottom of each post, before the comments.', 'counterpoint'),
+    'before_widget' => '<div id="%1$s" class="widget %2$s">',
+    'after_widget'  => '</div>',
+    'before_title'  => '<h4>',
+    'after_title'   => '</h4>'
+  ));
+  
+  register_sidebar(array(
+    'name' => __('Header Right', 'counterpoint'),
+    'id'   => 'header-right',
+    'description'   => __('Area at the right side of the header.', 'counterpoint'),
+    'before_widget' => '<div id="%1$s" class="widget %2$s">',
+    'after_widget'  => '</div>',
+    'before_title'  => '<h4>',
+    'after_title'   => '</h4>'
+  ));
 
 
   /*
@@ -243,7 +220,7 @@
   
   
   // Post Header Function Call //
-  function post_thumb_style($post_id, $img_size = 'full') { // Checks for post thumbnail || if none, gets first image || else, default color //
+  function counterpoint_thumbnail_style($post_id, $img_size = 'full') { // Checks for post thumbnail || if none, gets first image || else, default color //
     if ( has_post_thumbnail($post_id) ) {
       $img_id = get_post_thumbnail_id($post_id);
       $alt_text = get_post_meta($img_id, '_wp_attachment_image_alt', true);
@@ -284,19 +261,6 @@
       </div>
     <?php // </li> is added by WordPress automatically
   } // don't remove this bracket!
-  
-  
-  // Password Protected Form //
-  add_filter( 'the_password_form', 'counterpoint_password_form' );
-  function counterpoint_password_form() {
-    global $post;
-    $label = 'pwbox-' . ( empty( $post->ID ) ? rand() : $post->ID );
-    $o = '<p class="no-dropcap">' . __( 'This post is password protected. Enter the password to view it.', 'counterpoint' ) . '</p>
-      <form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" method="post" class="post-password-form">
-        <label for="' . $label . '">' . __( 'Password:', 'counterpoint' ) . ' </label><input name="post_password" id="' . $label . '" type="password" maxlength="20" placeholder="Enter Password*" /><input type="submit" name="Submit" value="' . esc_attr__( 'Submit', 'counterpoint' ) . '" />
-      </form>';
-    return $o;
-  }
   
   
   // Numeric Page Navigation //
@@ -341,10 +305,10 @@
         $purl = get_permalink($prev_post->ID);
         $ptitle = get_the_title($prev_post->ID); ?>
         
-        <div class="next-post half-width" <?php echo post_thumb_style($next_post->ID); ?>>
+        <div class="next-post half-width" <?php echo counterpoint_thumbnail_style($next_post->ID); ?>>
           <a href="<?php echo esc_url($nurl); ?>" title="<?php echo esc_attr($ntitle); ?>">&larr; <?php _e('Next', 'counterpoint'); ?></a>
         </div>
-        <div class="prev-post half-width" <?php echo post_thumb_style($prev_post->ID); ?>>
+        <div class="prev-post half-width" <?php echo counterpoint_thumbnail_style($prev_post->ID); ?>>
           <a href="<?php echo esc_url($purl); ?>" title="<?php echo esc_attr($ptitle); ?>"><?php _e('Previous', 'counterpoint'); ?> &rarr;</a>
         </div>
         
@@ -353,7 +317,7 @@
         $nurl = get_permalink($next_post->ID);
         $ntitle = get_the_title($next_post->ID); ?>
         
-        <div class="next-post full-width" <?php echo post_thumb_style($next_post->ID); ?>>
+        <div class="next-post full-width" <?php echo counterpoint_thumbnail_style($next_post->ID); ?>>
           <a href="<?php echo esc_url($nurl); ?>" title="<?php echo esc_attr($ntitle); ?>">&larr; <?php _e('Next', 'counterpoint'); ?></a>
         </div>
         
@@ -362,7 +326,7 @@
         $purl = get_permalink($prev_post->ID);
         $ptitle = get_the_title($prev_post->ID); ?>
         
-        <div class="prev-post full-width" <?php echo post_thumb_style($prev_post->ID); ?>>
+        <div class="prev-post full-width" <?php echo counterpoint_thumbnail_style($prev_post->ID); ?>>
           <a href="<?php echo esc_url($purl); ?>" title="<?php echo esc_attr($ptitle); ?>"><?php _e('Previous', 'counterpoint'); ?> &rarr;</a>
         </div>
         
@@ -448,7 +412,7 @@
       global $post;
       
       // skips sticky posts when assigning even/odd //
-      if (is_home() && is_sticky($post->ID)) {
+      if (!is_paged() && is_sticky($post->ID)) {
         $even_or_odd = '';
       } else {
         $even_or_odd = $even ? 'even-post' : 'odd-post';
@@ -458,7 +422,7 @@
       ?>
       <li <?php post_class($even_or_odd); ?>>
         <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-          <div class="thumbnail" <?php echo post_thumb_style($post->ID, array(422,273) /* image size */ ); ?> >
+          <div class="thumbnail" <?php echo counterpoint_thumbnail_style($post->ID, array(422,273) /* image size */ ); ?> >
             <div class="post-title"><h3>
               <?php the_title(); ?>
             </h3></div>

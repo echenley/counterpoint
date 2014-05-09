@@ -2,13 +2,14 @@
 <?php get_sidebar(); ?>
   
 <section id="content">
-  <header class="post-header" <?php echo post_thumb_style($post->ID); ?> >
-    <div class="post-title"><h2>
-      <?php the_title(); ?>
-    </h2></div>
-  </header>
-    
-  <article id="page" <?php post_class(); ?>>
+
+  <article id="post" <?php post_class(); ?>>
+  
+    <header class="post-header" <?php echo counterpoint_thumbnail_style($post->ID); ?> >
+      <div class="post-title"><h2>
+        <?php the_title(); ?>
+      </h2></div>
+    </header>
   <?php
     while(have_posts()): the_post();
       wp_link_pages();

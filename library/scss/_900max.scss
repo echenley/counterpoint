@@ -1,21 +1,105 @@
 @media screen and (max-width: 900px) {
   
-  #site-nav > ul { font-size: 1em; }
+  #title a { padding: 0 5%; }
+  .menu-link {
+    position: absolute;
+    top: 0; right: 0;
+    display: block;
+    padding: 0 5%;
+    font-size: 2em;
+    color: $primary-color;
+    text-align: center;
+    @include prefix(transition, all 0.2s);
+    &:hover { color: $link-hover; }
+  }
   
-  .post-header .post-title h2,
-  article:not(.excerpt), #archive li,
-  #comments-section, #archive .sticky,
-  ul.page-numbers  {
-    width: $post-width-900;
+  h3#comments, h3#reply-title { margin: 5% 0; }
+  
+  #header-widget { display: none; }
+  
+  #sidebar {
+    position: absolute;
+    bottom: auto;
+    margin: 0;
+    padding: 0;
+    height: auto;
+    width: 100%;
+    max-width: 100%;
+    z-index: 1000;
+    #sidebar-widget { display: none; }
+  }
+
+  .menu {
+    display: none;
+    width: 100%;
+    background: rgba($highlight,0.95);
+    border-bottom: 1px solid $line-color;
+    padding: 5%;
+    font-size: 1em;
+    
+    &.active { display: block; }
+    
+    li {
+      clear: both;
+      width: 100%;
+      text-align: right;
+      
+      &.active {
+        > a {
+          padding: 1em;
+        }
+        > ul.sub-menu {
+          display: block;
+        }
+      }
+      
+      a {
+        padding: 1em;
+        &:hover {
+          background-color: transparent;
+          padding: 1em;
+        }
+      }
+      
+      ul.sub-menu {
+        background-color: transparent;
+      }
+    }
+  }
+  
+  nav.pagination {
+    margin: 5% 0 0 0;
+  }
+  
+  #content {
+    width: 100%;
+    padding: 5%;
+    float: none;
+  }
+  
+  .post-header {
+    margin: 0 auto;
+    padding-left: 0;
+    border: 6px solid $line-color;
+  }
+  
+  .archive-header, .attachment-header {
+    margin: 5% auto;
+    padding: 1.2em;
+  }
+  
+  article:not(.excerpt), #attachment,
+  #comments-section,
+  ul.page-numbers {
+    margin: 0 auto 5%;
+    padding: 0;
   }
   
   #archive {
-    margin: 0;
+    margin: 0 auto;
     li {
-      margin-bottom: 2 * $standard-margin;
-      &:last-child { margin-bottom: $standard-margin; }
-      &.odd-post, &.even-post { float: none; margin-right: 0; }
-      .thumbnail { padding-top: (1 / 2.618) * 100%; }
+      margin-bottom: 5%;
+      &:last-child { margin-bottom: 0; }
     }
     .sticky h3 { font-size: 1.5em; }
   }

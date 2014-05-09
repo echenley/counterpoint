@@ -18,23 +18,32 @@ h3#comments, h3#reply-title { margin: $standard-margin 0; }
   margin: 1.2em 0;
   font-size: 0.9em;
   
-  li {
+  .comment, .pingback {
     padding: 0.8em;
     overflow: auto;
-    li { margin: 0.8em 0 0 0.8em; }
+    .comment { margin: 0.8em 0 0 0.8em; }
   }
   
-  li.bypostauthor > div > .vcard .comment-author-info cite:after {
+  .pingback .avatar { display: none; }
+  
+  .odd {
+    background: $highlight;
+    > blockquote { background: $bg-color; }
+  }
+  .even {
+    background: $bg-color;
+    > #respond #commentform { background: $highlight; }
+  }
+  
+  .bypostauthor > div > .vcard .comment-author-info cite:after {
     content: ' (author)';
   }
   
   .vcard {
     display: block;
-    width: 100%;
-    height: 32px;
-    line-height: 32px;
     
     .comment-author-info {
+      padding-top: 3px;
       float: left;
       cite { font-weight: bold; }
     }
@@ -48,15 +57,6 @@ h3#comments, h3#reply-title { margin: $standard-margin 0; }
     }
   }
   
-  .odd {
-    background: $highlight;
-    > blockquote { background: $bg-color; }
-  }
-  .even {
-    background: $bg-color;
-    > #respond #commentform { background: $highlight; }
-  }
-  
   .comment-content { clear: both; }
 }
 
@@ -65,8 +65,9 @@ h3#comments, h3#reply-title { margin: $standard-margin 0; }
   
   a[title*='Log out'] { float: right; }
   #cancel-comment-reply-link {
-    font-size: 0.8em;
+    font-size: 0.7em;
     font-weight: normal;
+    font-variant: normal;
     &:before {
       content: '\20 \00b7 \20';
       color: $primary-color;
@@ -113,7 +114,8 @@ h3#comments, h3#reply-title { margin: $standard-margin 0; }
 // Styles For Replies To Comments //
 .commentlist {
   h3#reply-title {
-    margin: 0.6em 0;
+    margin: 0;
+    margin-bottom: 0.6em;
     border: none;
     padding: 0;
   }

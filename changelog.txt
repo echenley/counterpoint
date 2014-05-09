@@ -1,27 +1,52 @@
 Changelog
 =========
 
+-----------
+May 8, 2014
+-----------
+* Removed favicon and header.php call
+* Removed backup jquery in javascript folder
+
+readme.txt
+----------
+  * Combined readme-images.txt into readme.txt
+  * Copied all inline code credit
+
+functions.php
+-------------
+  * Moved content_width declaration to counterpoint_setup()
+  * Renamed post_thumb_style() to counterpoint_thumbnail_style()
+  * Fixed missed textdomain in counterpoint_title()
+  
+style.scss (and _ prefixed styles)
+----------
+  * container_width reduced from 1280 to 1080
+
+
+-----------
 May 6, 2014
- 
+-----------
 * Fixed the issue with the size of the blog title by moving it from the sidebar to a glorious new header. This gives the theme much more breathing room.
-
 * Redesigned menu and front-page
-
 * Licensing: Added proper licensing information for all the intellectual property I used while making Counterpoint. Script licensing can be found in line. Image licensing is in the readme-images.txt file in /counterpoint/images.
-
 * Removed favicons
 
-* functions.php:
+functions.php
+-------------
   * Removed favicon function
   * Added proper counterpoint_setup() function
   * Prefixed all relevant functions with "counterpoint_"
   * Added translation-ready function
-    (http://dukeo.com/how-to-make-your-wordpress-theme-translation-ready/)
+    - http://dukeo.com/how-to-make-your-wordpress-theme-translation-ready/
   * Replaced google jQuery with native WP version
+  * Removed excessive wp_head changes
+  * Removed add_filter( 'the_password_form', 'my_password_form' ); and associated function
 
-* header.php:
+header.php
+----------
   * Removed extra wp_enqueue_script('comment-reply')
   * Added new widget space at Header-Right
 
-* scripts.js
+scripts.js
+-----------
   * Sidebar now plays nicely with WP Admin Bar

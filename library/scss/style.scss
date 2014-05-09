@@ -11,15 +11,13 @@ $link-color:      #c44;     // linkz
 $link-hover:      darken($link-color, 20%);
 $line-color:      #dedede;  // borders and <hr>
 
-$container-size:  1280px;   // max container width
+$container-size:  1080px;   // max container width
 $container-margin: 3.5%;
 $standard-margin:  3.5vw;
-$margin-1280:      44px;
+$margin-1080:      39px;
 $nav-width:        .19;
 $content-width:    .74;     // .07 left over for margins
-$post-width:       80.9%;
-$post-width-900:   100% - ($container-margin / $content-width);
-$post-width-640:   90%;
+$post-width:       100%;
 
 
 // Typefaces (base, <code>) //
@@ -234,7 +232,7 @@ table {
 
 // Lists //
 
-article {
+article, .comment-content {
   ul {
     list-style: disc inside;
     ul,ol { margin-left: 2em; }
@@ -286,7 +284,6 @@ textarea {
 form.post-password-form {
   clear: both;
   text-align: center;
-  label { display: none; }
   input[type=password] {
     width: 200px;
     max-width: 100%;
@@ -398,11 +395,8 @@ h2 {
   position: relative;
   display: block;
   width: 100%;
-  height: 28vw;
-  min-height: 260px;
-  max-height: 360px;
+  height: 300px;
   border: 6px solid $line-color;
-  border-right: 0;
 }
 
 .post-title {
@@ -413,14 +407,12 @@ h2 {
   background: rgba(#000,0.45);
   color: $bg-color;
   h2,h3 {  // Post Titles Only (archive-post.php, page.php, single.php) //
+    margin: 0;
     padding: 0.5em;
     border: none;
     background: none;
   }
-  h2 {
-    width: $post-width;
-    padding-right: 0;
-  }
+  h2 { padding-right: 0; }
 }
 
 .thumbnail h3 { font-size: 1.5em; }
@@ -442,7 +434,7 @@ h6 { font-style: italic; }
 
 .archive-header, .attachment-header {
   width: 100%;
-  padding: 1.2em $standard-margin 1.2em 1.2em;
+  padding: 1.2em;
   background: $highlight;
   h3 {
     font-size: 1.5em;
@@ -483,21 +475,22 @@ body {
   background: $highlight;
   border-bottom: 1px solid $line-color;
   overflow: hidden;
-  
-  #title {
-    display: inline;
-    font-size: 2.4em;
-    border: none;
-    max-width: 100%;
-    a {
-      display: inline-block;
-      line-height: 74px;
-      padding: 0 $standard-margin;
-      color: $primary-color;
-    }
-  }
-  .menu-link { display: none; }
 }
+
+#title {
+  display: inline;
+  font-size: 2.4em;
+  border: none;
+  max-width: 100%;
+  a {
+    display: inline-block;
+    line-height: 74px;
+    padding: 0 $standard-margin;
+    color: $primary-color;
+  }
+}
+
+.menu-link { display: none; }
 
 
 // Main Content Styles //
@@ -507,7 +500,7 @@ body {
   float: right;
   width: $content-width * 100%;
   line-height: 1.8;
-  padding: $standard-margin 0;
+  padding: $standard-margin $standard-margin $standard-margin 0;
   
   a {
     color: $link-color;
@@ -530,12 +523,6 @@ article { text-align: justify; }
   padding: $standard-margin 0;
 }
 
-// Wordpress Admin Bar Fix //
-.admin-bar #sidebar { top: 102px; }
-@media screen and (max-width: 782px) {
-  .admin-bar #sidebar { top: 120px; }
-}
-  
 #site-nav {
   
   > ul {
@@ -645,7 +632,7 @@ nav#post-nav {
 
 nav.pagination {
   @include pagination;
-  margin: $standard-margin $standard-margin 0 0;
+  margin-top: $standard-margin;
   > * {
     &.prev { position: absolute; left: 0; }
     &.next { position: absolute; right: 0; }
@@ -670,7 +657,6 @@ nav.post-pagination {
 // Front-Page, Archives, Attachment (index.php, archive.php, attachment.php) //
 
 #archive {
-  margin-right: $standard-margin;
   
   .tags {
     margin-top: 1.2em;
@@ -757,12 +743,11 @@ article:not(.excerpt) {
 
 #attachment {
   width: 100%;
-  padding-right: $standard-margin;
   img { display: block; margin: 0 auto; }
 }
 
 @import '_comments';
-@import '_1280min';
+@import '_1080min';
 @import '_900max';
 @import '_640max';
 @import '_480max';
