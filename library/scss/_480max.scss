@@ -2,14 +2,20 @@
 
   html { -webkit-text-size-adjust: none; }
   body { font-size: 95%; }
-  #header #title { font-size: 1.8em; }
+  #title { font-size: 1.8em; }
   h2 { font-size: 1.5em; }
   
-  #archive { 
-    .sticky, li.odd-post, li.even-post {
-      .thumbnail {
-        padding-top: (100% / 1.618);
-      }
+  #archive li .thumbnail {
+    padding-top: (50% / 1.618) !important;
+    padding-bottom: (50% / 1.618) !important;
+  }
+  
+  nav.pagination {
+    padding: 0.6em;
+    .next { position: relative; top: 0; float: right; }
+    .prev { position: relative; top: 0; float: left; }
+    > *:not(.next):not(.prev) {
+      display: none;
     }
   }
 }

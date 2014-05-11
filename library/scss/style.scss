@@ -17,7 +17,6 @@ $standard-margin:  3.5vw;
 $margin-1080:      39px;
 $nav-width:        .19;
 $content-width:    .74;     // .07 left over for margins
-$post-width:       100%;
 
 
 // Typefaces (base, <code>) //
@@ -397,6 +396,8 @@ h2 {
   width: 100%;
   height: 300px;
   border: 6px solid $line-color;
+  padding-top: 150px;
+  padding-bottom: 150px;
 }
 
 .post-title {
@@ -406,6 +407,7 @@ h2 {
   width: 100%;
   background: rgba(#000,0.45);
   color: $bg-color;
+  text-align: left;
   h2,h3 {  // Post Titles Only (archive-post.php, page.php, single.php) //
     margin: 0;
     padding: 0.5em;
@@ -453,7 +455,7 @@ html { height: 100%; }
 body {
   font-family: $serif;
   font-size: 95%;
-  background: $primary-color;
+  background: $bg-color;
   height: 100%;
 }
 
@@ -472,8 +474,8 @@ body {
   line-height: 74px;
   width: 100%;
   max-width: 100%;
-  background: $highlight;
-  border-bottom: 1px solid $line-color;
+  background: $bg-color;
+  border-bottom: 2px solid $primary-color;
   overflow: hidden;
 }
 
@@ -501,16 +503,27 @@ body {
   width: $content-width * 100%;
   line-height: 1.8;
   padding: $standard-margin $standard-margin $standard-margin 0;
-  
   a {
     color: $link-color;
     &:hover { color: $link-hover; }
   }
-  
   p { margin: 1.2em 0; }
 }
 
 article { text-align: justify; }
+
+.no-featured-image {
+  background: #000;
+  &::before {
+    content: 'No Featured Image';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    line-height: 1;
+    color: #666;
+    font-style: italic;
+  }
+}
 
 
 // Top-Level Navigation (sidebar.php) //
@@ -538,7 +551,7 @@ article { text-align: justify; }
       
       a {
         display: block;
-        padding: 0.8em 0 0.8em 6px;
+        padding: 0.8em 1px 0.8em 6px;
         color: $primary-color;
         border-color: $line-color;
         line-height: 1.4;
@@ -547,7 +560,7 @@ article { text-align: justify; }
       }
       
       a:hover {
-        padding-right: 6px;
+        padding-right: 7px;
         border-right: 6px solid $link-hover !important;
         color: $link-hover;
       }
@@ -557,13 +570,13 @@ article { text-align: justify; }
       &.active {
         > a {
           color: $link-hover;
-          padding-right: 6px;
+          padding-right: 7px;
           border-right: 6px solid $link-hover !important;
         }
         > ul.sub-menu {
           height: auto;
           > li > a {
-            padding-right: 6px;
+            padding-right: 7px;
             border-right: 6px solid rgba(#000,0.12);
           }
         }
@@ -633,9 +646,11 @@ nav#post-nav {
 nav.pagination {
   @include pagination;
   margin-top: $standard-margin;
+  padding-left: 70px;
+  padding-right: 70px;
   > * {
-    &.prev { position: absolute; left: 0; }
-    &.next { position: absolute; right: 0; }
+    &.prev { position: absolute; top: 0.6em; left: 0; }
+    &.next { position: absolute; top: 0.6em; right: 0; }
   }
 }
 
@@ -679,7 +694,8 @@ nav.post-pagination {
     .thumbnail {
       position: relative;
       width: 100%;
-      padding-top: (1 / 1.618) * 100%;
+      padding-top: (50% / 1.618);
+      padding-bottom: (50% / 1.618);
       border: 6px solid $line-color;
     }
     
@@ -696,7 +712,8 @@ nav.post-pagination {
     width: 100%;
     .thumbnail {
       border-color: #fff3c1;
-      padding-top: (1 / 2.618) * 100%;
+      padding-top: (50% / 2.618);
+      padding-bottom: (50% / 2.618);
     }
     h3 { font-size: 2em; }
   }
@@ -719,7 +736,7 @@ nav.post-pagination {
 
 article:not(.excerpt) {
   position: relative;
-  width: $post-width;
+  width: 100%;
   margin-bottom: $standard-margin;
   img { max-width: 100%; }
   iframe {

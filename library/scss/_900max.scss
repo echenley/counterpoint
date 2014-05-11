@@ -32,9 +32,9 @@
   .menu {
     display: none;
     width: 100%;
-    background: rgba($highlight,0.94);
-    border-bottom: 1px solid $line-color;
-    padding: 5%;
+    background: rgba($bg-color,0.94);
+    border-bottom: 2px solid $primary-color;
+    padding: 2em 4em;
     font-size: 1em;
     
     &.active { display: block; }
@@ -97,10 +97,7 @@
   
   #archive {
     margin: 0 auto;
-    li {
-      margin-bottom: 5%;
-      &:last-child { margin-bottom: 0; }
-    }
+    li { margin-bottom: 5%; }
     .sticky h3 { font-size: 1.5em; }
   }
 }

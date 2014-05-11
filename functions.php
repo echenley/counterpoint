@@ -226,12 +226,12 @@
       $alt_text = get_post_meta($img_id, '_wp_attachment_image_alt', true);
       if ( !$alt_text )
         $alt_text = get_the_title($post_id);
-      return 'style="background: url(' . esc_attr( wp_get_attachment_image_src($img_id, $img_size)[0] ) . '); background-position: center; background-size: cover" title="' . esc_attr( $alt_text ) . '"';
+      return '\" style="background: url(' . esc_attr( wp_get_attachment_image_src($img_id, $img_size)[0] ) . '); background-position: center; background-size: cover" title="' . esc_attr( $alt_text ); // last quote already added, don't add it here
     } else {
       $first_img = counterpoint_catch_image($post_id);
       if ( $first_img )
-        return 'style="background: url(' . esc_attr( $first_img ) . '); background-position: center; background-size: cover" title="' . esc_attr( get_the_title() ) .'"';
-      return 'style="background: url(' . get_template_directory_uri() . '/library/images/no-featured-image.jpg' . '); background-position: center; background-size: cover" title="' . esc_attr( get_the_title() ) .'"';
+        return '\" style="background: url(' . esc_attr( $first_img ) . '); background-position: center; background-size: cover" title="' . esc_attr( get_the_title() );
+      return 'no-featured-image" title="' . esc_attr( get_the_title() );
     };
   };
 
@@ -263,34 +263,6 @@
   } // don't remove this bracket!
   
   
-  // Numeric Page Navigation //
-  function counterpoint_page_nav() {
-    global $wp_query;
-    $bignum = 999999999;
-    if ( $wp_query->max_num_pages <= 1 )
-      return;
-    $paginate_links = paginate_links( array(
-      'base'      => str_replace( $bignum, '%#%', esc_url( get_pagenum_link($bignum) ) ),
-      'format'    => '',
-      'current'   => max( 1, get_query_var('paged') ),
-      'total'     => $wp_query->max_num_pages,
-      'prev_text' => __('&larr; Newer', 'counterpoint'),
-      'next_text' => __('Older &rarr;', 'counterpoint'),
-      'type'      => 'array',
-      'end_size'  => 3,
-      'mid_size'  => 3
-    ) );
-    
-    if ( $paginate_links ) {
-      echo '<nav class="pagination">';
-      foreach($paginate_links as $key=>$value) {
-        echo $value;
-      };
-      echo '</nav>';
-    }
-  }
-  
-  
   // Next and Previous Post Navigation //
   function counterpoint_adjacent_posts() {
     $next_post = get_next_post();
@@ -305,10 +277,10 @@
         $purl = get_permalink($prev_post->ID);
         $ptitle = get_the_title($prev_post->ID); ?>
         
-        <div class="next-post half-width" <?php echo counterpoint_thumbnail_style($next_post->ID); ?>>
+        <div class="next-post half-width <?php echo counterpoint_thumbnail_style($next_post->ID); ?>">
           <a href="<?php echo esc_url($nurl); ?>" title="<?php echo esc_attr($ntitle); ?>">&larr; <?php _e('Next', 'counterpoint'); ?></a>
         </div>
-        <div class="prev-post half-width" <?php echo counterpoint_thumbnail_style($prev_post->ID); ?>>
+        <div class="prev-post half-width <?php echo counterpoint_thumbnail_style($prev_post->ID); ?>">
           <a href="<?php echo esc_url($purl); ?>" title="<?php echo esc_attr($ptitle); ?>"><?php _e('Previous', 'counterpoint'); ?> &rarr;</a>
         </div>
         
@@ -317,7 +289,7 @@
         $nurl = get_permalink($next_post->ID);
         $ntitle = get_the_title($next_post->ID); ?>
         
-        <div class="next-post full-width" <?php echo counterpoint_thumbnail_style($next_post->ID); ?>>
+        <div class="next-post full-width <?php echo counterpoint_thumbnail_style($next_post->ID); ?>">
           <a href="<?php echo esc_url($nurl); ?>" title="<?php echo esc_attr($ntitle); ?>">&larr; <?php _e('Next', 'counterpoint'); ?></a>
         </div>
         
@@ -326,7 +298,7 @@
         $purl = get_permalink($prev_post->ID);
         $ptitle = get_the_title($prev_post->ID); ?>
         
-        <div class="prev-post full-width" <?php echo counterpoint_thumbnail_style($prev_post->ID); ?>>
+        <div class="prev-post full-width <?php echo counterpoint_thumbnail_style($prev_post->ID); ?>">
           <a href="<?php echo esc_url($purl); ?>" title="<?php echo esc_attr($ptitle); ?>"><?php _e('Previous', 'counterpoint'); ?> &rarr;</a>
         </div>
         
@@ -402,6 +374,34 @@
   }
   
   
+  // Numeric Page Navigation //
+  function counterpoint_page_nav() {
+    global $wp_query;
+    $bignum = 999999999;
+    if ( $wp_query->max_num_pages <= 1 )
+      return;
+    $paginate_links = paginate_links( array(
+      'base'      => str_replace( $bignum, '%#%', esc_url( get_pagenum_link($bignum) ) ),
+      'format'    => '',
+      'current'   => max( 1, get_query_var('paged') ),
+      'total'     => $wp_query->max_num_pages,
+      'prev_text' => __('&larr; Newer', 'counterpoint'),
+      'next_text' => __('Older &rarr;', 'counterpoint'),
+      'type'      => 'array',
+      'end_size'  => 3,
+      'mid_size'  => 3
+    ) );
+    
+    if ( $paginate_links ) {
+      echo '<nav class="pagination cf">';
+      foreach($paginate_links as $key=>$value) {
+        echo $value;
+      };
+      echo '</nav>';
+    }
+  }
+  
+  
   // Main Index/Archive Loop Function (index.php, archive.php, search.php, tag.php, category.php) //
   function counterpoint_archive_loop() { ?>
     <ul id="archive">
@@ -422,7 +422,7 @@
       ?>
       <li <?php post_class($even_or_odd); ?>>
         <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-          <div class="thumbnail" <?php echo counterpoint_thumbnail_style($post->ID, array(422,273) /* image size */ ); ?> >
+          <div class="thumbnail <?php echo counterpoint_thumbnail_style($post->ID); ?>" >
             <div class="post-title"><h3>
               <?php the_title(); ?>
             </h3></div>

@@ -1,17 +1,16 @@
 @media screen and (max-width: 640px) {
 
   #title { font-size: 2em; }
-  h2 { padding-left: 0; }
-  h3#comments, h3#reply-title { margin: 5% 0; }
 
   #archive {
     margin: 0 auto;
-    li, .sticky {
+    li {
       width: 100%;
       margin-bottom: 5%;
-      &:last-child { margin-bottom: 5%; }
-      &.odd-post, &.even-post { padding: 0; }
-      .thumbnail { padding-top: (1 / 2.618) * 100%; }
+      .thumbnail {
+        padding-top: (50% / 2.618);
+        padding-bottom: (50% / 2.618);
+      }
     }
   }
   
