@@ -406,23 +406,24 @@
   function counterpoint_archive_loop() { ?>
     <ul id="archive">
     <?php
-    $even_or_odd = '';
     $even = false;
     while(have_posts()): the_post();
       global $post;
       
       // skips sticky posts when assigning even/odd //
-      if (!is_paged() && is_sticky($post->ID)) {
+      if (is_home() && !is_paged() && is_sticky($post->ID)) {
         $even_or_odd = '';
+        $max_image_size = array(800,320);
       } else {
         $even_or_odd = $even ? 'even-post' : 'odd-post';
+        $max_image_size = array(570,230);
         $even = !$even;
-      } 
+      }
       
       ?>
       <li <?php post_class($even_or_odd); ?>>
         <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-          <div class="thumbnail <?php echo counterpoint_thumbnail_style($post->ID); ?>" >
+          <div class="thumbnail <?php echo counterpoint_thumbnail_style($post->ID, $max_image_size); ?>" >
             <div class="post-title"><h3>
               <?php the_title(); ?>
             </h3></div>

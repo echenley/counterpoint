@@ -42,6 +42,13 @@ Images
     License:   Public Domain
     Notes:     From "Messiah," Cello Manuscript, n.d. (ca. 1770)
     
+  Lamp and Cherries.jpg (image in screenshot)
+  ---------------------
+    Author:      Pablo Picasso
+    Image URI:   http://commons.wikimedia.org/wiki/File%3APablo_Picasso%2C_La_lampe_et_les_cerises_(1945).jpg
+    License:     Creative Commons CC0 1.0 Universal Public Domain Dedication
+    License URI: http://creativecommons.org/publicdomain/zero/1.0/deed.en
+    
 
 Code Credit
 ===========

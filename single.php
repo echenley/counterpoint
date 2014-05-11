@@ -5,7 +5,7 @@
   
   <article id="post" <?php post_class(); ?>>
   
-    <header class="post-header <?php echo counterpoint_thumbnail_style($post->ID); ?>" >
+    <header class="post-header <?php echo counterpoint_thumbnail_style($post->ID, array(800,312)); ?>">
       <div class="post-title"><h2>
         <?php the_title(); ?>
       </h2></div>

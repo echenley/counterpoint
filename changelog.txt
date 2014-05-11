@@ -8,6 +8,7 @@ May 10, 2014
   * Removed favicon and header.php call
   * Removed backup jquery in javascript folder
   * Removed no-featured-image.jpg in favor of css solution
+  * Image in screenshot replaced with public domain photo
   
   readme.txt
   ----------
