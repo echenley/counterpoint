@@ -41,6 +41,10 @@ $monospace:       'Courier New', Courier, monospace;
   }
 }
 
+@mixin transparent_border {
+  border: 6px solid rgba($line-color, 0.9);
+}
+
 
 // Reset/Normalize Code //
 @import '_reset'; 
@@ -395,9 +399,9 @@ h2 {
   display: block;
   width: 100%;
   height: 300px;
-  border: 6px solid $line-color;
   padding-top: 150px;
   padding-bottom: 150px;
+  @include transparent_border;
 }
 
 .post-title {
@@ -597,7 +601,7 @@ article { text-align: justify; }
 nav#post-nav {
   margin-top: $standard-margin;
   clear: both;
-  border: 6px solid $line-color;
+  @include transparent_border;
   div {
     display: block;
     overflow: hidden;
@@ -696,7 +700,7 @@ nav.post-pagination {
       width: 100%;
       padding-top: (50% / 1.618);
       padding-bottom: (50% / 1.618);
-      border: 6px solid $line-color;
+      @include transparent_border;
     }
     
     .more-link {

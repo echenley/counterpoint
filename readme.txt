@@ -1,4 +1,3 @@
-============================
 Counterpoint Wordpress Theme
 ============================
 
@@ -15,7 +14,6 @@ Check out http://henleyedition.com for a live demo!
 - Ev
 
 
-==========
 Typography
 ==========
 
@@ -28,7 +26,6 @@ Typography
     License URI: http://www.apache.org/licenses/LICENSE-2.0.html
 
 
-===============
 Image Copyright
 ===============
 
@@ -40,13 +37,12 @@ Image Copyright
     
   404.jpg
   -------
-    Author:    RWJHughes
-    Image URI: http://en.wikipedia.org/wiki/File:Tacet_Sheetmusic.png
-    License:   GNU Free Documentation License
-    
+    Author:    Johann Sebastian Bach
+    Image URI: http://imslp.org/wiki/Special:ReverseLookup/273823
+    License:   Public Domain
+    Notes:     From "Messiah," Cello Manuscript, n.d. (ca. 1770)
     
 
-===========
 Code Credit
 ===========
 
