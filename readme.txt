@@ -26,8 +26,8 @@ Typography
     License URI: http://www.apache.org/licenses/LICENSE-2.0.html
 
 
-Image Copyright
-===============
+Images
+======
 
   archive.jpg
   -----------
@@ -74,6 +74,11 @@ Code Credit
     Author:     Bones Theme
     Author URI: http://themble.com/bones
     
+    Function:   Fluid-Width Video
+    Author:     Chris Coyier, Mathias Bynens
+    Author URI: http://css-tricks.com/
+    Code URI:   http://css-tricks.com/fluid-width-youtube-videos/
+    
   comments.php
   ------------
     Note:        Comment layout inspired by Bones Theme
@@ -86,4 +91,4 @@ Code Credit
   -----------
     Author URI: http://meyerweb.com/eric/tools/css/reset/ 
     Version:    v2.0 | 20110126
-    License:    none (public domain)
+    License:    Public Domain

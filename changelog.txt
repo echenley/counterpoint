@@ -2,8 +2,9 @@ Counterpoint Changelog
 ======================
 
 May 10, 2014
------------
+============
 
+  * More comprehensive readme.txt
   * Removed favicon and header.php call
   * Removed backup jquery in javascript folder
   * Removed no-featured-image.jpg in favor of css solution
@@ -11,7 +12,7 @@ May 10, 2014
   readme.txt
   ----------
     * Combined readme-images.txt into readme.txt
-    * Copied all inline code credit
+    * Copied all inline code and image credits
   
   functions.php
   -------------
@@ -33,11 +34,11 @@ May 10, 2014
       
   404.jpg
   -------
-    * changed to public domain work
+    * replaced with public domain material
 
 
 May 6, 2014
------------
+===========
 
   * Fixed the issue with the size of the blog title by moving it from the sidebar to a glorious new header. This gives the theme much more breathing room.
   * Redesigned menu and front-page

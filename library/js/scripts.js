@@ -11,9 +11,12 @@
   }
   
   // stores video aspect ratios for fluid resize //
+  // http://css-tricks.com/fluid-width-youtube-videos/ //
   var all_videos = $('iframe[src*="//www.youtube.com"], iframe[src*="//player.vimeo.com"]');
   all_videos.each(function() {
-    $(this).data('aspect_ratio', this.height / this.width).removeAttr('height').removeAttr('width');
+    $(this).data('aspect_ratio', this.height / this.width)
+      .removeAttr('height')
+      .removeAttr('width');
   });
   
   $(window).resize(function() {
