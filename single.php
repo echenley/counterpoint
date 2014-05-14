@@ -22,7 +22,7 @@
       the_content();
       wp_link_pages();
     endwhile; ?>
-    <div id="article-bottom"><?php dynamic_sidebar('article-bottom'); ?></div>
+    <?php dynamic_sidebar('article-widget'); ?>
     <?php counterpoint_adjacent_posts(); ?>
   </article>
   

@@ -12,7 +12,8 @@
 	    Positioning
 	****************************************/
 	
-	%sidebar {
+	%sidebar-3 {
+		@extend %display-block-3;
 		position: fixed;
 		bottom: 0;
 		width: $nav-width;
@@ -28,7 +29,7 @@
 	    Margin/Padding Resets
 	****************************************/
 	
-	#header {
+	#header, #footer {
 		margin: 0 $desktop-vw;
 	}
 	
@@ -38,7 +39,7 @@
 	}
 	
 	#sidebar {
-		@extend %sidebar;
+		@extend %sidebar-3;
 		padding: $desktop-vw;
 	}
 	
@@ -77,10 +78,13 @@
 	    Sidebar, Main Navigation
 	****************************************/	
 	
+	#sidebar {
+		border: none;
+	}
+	
 	.menu {
 		@extend %display-block-3;
 		padding: 0;
-		border: none;
 		font-size: 1.1em;
 	}
 	
@@ -93,13 +97,8 @@
 	    Other
 	****************************************/	
 	
-	#header-widget,
-	#sidebar-widget,
-	#article-bottom {
-		@extend %display-block-3;
-	}
-	
 	#header-widget {
+		@extend %display-block-3;
 		float: right;
 		height: 74px;
 		line-height: 74px;
@@ -107,19 +106,16 @@
 	}
 	
 	#sidebar-widget {
-		width: 100%;
 		position: absolute;
 		bottom: $desktop-vw;
 		left: 0;
 		right: 0;
-	    * {
-	    	@extend %text-align-center-3;
-			color: $line-color;
-			font-size: 0.9em;
-	    }
+		color: $line-color;
+		text-align: center;
 	}
 	
-	#article-bottom {
+	#article-widget {
+		@extend %display-block-3;
 		margin-top: 1.2em;
 		padding: 1em 0;
 		color: #666;

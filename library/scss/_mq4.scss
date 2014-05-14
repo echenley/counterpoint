@@ -18,7 +18,7 @@
 	    Margin/Padding Resets
 	****************************************/
 	
-	#header {
+	#header, #footer {
 		margin: 0 $max-margin;
 	}
 	
@@ -28,6 +28,10 @@
 	
 	#sidebar {
 		padding: $max-margin;
+	}
+	
+	#sidebar-widget {
+		bottom: $max-margin;
 	}
 	
 	.archive-header {

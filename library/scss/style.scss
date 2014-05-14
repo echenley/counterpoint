@@ -166,7 +166,7 @@ body {
 	height: 80px;
 }
 
-#sidebar {
+%sidebar {
 	position: absolute;
 	width: 100%;
 	z-index: 100;
@@ -176,6 +176,10 @@ body {
 	width: 100%;
 	padding: $mobile-margin;
 	line-height: 1.8;
+}
+
+%footer {
+	clear: both;
 }
 
 
@@ -291,7 +295,7 @@ h6 {
 
 
 /****************************************
-    Header Style
+    Header/Footer Styles
 ****************************************/
 
 #header {
@@ -326,6 +330,12 @@ h6 {
 	@extend %transition-200ms;
 }
 
+#footer {
+	@extend %footer;
+	border-top: 2px solid $primary-color;
+	padding: 1.2em $mobile-margin;
+}
+
 
 /****************************************
     Sidebar, Main Navigation
@@ -337,15 +347,19 @@ h6 {
 	color: $link-hover;
 }
 
-.menu {
+#sidebar {
+	@extend %sidebar;
 	@extend %hidden;
-    width: 100%;
+    padding: 2em 4em;
     background: rgba($bg-color,0.94);
     @extend %standard-bottom-border;
-    padding: 2em 4em;
     &.active {
     	@extend %display-block;
     }
+}
+
+.menu {
+    width: 100%;
 	a {
 		@extend %display-block;
 		padding: 0.8em 1px 0.8em 6px;
@@ -1109,9 +1123,22 @@ input[type=submit], input[type=submit]:visited {
 ****************************************/
 
 #header-widget,
-#sidebar-widget,
-#article-bottom {
+#article-widget {
 	@extend %hidden;
+}
+
+#sidebar-widget {
+	width: 100%;
+	position: relative;
+	margin-top: 1.2em;
+	color: darken($line-color, 30%);
+    * {
+		font-size: 0.9em;
+    }
+}
+
+#footer-widget {
+	float: right;
 }
 
 

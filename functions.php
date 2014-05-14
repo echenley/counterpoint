@@ -55,10 +55,9 @@
     if ( ! isset( $content_width ) ) $content_width = 1080;
   
   }
-  endif; // End Counterpoint Setup //
+  endif; // End Counterpoint Setup
   add_action( 'after_setup_theme', 'counterpoint_setup' );
 
-  // Better Title. ( http://www.deluxeblogtips.com/2012/03/better-title-meta-tag.html ) //
   add_filter( 'wp_title', 'counterpoint_title', 10, 3 ); 
   function counterpoint_title( $title, $sep, $seplocation ) {
     global $page, $paged;
@@ -85,10 +84,10 @@
     return $title;
   }
   
-  // remove WP version from RSS //
+  // remove WP version from RSS
   function counterpoint_rss_version() { return ''; }
   
-  // remove WP version from scripts //
+  // remove WP version from scripts
   function counterpoint_remove_wp_ver_css_js( $src ) {
     if ( strpos( $src, 'ver=' ) )
       $src = remove_query_arg( 'ver', $src );
@@ -100,34 +99,34 @@
    * Small Customizations
    **********************/
   
-  // Custom Excerpt More. Replaces [...] with 'Keep Reading' link //
+  // Custom Excerpt More. Replaces [...] with 'Keep Reading' link
   function counterpoint_excerpt_more( $more ) {
     return '';
   }
   add_filter( 'excerpt_more', 'counterpoint_excerpt_more' );
   
-  // Removes junk from around images //
+  // Removes junk from around images
   function counterpoint_filter_ptags_on_images($content){
     return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
   }
   add_filter( 'the_content', 'counterpoint_filter_ptags_on_images' );
 
-  // Excerpt Length //
+  // Excerpt Length
   function counterpoint_excerpt_length($length) { return 70; }
   add_filter('excerpt_length', 'counterpoint_excerpt_length');
   
-  // Remove Caption Padding //
+  // Remove Caption Padding
   function counterpoint_caption_padding($width) { return $width - 10; }
   add_filter( 'img_caption_shortcode_width', 'counterpoint_caption_padding' );
   
-  // Default Title //
+  // Default Title
   function counterpoint_default_title($title) {
     $title = __('Untitled', 'counterpoint');
     return $title;
   }
   add_filter( 'default_title', 'counterpoint_default_title' );
   
-  // If title field is left blank //
+  // If title field is left blank
   function counterpoint_no_title($title) {
     if ( $title == '' ) $title = __('Untitled', 'counterpoint');
     return $title;
@@ -135,7 +134,8 @@
   add_filter( 'the_title', 'counterpoint_no_title' );
   
   
-  // Return Font URL (called via enqueue) //
+  // Return Font URL (called via enqueue)
+  
   function counterpoint_font_url() {
     $font_url = '';
     /*
@@ -168,10 +168,20 @@
   
   // Register Widget Space //
   register_sidebar(array(
-    'name' => __('Sidebar Bottom', 'counterpoint'),
-    'id'   => 'sidebar-bottom',
+    'name' => __('Sidebar widget', 'counterpoint'),
+    'id'   => 'sidebar-widget',
     'description'   => __('Area at the bottom of the sidebar.', 'counterpoint'),
-    'before_widget' => '<div id="%1$s" class="widget %2$s">',
+    'before_widget' => '<div id="sidebar-widget" class="widget %2$s">',
+    'after_widget'  => '</div>',
+    'before_title'  => '<h4>',
+    'after_title'   => '</h4>'
+  ));
+  
+  register_sidebar(array(
+    'name' => __('Footer Widget', 'counterpoint'),
+    'id'   => 'footer-widget',
+    'description'   => __('Area in the footer.', 'counterpoint'),
+    'before_widget' => '<div id="footer-widget" class="widget %2$s">',
     'after_widget'  => '</div>',
     'before_title'  => '<h4>',
     'after_title'   => '</h4>'
@@ -179,9 +189,9 @@
   
   register_sidebar(array(
     'name' => __('Article Bottom', 'counterpoint'),
-    'id'   => 'article-bottom',
+    'id'   => 'article-widget',
     'description'   => __('Area at the bottom of each post, before the comments.', 'counterpoint'),
-    'before_widget' => '<div id="%1$s" class="widget %2$s">',
+    'before_widget' => '<div id="article-widget" class="widget %2$s">',
     'after_widget'  => '</div>',
     'before_title'  => '<h4>',
     'after_title'   => '</h4>'
@@ -189,9 +199,9 @@
   
   register_sidebar(array(
     'name' => __('Header Right', 'counterpoint'),
-    'id'   => 'header-right',
+    'id'   => 'header-widget',
     'description'   => __('Area at the right side of the header.', 'counterpoint'),
-    'before_widget' => '<div id="%1$s" class="widget %2$s">',
+    'before_widget' => '<div id="header-widget" class="widget %2$s">',
     'after_widget'  => '</div>',
     'before_title'  => '<h4>',
     'after_title'   => '</h4>'
@@ -243,7 +253,7 @@
   };
 
 
-  // Comment Layout //
+  // Comment Layout
   
   function counterpoint_comments( $comment, $args, $depth ) {
    $GLOBALS['comment'] = $comment; ?>
@@ -270,7 +280,7 @@
   } // don't remove this bracket!
   
   
-  // Next and Previous Post Navigation //
+  // Next and Previous Post Navigation
   
   function counterpoint_adjacent_posts() {
     $next_post = get_next_post();
@@ -317,7 +327,8 @@
   }
   
   
-  // Display Categories //
+  // Display Categories
+  
   function counterpoint_categories() {
     $categories = get_the_category();
     $separator = ', ';
@@ -332,7 +343,7 @@
   }
   
   
-  // Display Timestamp //
+  // Display Timestamp
   
   function counterpoint_posted_on() {
     printf('<time datetime="%1$s" class="timestamp">%2$s</time>',
@@ -341,12 +352,7 @@
     );
   }
   
-  
-  /*
-   * Custom Link Pages. Adds 'next_and_number' option for wp_link_pages() arg 'next_or_number'
-   * Adapted from:
-   * http://www.velvetblues.com/web-development-blog/wordpress-number-next-previous-links-wp_link_pages/
-  */
+  // Improved version of wp_link_pages_args
   
   add_filter('wp_link_pages_args','counterpoint_link_pages_args');
   function counterpoint_link_pages_args($args){

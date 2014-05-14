@@ -13,6 +13,6 @@
         <h1 id="title">
           <a class="title-link" href="<?php echo esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
         </h1>
-        <span id="header-widget"><?php dynamic_sidebar('header-right'); ?></span>
+        <?php dynamic_sidebar('header-right'); ?>
         <a href="#" class="menu-toggle">&#9776;</a>
       </header>

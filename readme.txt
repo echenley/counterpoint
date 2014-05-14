@@ -4,10 +4,9 @@ Counterpoint Wordpress Theme
 Author:     Evan Henley
 Author URI: http://henleyedition.com
 
-Elegant, understated, and fully responsive theme with fixed sidebar and
-minimalist aesthetics. Featured images are the main visual element and
+Elegant, understated, and fully responsive theme with fixed sidebar. Featured images are the main visual element and
 are used for both post headers and front page thumbnails, and are thus
-encouraged. Looks great on all devices.
+encouraged. Perfect for single-user, personal blogs. Looks great on all devices.
 
 Check out http://henleyedition.com for a live demo!
 
@@ -56,24 +55,12 @@ Code Credit
 
   functions.php
   -------------
-    Function:    counterpoint_title
-    Author:      Tran Ngoc Tuan Anh (aka Rilwis)
-    Author URI:  http://www.deluxeblogtips.com/
-    Code URI:    http://www.deluxeblogtips.com/2012/03/better-title-meta-tag.html
-    Notes:       Licensing information unavailable
-    
     Function:    counterpoint_catch_image
     Author:      Chris Coyier
     Author URI:  http://css-tricks.com/
     Code URI:    http://css-tricks.com/snippets/wordpress/get-the-first-image-from-a-post/
     License:     The CSS-Tricks License
     License URI: http://css-tricks.com/license/
-    
-    Function:    counterpoint_link_pages_args
-    Author:      Velvet Blues
-    Author URI:  http://www.velvetblues.com/
-    Code URI:    http://www.velvetblues.com/web-development-blog/wordpress-number-next-previous-links-wp_link_pages/
-    Notes:       Licensing information unavailable
     
   scripts.js
   ----------

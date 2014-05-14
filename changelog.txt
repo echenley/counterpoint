@@ -4,8 +4,13 @@ Counterpoint Changelog
 May 13, 2014
 ============
 
-  * Refactored stylesheets
+  * Completely refactored stylesheets
+  * Slightly improved readme.txt
   
+  functions.php
+  -------------
+    * Customized loop to show only most recent sticky post
+    * Abstracted loop layout from loop itself
 
 
 May 10, 2014
