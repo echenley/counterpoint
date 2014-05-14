@@ -232,9 +232,11 @@
       return '" style="background: url(' . esc_attr( $img_src[0] ) . '); background-position: center; background-size: cover" title="' . esc_attr( $alt_text ); // last quote already added, don't add it here
       
     else :
-    
+      
+      // grab the first image from the post
       $first_img = counterpoint_catch_image($post_id);
       $alt_text = get_the_title($post_id);
+      
       if ( $first_img ) {
         return '" style="background: url(' . esc_attr( $first_img ) . '); background-position: center; background-size: cover" title="' . esc_attr( $alt_text );
       }
@@ -472,7 +474,6 @@
             'posts_per_page' => 1
         ));
         if ( $sticky && !is_paged() ) {
-          $displayed_sticky = true;
           while ($most_recent_sticky_post->have_posts()) : $most_recent_sticky_post->the_post();
             counterpoint_archive_layout($post->ID, '', array(800,320));
           endwhile;
