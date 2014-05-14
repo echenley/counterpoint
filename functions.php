@@ -471,10 +471,12 @@
             // Get only the most recent
             'posts_per_page' => 1
         ));
-        if ( !is_paged() ) {
+        if ( $sticky && !is_paged() ) {
+          $displayed_sticky = true;
           while ($most_recent_sticky_post->have_posts()) : $most_recent_sticky_post->the_post();
             counterpoint_archive_layout($post->ID, '', array(800,320));
-          endwhile; wp_reset_query();
+          endwhile;
+          wp_reset_query();
         }
       }
       
@@ -491,7 +493,7 @@
         $all_other_posts = array(
             // Not most recent sticky post
             'post__not_in' => array( end($sticky) ),
-            // Don't return sticky posts before others
+            // Ignore sticky behavior for additional stickies
             'ignore_sticky_posts' => 1
         );
         $cp_query_args = array_merge($wp_query->query, $all_other_posts);
