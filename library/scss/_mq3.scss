@@ -3,6 +3,10 @@
 	%display-block-3 {
 		display: block;
 	}
+	
+	%text-align-center-3 {
+		text-align: center;
+	}
 
 	/****************************************
 	    Positioning
@@ -88,10 +92,6 @@
 	/****************************************
 	    Other
 	****************************************/	
-
-	%text-align-center-3 {
-		text-align: center;
-	}
 	
 	#header-widget,
 	#sidebar-widget,
@@ -110,6 +110,8 @@
 		width: 100%;
 		position: absolute;
 		bottom: $desktop-vw;
+		left: 0;
+		right: 0;
 	    * {
 	    	@extend %text-align-center-3;
 	    }
