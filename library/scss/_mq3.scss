@@ -114,6 +114,8 @@
 		right: 0;
 	    * {
 	    	@extend %text-align-center-3;
+			color: $line-color;
+			font-size: 0.9em;
 	    }
 	}
 	
