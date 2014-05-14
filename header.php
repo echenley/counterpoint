@@ -14,5 +14,5 @@
           <a class="title-link" href="<?php echo esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
         </h1>
         <span id="header-widget"><?php dynamic_sidebar('header-right'); ?></span>
-        <a href="#" class="menu-link">&#9776;</a>
+        <a href="#" class="menu-toggle">&#9776;</a>
       </header>

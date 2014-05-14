@@ -1,0 +1,101 @@
+@media screen and (min-width: nth($breakpoints, 3)) {
+
+	%display-block-3 {
+		display: block;
+	}
+
+	/****************************************
+	    Positioning
+	****************************************/
+	
+	%sidebar {
+		position: fixed;
+		bottom: 0;
+		width: $nav-width;
+		background: transparent;
+	}
+	
+	%content {
+		float: right;
+		width: $content-width;
+	}
+	
+	/****************************************
+	    Margin/Padding Resets
+	****************************************/
+	
+	#header {
+		margin: 0 $desktop-vw;
+	}
+	
+	#content {
+		@extend %content;
+		padding: $desktop-vw $desktop-vw $desktop-vw 0;
+	}
+	
+	#sidebar {
+		@extend %sidebar;
+		padding: $desktop-vw;
+	}
+	
+	.archive-header {
+		margin-bottom: $desktop-vw;
+	}
+	
+	#title a,
+	.menu-toggle {
+	    padding: 0 $desktop-vw;
+	}
+	
+	#post-nav,
+	.pagination {
+		margin-top: $desktop-vw;
+	}
+	
+	#post,
+	#archive-page,
+	.post {
+		margin-bottom: $desktop-vw;
+	}
+	
+	#comments,
+	#reply-title {
+		margin: $desktop-vw 0;
+	}
+	
+	#archive .post:not(.sticky) {
+		// sets width to 50% minus a center-margin of $desktop-margin
+	    width: 50% - (50% * $desktop-margin / ($content-width - (2 * $desktop-margin)));
+	}
+
+
+	/****************************************
+	    Sidebar, Main Navigation
+	****************************************/	
+	
+	.menu {
+		@extend %display-block-3;
+		padding: 0;
+		border: none;
+		font-size: 1.1em;
+	}
+	
+	.menu-toggle {
+		display: none;
+	}
+	
+	
+	/****************************************
+	    Other
+	****************************************/	
+
+	#header-widget,
+	#sidebar-widget {
+		@extend %display-block-3;
+	}
+	
+	#title {
+		font-size: 2.2em;
+	}
+	
+}

@@ -1,6 +1,13 @@
 Counterpoint Changelog
 ======================
 
+May 13, 2014
+============
+
+  * Refactored stylesheets
+  
+
+
 May 10, 2014
 ============
 

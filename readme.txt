@@ -32,14 +32,14 @@ Images
   archive.jpg
   -----------
     Author:    Johann Sebastian Bach
-    Image URI: http://en.wikipedia.org/wiki/File:Indulci1.jpg
-    License:   Public Domain
+    Image URI: http://imslp.org/wiki/Special:ReverseLookup/111276
+    License:   None (Public Domain)
     
   404.jpg
   -------
     Author:    Johann Sebastian Bach
     Image URI: http://imslp.org/wiki/Special:ReverseLookup/273823
-    License:   Public Domain
+    License:   None (Public Domain)
     Notes:     From "Messiah," Cello Manuscript, n.d. (ca. 1770)
     
   Lamp and Cherries.jpg (image in screenshot)
@@ -98,4 +98,4 @@ Code Credit
   -----------
     Author URI: http://meyerweb.com/eric/tools/css/reset/ 
     Version:    v2.0 | 20110126
-    License:    Public Domain
+    License:    None (Public Domain)

@@ -5,14 +5,14 @@
   
   <article id="post" <?php post_class(); ?>>
   
-    <header class="post-header <?php echo counterpoint_thumbnail_style($post->ID, array(800,312)); ?>">
+    <header class="post-header<?php echo counterpoint_thumbnail_style($post->ID, array(800,312)); ?>">
       <div class="post-title"><h2>
         <?php the_title(); ?>
       </h2></div>
     </header>
   <?php
     while(have_posts()): the_post(); ?>
-      <section class="post-meta">
+      <section class="post-meta cf">
         <?php counterpoint_categories(); ?>
         <?php counterpoint_posted_on(); ?>
         <?php edit_post_link( __( 'Edit', 'counterpoint' ), '<span class="edit-link">', ' &middot;&nbsp;</span>' ); ?>

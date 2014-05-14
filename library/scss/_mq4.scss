@@ -1,0 +1,58 @@
+@media screen and (min-width: nth($breakpoints, 4)) {
+
+	$container-width: nth($breakpoints, 4);
+
+	#container {
+		width: $container-width;
+	}
+	
+	#content {
+    	width: floor(($content-width / 100%) * $container-width);
+    }
+	
+    #sidebar { 
+    	width: ceil(($nav-width / 100%) * $container-width);
+    }
+
+	/****************************************
+	    Margin/Padding Resets
+	****************************************/
+	
+	#header {
+		margin: 0 $max-margin;
+	}
+	
+	#content {
+		padding: $max-margin $max-margin $max-margin 0;
+	}
+	
+	#sidebar {
+		padding: $max-margin;
+	}
+	
+	.archive-header {
+		margin-bottom: $max-margin;
+	}
+	
+	#title a,
+	.menu-toggle {
+	    padding: 0 $max-margin;
+	}
+	
+	#post-nav,
+	.pagination {
+		margin-top: $max-margin;
+	}
+	
+	#post,
+	#archive-page,
+	.post {
+		margin-bottom: $max-margin;
+	}
+	
+	#comments,
+	#reply-title {
+		margin: $max-margin 0;
+	}
+
+}

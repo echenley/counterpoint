@@ -9,21 +9,19 @@
   *  Theme Support
   *  Translation-Ready Function
   *  Small Customizations
-  *  Custom Favicon For Admin
   *  Font URL Function (called from enqueue)
   *  Enqueue Scripts and Styles
   *  Remove Admin Bar
   *  Register Menus
   *  Register Widget Space
-  *  Catch That Image
-  *  Post-Header Function Call
+  *  Thumbnail Functions
   *  Comment Layout
   *  Numeric Page Navigation
   *  Next and Previous Post Navigation
   *  Display Categories
   *  Display Timestamp
   *  Custom Link Pages
-  *  Index/Archive Loop Function
+  *  Index/Archive Loop Functions
 
  */
 
@@ -208,6 +206,7 @@
    * Catch That Image. Returns the first image in a post (in lieu of Featured Image)
    * http://css-tricks.com/snippets/wordpress/get-the-first-image-from-a-post/
   */
+  
   function counterpoint_catch_image($post_id) {
     $first_img = '';
     ob_start();
@@ -219,20 +218,30 @@
   }
   
   
-  // Post Header Function Call //
-  function counterpoint_thumbnail_style($post_id, $img_size = 'full') { // Checks for post thumbnail || if none, gets first image || else, default color //
-    if ( has_post_thumbnail($post_id) ) {
+  // Post Header Function Call
+  // Checks for post thumbnail. If none, gets first image. Else, default class 'no-featured-image'
+  
+  function counterpoint_thumbnail_style($post_id, $img_size = 'full') {
+
+    if ( has_post_thumbnail($post_id) ) :
+    
       $img_id = get_post_thumbnail_id($post_id);
-      $alt_text = get_post_meta($img_id, '_wp_attachment_image_alt', true);
-      if ( !$alt_text )
-        $alt_text = get_the_title($post_id);
-      return '\" style="background: url(' . esc_attr( wp_get_attachment_image_src($img_id, $img_size)[0] ) . '); background-position: center; background-size: cover" title="' . esc_attr( $alt_text ); // last quote already added, don't add it here
-    } else {
+      $img_src = wp_get_attachment_image_src($img_id, $img_size);
+      $alt_text = get_post_meta($img_id, '_wp_attachment_image_alt', true) || get_the_title($post_id);
+      
+      return '" style="background: url(' . esc_attr( $img_src[0] ) . '); background-position: center; background-size: cover" title="' . esc_attr( $alt_text ); // last quote already added, don't add it here
+      
+    else :
+    
       $first_img = counterpoint_catch_image($post_id);
-      if ( $first_img )
-        return '\" style="background: url(' . esc_attr( $first_img ) . '); background-position: center; background-size: cover" title="' . esc_attr( get_the_title() );
-      return 'no-featured-image" title="' . esc_attr( get_the_title() );
-    };
+      $alt_text = get_the_title($post_id);
+      if ( $first_img ) {
+        return '" style="background: url(' . esc_attr( $first_img ) . '); background-position: center; background-size: cover" title="' . esc_attr( $alt_text );
+      }
+      return ' no-featured-image" title="' . esc_attr( $alt_text );
+      
+    endif;
+    
   };
 
 
@@ -264,6 +273,7 @@
   
   
   // Next and Previous Post Navigation //
+  
   function counterpoint_adjacent_posts() {
     $next_post = get_next_post();
     $prev_post = get_previous_post();
@@ -325,6 +335,7 @@
   
   
   // Display Timestamp //
+  
   function counterpoint_posted_on() {
     printf('<time datetime="%1$s" class="timestamp">%2$s</time>',
     esc_attr( get_the_date('c') ),
@@ -338,6 +349,7 @@
    * Adapted from:
    * http://www.velvetblues.com/web-development-blog/wordpress-number-next-previous-links-wp_link_pages/
   */
+  
   add_filter('wp_link_pages_args','counterpoint_link_pages_args');
   function counterpoint_link_pages_args($args){
     $cp_defaults = array(
@@ -375,6 +387,7 @@
   
   
   // Numeric Page Navigation //
+  
   function counterpoint_page_nav() {
     global $wp_query;
     $bignum = 999999999;
@@ -388,8 +401,8 @@
       'prev_text' => __('&larr; Newer', 'counterpoint'),
       'next_text' => __('Older &rarr;', 'counterpoint'),
       'type'      => 'array',
-      'end_size'  => 3,
-      'mid_size'  => 3
+      'end_size'  => 1,
+      'mid_size'  => 2
     ) );
     
     if ( $paginate_links ) {
@@ -401,51 +414,103 @@
     }
   }
   
+  // Displays the loop
   
-  // Main Index/Archive Loop Function (index.php, archive.php, search.php, tag.php, category.php) //
+  function counterpoint_archive_layout($post_id, $even_or_odd, $max_image_size) { ?>
+    <li <?php post_class($even_or_odd); ?>>
+      <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+        <div class="archive-thumbnail<?php echo counterpoint_thumbnail_style($post_id, $max_image_size); ?>" >
+          <div class="post-title"><h3>
+            <?php the_title(); ?>
+          </h3></div>
+        </div>
+      </a>
+      <section class="post-meta"><?php counterpoint_posted_on(); ?></section>
+      <article class="excerpt cf">
+        <?php
+        
+          // gets content/excerpt based on whether more tag is present
+          $ismore = @strpos( $post->post_content, '<!--more-->');
+          if ($ismore) : echo get_the_content('');
+          else : echo get_the_excerpt();
+          endif;
+          echo ' &hellip; <a class="more-link" href="' . get_the_permalink() . '" title="' . get_the_title() . '">' . __('Keep reading &rarr;', 'counterpoint') . '</a>';
+          
+        ?>
+      </article>
+      <footer class="tags">
+        <?php counterpoint_categories(); ?><br>
+        <?php the_tags(); ?>
+      </footer>
+    </li>
+  <?php }
+  
+  
+  // Main Index/Archive Loop Function (index.php, archive.php, search.php, tag.php, category.php)
+  
   function counterpoint_archive_loop() { ?>
     <ul id="archive">
     <?php
-    $even = false;
-    while(have_posts()): the_post();
       global $post;
       
-      // skips sticky posts when assigning even/odd //
-      if (is_home() && !is_paged() && is_sticky($post->ID)) {
-        $even_or_odd = '';
-        $max_image_size = array(800,320);
-      } else {
-        $even_or_odd = $even ? 'even-post' : 'odd-post';
-        $max_image_size = array(570,230);
-        $even = !$even;
+      /****************
+        Loop #1
+      ****************/
+      // displays most recent sticky on front page only
+      
+      // ignore behavior unless on blog index page
+      if ( is_home() ) {
+        // Get IDs of sticky posts
+        $sticky = get_option('sticky_posts');
+        // First loop to display only my single, most recent sticky post
+        $most_recent_sticky_post = new WP_Query(array(
+            // Only sticky posts
+            'post__in' => $sticky,
+            // Don't return sticky posts before others
+            'ignore_sticky_posts' => 1,
+            // Get only the most recent
+            'posts_per_page' => 1
+        ));
+        if ( !is_paged() ) {
+          while ($most_recent_sticky_post->have_posts()) : $most_recent_sticky_post->the_post();
+            counterpoint_archive_layout($post->ID, '', array(800,320));
+          endwhile; wp_reset_query();
+        }
       }
       
-      ?>
-      <li <?php post_class($even_or_odd); ?>>
-        <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-          <div class="thumbnail <?php echo counterpoint_thumbnail_style($post->ID, $max_image_size); ?>" >
-            <div class="post-title"><h3>
-              <?php the_title(); ?>
-            </h3></div>
-          </div>
-        </a>
-        <section class="post-meta"><?php counterpoint_posted_on(); ?></section>
-        <article class="excerpt cf">
-          <?php
-            $ismore = @strpos( $post->post_content, '<!--more-->');
-            if ($ismore) : echo get_the_content('');
-            else : echo get_the_excerpt();
-            endif;
-            echo ' &hellip; <a class="more-link" href="' . get_the_permalink() . '" title="' . get_the_title() . '">' . __('Keep reading &rarr;', 'counterpoint') . '</a>';
-          ?>
-        </article>
-        <footer class="tags">
-          <?php counterpoint_categories(); ?><br>
-          <?php the_tags(); ?>
-        </footer>
-      </li>
-    <?php
-    endwhile; ?>
+      
+      /****************
+        Loop #2
+      ****************/
+      // displays all other posts, skipping last sticky if on front page
+      
+      global $wp_query;
+      
+      // custom only on page 1 of blog index
+      if ( is_home() && !is_paged() ) :
+        $all_other_posts = array(
+            // Not most recent sticky post
+            'post__not_in' => array( end($sticky) ),
+            // Don't return sticky posts before others
+            'ignore_sticky_posts' => 1
+        );
+        $cp_query_args = array_merge($wp_query->query, $all_other_posts);
+      else :
+        // if not, use defaults
+        $cp_query_args = $wp_query->query;
+      endif;
+      
+      query_posts($cp_query_args);
+      
+      if (have_posts()) :
+        $even = false;
+        while (have_posts()) : the_post();
+          $even_or_odd = $even ? 'even-post' : 'odd-post';
+          $even = !$even;
+          counterpoint_archive_layout($post->ID, $even_or_odd, array(570,230));
+        endwhile;
+      endif;
+      wp_reset_query(); ?>
     </ul>
   <?php
   }
