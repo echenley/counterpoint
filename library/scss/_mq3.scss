@@ -100,6 +100,7 @@
 	#header-widget {
 		@extend %display-block-3;
 		float: right;
+		margin-right: $desktop-vw;
 		height: 74px;
 		line-height: 74px;
 		overflow: hidden;
