@@ -106,10 +106,9 @@
 		overflow: hidden;
 	}
 	
-	#sidebar-widget {
+	#sidebar-widget, #sidebar-widget * {
 		position: absolute;
 		bottom: $desktop-margin;
-		width: 100%;
 		@extend %text-align-center-3;
 	}
 	
