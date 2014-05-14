@@ -333,7 +333,7 @@ h6 {
 #footer {
 	@extend %footer;
 	border-top: 2px solid $primary-color;
-	padding: 1.2em $mobile-margin;
+	padding: 1.2em 0;
 }
 
 
