@@ -106,10 +106,13 @@
 		overflow: hidden;
 	}
 	
-	#sidebar-widget, #sidebar-widget * {
+	#sidebar-widget {
+		width: 100%;
 		position: absolute;
-		bottom: $desktop-margin;
-		@extend %text-align-center-3;
+		bottom: $desktop-vw;
+	    * {
+	    	@extend %text-align-center-3;
+	    }
 	}
 	
 	#article-bottom {
