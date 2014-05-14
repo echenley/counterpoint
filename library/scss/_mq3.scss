@@ -94,6 +94,13 @@
 		@extend %display-block-3;
 	}
 	
+	#header-widget {
+		float: right;
+		height: 74px;
+		line-height: 74px;
+		overflow: hidden;
+	}
+	
 	#title {
 		font-size: 2.2em;
 	}
