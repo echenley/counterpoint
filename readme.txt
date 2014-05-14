@@ -31,16 +31,17 @@ Images
 
   archive.jpg
   -----------
-    Author:    Johann Sebastian Bach
-    Image URI: http://imslp.org/wiki/Special:ReverseLookup/111276
-    License:   None (Public Domain)
+    Author:      Johann Sebastian Bach
+    Image URI:   http://imslp.org/wiki/Special:ReverseLookup/111276
+    License:     None (Public Domain)
+    Notes:       From "Das Orgel-Büchlein" (1713-15)
     
   404.jpg
   -------
-    Author:    Johann Sebastian Bach
-    Image URI: http://imslp.org/wiki/Special:ReverseLookup/273823
-    License:   None (Public Domain)
-    Notes:     From "Messiah," Cello Manuscript, n.d. (ca. 1770)
+    Author:      Johann Sebastian Bach
+    Image URI:   http://imslp.org/wiki/Special:ReverseLookup/273823
+    License:     None (Public Domain)
+    Notes:       From "Messiah," Cello Manuscript (ca. 1770)
     
   Lamp and Cherries.jpg (image in screenshot)
   ---------------------
@@ -55,36 +56,39 @@ Code Credit
 
   functions.php
   -------------
-    Function:   counterpoint_title
-    Author:     Tran Ngoc Tuan Anh (aka Rilwis)
-    Author URI: http://www.deluxeblogtips.com/
-    Code URI:   http://www.deluxeblogtips.com/2012/03/better-title-meta-tag.html
+    Function:    counterpoint_title
+    Author:      Tran Ngoc Tuan Anh (aka Rilwis)
+    Author URI:  http://www.deluxeblogtips.com/
+    Code URI:    http://www.deluxeblogtips.com/2012/03/better-title-meta-tag.html
+    Notes:       Licensing information unavailable
     
-    Function:   Localization Function (in counterpoint_setup)
-    Author:     Sté Kerwer
-    Author URI: http://dukeo.com/
-    Code URI:   http://dukeo.com/how-to-make-your-wordpress-theme-translation-ready/
+    Function:    counterpoint_catch_image
+    Author:      Chris Coyier
+    Author URI:  http://css-tricks.com/
+    Code URI:    http://css-tricks.com/snippets/wordpress/get-the-first-image-from-a-post/
+    License:     The CSS-Tricks License
+    License URI: http://css-tricks.com/license/
     
-    Function:   counterpoint_catch_image
-    Author:     Chris Coyier
-    Author URI: http://css-tricks.com/
-    Code URI:   http://css-tricks.com/snippets/wordpress/get-the-first-image-from-a-post/
-    
-    Function:   counterpoint_link_pages_args
-    Author:     Velvet Blues
-    Author URI: http://www.velvetblues.com/
-    Code URI:   http://www.velvetblues.com/web-development-blog/wordpress-number-next-previous-links-wp_link_pages/
+    Function:    counterpoint_link_pages_args
+    Author:      Velvet Blues
+    Author URI:  http://www.velvetblues.com/
+    Code URI:    http://www.velvetblues.com/web-development-blog/wordpress-number-next-previous-links-wp_link_pages/
+    Notes:       Licensing information unavailable
     
   scripts.js
   ----------
-    Function:   Responsive Gravatar Images
-    Author:     Bones Theme
-    Author URI: http://themble.com/bones
+    Function:    Responsive Gravatar Images
+    Author:      Bones Theme
+    Author URI:  http://themble.com/bones
+    License:     WTFPL
+    License URI: http://sam.zoy.org/wtfpl/
     
-    Function:   Fluid-Width Video
-    Author:     Chris Coyier, Mathias Bynens
-    Author URI: http://css-tricks.com/
-    Code URI:   http://css-tricks.com/fluid-width-youtube-videos/
+    Function:    Fluid-Width Video
+    Author:      Chris Coyier, Mathias Bynens
+    Author URI:  http://css-tricks.com/
+    Code URI:    http://css-tricks.com/fluid-width-youtube-videos/
+    License:     The CSS-Tricks License
+    License URI: http://css-tricks.com/license/
     
   comments.php
   ------------
@@ -96,6 +100,7 @@ Code Credit
     
   _reset.scss
   -----------
-    Author URI: http://meyerweb.com/eric/tools/css/reset/ 
-    Version:    v2.0 | 20110126
-    License:    None (Public Domain)
+  	Author:      Eric A. Meyer
+    Author URI:  http://meyerweb.com/eric/tools/css/reset/ 
+    Version:     v2.0 | 20110126
+    License:     None (Public Domain)

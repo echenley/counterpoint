@@ -89,6 +89,10 @@
 	    Other
 	****************************************/	
 
+	%text-align-center-3 {
+		text-align: center;
+	}
+	
 	#header-widget,
 	#sidebar-widget,
 	#article-bottom {
@@ -102,10 +106,11 @@
 		overflow: hidden;
 	}
 	
-	#sidebar #sidebar-widget {
+	#sidebar-widget {
 		position: absolute;
-		bottom: 0;
+		bottom: $desktop-margin;
 		width: 100%;
+		@extend %text-align-center-3;
 	}
 	
 	#article-bottom {
@@ -113,7 +118,7 @@
 		padding: 1em 0;
 		color: #666;
 		background: $highlight;
-		text-align: center;
+		@extend %text-align-center-3;
 		&:empty {
 			display: none;
 		}

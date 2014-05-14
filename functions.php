@@ -33,10 +33,6 @@
   if ( ! function_exists( 'counterpoint_setup' ) ) :
   function counterpoint_setup() {
   
-    /*
-     * Localization Function - via Sté Kerwer
-     * http://dukeo.com/how-to-make-your-wordpress-theme-translation-ready/
-    */
     load_theme_textdomain( 'counterpoint', get_template_directory_uri() . '/languages' );
     
     $locale = get_locale();
