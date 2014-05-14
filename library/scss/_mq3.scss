@@ -33,6 +33,10 @@
 		margin: 0 $desktop-vw;
 	}
 	
+	#footer {
+		padding: 1.2em;
+	}
+	
 	#content {
 		@extend %content;
 		padding: $desktop-vw $desktop-vw $desktop-vw 0;
