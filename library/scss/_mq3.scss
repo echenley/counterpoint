@@ -90,7 +90,8 @@
 	****************************************/	
 
 	#header-widget,
-	#sidebar-widget {
+	#sidebar-widget,
+	#article-bottom {
 		@extend %display-block-3;
 	}
 	
@@ -99,6 +100,23 @@
 		height: 74px;
 		line-height: 74px;
 		overflow: hidden;
+	}
+	
+	#sidebar #sidebar-widget {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+	}
+	
+	#article-bottom {
+		margin-top: 1.2em;
+		padding: 1em 0;
+		color: #666;
+		background: $highlight;
+		text-align: center;
+		&:empty {
+			display: none;
+		}
 	}
 	
 	#title {

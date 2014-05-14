@@ -1109,7 +1109,8 @@ input[type=submit], input[type=submit]:visited {
 ****************************************/
 
 #header-widget,
-#sidebar-widget {
+#sidebar-widget,
+#article-bottom {
 	@extend %hidden;
 }
 
