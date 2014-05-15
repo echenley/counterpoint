@@ -20,7 +20,7 @@ $line-color:      #dedede;  // borders and <hr>
 $breakpoints:     (480px, 640px, 900px, 1100px);
 
 // Column widths
-$nav-width:       26%;
+$nav-width:       19%;
 $content-width:   74%;
 
 // Margins
@@ -1078,7 +1078,7 @@ textarea {
 	}
 	input {
 		width: 100%;
-		min-width: 250px;
+		max-width: 100%;
 		@extend %form-input;
 		line-height: 2;
 	}

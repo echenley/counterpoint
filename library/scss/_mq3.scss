@@ -44,7 +44,8 @@
 	
 	#sidebar {
 		@extend %sidebar-3;
-		padding: $desktop-vw;
+		margin: $desktop-vw;
+		padding: 0;
 	}
 	
 	.archive-header {
@@ -71,7 +72,7 @@
 		margin: $desktop-vw 0;
 	}
 	
-	#archive .post:not(.sticky) {
+	#archive .post {
 		// sets width to 50% minus a center-margin of $desktop-margin
 	    width: 50% - (50% * $desktop-margin / ($content-width - (2 * $desktop-margin)));
 	}
@@ -110,9 +111,7 @@
 	
 	#sidebar-widget {
 		position: absolute;
-		bottom: $desktop-vw;
-		left: 0;
-		right: 0;
+		bottom: 0;
 		color: $line-color;
 		text-align: center;
 	}

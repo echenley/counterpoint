@@ -455,7 +455,7 @@
   function counterpoint_archive_loop() { ?>
     <ul id="archive">
     <?php
-      global $post;
+      global $wp_query, $post;
       
       /****************
         Loop #1
@@ -467,15 +467,8 @@
         // Get IDs of sticky posts
         $sticky = get_option('sticky_posts');
         // First loop to display only my single, most recent sticky post
-        $most_recent_sticky_post = new WP_Query(array(
-            // Only sticky posts
-            'post__in' => $sticky,
-            // Don't return sticky posts before others
-            'ignore_sticky_posts' => 1,
-            // Get only the most recent
-            'posts_per_page' => 1
-        ));
-        if ( $sticky && !is_paged() ) {
+        $most_recent_sticky_post = new WP_Query( 'p=' . $sticky[0] );
+        if ( $sticky[0] && !is_paged() ) {
           while ($most_recent_sticky_post->have_posts()) : $most_recent_sticky_post->the_post();
             counterpoint_archive_layout($post->ID, '', array(800,320));
           endwhile;
@@ -488,14 +481,13 @@
         Loop #2
       ****************/
       // displays all other posts, skipping last sticky if on front page
-      
-      global $wp_query;
+      // unaffected stickies are still classed sticky, so stylesheet requires :first-child
       
       // custom only on page 1 of blog index
-      if ( is_home() && !is_paged() ) :
+      if ( $sticky[0] && is_home() && !is_paged() ) :
         $all_other_posts = array(
             // Not most recent sticky post
-            'post__not_in' => array( end($sticky) ),
+            'post__not_in' => array( $sticky[0] ),
             // Ignore sticky behavior for additional stickies
             'ignore_sticky_posts' => 1
         );

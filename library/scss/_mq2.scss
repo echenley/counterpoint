@@ -1,15 +1,16 @@
 @media screen and (min-width: nth($breakpoints, 2)) {
 
 	#archive {
-		.post:not(.sticky) {
-			width: (100% - $mobile-margin) / 2;
+		.post {
+			// sets width to 50% minus a center-margin of $mobile-margin...trust me.
+			width: 50% - (50% * $mobile-margin / (100% - (2 * $mobile-margin)));
 
 			&.odd-post { 
 		    	float: left;
 				clear: both;
-		    }
+			}
 		    
-		    &.even-post {
+			&.even-post {
 				float: right;
 			}
 			
@@ -17,7 +18,8 @@
 				padding-top: (100% / 1.618);
 			}
 		}
-		.sticky {
+		.sticky:first-child {
+			width: 100%;
 			.archive-thumbnail {
 				padding-top: (50% / 1.618);
 			}
