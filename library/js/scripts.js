@@ -51,7 +51,7 @@
     $(window).scroll(function() {
     
       // No sidebar, skip it //
-      if( $(window).width() > 900 ) {
+      if( $(window).width() >= 900 ) {
       
         var scroll = $(window).scrollTop(),
             target = $('#sidebar'),
@@ -68,15 +68,18 @@
         } else {
           target.css({ top: combined_height });
         }
+      } else {
+        $('#sidebar').css({top: get_header_heights()[0] });
       }
     }).scroll();
   
   });
   
   // Mobile Menu Control //
-  $('.menu-toggle').click(function() {
+  $('.menu-toggle').click(function(e) {
     
-    $('#sidebar').css({ top: get_header_heights()[2] });
+    e.preventDefault();
+    $('#sidebar').css({ top: get_header_heights()[0] });
     $('#sidebar').toggleClass('active');
     
   });

@@ -307,13 +307,17 @@ h6 {
 #title a,
 .menu-toggle {
 	display: inline-block;
-    padding: 0 $mobile-margin;
-    color: $primary-color;
-    line-height: 80px;
+	color: $primary-color;
+	line-height: 80px;
+}
+
+#title,
+.menu-toggle {
+	padding: 0 $mobile-margin;
 }
 
 #title {
-	display: inline;
+	display: inline-block;
 	font-size: 1.8em;
 	a {
 		@extend %display-block;
