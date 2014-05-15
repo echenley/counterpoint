@@ -2,21 +2,24 @@
 
 	#archive {
 		.post:not(.sticky) {
-		    width: (100% - $mobile-margin) / 2;
-		    
+			width: (100% - $mobile-margin) / 2;
+
 			&.odd-post { 
 		    	float: left;
 				clear: both;
 		    }
+		    
 		    &.even-post {
 				float: right;
-		    }
-		    .archive-thumbnail {
+			}
+			
+			.archive-thumbnail {
 				padding-top: (100% / 1.618);
 			}
-	    }
-    	.sticky {
+		}
+		.sticky {
 			.archive-thumbnail {
+				border-color: #fff3c1;
 				padding-top: (50% / 1.618);
 			}
 			h3 {
