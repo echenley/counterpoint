@@ -1,16 +1,22 @@
 Counterpoint Changelog
 ======================
 
-May 13, 2014
+Author:     Evan Henley
+Author URI: http://henleyedition.com
+
+May 14, 2014
 ============
 
   * Completely refactored stylesheets
+  * Added a simple footer with widget area
   * Slightly improved readme.txt
   
   functions.php
   -------------
     * Customized loop to show only most recent sticky post
     * Abstracted loop layout from loop itself
+    * Added footer widget
+    * Removed extra div around widgets
 
 
 May 10, 2014
@@ -64,7 +70,6 @@ May 6, 2014
     * Added proper counterpoint_setup() function
     * Prefixed all relevant functions with "counterpoint_"
     * Added translation-ready function
-      - http://dukeo.com/how-to-make-your-wordpress-theme-translation-ready/
     * Replaced google jQuery with native WP version
     * Removed excessive wp_head changes
     * Removed add_filter( 'the_password_form', 'my_password_form' ); and associated function

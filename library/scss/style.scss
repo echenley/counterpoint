@@ -47,7 +47,7 @@ $monospace: 'Courier New', Courier, monospace;
 
 
 /****************************************
-    Mixins
+	Mixins
 ****************************************/
 
 @mixin prefix($property, $value, $prefixes) {
@@ -65,7 +65,7 @@ $monospace: 'Courier New', Courier, monospace;
 
 
 /****************************************
-    Reset, Clearfix
+	Reset, Clearfix
 ****************************************/
 
 @import '_reset';
@@ -83,11 +83,12 @@ $monospace: 'Courier New', Courier, monospace;
 
 
 /****************************************
-    Placeholders
+	Placeholders
 ****************************************/
 
 %transparent_border {
-    border: 4px solid rgba($line-color, 0.8);
+    border: 2px solid rgba(#000, 0.8);
+    border-left-width: 6px;
 }
 
 %bg-highlight {
@@ -138,7 +139,7 @@ $monospace: 'Courier New', Courier, monospace;
 
 
 /****************************************
-    Macro Structure
+	Macro Structure
 ****************************************/
 
 html,
@@ -184,7 +185,7 @@ body {
 
 
 /****************************************
-    Heading Tags
+	Heading Tags
 ****************************************/
 
 
@@ -255,7 +256,7 @@ h6 {
 
 
 /****************************************
-    Post Headers
+	Post Headers
 ****************************************/
 
 .post-header {
@@ -295,7 +296,7 @@ h6 {
 
 
 /****************************************
-    Header/Footer Styles
+	Header/Footer Styles
 ****************************************/
 
 #header {
@@ -338,7 +339,7 @@ h6 {
 
 
 /****************************************
-    Sidebar, Main Navigation
+	Sidebar, Main Navigation
 ****************************************/
 
 %menu-hover {
@@ -404,7 +405,7 @@ h6 {
 
 
 /****************************************
-    Other Navigation
+	Other Navigation
 ****************************************/
 
 // Adjacent Posts
@@ -510,7 +511,7 @@ h6 {
 
 
 /****************************************
-    Post Content
+	Post Content
 ****************************************/
 
 #post,
@@ -529,7 +530,7 @@ h6 {
 
 
 /****************************************
-    Front-Page, Archives
+	Front-Page, Archives
 ****************************************/
 
 #archive .post {
@@ -569,7 +570,7 @@ h6 {
 
 
 /****************************************
-    Post-Meta Bar
+	Post-Meta Bar
 ****************************************/
 
 .post-meta {
@@ -606,7 +607,7 @@ h6 {
 
 
 /****************************************
-    Comments
+	Comments
 ****************************************/
 
 // these are <h3> tags
@@ -768,7 +769,7 @@ h6 {
 
 
 /****************************************
-    Archive Page
+	Archive Page
 ****************************************/
 
 #archive-page {
@@ -789,7 +790,7 @@ h6 {
 
 
 /****************************************
-    General Styles
+	General Styles
 ****************************************/
 
 // this applies to most bodies of text
@@ -906,7 +907,7 @@ hr {
 
 
 /****************************************
-    Wordpress Classes
+	Wordpress Classes
 ****************************************/
 
 // eliminate stupid smiley face at bottom of page
@@ -959,7 +960,7 @@ img.size-full {
 
 
 /****************************************
-    Gallery and Captions
+	Gallery and Captions
 ****************************************/
 
 .gallery {
@@ -1003,7 +1004,7 @@ img.size-full {
 
 
 /****************************************
-    Tables and Lists
+	Tables and Lists
 ****************************************/
 
 table {
@@ -1044,7 +1045,7 @@ article,
 
 
 /****************************************
-    Forms
+	Forms
 ****************************************/
 
 %form-input {
@@ -1119,7 +1120,7 @@ input[type=submit], input[type=submit]:visited {
 
 
 /****************************************
-    Widgets
+	Widgets
 ****************************************/
 
 #header-widget,
@@ -1132,9 +1133,9 @@ input[type=submit], input[type=submit]:visited {
 	position: relative;
 	margin-top: 1.2em;
 	color: darken($line-color, 30%);
-    * {
+	* {
 		font-size: 0.9em;
-    }
+	}
 }
 
 #footer-widget {
@@ -1143,7 +1144,7 @@ input[type=submit], input[type=submit]:visited {
 
 
 /****************************************
-    Media Queries
+	Media Queries
 ****************************************/
 
 @import '_mq1';
