@@ -557,6 +557,17 @@ h6 {
 	@extend %thumbnail-heading;
 }
 
+.excerpt {
+	margin-top: 1.2em;
+}
+
+.posted-on {
+	float: right;
+	@extend %highlight-box;
+	margin-top: 7px;
+	margin-left: 1.2em;
+}
+
 .more-link {
 	display: inline;
 	float: right;
@@ -574,10 +585,11 @@ h6 {
 
 .post-meta {
 	@extend %display-block;
-	@extend %standard-bottom-border;
-	.timestamp { font-style: italic; }
+	@extend %highlight-box;
+	.timestamp {
+		font-style: italic;
+	}
 }
-
 
 #archive .post-meta {
 	margin: 0.6em 0;

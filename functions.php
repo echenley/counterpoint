@@ -429,8 +429,8 @@
           </h3></div>
         </div>
       </a>
-      <section class="post-meta"><?php counterpoint_posted_on(); ?></section>
       <article class="excerpt cf">
+	      <div class="posted-on"><?php counterpoint_posted_on(); ?></div>
         <?php
         
           // gets content/excerpt based on whether more tag is present
