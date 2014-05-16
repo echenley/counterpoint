@@ -16,7 +16,6 @@
       the_content();
       wp_link_pages();
     endwhile; ?>
-    <?php dynamic_sidebar('article-widget'); ?>
   </article>
   
   <section id="comments-section">

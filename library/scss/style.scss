@@ -108,7 +108,7 @@ $monospace: 'Courier New', Courier, monospace;
 }
 
 %glitch-fix {
-	-webkit-backface-visibility: hidden;
+	-webkit-backface-visibility: visible;
 	-webkit-transform: translateZ(0);
 }
 

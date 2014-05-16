@@ -420,10 +420,10 @@
   
   // Displays the loop
   
-  function counterpoint_archive_layout($post_id, $even_or_odd, $max_image_size) { ?>
+  function counterpoint_archive_layout($post_id, $even_or_odd) { ?>
     <li <?php post_class($even_or_odd); ?>>
       <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-        <div class="archive-thumbnail<?php echo counterpoint_thumbnail_style($post_id, $max_image_size); ?>" >
+        <div class="archive-thumbnail<?php echo counterpoint_thumbnail_style($post_id); ?>" >
           <div class="post-title"><h3>
             <?php the_title(); ?>
           </h3></div>
@@ -474,7 +474,7 @@
         $most_recent_sticky_post = new WP_Query( 'p=' . $first_sticky );
         
         while ($most_recent_sticky_post->have_posts()) : $most_recent_sticky_post->the_post();
-          counterpoint_archive_layout($post->ID, '', array(800,320));
+          counterpoint_archive_layout($post->ID, '');
         endwhile;
           
       }
@@ -483,6 +483,10 @@
       
       /* Loop #2 - for the rest
       ========================== */
+      
+      /*
+        This part is a little convoluted, but it gets the job done.
+      */
       
       // just a junk query used to...
       $junk_query = new WP_Query(array(
@@ -506,6 +510,9 @@
       }
       wp_reset_query();
       
+      
+      // okay, now we have all the variables we need
+      
       // if the sticky is from the first page...
       // add an extra post in there to avoid a gap
       if ( $first_sticky && $front_page_sticky && is_home() && !is_paged() ) {
@@ -525,7 +532,6 @@
       // set an offset to account for the extra post
       } elseif ( $first_sticky && $front_page_sticky && is_home() && is_paged() ) {
         $cp_args = array(
-          
           // offset incremented by 1
           'offset' => ($wp_query->query_vars['paged']-1) * $ppp + 1,
           'ignore_sticky_posts' => 1
@@ -548,7 +554,7 @@
           if ( !( !is_paged() && $post->ID === $first_sticky ) ) {
             $even_or_odd = $even ? 'even-post' : 'odd-post';
             $even = !$even;
-            counterpoint_archive_layout($post->ID, $even_or_odd, array(570,230));
+            counterpoint_archive_layout($post->ID, $even_or_odd);
           }
         endwhile;
       endif;
