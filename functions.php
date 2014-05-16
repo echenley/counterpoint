@@ -435,9 +435,11 @@
         
           // gets content/excerpt based on whether more tag is present
           $ismore = @strpos( $post->post_content, '<!--more-->');
-          if ($ismore) : echo get_the_content('');
-          else : echo get_the_excerpt();
-          endif;
+          if ($ismore) {
+            echo get_the_content('');
+          } else {
+            echo get_the_excerpt();
+          }
           echo ' &hellip; <a class="more-link" href="' . get_the_permalink() . '" title="' . get_the_title() . '">' . __('Keep reading &rarr;', 'counterpoint') . '</a>';
           
         ?>
@@ -449,7 +451,7 @@
     </li>
   <?php }
   
-  
+
   // Main Index/Archive Loop Function (index.php, archive.php, search.php, tag.php, category.php)
   
   function counterpoint_archive_loop() { ?>
@@ -457,54 +459,98 @@
     <?php
       global $wp_query, $post;
       
-      /****************
-        Loop #1
-      ****************/
-      // displays most recent sticky on front page only
+      /* Loop #1 - for stickies
+      ========================== */
       
-      // ignore behavior unless on blog index page
-      if ( is_home() ) {
-        // Get IDs of sticky posts
-        $sticky = get_option('sticky_posts');
+      $sticky = get_option('sticky_posts');
+      $first_sticky = $sticky ? $sticky[0] : false;
+      // get the posts_per_page variable (set by user)
+      $ppp = get_option('posts_per_page');
+      $front_page_sticky = false;
+      
+      if ( is_home() && !is_paged() && $first_sticky ) {
+          
         // First loop to display only my single, most recent sticky post
-        $most_recent_sticky_post = new WP_Query( 'p=' . $sticky[0] );
-        if ( $sticky[0] && !is_paged() ) {
-          while ($most_recent_sticky_post->have_posts()) : $most_recent_sticky_post->the_post();
-            counterpoint_archive_layout($post->ID, '', array(800,320));
-          endwhile;
-          wp_reset_query();
+        $most_recent_sticky_post = new WP_Query( 'p=' . $first_sticky );
+        
+        while ($most_recent_sticky_post->have_posts()) : $most_recent_sticky_post->the_post();
+          counterpoint_archive_layout($post->ID, '', array(800,320));
+        endwhile;
+          
+      }
+      wp_reset_query();
+      
+      
+      /* Loop #2 - for all else
+      ========================== */
+      
+      // just a junk query
+      $junk_query = new WP_Query(array(
+        'ignore_sticky_posts' => 1
+      ));
+      
+      // determines whether the sticky is from the front page or not
+      if ( $first_sticky ) {
+        foreach($junk_query->posts as $post_num=>$the_post) {
+          
+          // if within the first $ppp posts, it comes across the $first_sticky...
+          if ($post_num < $ppp && $the_post->ID === $first_sticky) {
+            $front_page_sticky = true;
+            break;
+            
+          // otherwise...
+          } elseif ($post_num >= $ppp) {
+            $front_page_sticky = false;
+            break;
+          }
         }
       }
+      wp_reset_query();
       
-      
-      /****************
-        Loop #2
-      ****************/
-      // displays all other posts, skipping last sticky if on front page
-      // unaffected stickies are still classed sticky, so stylesheet requires :first-child
-      
-      // custom only on page 1 of blog index
-      if ( $sticky[0] && is_home() && !is_paged() ) :
-        $all_other_posts = array(
-            // Not most recent sticky post
-            'post__not_in' => array( $sticky[0] ),
-            // Ignore sticky behavior for additional stickies
-            'ignore_sticky_posts' => 1
+      // if the sticky is from the first page...
+      // add an extra post in there to avoid a gap
+      if ( $first_sticky && $front_page_sticky && is_home() && !is_paged() ) {
+        $cp_args = array(
+          'posts_per_page' => $ppp + 1,
+          'ignore_sticky_posts' => 1
         );
-        $cp_query_args = array_merge($wp_query->query, $all_other_posts);
-      else :
-        // if not, use defaults
-        $cp_query_args = $wp_query->query;
-      endif;
       
-      query_posts($cp_query_args);
+      // if there is a sticky but it's not from the first page...
+      // that's easy, just keep going like normal
+      } elseif ( $first_sticky && is_home() && !is_paged() ) {
+        $cp_args = array(
+          'ignore_sticky_posts' => 1
+        );
+      
+      // if there is a front-page sticky and you're NOT on the front page...
+      // set an offset to account for the extra post
+      } elseif ( $first_sticky && $front_page_sticky && is_home() && is_paged() ) {
+        $cp_args = array(
+          
+          // offset incremented by 1
+          'offset' => ($wp_query->query_vars['paged']-1) * $ppp + 1,
+          'ignore_sticky_posts' => 1
+        );
+      
+      // if there are no stickies or if the sticky isn't from the front page
+      // do things normally
+      } else {
+        $cp_args = array();
+      }
+      
+      // now, merge $cp_args arguments with defaults
+      $merged_query_args = array_merge($wp_query->query, $cp_args);
+      query_posts($merged_query_args);
       
       if (have_posts()) :
+        $got_sticky = false;
         $even = false;
         while (have_posts()) : the_post();
-          $even_or_odd = $even ? 'even-post' : 'odd-post';
-          $even = !$even;
-          counterpoint_archive_layout($post->ID, $even_or_odd, array(570,230));
+          if ( !( !is_paged() && $post->ID === $first_sticky ) ) {
+            $even_or_odd = $even ? 'even-post' : 'odd-post';
+            $even = !$even;
+            counterpoint_archive_layout($post->ID, $even_or_odd, array(570,230));
+          }
         endwhile;
       endif;
       wp_reset_query(); ?>
