@@ -430,7 +430,7 @@
         </div>
       </a>
       <article class="excerpt cf">
-	      <div class="posted-on"><?php counterpoint_posted_on(); ?></div>
+        <div class="posted-on"><?php counterpoint_posted_on(); ?></div>
         <?php
         
           // gets content/excerpt based on whether more tag is present
@@ -481,15 +481,15 @@
       wp_reset_query();
       
       
-      /* Loop #2 - for all else
+      /* Loop #2 - for the rest
       ========================== */
       
-      // just a junk query
+      // just a junk query used to...
       $junk_query = new WP_Query(array(
         'ignore_sticky_posts' => 1
       ));
       
-      // determines whether the sticky is from the front page or not
+      // determine whether the sticky is from the front page or not
       if ( $first_sticky ) {
         foreach($junk_query->posts as $post_num=>$the_post) {
           
@@ -500,7 +500,6 @@
             
           // otherwise...
           } elseif ($post_num >= $ppp) {
-            $front_page_sticky = false;
             break;
           }
         }
