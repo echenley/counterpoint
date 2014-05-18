@@ -121,9 +121,6 @@
 	
 	#article-widget {
 		@extend %display-block-3;
-		margin-top: $margin-em;
-		padding: 1em 0;
-		color: #666;
 		@extend %text-align-center-3;
 		&:empty {
 			display: none;

@@ -173,8 +173,8 @@
     'description'   => __('Area at the bottom of the sidebar.', 'counterpoint'),
     'before_widget' => '<div id="sidebar-widget" class="widget %2$s">',
     'after_widget'  => '</div>',
-    'before_title'  => '<h4>',
-    'after_title'   => '</h4>'
+    'before_title'  => '<h5>',
+    'after_title'   => '</h5>'
   ));
   
   register_sidebar(array(
