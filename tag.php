@@ -3,7 +3,7 @@
 
 <section id="content">
   <header class="archive-header">
-    <h3><?php printf( __( 'Tag Archives: %s', 'counterpoint' ), single_tag_title( '', false ) ); ?></h3>
+    <h2><?php printf( __( 'Tag Archives: %s', 'counterpoint' ), single_tag_title( '', false ) ); ?></h2>
   </header>
   
   <ul id="archive">

@@ -3,7 +3,7 @@
 
 <section id="content">
   <header class="archive-header">
-    <h3><?php printf( __( 'Category Archives: %s', 'counterpoint' ), single_cat_title( '', false ) ); ?></h3>
+    <h2><?php printf( __( 'Category Archives: %s', 'counterpoint' ), single_cat_title( '', false ) ); ?></h2>
   </header>
   
   <?php counterpoint_archive_loop(); ?>

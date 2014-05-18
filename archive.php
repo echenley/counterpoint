@@ -3,7 +3,7 @@
 
 <section id="content">
   <header class="archive-header">
-    <h3>
+    <h2>
       <?php
         if ( is_day() ) :
           printf( __( 'Daily Archives: %s', 'counterpoint' ), get_the_date() );
@@ -15,7 +15,7 @@
           _e( 'Archives', 'counterpoint' );
         endif;
       ?>
-    </h3>
+    </h2>
   </header>
   
   <?php counterpoint_archive_loop(); ?>

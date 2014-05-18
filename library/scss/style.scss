@@ -21,13 +21,13 @@ $breakpoints:     (480px, 640px, 900px, 1100px);
 
 // Column widths
 $nav-width:       19%;
-$content-width:   74%;
+$content-width:   71%;
 
 // Margins
-$mobile-margin:   5%;
-$desktop-margin:  3.5%;
-$desktop-vw:      3.5vw; // consistency in spite of container size
-$max-margin:      39px;  // used at max breakpoint
+$percent-margin:  5%;
+$desktop-vw:      5vw; // consistency in spite of container size
+$max-margin:      54px;  // used at max breakpoint
+$margin-em:       1.4em;
 
 
 /****************************************
@@ -86,8 +86,8 @@ $monospace: 'Courier New', Courier, monospace;
 	Placeholders
 ****************************************/
 
-%transparent_border {
-    border: 2px solid rgba($primary-color, 0.8);
+%dark-border {
+    border: 2px solid $primary-color;
 }
 
 %bg-highlight {
@@ -96,7 +96,7 @@ $monospace: 'Courier New', Courier, monospace;
 
 %highlight-box {
 	@extend %bg-highlight;
-	padding: 0.4em 0.8em;
+	padding: 0.4em $margin-em * (2/3);
 }
 
 %transition-200ms {
@@ -117,7 +117,7 @@ $monospace: 'Courier New', Courier, monospace;
 }
 
 %standard-margin-em {
-	margin: 1.2em 0;
+	margin: $margin-em 0;
 }
 
 %clear-both {
@@ -134,6 +134,14 @@ $monospace: 'Courier New', Courier, monospace;
 
 %max-width {
 	max-width: 100% !important;
+}
+
+%thumbnail-style-1 {
+	position: relative;
+	padding-top: 100%;
+	border-radius: 50%;
+	overflow: hidden;
+	@extend %dark-border;
 }
 
 
@@ -174,7 +182,7 @@ body {
 
 #content {
 	width: 100%;
-	padding: $mobile-margin;
+	padding: $max-margin $percent-margin;
 	line-height: 1.8;
 }
 
@@ -187,27 +195,38 @@ body {
 	Heading Tags
 ****************************************/
 
-
-h1,h2,h3,h4,h5,h6 {
+#title, h1,h2,h3,h4,h5,h6 {
 	clear: both;
 	font-variant: small-caps;
 	font-weight: normal;
+	text-align: left;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	padding-bottom: 10px;
 }
 
 article,
 .comment-content {
-	h1,h2,h3,h4,h5,h6 {
+	h2,h3,h4,h5,h6 {
 		@extend %standard-bottom-border;
 		margin: 30px 0;
-		padding-bottom: 0.6em;
 	}
 }
 
-h1,h2,h3 {
+.post-header h1 {
+	// h1 is for post titles only
+	clear: none;
+	@extend %standard-bottom-border;
+	margin-bottom: 10px;
+	font-size: 2.2em;
+}
+
+#title, h1,h2,h3 {
 	line-height: 1.3;
 }
 
-h1 {
+#title {
 	font-size: 2em;
 }
 
@@ -235,13 +254,11 @@ h6 {
 
 // applies to .post-title
 %post-title-headings {
-	h2,h3 {
+	h2 {
 		margin: 0;
 		padding: 0.5em;
 		border: none;
 		background: none;
-	}
-	h2 {
 		padding-right: 0;
 	}
 }
@@ -255,46 +272,6 @@ h6 {
 
 
 /****************************************
-	Post Headers
-****************************************/
-
-.post-header {
-	position: relative;
-	padding-top: (100% / 1.618);
-	@extend %transparent_border;
-}
-
-.post-title {
-	position: absolute;
-	@extend %display-block;
-	bottom: 0;
-	width: 100%;
-	background: rgba(#000,0.45);
-	color: $bg-color;
-	text-align: left;
-	@extend %post-title-headings;
-}
-
-.archive-header, .attachment-header {
-	width: 100%;
-	padding: 1.2em;
-	@extend %bg-highlight;
-	h3 {
-		font-size: 1.5em;
-		border: none;
-		padding: 0;
-	}
-}
-.attachment-header {
-	margin-bottom: 1.2em;
-}
-
-.archive-header {
-	margin-bottom: $mobile-margin;
-}
-
-
-/****************************************
 	Header/Footer Styles
 ****************************************/
 
@@ -304,7 +281,7 @@ h6 {
 	@extend %standard-bottom-border;
 }
 
-#title a,
+.title-link,
 .menu-toggle {
 	display: inline-block;
 	color: $primary-color;
@@ -313,15 +290,12 @@ h6 {
 
 #title,
 .menu-toggle {
-	padding: 0 $mobile-margin;
+	padding: 0 $percent-margin;
 }
 
 #title {
 	display: inline-block;
 	font-size: 1.8em;
-	a {
-		@extend %display-block;
-	}
 }
 
 .menu-toggle {
@@ -337,7 +311,7 @@ h6 {
 #footer {
 	@extend %footer;
 	border-top: 2px solid $primary-color;
-	padding: 1.2em $mobile-margin;
+	padding: 20px;
 }
 
 
@@ -366,7 +340,7 @@ h6 {
     width: 100%;
 	a {
 		@extend %display-block;
-		padding: 0.8em 1px 0.8em 6px;
+		padding: 14px 1px 14px 6px;
 		color: $primary-color;
 		line-height: 1.4;
 		@extend %glitch-fix;
@@ -412,46 +386,68 @@ h6 {
 ****************************************/
 
 // Adjacent Posts
-#post-nav {
-	margin-top: $mobile-margin;
-	@extend %clear-both;
-	@extend %transparent_border;
-	div {
-		overflow: hidden;
-		@extend %glitch-fix;
-		a {
-			position: relative;
-			@extend %display-block;
-			width: 100%;
-			font-size: 1.5em;
-			line-height: 0;
-			color: $bg-color;
-			white-space: nowrap;
-			text-align: center;
-			@extend %transition-200ms;
-			&:hover {
-				opacity: 0.3;
-			}
-		}
-		&.half-width {
-			width: 50%;
-			a {
-				padding: (50% / 1.618) 0;
-			}
-		}
-		&.full-width {
-			width: 100%;
-			a {
-				padding: (25% / 1.618) 0;
-			}
-		}
-		&.next-post {
-			float: left;
-		}
-		&.prev-post {
-			float: right;
+.post-nav {
+	margin: $max-margin 0;
+	h3 {
+		margin: 0;
+		padding: 0;
+		border: none;
+		border-top: 2px solid $primary-color;
+		clear: none;
+		font-size: 1.3em;
+	}
+}
+
+.next-post-thumb,
+.prev-post-thumb {
+	width: 30%;
+	border-radius: 50%;
+	padding-top: 30%;
+	overflow: hidden;
+	@extend %dark-border;
+	a {
+		line-height: 0;
+	}
+}
+
+.next-post, .prev-post {
+	width: 50% - (50% * $percent-margin / (100% - (2 * $percent-margin)));
+	
+	a {
+		display: block;
+		color: $primary-color;
+	}
+	a:hover {
+		h3,
+		.next-post-thumb,
+		.prev-post-thumb {
+			border-color: $link-hover;
 		}
 	}
+}
+
+.next-post {
+	float: left;
+	h3 {
+		text-align: right;
+		margin-left: 15%;
+	}
+}
+
+.prev-post {
+	float: right;
+	h3 {
+		margin-right: 15%;
+	}
+}
+
+.next-post-thumb {
+	float: left;
+	margin-right: 0.6em;
+}
+.prev-post-thumb {
+	float: right;
+	margin-left: 0.6em;
 }
 
 // Page Numbers
@@ -470,7 +466,7 @@ h6 {
 // For Index/Archive/Comments
 .pagination {
 	@extend %pagination;
-	margin-top: $mobile-margin;
+	margin-top: $percent-margin;
     .next, .prev {
 		position: relative;
     }
@@ -514,12 +510,66 @@ h6 {
 
 
 /****************************************
+	Post Headers
+****************************************/
+
+.archive-header, .attachment-header {
+	width: 100%;
+	padding: $margin-em;
+	@extend %bg-highlight;
+	h2 {
+		font-size: 1.5em;
+		border: none;
+		padding: 0;
+	}
+}
+.attachment-header {
+	margin-bottom: $margin-em;
+}
+
+.archive-header {
+	margin-bottom: $percent-margin;
+}
+
+.post-thumbnail {
+	@extend %thumbnail-style-1;
+	margin-bottom: $margin-em;
+}
+
+.timestamp {
+	position: absolute;
+	bottom: -2px;
+	background: rgba(#000, 0.6);
+	padding: 0.4em 0 $margin-em * (2/3) 0;
+	width: 100%;
+	text-align: center;
+	color: $bg-color;
+	font-style: italic;
+}
+
+.post-meta {
+	@extend %display-block;
+	margin-bottom: $margin-em;
+	overflow: hidden;
+	text-align: left;
+	.timestamp {
+		float: right;
+		margin-left: 0.6em;
+	}
+}
+
+#attachment .post-meta {
+	background: none;
+}
+
+
+/****************************************
 	Post Content
 ****************************************/
 
 #post,
 #archive-page {
-	margin: 0 auto $mobile-margin;
+	margin: 0 auto $percent-margin;
 }
 
 #post > p:first-of-type:not(.no-dropcap):first-letter {
@@ -536,36 +586,36 @@ h6 {
 	Front-Page, Archives
 ****************************************/
 
-#archive .post {
-	width: 100%;
-	margin-bottom: $mobile-margin;
 
-	&.odd-post { 
-		float: left;
-		@extend %clear-both;
-	}
-	&.even-post {
-		float: right;
+
+#archive .post,
+#archive .page {
+	width: 100%;
+	margin-bottom: $max-margin;
+}
+
+.archive-post-title {
+	margin: 0 0 30px 0;
+	font-size: 1.8em;
+	a {
+		display: block;
+		color: $primary-color;
 	}
 }
 
 .archive-thumbnail {
-	position: relative;
+	@extend %thumbnail-style-1;
 	width: 100%;
-	padding-top: (100% / 1.618);
-	@extend %transparent_border;
 	@extend %thumbnail-heading;
+	@extend %transition-200ms;
+	@extend %glitch-fix;
+	&:hover {
+		border-color: $link-hover;
+	}
 }
 
 .excerpt {
-	margin-top: 1.2em;
-}
-
-.posted-on {
-	float: right;
-	@extend %highlight-box;
-	margin-top: 7px;
-	margin-left: 1.2em;
+	margin-top: $margin-em;
 }
 
 .more-link {
@@ -574,45 +624,8 @@ h6 {
 }
 
 .tags {
-	margin-top: 1.2em;
-	font-size: 0.8em;
-}
-
-
-/****************************************
-	Post-Meta Bar
-****************************************/
-
-.post-meta {
-	@extend %display-block;
-	@extend %highlight-box;
-	.timestamp {
-		font-style: italic;
-	}
-}
-
-#archive .post-meta {
-	margin: 0.6em 0;
-	padding: 0.2em 0.6em;
-}
-
-#post,
-#attachment {
-	.post-meta {
-		@extend %standard-margin-em;
-		.timestamp,
-		.edit-link {
-			float: right;
-		}
-	}
-}
-
-#post .post-meta {
-	padding: 0.6em 1.2em;
-}
-
-#attachment .post-meta {
-	background: none;
+	margin-top: $margin-em;
+	font-size: $margin-em * (2/3);
 }
 
 
@@ -620,21 +633,28 @@ h6 {
 	Comments
 ****************************************/
 
-// these are <h3> tags
-#comments,
-#reply-title {
-	margin: $mobile-margin 0;
-	padding-bottom: 0.6em;
-	@extend %standard-bottom-border;
-}
-
 .comment-subscription-form,
 .form-allowed-tags {
 	@extend %hidden;
 }
 
+// these are <h3> tags
+#comments,
+#reply-title {
+	margin: $percent-margin 0 20px 0;
+	@extend %standard-bottom-border;
+}
+
+#comments {
+	font-size: 1.8em;
+}
+
+#reply-title {
+	margin-bottom: 10px;
+}
+
 .logged-in-as {
-	@extend %highlight-box;
+	margin: 10px 0 $margin-em 0;
 }
 
 .commentlist {
@@ -652,10 +672,10 @@ h6 {
 }
 	
 .comment, .pingback {
-	padding: 0.8em;
+	padding: $margin-em * (2/3);
 	overflow: auto;
 	.comment {
-		margin: 0.8em 0 0 0.8em;
+		margin: $margin-em * (2/3) 0 0 $margin-em * (2/3);
 	}
 }
 
@@ -684,7 +704,7 @@ h6 {
 	
 	img.avatar {
 		float: left;
-		margin-right: 0.8em;
+		margin-right: $margin-em * (2/3);
 		border: 1px solid $line-color;
 	}
 }
@@ -695,15 +715,11 @@ h6 {
 
 #respond {
 	p {
-		margin: 0.8em 0;
-	}
-
-	a[title*='Log out'] {
-		float: right;
+		margin: $margin-em * (2/3) 0;
 	}
 	
 	#cancel-comment-reply-link {
-		font-size: 0.8em;
+		font-size: $margin-em * (2/3);
 		font-weight: normal;
 		font-variant: normal;
 		&:before {
@@ -766,8 +782,8 @@ h6 {
 		margin-bottom: 0;
 	}
 	#respond {
-		padding: 0.8em;
-		margin: 0.8em 0 0 0.8em;
+		padding: $margin-em * (2/3);
+		margin: $margin-em * (2/3) 0 0 $margin-em * (2/3);
 	}
 	.odd > #respond {
 		background: $bg-color;
@@ -785,6 +801,10 @@ h6 {
 #archive-page {
 	#searchform {
 		@extend %standard-margin-em;
+		overflow: hidden;
+		input {
+			width: 100%;
+		}
 	}
 	ul {
 		margin: 0;
@@ -795,6 +815,10 @@ h6 {
 	}
 	.tag-cloud {
 		line-height: 1.4;
+	}
+	h3 {
+		clear: none;
+		overflow: hidden;
 	}
 }
 
@@ -839,7 +863,7 @@ pre, code, blockquote {
 pre, blockquote {
 	@extend %clear-both;
 	@extend %standard-margin-em;
-	padding: 1.2em;
+	padding: $margin-em;
 	border-left: 6px solid $line-color;
 }
 
@@ -897,7 +921,7 @@ hr {
   @extend %display-block;
   height: 0;
   width: 100%;
-  margin: 1.2em auto;
+  margin: $margin-em auto;
   border: 1px solid $line-color;
 }
 
@@ -907,9 +931,10 @@ hr {
 	&::before {
 		content: 'No Featured Image';
 		position: absolute;
-		top: 12px;
-		right: 12px;
-		line-height: 1;
+		top: 50%;
+		width: 100%;
+		text-align: center;
+		line-height: 0;
 		color: #666;
 		font-style: italic;
 	}
@@ -945,15 +970,15 @@ img.alignleft, .wp-caption.alignleft {
 }
 
 img.alignright, .wp-caption.alignright {
-	margin: 0.6em 0 0.6em 1.2em;
+	margin: 0.6em 0 0.6em $margin-em;
 }
 
 img.alignleft, .wp-caption.alignleft {
-	margin: 0.6em 1.2em 0.6em 0;
+	margin: 0.6em $margin-em 0.6em 0;
 }
 
 img.aligncenter {
-	margin-left: 1.2em auto;
+	margin-left: $margin-em auto;
 }
 
 img[class*="align"],
@@ -1018,14 +1043,14 @@ img.size-full {
 ****************************************/
 
 table {
-	margin: 1.2em auto;
+	margin: $margin-em auto;
 	@extend %max-width;
 	border-top: 2px solid $primary-color;
 	@extend %standard-bottom-border;
 	border-collapse: collapse;
 	font-size: 0.9em;
 	th, td {
-		padding: 0.6em 1.2em;
+		padding: 0.6em $margin-em;
 		border-bottom: 1px solid $line-color;
 		text-align: left;
 	}
@@ -1061,7 +1086,7 @@ article,
 %form-input {
 	@extend %max-width;
 	margin: 0;
-	padding: 0.5em 0.8em;
+	padding: 0.5em $margin-em * (2/3);
 	line-height: 1.5;
 	font-size: 13px;
 }
@@ -1104,7 +1129,7 @@ form.post-password-form {
 		@extend %form-input;
 	}
 	input[type=submit] {
-		margin-left: 1.2em;
+		margin-left: $margin-em;
 	}
 }
 
@@ -1141,7 +1166,7 @@ input[type=submit], input[type=submit]:visited {
 #sidebar-widget {
 	width: 100%;
 	position: relative;
-	margin-top: 1.2em;
+	margin-top: $margin-em;
 	color: darken($line-color, 30%);
 	* {
 		font-size: 0.9em;

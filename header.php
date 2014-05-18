@@ -10,9 +10,9 @@
   <body <?php body_class(); ?>>
     <div id="container" class="cf">
       <header id="header">
-        <h1 id="title">
-          <a class="title-link" href="<?php echo esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
-        </h1>
+        <div id="title">
+          <a href="<?php echo esc_url(home_url('/')); ?>" class="title-link"><?php bloginfo('name'); ?></a>
+        </div>
         <?php dynamic_sidebar('header-right'); ?>
         <a href="#" class="menu-toggle">&#9776;</a>
       </header>

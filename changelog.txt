@@ -4,6 +4,27 @@ Counterpoint Changelog
 Author:     Evan Henley
 Author URI: http://henleyedition.com
 
+May 17, 2014
+============
+  
+  * Slight style differences (posted-on vs. post-meta)
+  * CSS bug fixes (e.g. using both .page AND .post so search results which include pages don't break everything
+  * Reshuffled headings (h1-h6) to be more SEO friendly
+
+  stylesheets
+  -----------
+    * Revamped post-headers, next/previous post navigation, and front-page styles
+
+  functions.php
+  -------------
+    * Revised archive_loops to fix flaws (theme mods need to check this hack!)
+    * Rewrote counterpoint_adjacent_posts() with new markup for the styles
+    
+  single.php, page.php, archive-page.php
+  --------------------------------------
+    * Changed post-header markup
+    
+
 May 14, 2014
 ============
 

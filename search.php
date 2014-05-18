@@ -3,7 +3,7 @@
 
 <section id="content">
   <header class="archive-header">
-    <h3><?php printf( __('Search Results For: %s', 'counterpoint'), get_search_query('', false)); ?></h3>
+    <h2><?php printf( __('Search Results For: %s', 'counterpoint'), get_search_query('', false)); ?></h2>
   </header>
   
   <?php counterpoint_archive_loop(); ?>

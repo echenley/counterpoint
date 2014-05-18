@@ -1,31 +1,65 @@
 @media screen and (min-width: nth($breakpoints, 2)) {
 
-	#archive {
-		.post {
-			// sets width to 50% minus a center-margin of $mobile-margin...trust me.
-			width: 50% - (50% * $mobile-margin / (100% - (2 * $mobile-margin)));
+	%thumbnail-style {
+		width: 50%;
+		padding-top: 50%;
+	}
 
+	.archive-thumbnail {
+		width: 100%;
+		padding-top: 100%;
+	}
+	
+	#archive {
+	
+		.post,
+		.page {
+			// sets width to 50% minus a center-margin of $percent-margin...trust me.
+			width: 50% - (50% * $percent-margin / (100% - (2 * $percent-margin)));
+			
 			&.odd-post { 
 		    	float: left;
-				clear: both;
+		    	clear: both;
 			}
 		    
 			&.even-post {
 				float: right;
 			}
-			
-			.archive-thumbnail {
-				padding-top: (100% / 1.618);
-			}
 		}
+		
 		.sticky:first-child {
 			width: 100%;
-			.archive-thumbnail {
-				padding-top: (50% / 1.618);
+			
+			> a:hover + article h3 {
+				border-color: $link-hover;
 			}
-			h3 {
-				font-size: 1.8em;
+			.archive-thumbnail {
+				float: left;
+				margin-right: $percent-margin;
+				@extend %thumbnail-style;
+			}
+			.archive-post-title {
+				clear: none;
+				font-size: 2em;
+				margin-left: 25%;
+				border-left: 2px solid $primary-color;
+				border-bottom-left-radius: 10px;
 			}
 		}
+	}
+	
+	.post-thumbnail {
+		float: right;
+		margin-left: 28px;
+		margin-bottom: 8px;
+		@extend %thumbnail-style;
+	}
+	
+	.post-header h1 {
+		clear: none;
+		margin-right: 25%;
+		font-size: 2.4em;
+		border-right: 2px solid $primary-color;
+		border-bottom-right-radius: 10px;
 	}
 }

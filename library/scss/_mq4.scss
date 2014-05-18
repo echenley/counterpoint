@@ -34,24 +34,21 @@
 		margin-bottom: $max-margin;
 	}
 	
-	#title {
-	    padding: 0 $max-margin;
-	}
-	
-	#post-nav,
+	.post-nav,
 	.pagination {
 		margin-top: $max-margin;
 	}
 	
 	#post,
 	#archive-page,
-	.post {
+	#archive .post,
+	#archive .page {
 		margin-bottom: $max-margin;
 	}
 	
 	#comments,
 	#reply-title {
-		margin: $max-margin 0;
+		margin-top: $max-margin;
 	}
-
+	
 }

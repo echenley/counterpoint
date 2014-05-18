@@ -222,35 +222,6 @@
     $first_img = $matches[1][0];
     return $first_img;
   }
-  
-  
-  // Post Header Function Call
-  // Checks for post thumbnail. If none, gets first image. Else, default class 'no-featured-image'
-  
-  function counterpoint_thumbnail_style($post_id, $img_size = 'full') {
-
-    if ( has_post_thumbnail($post_id) ) :
-    
-      $img_id = get_post_thumbnail_id($post_id);
-      $img_src = wp_get_attachment_image_src($img_id, $img_size);
-      $alt_text = get_post_meta($img_id, '_wp_attachment_image_alt', true) || get_the_title($post_id);
-      
-      return '" style="background: url(' . esc_attr( $img_src[0] ) . '); background-position: center; background-size: cover" title="' . esc_attr( $alt_text ); // last quote already added, don't add it here
-      
-    else :
-      
-      // grab the first image from the post
-      $first_img = counterpoint_catch_image($post_id);
-      $alt_text = get_the_title($post_id);
-      
-      if ( $first_img ) {
-        return '" style="background: url(' . esc_attr( $first_img ) . '); background-position: center; background-size: cover" title="' . esc_attr( $alt_text );
-      }
-      return ' no-featured-image" title="' . esc_attr( $alt_text );
-      
-    endif;
-    
-  };
 
 
   // Comment Layout
@@ -287,40 +258,31 @@
     $prev_post = get_previous_post();
     $is_next = is_object($next_post);
     $is_prev = is_object($prev_post); ?>
-    <nav id="post-nav" class="cf">
+    <nav class="post-nav cf">
       <?php
+      
+      function next_prev_display($nextorprev, $post_id) { 
+        $np_url = get_permalink($post_id);
+        $np_title = get_the_title($post_id);
+        ?>
+      
+        <div class="<?php echo $nextorprev; ?>-post">
+          <a href="<?php echo esc_url($np_url); ?>" title="Next Post: <?php echo esc_attr($np_title); ?>" class="cf">
+            <div class="<?php echo $nextorprev; ?>-post-thumb<?php echo counterpoint_thumbnail_style($post_id); ?>"></div>
+            <h3><?php echo esc_html($np_title); ?></h3>
+          </a>
+        </div>
+        
+      <?php
+      };
+      
       if ( $is_next && $is_prev ) {
-        $nurl = get_permalink($next_post->ID);
-        $ntitle = get_the_title($next_post->ID);
-        $purl = get_permalink($prev_post->ID);
-        $ptitle = get_the_title($prev_post->ID); ?>
-        
-        <div class="next-post half-width <?php echo counterpoint_thumbnail_style($next_post->ID); ?>">
-          <a href="<?php echo esc_url($nurl); ?>" title="<?php echo esc_attr($ntitle); ?>">&larr; <?php _e('Next', 'counterpoint'); ?></a>
-        </div>
-        <div class="prev-post half-width <?php echo counterpoint_thumbnail_style($prev_post->ID); ?>">
-          <a href="<?php echo esc_url($purl); ?>" title="<?php echo esc_attr($ptitle); ?>"><?php _e('Previous', 'counterpoint'); ?> &rarr;</a>
-        </div>
-        
-      <?php
+        next_prev_display('next', $next_post->ID);
+        next_prev_display('prev', $prev_post->ID);
       } else if ( $is_next ) {  // if first post //
-        $nurl = get_permalink($next_post->ID);
-        $ntitle = get_the_title($next_post->ID); ?>
-        
-        <div class="next-post full-width <?php echo counterpoint_thumbnail_style($next_post->ID); ?>">
-          <a href="<?php echo esc_url($nurl); ?>" title="<?php echo esc_attr($ntitle); ?>">&larr; <?php _e('Next', 'counterpoint'); ?></a>
-        </div>
-        
-      <?php
+        next_prev_display('next', $next_post->ID);
       } else if ( $is_prev ) { // if last post //
-        $purl = get_permalink($prev_post->ID);
-        $ptitle = get_the_title($prev_post->ID); ?>
-        
-        <div class="prev-post full-width <?php echo counterpoint_thumbnail_style($prev_post->ID); ?>">
-          <a href="<?php echo esc_url($purl); ?>" title="<?php echo esc_attr($ptitle); ?>"><?php _e('Previous', 'counterpoint'); ?> &rarr;</a>
-        </div>
-        
-      <?php
+        next_prev_display('prev', $prev_post->ID);
       } ?>
     </nav>
   <?php
@@ -418,19 +380,45 @@
     }
   }
   
+  // Post Header Function Call
+  // Checks for post thumbnail. If none, gets first image. Else, default class 'no-featured-image'
+  
+  function counterpoint_thumbnail_style($post_id, $img_size = 'full') {
+
+    if ( has_post_thumbnail($post_id) ) {
+    
+      $img_id = get_post_thumbnail_id($post_id);
+      $img_src = wp_get_attachment_image_src($img_id, $img_size);
+      $img_url = $img_src[0];
+      $alt_text = get_post_meta($img_id, '_wp_attachment_image_alt', true) || get_the_title($post_id);
+         
+    } else {
+      
+      // grab the first image from the post
+      $img_url = counterpoint_catch_image($post_id);
+      $alt_text = get_the_title($post_id);
+      
+    }
+    
+    if ( $img_url ) {
+      return '" style="background: #fff url(' . esc_attr( $img_url ) . '); background-position: center; background-size: cover" title="' . esc_attr( $alt_text );
+    }
+    // if no image, apply class no-featured-image
+    return ' no-featured-image" title="' . esc_attr( $alt_text );
+    
+  };
+  
   // Displays the loop
   
   function counterpoint_archive_layout($post_id, $even_or_odd) { ?>
     <li <?php post_class($even_or_odd); ?>>
       <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-        <div class="archive-thumbnail<?php echo counterpoint_thumbnail_style($post_id); ?>" >
-          <div class="post-title"><h3>
-            <?php the_title(); ?>
-          </h3></div>
-        </div>
+      <div class="archive-thumbnail<?php echo counterpoint_thumbnail_style($post_id); ?>" >
+        <?php counterpoint_posted_on(); ?>
+      </div>
       </a>
       <article class="excerpt cf">
-        <div class="posted-on"><?php counterpoint_posted_on(); ?></div>
+        <h3 class="archive-post-title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
         <?php
         
           // gets content/excerpt based on whether more tag is present
@@ -457,22 +445,30 @@
   function counterpoint_archive_loop() { ?>
     <ul id="archive">
     <?php
+    
       global $wp_query, $post;
       
       /* Loop #1 - for stickies
       ========================== */
       
+      // get an array of stickies
       $sticky = get_option('sticky_posts');
-      $first_sticky = $sticky ? $sticky[0] : false;
+      // get the first one, or set it to false if none
+      $first_sticky = $sticky ? end($sticky) : false;
       // get the posts_per_page variable (set by user)
       $ppp = get_option('posts_per_page');
+      // used later to determine where the sticky's natural placement is
       $front_page_sticky = false;
+      // first post of $main_query will be odd
+      $even = false;
       
+      // if you're on the first page of your blog and there's a sticky...
       if ( is_home() && !is_paged() && $first_sticky ) {
           
-        // First loop to display only my single, most recent sticky post
+        // get the most recent sticky post
         $most_recent_sticky_post = new WP_Query( 'p=' . $first_sticky );
         
+        // and display it
         while ($most_recent_sticky_post->have_posts()) : $most_recent_sticky_post->the_post();
           counterpoint_archive_layout($post->ID, '');
         endwhile;
@@ -486,6 +482,7 @@
       
       /*
         This part is a little convoluted, but it gets the job done.
+        Please let me know if there is a better way to do this.
       */
       
       // just a junk query used to...
@@ -495,14 +492,17 @@
       
       // determine whether the sticky is from the front page or not
       if ( $first_sticky ) {
-        foreach($junk_query->posts as $post_num=>$the_post) {
+      
+        // loop through the posts in $junk_query
+        foreach($junk_query->posts as $post_num=>$junk_post) {
           
-          // if within the first $ppp posts, it comes across the $first_sticky...
-          if ($post_num < $ppp && $the_post->ID === $first_sticky) {
+          // if it comes across the $first_sticky within the first $ppp posts...
+          if ($post_num < $ppp && $junk_post->ID === $first_sticky) {
+            // set this to true, then quit
             $front_page_sticky = true;
             break;
             
-          // otherwise...
+          // if there's no match, just quit
           } elseif ($post_num >= $ppp) {
             break;
           }
@@ -513,18 +513,13 @@
       
       // okay, now we have all the variables we need
       
+      
       // if the sticky is from the first page...
-      // add an extra post in there to avoid a gap
       if ( $first_sticky && $front_page_sticky && is_home() && !is_paged() ) {
         $cp_args = array(
+          // add an extra post in there to avoid a gap
           'posts_per_page' => $ppp + 1,
-          'ignore_sticky_posts' => 1
-        );
-      
-      // if there is a sticky but it's not from the first page...
-      // that's easy, just keep going like normal
-      } elseif ( $first_sticky && is_home() && !is_paged() ) {
-        $cp_args = array(
+          // and ignore the behavior of sticky posts
           'ignore_sticky_posts' => 1
         );
       
@@ -533,31 +528,28 @@
       } elseif ( $first_sticky && $front_page_sticky && is_home() && is_paged() ) {
         $cp_args = array(
           // offset incremented by 1
-          'offset' => ($wp_query->query_vars['paged']-1) * $ppp + 1,
+          'offset' => ($wp_query->query_vars['paged'] - 1) * $ppp + 1,
           'ignore_sticky_posts' => 1
         );
       
-      // if there are no stickies or if the sticky isn't from the front page
-      // do things normally
+      // if there are no stickies OR if the sticky isn't from the front page
+      // that's easy, just do things normally
       } else {
-        $cp_args = array();
+        $cp_args = array(
+          'ignore_sticky_posts' => 1
+        );
       }
       
-      // now, merge $cp_args arguments with defaults
-      $merged_query_args = array_merge($wp_query->query, $cp_args);
-      query_posts($merged_query_args);
+      // now for the main query
+      $main_query = new WP_Query($cp_args);
       
-      if (have_posts()) :
-        $got_sticky = false;
-        $even = false;
-        while (have_posts()) : the_post();
-          if ( !( !is_paged() && $post->ID === $first_sticky ) ) {
-            $even_or_odd = $even ? 'even-post' : 'odd-post';
-            $even = !$even;
-            counterpoint_archive_layout($post->ID, $even_or_odd);
-          }
-        endwhile;
-      endif;
+      while ($main_query->have_posts()) : $main_query->the_post();
+        if ( !( !is_paged() && $post->ID === $first_sticky ) ) {
+          $even_or_odd = $even ? 'even-post' : 'odd-post';
+          $even = !$even;
+          counterpoint_archive_layout($post->ID, $even_or_odd);
+        }
+      endwhile;
       wp_reset_query(); ?>
     </ul>
   <?php

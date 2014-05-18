@@ -20,9 +20,6 @@
   });
   
   $(window).resize(function() {
-  
-    var ph_height = $('.post-header').width() / 2.618;
-    $('.post-header').css({'height': ph_height + 'px'});
     
     // fluid video width on resize //
     var vid_width = $('article').width();

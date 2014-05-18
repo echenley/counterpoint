@@ -4,15 +4,6 @@
 		font-size: 2em;
 	}
 	
-	.post-header {
-		height: 300px;
-		padding: 0;
-	}
-
-	.archive-thumbnail {
-		padding-top: (100% / 2.618);
-	}
-	
 	.pagination {
 		padding-left: 84px;
 		padding-right: 84px;
@@ -30,5 +21,12 @@
 		> *:not(.next):not(.prev) {
 			display: inline-block;
 		}
+	}
+	
+	.archive-thumbnail, .post-thumbnail {
+		width: 70%;
+		padding-top: 70%;
+		margin-left: auto;
+		margin-right: auto;
 	}
 }

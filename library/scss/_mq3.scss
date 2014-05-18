@@ -34,7 +34,7 @@
 	}
 	
 	#footer {
-		padding: 1.2em;
+		padding: $margin-em;
 	}
 	
 	#content {
@@ -53,28 +53,31 @@
 	}
 	
 	#title {
-	    padding: 0 $desktop-vw;
+	    padding: 0 20px;
+		font-size: 2.2em;
 	}
 	
-	#post-nav,
+	.post-nav,
 	.pagination {
 		margin-top: $desktop-vw;
 	}
 	
 	#post,
 	#archive-page,
-	.post {
+	#archive .post,
+	#archive .page {
 		margin-bottom: $desktop-vw;
 	}
 	
 	#comments,
 	#reply-title {
-		margin: $desktop-vw 0;
+		margin-top: $desktop-vw;
 	}
 	
-	#archive .post {
-		// sets width to 50% minus a center-margin of $desktop-margin
-	    width: 50% - (50% * $desktop-margin / ($content-width - (2 * $desktop-margin)));
+	#archive .post,
+	#archive .page {
+		// sets width to 50% minus a center-margin of $percent-margin
+	    width: 50% - (50% * $percent-margin / ($content-width - (2 * $percent-margin)));
 	}
 
 
@@ -118,7 +121,7 @@
 	
 	#article-widget {
 		@extend %display-block-3;
-		margin-top: 1.2em;
+		margin-top: $margin-em;
 		padding: 1em 0;
 		color: #666;
 		background: $highlight;
@@ -128,8 +131,11 @@
 		}
 	}
 	
-	#title {
-		font-size: 2.2em;
+	.post-nav h3 {
+		font-size: 1.6em;
 	}
 	
+	#comments {
+		font-size: 2em;
+	}
 }

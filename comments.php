@@ -18,7 +18,7 @@
   }
   
 if ( have_comments() ) : ?>
-  <h2 id="comments"><?php comments_number( __( '<span>No</span> Responses', 'counterpoint' ), __( '<span>One</span> Response', 'counterpoint' ), _n( '<span>%</span> Response', '<span>%</span> Responses', get_comments_number(), 'counterpoint' ) );?> to &#8220;<?php the_title(); ?>&#8221;</h2>
+  <h3 id="comments"><?php comments_number( __( '<span>No</span> Responses', 'counterpoint' ), __( '<span>One</span> Response', 'counterpoint' ), _n( '<span>%</span> Response', '<span>%</span> Responses', get_comments_number(), 'counterpoint' ) );?> to &#8220;<?php the_title(); ?>&#8221;</h3>
   <nav class="pagination cf"><?php paginate_comments_links( array('prev_text' => '&larr; Previous', 'next_text' => 'Next &rarr;') ); ?></nav>
   <ol class="commentlist">
     <?php wp_list_comments( array('type' => 'all', 'callback' => 'counterpoint_comments') ); ?>
@@ -50,6 +50,7 @@ $fields = array(
 comment_form(
   array(
     'fields' => $fields,
+    'logged_in_as' => '<div class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>' ), admin_url( 'profile.php' ), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( ) ) ) ) . '</div>',
     'comment_field' =>
       '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment*', 'noun', 'counterpoint' ) . '</label><textarea id="comment" placeholder="Enter Your Comment Here*" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>',
     'label_submit' => __('Post Comment &rarr;', 'counterpoint')
