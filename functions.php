@@ -267,7 +267,7 @@
         ?>
       
         <div class="<?php echo $nextorprev; ?>-post">
-          <a href="<?php echo esc_url($np_url); ?>" title="Next Post: <?php echo esc_attr($np_title); ?>" class="cf">
+          <a href="<?php echo esc_url($np_url); ?>" title="<?php echo $nextorprev; ?> Post: <?php echo esc_attr($np_title); ?>" class="cf">
             <div class="<?php echo $nextorprev; ?>-post-thumb<?php echo counterpoint_thumbnail_style($post_id); ?>"></div>
             <h3><?php echo esc_html($np_title); ?></h3>
           </a>
