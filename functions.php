@@ -390,7 +390,10 @@
       $img_id = get_post_thumbnail_id($post_id);
       $img_src = wp_get_attachment_image_src($img_id, $img_size);
       $img_url = $img_src[0];
-      $alt_text = get_post_meta($img_id, '_wp_attachment_image_alt', true) || get_the_title($post_id);
+      $alt_text = get_post_meta($img_id, '_wp_attachment_image_alt', true);
+      if ( !$alt_text ) {
+        $alt_text = get_the_title($post_id);
+      }
          
     } else {
       
@@ -428,7 +431,7 @@
           } else {
             echo get_the_excerpt();
           }
-          echo ' &hellip; <a class="more-link" href="' . get_the_permalink() . '" title="' . get_the_title() . '">' . __('Keep reading &rarr;', 'counterpoint') . '</a>';
+          echo ' &hellip; <a class="more-link" href="' . get_the_permalink() . '" title="Keep reading ' . get_the_title() . '">' . __('Keep reading &rarr;', 'counterpoint') . '</a>';
           
         ?>
       </article>

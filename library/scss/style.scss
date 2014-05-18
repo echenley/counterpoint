@@ -25,7 +25,7 @@ $content-width:   71%;
 
 // Margins
 $percent-margin:  5%;
-$desktop-vw:      5vw; // consistency in spite of container size
+$desktop-vw:      5vw;   // consistency regardless of container width
 $max-margin:      54px;  // used at max breakpoint
 $margin-em:       1.4em;
 
