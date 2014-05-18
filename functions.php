@@ -265,14 +265,14 @@
         $np_url = get_permalink($post_id);
         $np_title = get_the_title($post_id);
         if ($nextorprev === 'next') {
-          $nextorprev = 'Next';
+          $capitalized = 'Next';
         } else {
-          $nextorprev = 'Previous';
+          $capitalized = 'Previous';
         }
         ?>
       
         <div class="<?php echo $nextorprev; ?>-post">
-          <a href="<?php echo esc_url($np_url); ?>" title="<?php echo $nextorprev; ?> Post: <?php echo esc_attr($np_title); ?>" class="cf">
+          <a href="<?php echo esc_url($np_url); ?>" title="<?php echo $capitalized; ?> Post: <?php echo esc_attr($np_title); ?>" class="cf">
             <div class="<?php echo $nextorprev; ?>-post-thumb<?php echo counterpoint_thumbnail_style($post_id); ?>"></div>
             <h3><?php echo esc_html($np_title); ?></h3>
           </a>
