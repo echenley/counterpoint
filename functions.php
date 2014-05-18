@@ -404,7 +404,7 @@
     }
     
     if ( $img_url ) {
-      return '" style="background: #fff url(' . esc_attr( $img_url ) . '); background-position: center; background-size: cover" title="' . esc_attr( $alt_text );
+      return '" style="background: #fff url(' . esc_attr( $img_url ) . '); background-position: center; background-size: cover" title="Image of: ' . esc_attr( $alt_text );
     }
     // if no image, apply class no-featured-image
     return ' no-featured-image" title="' . esc_attr( $alt_text );

@@ -124,7 +124,6 @@
 		margin-top: $margin-em;
 		padding: 1em 0;
 		color: #666;
-		background: $highlight;
 		@extend %text-align-center-3;
 		&:empty {
 			display: none;
