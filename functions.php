@@ -264,7 +264,11 @@
       function next_prev_display($nextorprev, $post_id) { 
         $np_url = get_permalink($post_id);
         $np_title = get_the_title($post_id);
-        $nextorprev = $nextorprev === 'next' ? 'Next' : 'Previous';
+        if ($nextorprev === 'next') {
+          $nextorprev = 'Next';
+        } else {
+          $nextorprev = 'Previous';
+        }
         ?>
       
         <div class="<?php echo $nextorprev; ?>-post">
