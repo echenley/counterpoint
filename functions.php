@@ -451,124 +451,141 @@
     <?php
     
       global $wp_query, $post;
-      
-      /* Loop #1 - for stickies
-      ========================== */
-      
-      // get an array of stickies
-      $sticky = get_option('sticky_posts');
-      // get the first one, or set it to false if none
-      $first_sticky = $sticky ? end($sticky) : false;
-      // get the posts_per_page variable (set by user)
-      $ppp = get_option('posts_per_page');
-      // used later to determine where the sticky's natural placement is
-      $front_page_sticky = false;
       // first post of $main_query will be odd
       $even = false;
       
-      // if you're on the first page of your blog and there's a sticky...
-      if ( is_home() && !is_paged() && $first_sticky ) {
-          
-        // get the most recent sticky post
-        $most_recent_sticky_post = new WP_Query( 'p=' . $first_sticky );
-        
-        // and display it
-        while ($most_recent_sticky_post->have_posts()) : $most_recent_sticky_post->the_post();
-          counterpoint_archive_layout($post->ID, '', true);
-        endwhile;
-          
-      }
-      wp_reset_postdata();
+      // only do this crazy double-loop business on the home page of your blog
+      if ( is_home() ) {
       
+        /* Loop #1 - for stickies
+        ========================== */
       
-      /* Loop #2 - for the rest
-      ========================== */
-      
-      /*
-        Goal: always even number of posts per page, NOT including sticky
+        // get an array of stickies
+        $sticky = get_option('sticky_posts');
+        // get the first one, or set it to false if none
+        $first_sticky = $sticky ? end($sticky) : false;
+        // get the posts_per_page variable (set by user)
+        $ppp = get_option('posts_per_page');
+        // used later to determine where the sticky's natural placement is
+        $front_page_sticky = false;
         
-        Caveats: (because WP's handling of stickies is weird)
         
-          * If sticky is from front page, skip it, get an extra post, and offset the rest by 1
-          * If not, continue normally and DO NOT skip the sticky
-          * Additional stickies are unformatted (this is done with css :first-child pseudo-class)
-        
-        So, I need to determine where the sticky came from. Best I could come up with was to do
-        another blank loop and compare it to the first 'n' posts, where 'n' is the user-defined
-        posts-per-page.
-        
-        I know that this is convoluted, but to my knowledge, it is necessary to do what I want.
-        
-        Please let me know if there is a better way to do this.
-      */
-      
-      // so, this is the junk query used to...
-      $junk_query = new WP_Query(array(
-        // do not prepend stickies to query
-        'ignore_sticky_posts' => 1
-      ));
-      
-      // determine whether the sticky is from the front page or not
-      if ( $first_sticky ) {
-      
-        // loop through the posts in $junk_query
-        foreach($junk_query->posts as $post_num=>$junk_post) {
-          
-          // if it comes across the $first_sticky within the first $ppp posts...
-          if ($post_num < $ppp && $junk_post->ID === $first_sticky) {
-            // set this to true, then quit
-            $front_page_sticky = true;
-            break;
+        //  if a sticky exists...
+        if ( $first_sticky && is_front_page() && !is_paged() ) {
             
-          // if there's no match, just quit
-          } elseif ($post_num >= $ppp) {
-            break;
+          // get the most recent sticky post
+          $most_recent_sticky_post = new WP_Query( 'p=' . $first_sticky );
+          
+          // and display it
+          while ($most_recent_sticky_post->have_posts()) : $most_recent_sticky_post->the_post();
+            counterpoint_archive_layout($post->ID, '', true);
+          endwhile;
+            
+        }
+        wp_reset_postdata();
+        
+        
+        /* Loop #2 - for the rest
+        ========================== */
+        
+        /*
+          Goal: always even number of posts per page, NOT including sticky
+          
+          Caveats: (because WP's handling of stickies is weird)
+          
+            * If sticky is from front page, skip it, get an extra post, and offset the rest by 1
+            * If not, continue normally and DO NOT skip the sticky
+            * Additional stickies are unformatted (this is done with css :first-child pseudo-class)
+          
+          So, I need to determine where the sticky came from. Best I could come up with was to do
+          another blank loop and compare it to the first 'n' posts, where 'n' is the user-defined
+          posts-per-page.
+          
+          I know that this is convoluted, but to my knowledge, it is necessary to do what I want.
+          
+          Please let me know if there is a better way to do this.
+        */
+        
+        // so, this is the junk query used to...
+        $junk_query = new WP_Query(array(
+          // do not prepend stickies to query
+          'ignore_sticky_posts' => 1
+        ));
+        
+        // determine whether the sticky is from the front page or not
+        if ( $first_sticky ) {
+        
+          // loop through the posts in $junk_query
+          foreach($junk_query->posts as $post_num=>$junk_post) {
+            
+            // if it comes across the $first_sticky within the first $ppp posts...
+            if ($post_num < $ppp && $junk_post->ID === $first_sticky) {
+              // set this to true, then quit
+              $front_page_sticky = true;
+              break;
+              
+            // if there's no match, just quit
+            } elseif ($post_num >= $ppp) {
+              break;
+            }
           }
         }
-      }
-      wp_reset_postdata();
+        wp_reset_postdata();
+        
+        // okay, now we have all the variables we need
+        
+        
+        // if the sticky is from the first page...
+        if ( $first_sticky && $front_page_sticky && is_home() && !is_paged() ) {
+          $cp_args = array(
+            // add an extra post in there to avoid a gap
+            'posts_per_page' => $ppp + 1,
+            // and ignore the behavior of sticky posts
+            'ignore_sticky_posts' => 1
+          );
+        
+        // if there is a front-page sticky and you're NOT on the front page...
+        // set an offset to account for the extra post
+        } elseif ( $first_sticky && $front_page_sticky && is_home() && is_paged() ) {
+          $cp_args = array(
+            // offset incremented by 1
+            'offset' => ($wp_query->query_vars['paged'] - 1) * $ppp + 1,
+            'ignore_sticky_posts' => 1
+          );
+        
+        // if there are no stickies OR if the sticky isn't from the front page
+        // that's easy, just do things normally
+        } else {
+          $cp_args = array(
+            'ignore_sticky_posts' => 1
+          );
+        }
+        
+        // now for the main query
+        $main_query = new WP_Query($cp_args);
+        
+        while ($main_query->have_posts()) : $main_query->the_post();
+          if ( !( !is_paged() && $post->ID === $first_sticky ) ) {
+            $even_or_odd = $even ? 'even-post' : 'odd-post';
+            $even = !$even;
+            counterpoint_archive_layout($post->ID, $even_or_odd);
+          }
+        endwhile;
+        wp_reset_postdata();
       
-      
-      // okay, now we have all the variables we need
-      
-      
-      // if the sticky is from the first page...
-      if ( $first_sticky && $front_page_sticky && is_home() && !is_paged() ) {
-        $cp_args = array(
-          // add an extra post in there to avoid a gap
-          'posts_per_page' => $ppp + 1,
-          // and ignore the behavior of sticky posts
-          'ignore_sticky_posts' => 1
-        );
-      
-      // if there is a front-page sticky and you're NOT on the front page...
-      // set an offset to account for the extra post
-      } elseif ( $first_sticky && $front_page_sticky && is_home() && is_paged() ) {
-        $cp_args = array(
-          // offset incremented by 1
-          'offset' => ($wp_query->query_vars['paged'] - 1) * $ppp + 1,
-          'ignore_sticky_posts' => 1
-        );
-      
-      // if there are no stickies OR if the sticky isn't from the front page
-      // that's easy, just do things normally
       } else {
-        $cp_args = array(
-          'ignore_sticky_posts' => 1
-        );
-      }
       
-      // now for the main query
-      $main_query = new WP_Query($cp_args);
-      
-      while ($main_query->have_posts()) : $main_query->the_post();
-        if ( !( !is_paged() && $post->ID === $first_sticky ) ) {
+        // do basic query on any page that isn't the blog home()
+        // e.g. archive/search etc.
+
+        while (have_posts()) : the_post();
           $even_or_odd = $even ? 'even-post' : 'odd-post';
           $even = !$even;
           counterpoint_archive_layout($post->ID, $even_or_odd);
-        }
-      endwhile;
-      wp_reset_postdata(); ?>
+        endwhile;
+        
+      } // end if is_front_page()
+      ?>
     </ul>
   <?php
   }

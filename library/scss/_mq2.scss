@@ -68,4 +68,8 @@
 		border-right: 2px solid $primary-color;
 		border-bottom-right-radius: 10px;
 	}
+	
+	.wp-caption-text {
+		overflow: hidden;
+	}
 }

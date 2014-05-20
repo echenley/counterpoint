@@ -4,21 +4,22 @@ Counterpoint Changelog
 Author:     Evan Henley
 Author URI: http://henleyedition.com
 
-May 17, 2014
+May 20, 2014
 ============
   
-  * Slight style differences (posted-on vs. post-meta)
-  * CSS bug fixes (e.g. using both .page AND .post so search results which include pages don't break everything
+  * Some minor style differences (.posted-on vs. .post-meta)
   * Reshuffled headings (h1-h6) to be more SEO friendly
   * Removed sidebar widget (not versatile enough)
 
   stylesheets
   -----------
     * Revamped post-headers, next/previous post navigation, and front-page styles
+    * Bug fixes (e.g. using both .page AND .post so search results which include pages don't break everything)
 
   functions.php
   -------------
     * Revised archive_loops to fix flaws (theme mods need to check this hack!)
+    * Replaced wp_reset_query() with wp_reset_postdata()
     * Rewrote counterpoint_adjacent_posts() with new markup for the styles
     
   single.php, page.php, archive-page.php
