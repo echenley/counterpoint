@@ -536,7 +536,7 @@
         
         
         // if the sticky is from the first page...
-        if ( $first_sticky && $front_page_sticky && is_home() && !is_paged() ) {
+        if ( $first_sticky && $front_page_sticky && !is_paged() ) {
           $cp_args = array(
             // add an extra post in there to avoid a gap
             'posts_per_page' => $ppp + 1,
@@ -546,7 +546,7 @@
         
         // if there is a front-page sticky and you're NOT on the front page...
         // set an offset to account for the extra post
-        } elseif ( $first_sticky && $front_page_sticky && is_home() && is_paged() ) {
+        } elseif ( $first_sticky && $front_page_sticky && is_paged() ) {
           $cp_args = array(
             // offset incremented by 1
             'offset' => ($wp_query->query_vars['paged'] - 1) * $ppp + 1,
