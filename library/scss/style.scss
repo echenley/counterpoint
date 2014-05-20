@@ -27,7 +27,7 @@ $content-width:   71%;
 $percent-margin:  5%;
 $desktop-vw:      5vw;   // consistency regardless of container width
 $max-margin:      54px;  // used at max breakpoint
-$margin-em:       1.4em;
+$margin-em:       1.3em;
 
 
 /****************************************
@@ -584,13 +584,15 @@ h6 {
 	Front-Page, Archives
 ****************************************/
 
-
-
 #archive .post,
 #archive .page {
 	width: 100%;
 	margin-bottom: $max-margin;
 }
+
+#archive hr {
+		margin: $max-margin 0;
+	}
 
 .archive-post-title {
 	margin: 0 0 30px 0;
@@ -622,6 +624,7 @@ h6 {
 }
 
 .tags {
+	@extend %highlight-box;
 	margin-top: $margin-em;
 	font-size: $margin-em * (2/3);
 }
@@ -638,7 +641,7 @@ h6 {
 
 // these are <h3> tags
 #comments,
-#reply-title {
+.comment-reply-title {
 	margin: $percent-margin 0 20px 0;
 	@extend %standard-bottom-border;
 }
@@ -647,12 +650,17 @@ h6 {
 	font-size: 1.8em;
 }
 
-#reply-title {
+.comment-reply-title {
 	margin-bottom: 10px;
+	font-size: 1.7em;
 }
 
 .logged-in-as {
 	margin: 10px 0 $margin-em 0;
+}
+
+.fn {
+	font-weight: bold;
 }
 
 .commentlist {
@@ -1160,16 +1168,6 @@ input[type=submit], input[type=submit]:visited {
 
 #article-widget {
 	@extend %standard-margin-em;
-}
-
-#sidebar-widget {
-	width: 100%;
-	position: relative;
-	margin-top: $margin-em;
-	color: darken($line-color, 30%);
-	* {
-		font-size: 0.9em;
-	}
 }
 
 #footer-widget {

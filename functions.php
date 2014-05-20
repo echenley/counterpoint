@@ -158,8 +158,7 @@
     wp_enqueue_style('counterpoint-style', get_template_directory_uri() . '/library/css/style.css');
       
     // Javascript //
-    wp_enqueue_script('counterpoint-scripts', get_template_directory_uri() . '/library/js/scripts-min.js',
-      array('jquery'), '', true);
+    wp_enqueue_script('counterpoint-scripts', get_template_directory_uri() . '/library/js/scripts-min.js',array('jquery'),'',true);
 
     if ( is_singular() && comments_open() && get_option('thread_comments') )
       wp_enqueue_script( 'comment-reply' );
@@ -167,15 +166,6 @@
   
   
   // Register Widget Space //
-  register_sidebar(array(
-    'name' => __('Sidebar widget', 'counterpoint'),
-    'id'   => 'sidebar-widget',
-    'description'   => __('Area at the bottom of the sidebar.', 'counterpoint'),
-    'before_widget' => '<div id="sidebar-widget" class="widget %2$s">',
-    'after_widget'  => '</div>',
-    'before_title'  => '<h5>',
-    'after_title'   => '</h5>'
-  ));
   
   register_sidebar(array(
     'name' => __('Footer Widget', 'counterpoint'),
@@ -230,7 +220,7 @@
    $GLOBALS['comment'] = $comment; ?>
     <li <?php comment_class(); ?>>
       <div id="comment-<?php comment_ID(); ?>">
-        <header class="comment-author vcard">
+        <header class="comment-author vcard cf">
           <img data-gravatar="http://www.gravatar.com/avatar/<?php echo md5( get_comment_author_email() ); ?>?s=64" class="load-gravatar avatar avatar-48 photo" height="32" width="32" src="<?php echo get_template_directory_uri(); ?>/library/images/nothing.png" />
           <div class="comment-author-info"><?php printf('<cite class="fn">%s</cite>', get_comment_author_link()); ?>
           <?php edit_comment_link(__('Edit', 'counterpoint'), ' &#183; ', ''); ?>
@@ -418,7 +408,7 @@
   
   // Displays the loop
   
-  function counterpoint_archive_layout($post_id, $even_or_odd) { ?>
+  function counterpoint_archive_layout($post_id, $even_or_odd, $sticky = false) { ?>
     <li <?php post_class($even_or_odd); ?>>
       <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
       <div class="archive-thumbnail<?php echo counterpoint_thumbnail_style($post_id); ?>" >
@@ -430,6 +420,7 @@
         <?php
         
           // gets content/excerpt based on whether more tag is present
+          $post = get_post($post_id);
           $ismore = @strpos( $post->post_content, '<!--more-->');
           if ($ismore) {
             echo get_the_content('');
@@ -445,7 +436,12 @@
         <?php the_tags(); ?>
       </footer>
     </li>
-  <?php }
+    
+    <?php
+    if ($sticky) {
+       echo '<hr>';
+    }
+  }
   
 
   // Main Index/Archive Loop Function (index.php, archive.php, search.php, tag.php, category.php)
@@ -478,23 +474,37 @@
         
         // and display it
         while ($most_recent_sticky_post->have_posts()) : $most_recent_sticky_post->the_post();
-          counterpoint_archive_layout($post->ID, '');
+          counterpoint_archive_layout($post->ID, '', true);
         endwhile;
           
       }
-      wp_reset_query();
+      wp_reset_postdata();
       
       
       /* Loop #2 - for the rest
       ========================== */
       
       /*
-        This part is a little convoluted, but it gets the job done.
+        Goal: always even number of posts per page, NOT including sticky
+        
+        Caveats: (because WP's handling of stickies is weird)
+        
+          * If sticky is from front page, skip it, get an extra post, and offset the rest by 1
+          * If not, continue normally and DO NOT skip the sticky
+          * Additional stickies are unformatted (this is done with css :first-child pseudo-class)
+        
+        So, I need to determine where the sticky came from. Best I could come up with was to do
+        another blank loop and compare it to the first 'n' posts, where 'n' is the user-defined
+        posts-per-page.
+        
+        I know that this is convoluted, but to my knowledge, it is necessary to do what I want.
+        
         Please let me know if there is a better way to do this.
       */
       
-      // just a junk query used to...
+      // so, this is the junk query used to...
       $junk_query = new WP_Query(array(
+        // do not prepend stickies to query
         'ignore_sticky_posts' => 1
       ));
       
@@ -516,7 +526,7 @@
           }
         }
       }
-      wp_reset_query();
+      wp_reset_postdata();
       
       
       // okay, now we have all the variables we need
@@ -558,7 +568,7 @@
           counterpoint_archive_layout($post->ID, $even_or_odd);
         }
       endwhile;
-      wp_reset_query(); ?>
+      wp_reset_postdata(); ?>
     </ul>
   <?php
   }

@@ -10,6 +10,7 @@ May 17, 2014
   * Slight style differences (posted-on vs. post-meta)
   * CSS bug fixes (e.g. using both .page AND .post so search results which include pages don't break everything
   * Reshuffled headings (h1-h6) to be more SEO friendly
+  * Removed sidebar widget (not versatile enough)
 
   stylesheets
   -----------

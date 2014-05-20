@@ -104,19 +104,15 @@
 	    Other
 	****************************************/	
 	
-	#header-widget {
-		@extend %display-block-3;
-		float: right;
-		height: 74px;
-		line-height: 74px;
+	#header {
 		overflow: hidden;
 	}
 	
-	#sidebar-widget {
-		position: absolute;
-		bottom: 0;
-		color: $line-color;
-		text-align: center;
+	#header-widget {
+		@extend %display-block-3;
+		float: right;
+		overflow: hidden;
+		line-height: 80px;
 	}
 	
 	#article-widget {

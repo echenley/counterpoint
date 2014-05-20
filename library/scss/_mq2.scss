@@ -30,14 +30,20 @@
 		.sticky:first-child {
 			width: 100%;
 			
+			.excerpt {
+				margin-top: 0;
+			}
+			
 			> a:hover + article h3 {
 				border-color: $link-hover;
 			}
+			
 			.archive-thumbnail {
 				float: left;
 				margin-right: $percent-margin;
 				@extend %thumbnail-style;
 			}
+			
 			.archive-post-title {
 				clear: none;
 				font-size: 2em;
