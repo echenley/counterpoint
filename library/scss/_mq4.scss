@@ -6,28 +6,20 @@
 		width: $container-width;
 	}
 	
-	#content {
-    	width: floor(($content-width / 100%) * $container-width);
-    }
-	
-    #sidebar { 
-    	width: ceil(($nav-width / 100%) * $container-width);
-    }
 
 	/****************************************
 	    Margin/Padding Resets
 	****************************************/
 	
-	#header, #footer {
+	#content-container,
+	#header,
+	#footer {
 		margin: 0 $max-margin;
 	}
 	
-	#content {
-		padding: $max-margin $max-margin $max-margin 0;
-	}
-	
+	#content,
 	#sidebar {
-		margin: $max-margin;
+		padding: $max-margin 0;
 	}
 	
 	.archive-header {
@@ -46,8 +38,7 @@
 		margin-bottom: $max-margin;
 	}
 	
-	#comments,
-	#reply-title {
+	#comments{
 		margin-top: $max-margin;
 	}
 	

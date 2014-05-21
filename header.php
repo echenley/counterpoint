@@ -16,3 +16,4 @@
         <?php dynamic_sidebar('header-right'); ?>
         <a href="#" class="menu-toggle">&#9776;</a>
       </header>
+      <div id="content-container" class="cf">

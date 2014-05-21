@@ -10,11 +10,13 @@ May 20, 2014
   * Some minor style differences (.posted-on vs. .post-meta)
   * Reshuffled headings (h1-h6) to be more SEO friendly
   * Removed sidebar widget (not versatile enough)
+  * Better widget behavior
 
   stylesheets
   -----------
     * Revamped post-headers, next/previous post navigation, and front-page styles
     * Bug fixes (e.g. using both .page AND .post so search results which include pages don't break everything)
+    * Improved footer-widget styling
 
   functions.php
   -------------
@@ -25,6 +27,13 @@ May 20, 2014
   single.php, page.php, archive-page.php
   --------------------------------------
     * Changed post-header markup
+    
+  scripts.js
+  ----------
+    * Improved sidebar behavior
+      * No longer overlaps footer
+      * Positioned on scroll with javascript
+      * No javascript, no problem, it's just positioned absolutely
     
 
 May 14, 2014

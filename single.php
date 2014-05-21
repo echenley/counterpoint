@@ -17,7 +17,6 @@
         <?php counterpoint_categories(); ?>
       </section>
       <?php
-      wp_link_pages();
       the_content();
       wp_link_pages();
     endwhile; ?>

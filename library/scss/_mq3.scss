@@ -14,8 +14,8 @@
 	
 	%sidebar-3 {
 		@extend %display-block-3;
-		position: fixed;
-		bottom: 0;
+		position: absolute;
+		float: left;
 		width: $nav-width;
 		background: transparent;
 	}
@@ -37,15 +37,18 @@
 		padding: $margin-em;
 	}
 	
+	#content-container {
+		margin: 0 $desktop-vw;
+	}
+	
 	#content {
 		@extend %content;
-		padding: $desktop-vw $desktop-vw $desktop-vw 0;
+		padding: $desktop-vw 0;
 	}
 	
 	#sidebar {
 		@extend %sidebar-3;
-		margin: $desktop-vw;
-		padding: 0;
+		padding: $desktop-vw 0;
 	}
 	
 	.archive-header {
@@ -69,8 +72,7 @@
 		margin-bottom: $desktop-vw;
 	}
 	
-	#comments,
-	#reply-title {
+	#comments {
 		margin-top: $desktop-vw;
 	}
 	
@@ -108,14 +110,14 @@
 		overflow: hidden;
 	}
 	
-	#header-widget {
+	.header-widget {
 		@extend %display-block-3;
 		float: right;
 		overflow: hidden;
 		line-height: 80px;
 	}
 	
-	#article-widget {
+	.article-widget {
 		@extend %display-block-3;
 		@extend %text-align-center-3;
 		&:empty {

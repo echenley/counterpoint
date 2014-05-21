@@ -20,8 +20,8 @@ $line-color:      #dedede;  // borders and <hr>
 $breakpoints:     (480px, 640px, 900px, 1100px);
 
 // Column widths
-$nav-width:       19%;
-$content-width:   71%;
+$nav-width:       21%;
+$content-width:   74%;
 
 // Margins
 $percent-margin:  5%;
@@ -174,6 +174,10 @@ body {
 	height: 80px;
 }
 
+#content-container {
+	position: relative;
+}
+
 %sidebar {
 	position: absolute;
 	width: 100%;
@@ -187,7 +191,7 @@ body {
 }
 
 %footer {
-	clear: both;
+	@extend %clear-both;
 }
 
 
@@ -196,7 +200,7 @@ body {
 ****************************************/
 
 #title, h1,h2,h3,h4,h5,h6 {
-	clear: both;
+	@extend %clear-both;
 	font-variant: small-caps;
 	font-weight: normal;
 	text-align: left;
@@ -386,6 +390,7 @@ h6 {
 // Adjacent Posts
 .post-nav {
 	margin: $max-margin 0;
+	@extend %clear-both;
 	h3 {
 		margin: 0;
 		padding: 0;
@@ -398,6 +403,7 @@ h6 {
 
 .next-post-thumb,
 .prev-post-thumb {
+	position: relative;
 	width: 30%;
 	border-radius: 50%;
 	padding-top: 30%;
@@ -410,7 +416,6 @@ h6 {
 
 .next-post, .prev-post {
 	width: 50% - (50% * $percent-margin / (100% - (2 * $percent-margin)));
-	
 	a {
 		display: block;
 		color: $primary-color;
@@ -453,7 +458,7 @@ h6 {
 	position: relative;
 	@extend %clear-both;
 	@extend %bg-highlight;
-	text-align: center;
+	@extend %text-align-center;
 	padding: 0.2em 0.6em;
 	> * {
 		display: inline-block;
@@ -511,7 +516,8 @@ h6 {
 	Post Headers
 ****************************************/
 
-.archive-header, .attachment-header {
+.archive-header,
+.attachment-header {
 	width: 100%;
 	padding: $margin-em;
 	@extend %bg-highlight;
@@ -534,30 +540,29 @@ h6 {
 	margin-bottom: $margin-em;
 }
 
-.timestamp {
-	position: absolute;
-	bottom: -2px;
-	background: rgba(#000, 0.6);
-	padding: 0.4em 0 $margin-em * (2/3) 0;
-	width: 100%;
-	text-align: center;
-	color: $bg-color;
-	font-style: italic;
+.post-thumbnail,
+.archive-thumbnail {
+	 .timestamp {
+		position: absolute;
+		bottom: -2px;
+		background: rgba(#000, 0.6);
+		padding: 0.4em 0 $margin-em * (2/3) 0;
+		width: 100%;
+		@extend %text-align-center;
+		color: $bg-color;
+		font-style: italic;
+	}
 }
 
 .post-meta {
 	@extend %display-block;
 	margin-bottom: $margin-em;
-	overflow: hidden;
 	text-align: left;
-	.timestamp {
-		float: right;
-		margin-left: 0.6em;
-	}
 }
 
 #attachment .post-meta {
 	background: none;
+	@extend %text-align-center;
 }
 
 
@@ -642,7 +647,7 @@ h6 {
 // these are <h3> tags
 #comments,
 .comment-reply-title {
-	margin: $percent-margin 0 20px 0;
+	margin: 20px 0;
 	@extend %standard-bottom-border;
 }
 
@@ -722,7 +727,7 @@ h6 {
 	}
 	
 	#cancel-comment-reply-link {
-		font-size: $margin-em * (2/3);
+		font-size: 0.6em;
 		font-weight: normal;
 		font-variant: normal;
 		&:before {
@@ -779,7 +784,6 @@ h6 {
 		margin-bottom: 0.6em;
 		border: none;
 		padding: 0;
-		font-weight: bold;
 	}
 	.form-submit {
 		margin-bottom: 0;
@@ -805,9 +809,6 @@ h6 {
 	#searchform {
 		@extend %standard-margin-em;
 		overflow: hidden;
-		input {
-			width: 100%;
-		}
 	}
 	ul {
 		margin: 0;
@@ -936,10 +937,11 @@ hr {
 		position: absolute;
 		top: 50%;
 		width: 100%;
-		text-align: center;
+		@extend %text-align-center;
 		line-height: 0;
 		color: #666;
 		font-style: italic;
+		white-space: nowrap;
 	}
 }
 
@@ -994,6 +996,10 @@ img.size-full {
 
 .alert {
 	@extend %highlight-box;
+}
+
+.wp-audio-shortcode {
+	@extend %clear-both;
 }
 
 
@@ -1053,7 +1059,7 @@ table {
 	border-collapse: collapse;
 	font-size: 0.9em;
 	th, td {
-		padding: 0.6em $margin-em;
+		padding: 0.6em;
 		border-bottom: 1px solid $line-color;
 		text-align: left;
 	}
@@ -1123,9 +1129,8 @@ textarea {
 	}
 }
 
-form.post-password-form {
+.post-password-form {
 	@extend %clear-both;
-	text-align: center;
 	input[type=password] {
 		width: 200px;
 		@extend %max-width;
@@ -1161,17 +1166,27 @@ input[type=submit], input[type=submit]:visited {
 	Widgets
 ****************************************/
 
-#header-widget,
-#article-widget {
+.header-widget,
+.article-widget {
 	@extend %hidden;
 }
 
-#article-widget {
+.article-widget {
 	@extend %standard-margin-em;
 }
 
-#footer-widget {
-	float: right;
+.footer-widget {
+	width: 100%;
+	margin-bottom: $max-margin;
+	overflow: hidden;
+	h4 {
+		@extend %text-align-center;
+		padding-bottom: 20px;
+	}
+	
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 

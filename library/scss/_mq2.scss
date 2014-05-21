@@ -72,4 +72,16 @@
 	.wp-caption-text {
 		overflow: hidden;
 	}
+	
+	.footer-widget {
+		float: left;
+		width: 30%;
+		max-width: 30%;
+		margin: 0 $percent-margin 0 0;
+		&:last-child {
+			float: right;
+			margin-right: 0;
+			width: auto;
+		}
+	}
 }

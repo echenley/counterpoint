@@ -13,7 +13,6 @@
     </header>
   <?php
     while(have_posts()): the_post();
-      wp_link_pages();
       the_content();
       wp_link_pages();
     endwhile; ?>

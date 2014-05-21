@@ -170,8 +170,8 @@
   register_sidebar(array(
     'name' => __('Footer Widget', 'counterpoint'),
     'id'   => 'footer-widget',
-    'description'   => __('Area in the footer.', 'counterpoint'),
-    'before_widget' => '<div id="footer-widget" class="widget %2$s">',
+    'description'   => __('Area in the footer for 3 widgets.', 'counterpoint'),
+    'before_widget' => '<div class="footer-widget widget %2$s">',
     'after_widget'  => '</div>',
     'before_title'  => '<h4>',
     'after_title'   => '</h4>'
@@ -181,7 +181,7 @@
     'name' => __('Article Bottom', 'counterpoint'),
     'id'   => 'article-widget',
     'description'   => __('Area at the bottom of each post, before the comments.', 'counterpoint'),
-    'before_widget' => '<div id="article-widget" class="widget %2$s">',
+    'before_widget' => '<div class="article-widget widget %2$s">',
     'after_widget'  => '</div>',
     'before_title'  => '<h4>',
     'after_title'   => '</h4>'
@@ -190,8 +190,8 @@
   register_sidebar(array(
     'name' => __('Header Right', 'counterpoint'),
     'id'   => 'header-widget',
-    'description'   => __('Area at the right side of the header.', 'counterpoint'),
-    'before_widget' => '<div id="header-widget" class="widget %2$s">',
+    'description'   => __('Area at the right side of the header. Perfect for social icons, search bar, or a site tagline.', 'counterpoint'),
+    'before_widget' => '<div class="header-widget widget %2$s">',
     'after_widget'  => '</div>',
     'before_title'  => '<h4>',
     'after_title'   => '</h4>'

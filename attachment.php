@@ -4,7 +4,7 @@
 <section id="content">
 
   <header class="attachment-header">
-    <h3><?php printf( __( 'Attachment: %s', 'counterpoint' ), get_the_title() ); ?></h3>
+    <h2><?php printf( __( 'Attachment: %s', 'counterpoint' ), get_the_title() ); ?></h2>
   </header>
     
   <article id="attachment" <?php post_class(); ?>>

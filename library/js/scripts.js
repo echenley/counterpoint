@@ -1,6 +1,7 @@
 (function($) {
   
-  // Responsive Gravatar Images //
+  /* Responsive Gravatar Images
+  ============================== */
   var responsive_viewport = $(window).width();
   if (responsive_viewport > 640) {
     $('.comment img[data-gravatar]').each(function(){
@@ -31,57 +32,70 @@
   }).resize();
   
 
-  var get_header_heights = function() {
-    var header_height   = $('#header').outerHeight(),
-        admin_bar       = $('#wpadminbar').outerHeight() || 0,
-        combined_height = header_height + admin_bar;
-    return [header_height, admin_bar, combined_height];
-  };
+  /* Sidebar Behavior
+  ========================== */
   
+  // No sidebar, skip it //
+  if( $(window).width() >= 900 ) {
   
-  // Need $(document).ready() in order to interact with admin bar //
-  $(document).ready(function() {
-    
-    $('#sidebar').css({ top: get_header_heights()[2] });
-
-    // Sidebar Behavior //
     $(window).scroll(function() {
     
-      // No sidebar, skip it //
-      if( $(window).width() >= 900 ) {
+      var sidebar =        $('#sidebar'),
+          header_height  = $('#header').outerHeight(),
+          content_height = $('#content-container').outerHeight(),
+          full_height = header_height + content_height - sidebar.outerHeight();
       
-        var scroll = $(window).scrollTop(),
-            target = $('#sidebar'),
-            all_header_heights = get_header_heights(),
-            header_height = all_header_heights[0],
-            admin_bar = all_header_heights[1],
-            combined_height = all_header_heights[2];
-            
-        if ( scroll >= 0 && scroll < header_height ) {
-          var top = combined_height - scroll;
-          target.css({ top: top });
-        } else if ( scroll >= header_height ) {
-          target.css({ top: admin_bar });
-        } else {
-          target.css({ top: combined_height });
-        }
+      // if the sidebar is taller than the content,
+      // just position it relative
+      if ( content_height <= sidebar.outerHeight() ) {
+        sidebar.css({
+          position: 'relative',
+          top: 0
+        });
+        
+      // otherwise, continue with normal scroll behavior
       } else {
-        $('#sidebar').css({top: get_header_heights()[0] });
+        
+        var scroll = $(window).scrollTop();
+        
+        sidebar.css({
+          position: 'absolute'
+        });
+        
+        if ( scroll >= full_height ) {
+          sidebar.css({
+            top:    'auto',
+            bottom: 0
+          });
+        } else if ( scroll >= header_height ) {
+          sidebar.css({
+            top:    scroll - header_height,
+            bottom: 'auto'
+          });
+        } else {
+          sidebar.css({
+            top: 0,
+            bottom: 'auto'
+          });
+        }
       }
     }).scroll();
   
-  });
+  }
   
-  // Mobile Menu Control //
+  
+  /* Mobile Menu Toggle
+  ========================== */
   $('.menu-toggle').click(function(e) {
     
     e.preventDefault();
-    $('#sidebar').css({ top: get_header_heights()[0] });
     $('#sidebar').toggleClass('active');
     
   });
   
-  // Desktop Menu Control //
+  
+  /* Desktop Menu Control
+  ========================== */
   $('.menu .menu-item-has-children > a').click(function(e) {
     e.preventDefault();
     var clicked = $(this).parent();
@@ -96,7 +110,9 @@
     }
   });
 
-  // Hides Mobile Menu on Unfocus //
+
+  /* Hides Mobile Menu on Unfocus
+  ========================== */
   $(document).mouseup(function (e) {
     var container = $('#sidebar, .menu-toggle');
     if (!container.is(e.target) && container.has(e.target).length === 0) {
