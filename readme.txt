@@ -31,22 +31,21 @@ Images
     Author:      Johann Sebastian Bach
     Image URI:   http://imslp.org/wiki/Special:ReverseLookup/111276
     License:     None (Public Domain)
-    Notes:       From "Das Orgel-Büchlein" (1713-15)
+    Notes:       Used for archive-page. From "Das Orgel-Büchlein" (1713-15)
     
   404.jpg
   -------
     Author:      Johann Sebastian Bach
     Image URI:   http://imslp.org/wiki/Special:ReverseLookup/273823
     License:     None (Public Domain)
-    Notes:       From "Messiah," Cello Manuscript (ca. 1770)
+    Notes:       Used for 404 page. Taken from "Messiah," Cello Manuscript (ca. 1770)
     
-  Lamp and Cherries.jpg (image in screenshot)
-  ---------------------
-    Author:      Pablo Picasso
-    Image URI:   http://commons.wikimedia.org/wiki/File%3APablo_Picasso%2C_La_lampe_et_les_cerises_(1945).jpg
-    License:     Creative Commons CC0 1.0 Universal Public Domain Dedication
-    License URI: http://creativecommons.org/publicdomain/zero/1.0/deed.en
-    
+  Der Blaue Reiter (The Blue Rider)
+  ---------------------------------
+    Author:      Franz Marc and Wassily Kandinsky
+    Image URI:   http://commons.wikimedia.org/wiki/File:Franz_Marc_and_Wassily_Kandinsky,_published_by_R._Piper_%26_Co._-_Der_Blaue_Reiter_(The_Blue_Rider)_-_Google_Art_Project.jpg
+    License:     None (Public Domain)
+    Notes:       Image in screenshot
 
 Code Credit
 ===========

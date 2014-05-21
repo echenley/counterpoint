@@ -7,10 +7,10 @@ Author URI: http://henleyedition.com
 May 20, 2014
 ============
   
-  * Some minor style differences (.posted-on vs. .post-meta)
   * Reshuffled headings (h1-h6) to be more SEO friendly
   * Removed sidebar widget (not versatile enough)
-  * Better widget behavior
+  * Overall better widget behavior (especially in footer)
+  * New screenshot
 
   stylesheets
   -----------
