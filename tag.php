@@ -6,9 +6,7 @@
     <h2><?php printf( __( 'Tag Archives: %s', 'counterpoint' ), single_tag_title( '', false ) ); ?></h2>
   </header>
   
-  <ul id="archive">
-    <?php counterpoint_index_loop($post->ID); ?>
-  </ul>
+  <?php counterpoint_archive_loop(); ?>
   
   <?php if ( function_exists( 'counterpoint_page_nav' ) ) {
     counterpoint_page_nav();
