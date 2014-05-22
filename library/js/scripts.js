@@ -112,6 +112,9 @@
     
     e.preventDefault();
     $('#sidebar').toggleClass('active');
+    $('#site-nav').css({
+      position: 'relative'
+    });
     
   });
   

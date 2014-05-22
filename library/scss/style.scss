@@ -335,9 +335,6 @@ h6 {
     @extend %standard-bottom-border;
     &.active {
     	@extend %display-block;
-    	#site-nav {
-    		position: relative ;
-    	}
     }
 }
 
