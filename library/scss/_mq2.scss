@@ -30,6 +30,10 @@
 		.sticky:first-of-type {
 			width: 100%;
 			
+			.cp-tags {
+				text-align: right;
+			}
+			
 			.excerpt {
 				margin-top: 0;
 			}

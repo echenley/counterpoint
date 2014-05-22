@@ -99,8 +99,8 @@
    * Small Customizations
    **********************/
   
-  // Custom Excerpt More. Replaces [...] with 'Keep Reading' link
-  function counterpoint_excerpt_more( $more ) {
+  // Removes [...] from Excerpt
+  function counterpoint_excerpt_more() {
     return '';
   }
   add_filter( 'excerpt_more', 'counterpoint_excerpt_more' );
@@ -412,7 +412,7 @@
   
     if ($sticky) {
        echo '<header class="archive-header">' .
-              '<h2>' . __( 'Featured Post', 'counterpoint' ) . '</h2>' .
+              '<h2>' . __( 'Featured', 'counterpoint' ) . '</h2>' .
             '</header>';
     } ?>
     
@@ -426,7 +426,6 @@
       </div>
       <article class="excerpt cf">
         <h3 class="archive-post-title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
-        <div class="cp-tags"><?php the_tags(); ?></div>
         <?php
         
           // gets content/excerpt based on whether more tag is present
@@ -437,10 +436,11 @@
           } else {
             echo get_the_excerpt();
           }
-          echo ' &hellip; <a class="more-link" href="' . get_the_permalink() . '" title="Keep reading ' . get_the_title() . '">' . __('Keep reading &rarr;', 'counterpoint') . '</a>';
+          echo ' &hellip; <a class="more-link button" href="' . get_the_permalink() . '" title="Keep reading ' . get_the_title() . '">' . __('Keep reading &rarr;', 'counterpoint') . '</a>';
           
         ?>
       </article>
+      <footer class="cp-tags"><?php the_tags(); ?></footer>
     </li>
     
     <?php

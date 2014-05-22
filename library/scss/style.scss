@@ -575,7 +575,8 @@ h6 {
 }
 
 .cp-tags {
-	@extend %hidden;
+	@extend %standard-margin-em;
+	font-size: 0.85em;
 }
 
 .post-meta {
@@ -862,6 +863,18 @@ a,input,select,textarea {
 a {
 	color: $link-color;
 	&:hover { color: $link-hover; }
+}
+
+.button {
+	background: $link-color;
+	color: $bg-color;
+	border-radius: 3px;
+	padding: 0 4px;
+	
+	&:hover {
+		background: darken($link-color, 10%);
+		color: $bg-color;
+	}
 }
 
 img {
