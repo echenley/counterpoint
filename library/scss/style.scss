@@ -280,7 +280,7 @@ h6 {
 
 #header {
 	@extend %header;
-	box-shadow: 0 2px 1px -2px;
+	@include prefix(box-shadow, 0 3px 1px -2px, ('-webkit-','-moz-'));
 }
 
 .title-link {
@@ -309,7 +309,7 @@ h6 {
 #footer {
 	@extend %footer;
 	padding: 20px;
-	box-shadow: 0 -2px 1px -2px;
+	@include prefix(box-shadow, 0 -3px 1px -2px, ('-webkit-','-moz-'));
 }
 
 
@@ -454,12 +454,11 @@ h6 {
 %pagination {
 	position: relative;
 	@extend %clear-both;
-	@extend %bg-highlight;
 	@extend %text-align-center;
-	padding: 0.2em 0.6em;
 	> * {
 		display: inline-block;
-		padding: 0.4em 0.6em;
+		padding: 0.2em 0.8em;
+		margin-right: 0.2em;
 	}
 }
 
@@ -467,6 +466,12 @@ h6 {
 .pagination {
 	@extend %pagination;
 	margin-top: $percent-margin;
+	a {
+		@extend %button-dark;
+	}
+	.current {
+		@extend %button-outline;
+	}
     .next, .prev {
 		position: relative;
     }
@@ -553,7 +558,7 @@ h6 {
 	a {
 		color: $line-color;
 		&:hover {
-		color: darken($line-color, 30%);
+			color: darken($line-color, 30%);
 		}
 	}
 	
@@ -779,7 +784,7 @@ h6 {
 		&:invalid {
 			outline: none;
 			border-color: #fb8888;
-			@include prefix(box-shadow, none, ('-webkit-','-moz-'))
+			@include prefix(box-shadow, none, ('-webkit-','-moz-'));
 		}
 	}
 
@@ -868,15 +873,34 @@ a {
 	&:hover { color: $link-hover; }
 }
 
+.button,
+%button-dark,
+%button-outline {
+	border-radius: 3px;
+}
+
 .button {
 	background: $link-color;
 	color: $bg-color;
-	border-radius: 3px;
 	
 	&:hover {
 		background: darken($link-color, 10%);
 		color: $bg-color;
 	}
+}
+
+%button-dark {
+	background: $primary-color;
+	color: $bg-color;
+	
+	&:hover {
+		background: darken($primary-color, 10%);
+		color: $bg-color;
+	}
+}
+
+%button-outline {
+	border: 1px solid $line-color;
 }
 
 img {
@@ -1182,14 +1206,10 @@ input[type=submit]:visited {
 	padding: 0 20px;
 	height: 34px;
 	border: none;
-	background: darken($line-color, 10%);
-	color: $bg-color;
 	text-decoration: none;
 	font-size: 13px;
 	cursor: pointer;
-	&:hover, &:active {
-		background: darken($line-color, 20%);
-	}
+	@extend %button-dark;
 }
 
 
