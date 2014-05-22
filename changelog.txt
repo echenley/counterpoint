@@ -7,7 +7,7 @@ Author URI: http://henleyedition.com
 May 21, 2014
 ============
 
-  * Added Recent Posts header to main blog page
+  * Added Featured Post and Recent Posts headers to main blog page
   * Less repaint-heavy sidebar handling
   * Moved categories to .post-info inside of thumbnail
   

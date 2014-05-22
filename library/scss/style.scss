@@ -335,6 +335,9 @@ h6 {
     @extend %standard-bottom-border;
     &.active {
     	@extend %display-block;
+    	.menu {
+    		position: relative;
+    	}
     }
 }
 
