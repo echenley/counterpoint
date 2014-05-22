@@ -4,6 +4,18 @@ Counterpoint Changelog
 Author:     Evan Henley
 Author URI: http://henleyedition.com
 
+May 21, 2014
+============
+
+  * Added Recent Posts header to main blog page
+  * Less repaint-heavy sidebar handling
+  * Moved categories to .post-info inside of thumbnail
+  
+  scripts.js
+  ----------
+    * Added function to resize .post-info to prevent overflow
+
+
 May 20, 2014
 ============
   

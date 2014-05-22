@@ -339,7 +339,8 @@ h6 {
 }
 
 .menu {
-    width: 100%;
+	position: relative;
+	width: 100%;
 	a {
 		@extend %display-block;
 		padding: 14px 1px 14px 6px;
@@ -532,7 +533,7 @@ h6 {
 }
 
 .archive-header {
-	margin-bottom: $percent-margin;
+	margin-bottom: $max-margin;
 }
 
 .post-thumbnail {
@@ -540,18 +541,41 @@ h6 {
 	margin-bottom: $margin-em;
 }
 
-.post-thumbnail,
-.archive-thumbnail {
-	 .timestamp {
-		position: absolute;
-		bottom: -2px;
-		background: rgba(#000, 0.6);
-		padding: 0.4em 0 $margin-em * (2/3) 0;
-		width: 100%;
-		@extend %text-align-center;
-		color: $bg-color;
-		font-style: italic;
+
+.post-info {
+	z-index: 2;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background: rgba(#000, 0.6);
+	padding: 0.4em 0 0.8em 0;
+	overflow: hidden;
+	@extend %text-align-center;
+	color: $bg-color;
+	
+	a {
+		color: $line-color;
+		&:hover {
+		color: darken($line-color, 30%);
+		}
 	}
+	
+	.timestamp {
+		@extend %display-block;
+		font-style: italic;
+		padding-top: 4px;
+	}
+}
+
+
+.cp-cats {
+  margin: 0 auto;
+  padding-bottom: 4px;
+  border-bottom: 2px solid rgba($bg-color,0.2);
+}
+
+.cp-tags {
+	@extend %hidden;
 }
 
 .post-meta {
@@ -595,10 +619,6 @@ h6 {
 	margin-bottom: $max-margin;
 }
 
-#archive hr {
-		margin: $max-margin 0;
-	}
-
 .archive-post-title {
 	margin: 0 0 30px 0;
 	font-size: 1.8em;
@@ -609,13 +629,18 @@ h6 {
 }
 
 .archive-thumbnail {
+	position: relative;
 	@extend %thumbnail-style-1;
 	width: 100%;
 	@extend %thumbnail-heading;
 	@extend %transition-200ms;
-	@extend %glitch-fix;
-	&:hover {
-		border-color: $link-hover;
+	
+	.thumbnail-link {
+		position: absolute;
+		top: 0;
+		@extend %display-block;
+		width: 100%;
+		padding-top: 100%;
 	}
 }
 
@@ -626,12 +651,6 @@ h6 {
 .more-link {
 	display: inline;
 	float: right;
-}
-
-.tags {
-	@extend %highlight-box;
-	margin-top: $margin-em;
-	font-size: $margin-em * (2/3);
 }
 
 

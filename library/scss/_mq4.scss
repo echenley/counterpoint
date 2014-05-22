@@ -11,9 +11,9 @@
 	    Margin/Padding Resets
 	****************************************/
 	
-	#content-container,
 	#header,
-	#footer {
+	#footer,
+	#content-container {
 		margin: 0 $max-margin;
 	}
 	

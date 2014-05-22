@@ -7,7 +7,6 @@
   
     <header class="post-header">
       <div class="post-thumbnail<?php echo counterpoint_thumbnail_style($post->ID); ?>">
-        <?php counterpoint_posted_on(); ?>
       </div>
       <h1><?php the_title(); ?></h1>
     </header>

@@ -1,4 +1,5 @@
 (function($) {
+
   
   /* Responsive Gravatar Images
   ============================== */
@@ -10,6 +11,10 @@
   } else {
     $('.comment img[data-gravatar]').hide();
   }
+  
+  
+  /* Responsive Video Embeds
+  ============================= */
   
   // stores video aspect ratios for fluid resize //
   // http://css-tricks.com/fluid-width-youtube-videos/ //
@@ -29,21 +34,36 @@
       el.width(vid_width).height(vid_width * el.data('aspect_ratio'));
     });
     
-  }).resize();
-  
-
-  /* Sidebar Behavior
-  ========================== */
-  
-  // No sidebar, skip it //
-  if( $(window).width() >= 900 ) {
-  
-    $(window).scroll(function() {
     
-      var sidebar =        $('#sidebar'),
+    /* Responsive Post-info
+    ============================= */
+    // calculates proper width to fit inside circle
+    
+    var cp_cats     = $('.cp-cats'),
+        info_height = $('.post-info').outerHeight(),
+        cat_height  = cp_cats.outerHeight(),
+        r           = $('.post-thumbnail, .archive-thumbnail').width() / 2,
+        d           = r - (info_height - cat_height),
+        new_width   = 2 * Math.sqrt(r * r - d * d);
+        
+    cp_cats.width(new_width);
+    
+  }).resize();
+
+  
+  $(window).scroll(function() {
+    
+    /* Sidebar Behavior
+    ========================== */
+    
+    // No sidebar, skip all this //
+    if( $(window).width() >= 900 ) {
+    
+      var sidebar        = $('#site-nav'),
+          admin_bar      = $('#wpadminbar').outerHeight() || 0,
           header_height  = $('#header').outerHeight(),
           content_height = $('#content-container').outerHeight(),
-          full_height = header_height + content_height - sidebar.outerHeight();
+          full_height    = $('#footer').offset().top - sidebar.outerHeight() - admin_bar;
       
       // if the sidebar is taller than the content,
       // just position it relative
@@ -56,33 +76,35 @@
       // otherwise, continue with normal scroll behavior
       } else {
         
-        var scroll = $(window).scrollTop();
-        
-        sidebar.css({
-          position: 'absolute'
-        });
+        var scroll = $(this).scrollTop();
         
         if ( scroll >= full_height ) {
           sidebar.css({
-            top:    'auto',
-            bottom: 0
+            position: 'absolute',
+            top:      full_height - header_height,
+            left:     0,
+            width:    '100%'
           });
         } else if ( scroll >= header_height ) {
           sidebar.css({
-            top:    scroll - header_height,
-            bottom: 'auto'
+            position: 'fixed',
+            top:      admin_bar,
+            bottom:   'auto',
+            left:     $('#sidebar').offset().left,
+            width:    $('#sidebar').width(),
           });
         } else {
           sidebar.css({
-            top: 0,
-            bottom: 'auto'
+            position: 'absolute',
+            top:      0,
+            bottom:   'auto',
+            left:     0,
+            width:    '100%'
           });
         }
       }
-    }).scroll();
-  
-  }
-  
+    }
+  }).scroll();
   
   /* Mobile Menu Toggle
   ========================== */
@@ -108,6 +130,7 @@
       clicked.siblings().find( $('li') ).removeClass('inactive active');
       clicked.removeClass('inactive').addClass('active');
     }
+    $(window).scroll();
   });
 
 

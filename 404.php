@@ -2,8 +2,11 @@
 <?php get_sidebar(); ?>
   
 <section id="content">
-  <header class="post-header" style="background: url(<?php echo get_template_directory_uri(); ?>/library/images/404.jpg); background-position: center; background-size: cover;">
-    <div class="post-title"><h2><?php _e('433 Not Found', 'counterpoint'); ?></h2></div>
+  
+  <header class="post-header">
+    <div class="post-thumbnail" style="background: #fff url(<?php echo get_template_directory_uri(); ?>/library/images/404.jpg); background-position: center; background-size: cover;">
+    </div>
+    <h1><?php _e('433 Not Found', 'counterpoint'); ?></h1>
   </header>
     
   <article id="error">

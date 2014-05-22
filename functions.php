@@ -408,15 +408,25 @@
   
   // Displays the loop
   
-  function counterpoint_archive_layout($post_id, $even_or_odd, $sticky = false) { ?>
+  function counterpoint_archive_layout($post_id, $even_or_odd, $sticky = false) {
+  
+    if ($sticky) {
+       echo '<header class="archive-header">' .
+              '<h2>' . __( 'Featured Post', 'counterpoint' ) . '</h2>' .
+            '</header>';
+    } ?>
+    
     <li <?php post_class($even_or_odd); ?>>
-      <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
       <div class="archive-thumbnail<?php echo counterpoint_thumbnail_style($post_id); ?>" >
-        <?php counterpoint_posted_on(); ?>
+        <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" class="thumbnail-link"></a>
+        <div class="post-info">
+          <div class="cp-cats"><?php counterpoint_categories(); ?></div>
+          <?php counterpoint_posted_on(); ?>
+        </div>
       </div>
-      </a>
       <article class="excerpt cf">
         <h3 class="archive-post-title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
+        <div class="cp-tags"><?php the_tags(); ?></div>
         <?php
         
           // gets content/excerpt based on whether more tag is present
@@ -431,15 +441,13 @@
           
         ?>
       </article>
-      <footer class="tags">
-        <?php counterpoint_categories(); ?><br>
-        <?php the_tags(); ?>
-      </footer>
     </li>
     
     <?php
     if ($sticky) {
-       echo '<hr>';
+       echo '<header class="archive-header">' .
+              '<h2>' . __( 'Recent Posts', 'counterpoint' ) . '</h2>' .
+            '</header>';
     }
   }
   
@@ -506,14 +514,15 @@
           Please let me know if there is a better way to do this.
         */
         
-        // so, this is the junk query used to...
-        $junk_query = new WP_Query(array(
-          // do not prepend stickies to query
-          'ignore_sticky_posts' => 1
-        ));
         
         // determine whether the sticky is from the front page or not
         if ( $first_sticky ) {
+
+          // so, this is the junk query used to...
+          $junk_query = new WP_Query(array(
+            // do not prepend stickies to query
+            'ignore_sticky_posts' => 1
+          ));
         
           // loop through the posts in $junk_query
           foreach($junk_query->posts as $post_num=>$junk_post) {
@@ -529,14 +538,14 @@
               break;
             }
           }
+          wp_reset_postdata();
         }
-        wp_reset_postdata();
         
         // okay, now we have all the variables we need
         
-        
         // if the sticky is from the first page...
         if ( $first_sticky && $front_page_sticky && !is_paged() ) {
+        
           $cp_args = array(
             // add an extra post in there to avoid a gap
             'posts_per_page' => $ppp + 1,
@@ -547,25 +556,37 @@
         // if there is a front-page sticky and you're NOT on the front page...
         // set an offset to account for the extra post
         } elseif ( $first_sticky && $front_page_sticky && is_paged() ) {
+        
           $cp_args = array(
             // offset incremented by 1
             'offset' => ($wp_query->query_vars['paged'] - 1) * $ppp + 1,
+            'ignore_sticky_posts' => 1
+          );
+          
+        // if there ISN'T a front-page sticky and you're NOT on the front page...
+        } elseif ( $first_sticky && is_paged() ) {
+        
+          $cp_args = array(
+            // offset NOT incremented
+            'offset' => ($wp_query->query_vars['paged'] - 1) * $ppp,
             'ignore_sticky_posts' => 1
           );
         
         // if there are no stickies OR if the sticky isn't from the front page
         // that's easy, just do things normally
         } else {
+        
           $cp_args = array(
             'ignore_sticky_posts' => 1
           );
+          
         }
         
         // now for the main query
         $main_query = new WP_Query($cp_args);
         
         while ($main_query->have_posts()) : $main_query->the_post();
-          if ( !( !is_paged() && $post->ID === $first_sticky ) ) {
+          if ( is_paged() || $post->ID !== $first_sticky ) {
             $even_or_odd = $even ? 'even-post' : 'odd-post';
             $even = !$even;
             counterpoint_archive_layout($post->ID, $even_or_odd);
@@ -575,7 +596,7 @@
       
       } else {
       
-        // do basic query on any page that isn't the blog home()
+        // do basic query on any page that isn't the blog is_home()
         // e.g. archive/search etc.
 
         while (have_posts()) : the_post();

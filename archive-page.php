@@ -19,7 +19,6 @@ get_header(); ?>
   
     <header class="post-header">
       <div class="post-thumbnail" style="background: #fff url(<?php echo $archive_img; ?>); background-position: center; background-size: cover;">
-        <?php counterpoint_posted_on(); ?>
       </div>
       <h1><?php the_title(); ?></h1>
     </header>

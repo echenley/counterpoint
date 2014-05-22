@@ -14,10 +14,16 @@
 	
 	%sidebar-3 {
 		@extend %display-block-3;
-		position: absolute;
+		position: relative;
 		float: left;
 		width: $nav-width;
 		background: transparent;
+	}
+	
+	%site-nav {
+		position: absolute;
+		float: left;
+		width: 100%;
 	}
 	
 	%content {
@@ -29,16 +35,14 @@
 	    Margin/Padding Resets
 	****************************************/
 	
-	#header, #footer {
+	#header,
+	#footer,
+	#content-container {
 		margin: 0 $desktop-vw;
 	}
 	
 	#footer {
 		padding: $margin-em;
-	}
-	
-	#content-container {
-		margin: 0 $desktop-vw;
 	}
 	
 	#content {
@@ -48,6 +52,11 @@
 	
 	#sidebar {
 		@extend %sidebar-3;
+		padding: 0;
+	}
+	
+	#site-nav {
+		@extend %site-nav;
 		padding: $desktop-vw 0;
 	}
 	
@@ -56,7 +65,7 @@
 	}
 	
 	#title {
-	    padding: 0 20px;
+		padding: 0 20px;
 		font-size: 2.2em;
 	}
 	
