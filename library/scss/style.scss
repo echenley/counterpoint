@@ -348,6 +348,7 @@ h6 {
 		padding: 14px 1px 14px 6px;
 		color: $primary-color;
 		line-height: 1.4;
+		@extend %glitch-fix;
 		&:hover {
 			@extend %menu-hover;
 		}
