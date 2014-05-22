@@ -113,7 +113,9 @@
     e.preventDefault();
     $('#sidebar').toggleClass('active');
     $('#site-nav').css({
-      position: 'relative'
+      position: 'relative',
+      top: 0,
+      left: 0
     });
     
   });
