@@ -18,7 +18,7 @@
 	}
 	
 	#content,
-	#sidebar {
+	#site-nav {
 		padding: $max-margin 0;
 	}
 	
@@ -40,6 +40,14 @@
 	
 	#comments{
 		margin-top: $max-margin;
+	}
+	
+	#archive .sticky:first-of-type .archive-thumbnail {
+		margin-right: $max-margin;
+	}
+	
+	.post-thumbnail {
+		margin-left: $max-margin;
 	}
 	
 }

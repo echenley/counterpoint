@@ -1,8 +1,8 @@
 @media screen and (min-width: nth($breakpoints, 2)) {
 
 	%thumbnail-style {
-		width: 50%;
-		padding-top: 50%;
+		width: 50% - (50% * $percent-margin / (100% - (2 * $percent-margin)));
+		padding-top: 50% - (50% * $percent-margin / (100% - (2 * $percent-margin)));
 	}
 
 	.archive-thumbnail {
@@ -44,7 +44,7 @@
 			
 			.archive-thumbnail {
 				float: left;
-				margin-right: $percent-margin;
+				margin-right: $desktop-vw;
 				@extend %thumbnail-style;
 			}
 			
@@ -60,8 +60,8 @@
 	
 	.post-thumbnail {
 		float: right;
-		margin-left: 28px;
-		margin-bottom: 8px;
+		margin-left: $desktop-vw;
+		margin-bottom: 20px;
 		@extend %thumbnail-style;
 	}
 	

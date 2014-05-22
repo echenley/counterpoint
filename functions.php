@@ -142,9 +142,9 @@
      * Translators: If there are characters in your language that are not supported
      * by the current font, translate this to 'off'. Do not translate into your own language.
      */
-    if ( 'off' !== _x( 'on', 'Merriweather font: on or off', 'counterpoint' ) )
+    if ( 'off' !== _x( 'on', 'Droid Serif font: on or off', 'counterpoint' ) )
       $font_url = add_query_arg( 'family', urlencode( 'Droid Serif:400,700,400italic' ), '//fonts.googleapis.com/css' );
-  
+    
     return $font_url;
   }
 
@@ -154,7 +154,7 @@
   function counterpoint_scripts() {
   
     // CSS //
-    wp_enqueue_style( 'merriweather-font', counterpoint_font_url(), array(), null );
+    wp_enqueue_style( 'counterpoint-fonts', counterpoint_font_url(), array(), null );
     wp_enqueue_style('counterpoint-style', get_template_directory_uri() . '/library/css/style.css');
       
     // Javascript //

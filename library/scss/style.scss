@@ -15,6 +15,7 @@ $highlight:       #f6f6f6;  // light gray highlight
 $link-color:      #c44;
 $link-hover:      darken($link-color, 20%);
 $line-color:      #dedede;  // borders and <hr>
+$dark-gray:       #888;
 
 // Array of media query break points
 $breakpoints:     (480px, 640px, 900px, 1100px);
@@ -42,8 +43,8 @@ $margin-em:       1.3em;
 	License URI: http://www.apache.org/licenses/LICENSE-2.0.html
 */
 
-$serif:     'Droid Serif', TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
-$monospace: 'Courier New', Courier, monospace;
+$serif:      'Droid Serif', serif;
+$monospace:  'Courier New', Courier, monospace;
 
 
 /****************************************
@@ -279,7 +280,7 @@ h6 {
 
 #header {
 	@extend %header;
-	@extend %standard-bottom-border;
+	box-shadow: 0 2px 1px -2px;
 }
 
 .title-link {
@@ -307,8 +308,8 @@ h6 {
 
 #footer {
 	@extend %footer;
-	border-top: 2px solid $primary-color;
 	padding: 20px;
+	box-shadow: 0 -2px 1px -2px;
 }
 
 
@@ -325,12 +326,12 @@ h6 {
 #sidebar {
 	@extend %sidebar;
 	@extend %hidden;
-    padding: 2em 4em;
-    background: rgba($bg-color,0.94);
-    @extend %standard-bottom-border;
-    &.active {
-    	@extend %display-block;
-    }
+	padding: 2em 4em;
+	background: rgba($bg-color,0.94);
+	@extend %standard-bottom-border;
+	&.active {
+		@extend %display-block;
+	}
 }
 
 .menu {
@@ -514,13 +515,14 @@ h6 {
 
 .archive-header,
 .attachment-header {
-	width: 100%;
-	padding: $margin-em;
-	@extend %bg-highlight;
+	text-align: center;
 	h2 {
+		display: inline-block;
+		padding: 0.2em 0.6em 0.2em 0.2em;
+		@extend %standard-bottom-border;
+		color: $primary-color;
 		font-size: 1.5em;
-		border: none;
-		padding: 0;
+		font-variant: initial;
 	}
 }
 .attachment-header {
