@@ -469,9 +469,9 @@
         ========================== */
       
         // get an array of stickies
-        $sticky = get_option('sticky_posts');
+        $stickies = get_option('sticky_posts');
         // get the first one, or set it to false if none
-        $first_sticky = $sticky ? end($sticky) : false;
+        $first_sticky = $stickies ? end($stickies) : false;
         // get the posts_per_page variable (set by user)
         $ppp = get_option('posts_per_page');
         // used later to determine where the sticky's natural placement is
@@ -481,7 +481,7 @@
         //  if a sticky exists...
         if ( $first_sticky && is_front_page() && !is_paged() ) {
             
-          // get the most recent sticky post
+          // query the most recent sticky post
           $most_recent_sticky_post = new WP_Query( 'p=' . $first_sticky );
           
           // and display it
