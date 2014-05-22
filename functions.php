@@ -596,7 +596,7 @@
       
       } else {
       
-        // do basic query on any page that isn't the blog is_home()
+        // do basic query on any page that isn't is_home()
         // e.g. archive/search etc.
 
         while (have_posts()) : the_post();

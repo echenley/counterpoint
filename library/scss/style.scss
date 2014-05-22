@@ -465,7 +465,7 @@ h6 {
 	> * {
 		display: inline-block;
 		padding: 0.2em 0.7em;
-		margin: 0 0.2em 0.2em 0;
+		margin: 0 4px 4px 0;
 		&:last-child {
 			margin-right: 0;
 		}
@@ -517,8 +517,8 @@ h6 {
 		&:first-child,
 		&:last-child {
 			position: absolute;
-			top: 0;
-			bottom: 0;
+			top: 1px;
+			bottom: 1px;
 		}
 		&:first-child {
 			left: 0;
@@ -681,7 +681,7 @@ h6 {
 .more-link {
 	display: inline;
 	float: right;
-	padding: 0 4px;
+	padding: 0en 8px;
 }
 
 
@@ -1155,6 +1155,11 @@ table {
 
 article,
 .comment-content {
+	ul,
+	ol {
+		padding-left: 2em;
+		text-indent: -2em;
+	}
 	ul {
 		list-style: disc inside;
 		ul,ol {
