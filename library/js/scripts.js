@@ -48,6 +48,11 @@
         
     cp_cats.width(new_width);
     
+    // reposition the sidebar
+    if ( $(window).width() >= 900 ) {
+      $(window).scroll();
+    }
+    
   }).resize();
 
   
@@ -120,6 +125,20 @@
     });
     
   });
+  
+  
+  // Used to prevent the "sticky" hover effect on touch screens
+  // <a href="#">ontouchend="this.onclick=fix"
+  function fix() {
+    var el = this;
+    var par = el.parentNode;
+    var next = el.nextSibling;
+    par.removeChild(el);
+    setTimeout(function() {
+      par.insertBefore(el, next);
+    }, 0);
+  }
+
   
   
   /* Desktop Menu Control

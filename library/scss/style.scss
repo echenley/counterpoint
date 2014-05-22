@@ -279,33 +279,28 @@ h6 {
 
 #header {
 	@extend %header;
-	line-height: 80px;
 	@extend %standard-bottom-border;
 }
 
-.title-link,
-.menu-toggle {
+.title-link {
 	display: inline-block;
 	color: $primary-color;
 	line-height: 80px;
 }
 
-#title,
-.menu-toggle {
-	padding: 0 $percent-margin;
-}
-
 #title {
 	display: inline-block;
 	font-size: 1.8em;
+	padding: 0 $percent-margin;
 }
 
 .menu-toggle {
 	position: absolute;
-	display: inline-block;
-	top: 0;
-	right: 0;
+	top: 20px;
+	right: 20px;
+	width: 40px;
 	font-size: 2em;
+	line-height: 40px;
 	@extend %text-align-center;
 	@extend %transition-200ms;
 }
@@ -574,11 +569,6 @@ h6 {
   border-bottom: 2px solid rgba($bg-color,0.2);
 }
 
-.cp-tags {
-	@extend %standard-margin-em;
-	font-size: 0.85em;
-}
-
 .post-meta {
 	@extend %display-block;
 	margin-bottom: $margin-em;
@@ -618,6 +608,9 @@ h6 {
 #archive .page {
 	width: 100%;
 	margin-bottom: $max-margin;
+	&:hover .cp-tags {
+		opacity: 1;
+	}
 }
 
 .archive-post-title {
@@ -649,9 +642,17 @@ h6 {
 	margin-top: $margin-em;
 }
 
+.cp-tags {
+	opacity: 0;
+	@extend %standard-margin-em;
+	font-size: 0.85em;
+	@extend %transition-200ms;
+}
+
 .more-link {
 	display: inline;
 	float: right;
+	padding: 0 4px;
 }
 
 
@@ -869,7 +870,6 @@ a {
 	background: $link-color;
 	color: $bg-color;
 	border-radius: 3px;
-	padding: 0 4px;
 	
 	&:hover {
 		background: darken($link-color, 10%);
