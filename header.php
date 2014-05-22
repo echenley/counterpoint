@@ -14,6 +14,6 @@
           <a href="<?php echo esc_url(home_url('/')); ?>" class="title-link"><?php bloginfo('name'); ?></a>
         </div>
         <?php dynamic_sidebar('header-right'); ?>
-        <a href="#" class="menu-toggle button" ontouchend="this.onclick=fix()">&#9776;</a>
+        <a href="#" class="menu-toggle" ontouchend="this.onclick=fix()">&#9776;</a>
       </header>
       <div id="content-container" class="cf">

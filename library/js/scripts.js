@@ -128,7 +128,7 @@
   
   
   // Used to prevent the "sticky" hover effect on touch screens
-  // <a href="#">ontouchend="this.onclick=fix"
+  // <a href="#" ontouchend="this.onclick=fix"></a>
   function fix() {
     var el = this;
     var par = el.parentNode;

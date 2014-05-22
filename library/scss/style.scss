@@ -13,7 +13,7 @@ $primary-color:   #4f4f4f;  // text color
 $bg-color:        #fff;     // background
 $highlight:       #f6f6f6;  // light gray highlight
 $link-color:      #c44;
-$link-hover:      darken($link-color, 20%);
+$link-hover:      darken($link-color, 15%);
 $line-color:      #dedede;  // borders and <hr>
 $dark-gray:       #888;
 
@@ -287,6 +287,10 @@ h6 {
 	display: inline-block;
 	color: $primary-color;
 	line-height: 80px;
+	
+	&:hover {
+		color: darken($primary-color, 20%);
+	}
 }
 
 #title {
@@ -304,6 +308,7 @@ h6 {
 	line-height: 40px;
 	@extend %text-align-center;
 	@extend %transition-200ms;
+	@extend %button-dark;
 }
 
 #footer {
@@ -325,6 +330,7 @@ h6 {
 
 #sidebar {
 	@extend %sidebar;
+	top: 2px;
 	@extend %hidden;
 	padding: 2em 4em;
 	background: rgba($bg-color,0.94);
@@ -342,7 +348,6 @@ h6 {
 		padding: 14px 1px 14px 6px;
 		color: $primary-color;
 		line-height: 1.4;
-		@extend %glitch-fix;
 		&:hover {
 			@extend %menu-hover;
 		}
@@ -411,7 +416,8 @@ h6 {
 	}
 }
 
-.next-post, .prev-post {
+.next-post,
+.prev-post {
 	width: 50% - (50% * $percent-margin / (100% - (2 * $percent-margin)));
 	a {
 		display: block;
@@ -457,8 +463,11 @@ h6 {
 	@extend %text-align-center;
 	> * {
 		display: inline-block;
-		padding: 0.2em 0.8em;
-		margin-right: 0.2em;
+		padding: 0.2em 0.7em;
+		margin: 0 0.2em 0.2em 0;
+		&:last-child {
+			margin-right: 0;
+		}
 	}
 }
 
@@ -472,7 +481,8 @@ h6 {
 	.current {
 		@extend %button-outline;
 	}
-    .next, .prev {
+    .next,
+    .prev {
 		position: relative;
     }
 	.prev {
@@ -493,13 +503,21 @@ h6 {
 .post-pagination {
 	@extend %pagination;
 	@extend %standard-margin-em;
-	padding-left: 100px;
-	padding-right: 100px;
+	padding-left: 80px;
+	padding-right: 80px;
+	font-size: 0;
+	
+	> * {
+		font-size: 0.95rem;
+	}
 	> a {
-		&:first-child, &:last-child {
+		@extend %button-dark;
+		
+		&:first-child,
+		&:last-child {
 			position: absolute;
-			top: 0.2em;
-			bottom: 0.2em;
+			top: 0;
+			bottom: 0;
 		}
 		&:first-child {
 			left: 0;
@@ -507,6 +525,9 @@ h6 {
 		&:last-child { 
 			right: 0; 
 		}
+	}
+	> span {
+		@extend %button-outline;
 	}
 	&:empty {
 		@extend %hidden;
@@ -870,7 +891,9 @@ a,input,select,textarea {
 
 a {
 	color: $link-color;
-	&:hover { color: $link-hover; }
+	&:hover {
+		color: $link-hover;
+	}
 }
 
 .button,

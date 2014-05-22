@@ -5,8 +5,8 @@
 	}
 	
 	.pagination {
-		padding-left: 84px;
-		padding-right: 84px;
+		padding-left: 90px;
+		padding-right: 80px;
 		.next, .prev {
 			position: absolute;
 			top: 0;
@@ -23,7 +23,8 @@
 		}
 	}
 	
-	.archive-thumbnail, .post-thumbnail {
+	.archive-thumbnail,
+	.post-thumbnail {
 		width: 70%;
 		padding-top: 70%;
 		margin-left: auto;

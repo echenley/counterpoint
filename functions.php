@@ -319,7 +319,7 @@
       'after'            => '</nav>',
       'pagelink'         => '<span>%</span>',
       'nextpagelink'     => '<span>' . __('Next &rarr;', 'counterpoint') . '</span>',
-      'previouspagelink' => '<span>' . __('&larr; Previous', 'counterpoint') . '</span>'
+      'previouspagelink' => '<span>' . __('&larr; Prev', 'counterpoint') . '</span>'
     );
     $args = wp_parse_args( $cp_defaults, $args ); // overwrites $args with $cp_defaults //
     
