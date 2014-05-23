@@ -217,6 +217,10 @@ article,
 		@extend %standard-bottom-border;
 		margin: 30px 0;
 	}
+	
+	h3 {
+		border-bottom: none;
+	}
 }
 
 .post-header h1 {
@@ -966,8 +970,7 @@ pre {
 
 code {
 	display: inline-block;
-	padding: 0.4em;
-	border-left: 4px solid $line-color;
+	padding: 0 8px;
 }
 
 kbd {

@@ -474,7 +474,7 @@
         $first_sticky = $stickies ? end($stickies) : false;
         // get the posts_per_page variable (set by user)
         $ppp = get_option('posts_per_page');
-        // used later to determine where the sticky's natural placement is
+        // used later to determine position of sticky
         $front_page_sticky = false;
         
         
@@ -533,7 +533,7 @@
               $front_page_sticky = true;
               break;
               
-            // if there's no match, just quit
+            // if there's no match, leave $front_page_sticky false...
             } elseif ($post_num >= $ppp) {
               break;
             }
