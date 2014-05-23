@@ -541,56 +541,30 @@
           wp_reset_postdata();
         }
         
-        // okay, now we have all the variables we need
+        // okay, now we have all the variables we need to set up the query
         
-        // if the sticky is from the first page...
-        if ( $first_sticky && $front_page_sticky && !is_paged() ) {
         
-          $cp_args = array(
-            // add an extra post in there to avoid a gap
-            'posts_per_page' => $ppp + 1,
-            // and ignore the behavior of sticky posts
-            'ignore_sticky_posts' => 1
-          );
+        $cp_args = array(
+          'ignore_sticky_posts' => 1
+        );
         
-        // if there is a front-page sticky and you're NOT on the front page...
-        // set an offset to account for the extra post
-        } elseif ( $first_sticky && $front_page_sticky && is_paged() ) {
-        
-          $cp_args = array(
-            // offset incremented by 1
-            'offset' => ($wp_query->query_vars['paged'] - 1) * $ppp + 1,
-            'ignore_sticky_posts' => 1
-          );
-          
-        // if there ISN'T a front-page sticky and you're NOT on the front page...
-        } elseif ( $first_sticky && is_paged() ) {
-        
-          $cp_args = array(
-            // offset NOT incremented
-            'offset' => ($wp_query->query_vars['paged'] - 1) * $ppp,
-            'ignore_sticky_posts' => 1
-          );
-        
-        // if there are no stickies OR if the sticky isn't from the front page
-        // that's easy, just do things normally
-        } else {
-        
-          $cp_args = array(
-            'ignore_sticky_posts' => 1
-          );
-          
+        // skip over
+        if ( $front_page_sticky ) {
+          $cp_args['post__not_in'] = array($first_sticky);
         }
+        
+        if ( is_paged() ) {
+          $cp_args['offset'] = ($wp_query->query_vars['paged'] - 1) * $ppp;
+        }
+        
         
         // now for the main query
         $main_query = new WP_Query($cp_args);
         
         while ($main_query->have_posts()) : $main_query->the_post();
-          if ( is_paged() || $post->ID !== $first_sticky ) {
-            $even_or_odd = $even ? 'even-post' : 'odd-post';
-            $even = !$even;
-            counterpoint_archive_layout($post->ID, $even_or_odd);
-          }
+          $even_or_odd = $even ? 'even-post' : 'odd-post';
+          $even = !$even;
+          counterpoint_archive_layout($post->ID, $even_or_odd);
         endwhile;
         wp_reset_postdata();
       

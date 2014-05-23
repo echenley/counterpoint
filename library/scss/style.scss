@@ -970,7 +970,8 @@ pre {
 
 code {
 	display: inline-block;
-	padding: 0 8px;
+	padding: 0.4em;
+	border-left: 4px solid $line-color;
 }
 
 kbd {
@@ -1160,6 +1161,7 @@ article,
 .comment-content {
 	ul,
 	ol {
+		@extend %standard-margin-em;
 		padding-left: 1em;
 		text-indent: -1em;
 	}
