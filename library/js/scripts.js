@@ -161,10 +161,10 @@
 
   /* Hides Mobile Menu on Unfocus
   ========================== */
-  $(document).mouseup(function (e) {
+  $(document).mouseup(function(e) {
     var container = $('#sidebar, .menu-toggle');
     if (!container.is(e.target) && container.has(e.target).length === 0) {
-      $('nav#site-nav > ul').removeClass('active');
+      $('#site-nav').removeClass('active');
     }
   });
 

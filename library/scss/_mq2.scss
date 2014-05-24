@@ -78,14 +78,14 @@
 	}
 	
 	.footer-widget {
-		float: left;
 		width: 30%;
 		max-width: 30%;
-		margin: 0 $percent-margin 0 0;
-		&:last-child {
-			float: right;
-			margin-right: 0;
-			width: auto;
+		&:nth-child(even) {
+			// cancels out setting in _mq1
+			margin: 0 0 5% 0;
+		}
+		&:nth-child(3n+3) {
+			margin: 0;
 		}
 	}
 }

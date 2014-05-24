@@ -1,6 +1,6 @@
       </div>
       <footer id="footer" class="cf">
-        <div class="footer-widget-row"><?php dynamic_sidebar('footer-widget'); ?></div>
+        <?php dynamic_sidebar('footer-widget'); ?>
       </footer>
     </div>
     <?php wp_footer(); ?>

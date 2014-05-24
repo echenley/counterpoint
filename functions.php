@@ -50,8 +50,8 @@
         register_nav_menu('sidebar',__( 'Sidebar', 'counterpoint' ));
         
         
-        global $content_width;
         // Content Width Setup //
+        global $content_width;
         if ( ! isset( $content_width ) ) $content_width = 1080;
     
     }
@@ -167,35 +167,21 @@
     
     // Register Widget Space //
     
-    register_sidebar(array(
-        'name' => __('Footer Widget', 'counterpoint'),
-        'id'     => 'footer-widget',
-        'description'     => __('Area in the footer for 3 widgets.', 'counterpoint'),
-        'before_widget' => '<div class="footer-widget widget %2$s">',
-        'after_widget'    => '</div>',
-        'before_title'    => '<h4>',
-        'after_title'     => '</h4>'
-    ));
+    function counterpoint_create_widget($name, $id, $description) {
+        register_sidebar(array(
+            'name' => __($name, 'counterpoint'),
+            'id'     => $id,
+            'description'     => __($description, 'counterpoint'),
+            'before_widget' => '<div class="' . $id . ' widget %2$s">',
+            'after_widget'    => '</div>',
+            'before_title'    => '<h4>',
+            'after_title'     => '</h4>'
+        ));
+    }
     
-    register_sidebar(array(
-        'name' => __('Article Bottom', 'counterpoint'),
-        'id'     => 'article-widget',
-        'description'     => __('Area at the bottom of each post, before the comments.', 'counterpoint'),
-        'before_widget' => '<div class="article-widget widget %2$s">',
-        'after_widget'    => '</div>',
-        'before_title'    => '<h4>',
-        'after_title'     => '</h4>'
-    ));
-    
-    register_sidebar(array(
-        'name' => __('Header Right', 'counterpoint'),
-        'id'     => 'header-widget',
-        'description'     => __('Area at the right side of the header. Perfect for social icons, search bar, or a site tagline.', 'counterpoint'),
-        'before_widget' => '<div class="header-widget widget %2$s">',
-        'after_widget'    => '</div>',
-        'before_title'    => '<h4>',
-        'after_title'     => '</h4>'
-    ));
+    counterpoint_create_widget('Footer Widget', 'footer-widget', 'Area in the footer');
+    counterpoint_create_widget('Article Bottom', 'article-widget', 'Area at the bottom of each post, before the comments.');
+    counterpoint_create_widget('Header Right', 'header-widget', 'Area at the right side of the header. Perfect for social icons, search bar, or a site tagline.');
 
 
     /*
@@ -499,19 +485,13 @@
                 /*
                     Goal: always even number of posts per page, NOT including sticky
                     
-                    Caveats: (because WP's handling of stickies is weird)
-                    
-                        * If sticky is from front page, skip it, get an extra post, and offset the rest by 1
-                        * If not, continue normally and DO NOT skip the sticky
-                        * Additional stickies are unformatted (this is done with css :first-child pseudo-class)
-                    
                     So, I need to determine where the sticky came from. Best I could come up with was to do
-                    another blank loop and compare it to the first 'n' posts, where 'n' is the user-defined
-                    posts-per-page.
+                    another blank loop and look for the sticky in the first 'n' posts, where 'n' is the
+                    user-defined posts-per-page.
                     
-                    I know that this is convoluted, but to my knowledge, it is necessary to do what I want.
+                    I know that this is convoluted, and I'm sure there's a better solution out there,
+                    probably using pre_get_posts().
                     
-                    Please let me know if there is a better way to do this.
                 */
                 
                 
@@ -548,14 +528,11 @@
                     'ignore_sticky_posts' => 1
                 );
                 
-                // skip over
-                if ( $front_page_sticky ) {
+                if ( $front_page_sticky )
                     $cp_args['post__not_in'] = array($first_sticky);
-                }
                 
-                if ( is_paged() ) {
+                if ( is_paged() )
                     $cp_args['offset'] = ($wp_query->query_vars['paged'] - 1) * $ppp;
-                }
                 
                 
                 // now for the main query
@@ -571,7 +548,7 @@
             } else {
             
                 // do basic query on any page that isn't is_home()
-                // e.g. archive/search etc.
+                // i.e. archive and search pages
                 
                 while (have_posts()) : the_post();
                     $even_or_odd = $even ? 'even-post' : 'odd-post';

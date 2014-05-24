@@ -4,16 +4,21 @@ Counterpoint Changelog
 Author:     Evan Henley
 Author URI: http://henleyedition.com
 
-May 21, 2014
+May 24, 2014
 ============
 
   * Added Featured Post and Recent Posts headers to main blog page
   * Less repaint-heavy sidebar handling
   * Moved categories to .post-info inside of thumbnail
+  * Made footer widgets arrange in a basic, responsive grid
   
   scripts.js
   ----------
     * Added function to resize .post-info to prevent overflow
+    
+  functions.php
+  -------------
+    * Widgets now added in the function counterpoint_create_widget()
 
 
 May 20, 2014

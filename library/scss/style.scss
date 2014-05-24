@@ -315,6 +315,7 @@ h6 {
 	@extend %footer;
 	padding: 20px;
 	@include prefix(box-shadow, 0 -3px 1px -2px, ('-webkit-','-moz-'));
+	line-height: 1.6em;
 }
 
 
@@ -340,7 +341,7 @@ h6 {
 	}
 }
 
-.menu {
+#site-nav .menu {
 	position: relative;
 	width: 100%;
 	a {
@@ -355,7 +356,7 @@ h6 {
 	}
 }
 
-.menu-item {
+#site-nav .menu-item {
 	text-align: right;
 	@extend %transition-200ms;
 	overflow: hidden;
@@ -377,11 +378,11 @@ h6 {
 	}
 }
 
-.sub-menu {
+#site-nav .sub-menu {
 	height: 0;
 }
 
-.menu-item-has-children {
+#site-nav .menu-item-has-children {
 	cursor: pointer;
 }
 
@@ -1132,8 +1133,11 @@ img.size-full {
 	Tables and Lists
 ****************************************/
 
-table {
+#content table {
 	margin: $margin-em auto;
+}
+
+table {
 	@extend %max-width;
 	border-top: 2px solid $primary-color;
 	@extend %standard-bottom-border;
@@ -1153,7 +1157,8 @@ table {
 }
 
 article,
-.comment-content {
+.comment-content,
+#footer {
 	ul,
 	ol {
 		@extend %standard-margin-em;
@@ -1163,13 +1168,13 @@ article,
 	ul {
 		list-style: disc inside;
 		ul,ol {
-			margin-left: 2em;
+			margin: 0 0 0 1em;
 		}
 	}
 	ol {
 		list-style: decimal inside;
 		ul,ol {
-			margin-left: 2em;
+			margin: 0 0 0 1em;
 		}
 	}
 }
@@ -1258,9 +1263,9 @@ input[type=submit]:visited {
 .footer-widget {
 	width: 100%;
 	margin-bottom: $max-margin;
+	padding: 8px;
 	overflow: hidden;
 	h4 {
-		@extend %text-align-center;
 		padding-bottom: 20px;
 	}
 	
