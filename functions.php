@@ -518,7 +518,7 @@
                 // determine whether the sticky is from the front page or not
                 if ( $first_sticky ) {
 
-                    // so, this is the junk query used to...
+                    // so, this is the junk query
                     $junk_query = new WP_Query(array(
                         // do not prepend stickies to query
                         'ignore_sticky_posts' => 1
