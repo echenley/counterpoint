@@ -1229,8 +1229,7 @@ table {
 }
 
 article,
-.comment-content,
-.widget {
+.comment-content {
     ul,
     ol {
         @extend %standard-margin-em;
