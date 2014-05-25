@@ -38,7 +38,7 @@
 		max-width: 50% - ($percent-margin / 2);
 		margin: 0 $percent-margin $max-margin 0;
 		&:nth-child(even) {
-			margin: 0 0 $max-margin 0;
+			margin-right: 0;
 		}
 	}
 }
