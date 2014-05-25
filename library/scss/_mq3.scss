@@ -118,8 +118,9 @@
     .header-widget {
         @extend %display-block-3;
         float: right;
-        overflow: hidden;
         line-height: 80px;
+        max-height: 80px;
+        overflow: hidden;
     }
     
     .article-widget {

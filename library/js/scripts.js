@@ -54,11 +54,11 @@
         
     }).resize();
 
-    
-    $(window).scroll(function() {
         
-        /* Sidebar Behavior
-        ========================== */
+    /* Sidebar Behavior
+    ========================== */
+        
+    $(window).scroll(function() {
         
         // No sidebar, skip all this //
         if( $(window).width() >= 900 ) {
@@ -72,6 +72,7 @@
             // if the sidebar is taller than the content,
             // just position it relative
             if ( content_height <= sidebar.outerHeight() ) {
+            
                 sidebar.css({
                     position: 'relative',
                     top: 0
@@ -110,6 +111,7 @@
         }
     }).scroll();
     
+    
     /* Mobile Menu Toggle
     ========================== */
     $('.menu-toggle').click(function(e) {
@@ -124,20 +126,6 @@
         });
         
     });
-    
-    
-    // Used to prevent the "sticky" hover effect on touch screens
-    // <a href="#" onclick="this.ontouchend=fix"></a>
-    function fix() {
-        var el = this;
-        var par = el.parentNode;
-        var next = el.nextSibling;
-        par.removeChild(el);
-        setTimeout(function() {
-            par.insertBefore(el, next);
-        }, 0);
-    }
-
     
     
     /* Desktop Menu Control
