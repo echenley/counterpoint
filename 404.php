@@ -10,10 +10,8 @@
   </header>
     
   <article id="error">
-    <p>
-      <br><?php _e('You broke my site!', 'counterpoint'); ?> :(<br>
-      <?php printf( __('Return to the %s', 'counterpoint'), '<a class="title-link" href="' . home_url('/') . '">Home Page</a>' ); ?>.
-    </p>
+    <p><?php _e('You broke my site!', 'counterpoint'); ?> :(</p>
+    <p><?php printf( __('Return to the %s', 'counterpoint'), '<a href="' . home_url('/') . '">Home Page</a>' ); ?>.</p>
   </article>
 </section>
 

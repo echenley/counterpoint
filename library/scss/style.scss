@@ -1,12 +1,12 @@
 /****************************************
-	Theme Name:   Counterpoint 
-	Author:       Evan Henley
-	Author URI:   http://henleyedition.com
+    Theme Name:   Counterpoint 
+    Author:       Evan Henley
+    Author URI:   http://henleyedition.com
 ****************************************/
 
 
 /****************************************
-	Colors and Other Variables
+    Colors and Other Variables
 ****************************************/
 
 $primary-color:   #4f4f4f;  // text color
@@ -32,15 +32,15 @@ $margin-em:       1.3em;
 
 
 /****************************************
-	Typography
+    Typography
 ****************************************/
 
 /*
-	Font:        Droid Serif
-	Author:      Steve Matteson
-	Author URI:  http://www.droidfonts.com/
-	License:     Apache License, version 2.0
-	License URI: http://www.apache.org/licenses/LICENSE-2.0.html
+    Font:        Droid Serif
+    Author:      Steve Matteson
+    Author URI:  http://www.droidfonts.com/
+    License:     Apache License, version 2.0
+    License URI: http://www.apache.org/licenses/LICENSE-2.0.html
 */
 
 $serif:      'Droid Serif', serif;
@@ -48,43 +48,52 @@ $monospace:  'Courier New', Courier, monospace;
 
 
 /****************************************
-	Mixins
+    Mixins
 ****************************************/
 
 @mixin prefix($property, $value, $prefixes) {
-	$prefixes: ('-webkit-', '-moz-', '-ie-', '-o-') !default;
-	@each $prefix in $prefixes {
-		#{$prefix}#{$property}: $value;
-	}
-	#{$property}: $value;
+    $prefixes: ('-webkit-', '-moz-', '-ie-', '-o-') !default;
+    @each $prefix in $prefixes {
+        #{$prefix}#{$property}: $value;
+    }
+    #{$property}: $value;
 }
 
 @mixin transition($value) {
-	$prefixes: ('-webkit-', '-moz-', '-o-');
-	@include prefix('transition', $value, $prefixes);
+    $prefixes: ('-webkit-', '-moz-', '-o-');
+    @include prefix('transition', $value, $prefixes);
+}
+
+@mixin circle($diameter) {
+    content: '';
+    display: inline-block;
+    width: $diameter;
+    height: $diameter;
+    background: $bg-color;
+    border-radius: 50%;
 }
 
 
 /****************************************
-	Reset, Clearfix
+    Reset, Clearfix
 ****************************************/
 
 @import '_reset';
 
 .cf {
-	zoom: 1;
-	&:before, &:after {
-		content: "";
-		display: table;
-	}
-	&:after {
-		@extend %clear-both;
-	}
+    zoom: 1;
+    &:before, &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        @extend %clear-both;
+    }
 }
 
 
 /****************************************
-	Placeholders
+    Placeholders
 ****************************************/
 
 %dark-border {
@@ -92,504 +101,561 @@ $monospace:  'Courier New', Courier, monospace;
 }
 
 %bg-highlight {
-	background: rgba(#000,0.05);
+    background: rgba(#000,0.05);
+}
+
+%circle-left,
+%circle-right {
+    &:before {
+        @include circle(12px);
+        position: absolute;
+        bottom: -7px;
+        border: 2px solid $primary-color;
+    }
+}
+
+%circle-left {
+    &:before {
+        left: 0;
+    }
+}
+
+%circle-right {
+    &:before{
+        right: 0;
+    }
 }
 
 %highlight-box {
-	@extend %bg-highlight;
-	padding: 0.4em $margin-em * (2/3);
+    @extend %bg-highlight;
+    padding: 0.4em $margin-em * (2/3);
 }
 
 %transition-200ms {
-	@include transition(0.2s);
+    @include transition(0.2s);
 }
 
 %text-align-center {
-	text-align: center;
+    text-align: center;
 }
 
 %glitch-fix {
-	-webkit-backface-visibility: visible;
-	-webkit-transform: translateZ(0);
+    -webkit-backface-visibility: visible;
+    -webkit-transform: translateZ(0);
 }
 
 %standard-bottom-border {
-	border-bottom: 2px solid $primary-color;
+    border-bottom: 2px solid $primary-color;
 }
 
 %standard-margin-em {
-	margin: $margin-em 0;
+    margin: $margin-em 0;
 }
 
 %clear-both {
-	clear: both;
+    clear: both;
 }
 
 %hidden {
-	display: none;
+    display: none;
 }
 
 %display-block {
-	display: block;
+    display: block;
 }
 
 %max-width {
-	max-width: 100% !important;
+    max-width: 100% !important;
 }
 
 %thumbnail-style-1 {
-	position: relative;
-	padding-top: 100%;
-	border-radius: 50%;
-	overflow: hidden;
-	@extend %dark-border;
+    position: relative;
+    padding-top: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    @extend %dark-border;
 }
 
 
 /****************************************
-	Macro Structure
+    Macro Structure
 ****************************************/
 
 html,
 body,
 #container {
-	min-height: 100%;
+    min-height: 100%;
 }
 
 html {
-	-webkit-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
 }
 
 body {
-	font-family: $serif;
-	font-size: 95%;
+    font-family: $serif;
+    font-size: 95%;
 }
 
 #container {
-	position: relative;
-	margin: 0 auto;
-	color: $primary-color;
+    position: relative;
+    margin: 0 auto;
+    color: $primary-color;
 }
 
 %header {
-	height: 80px;
+    position: relative;
+    height: 80px;
 }
 
 #content-container {
-	position: relative;
+    position: relative;
 }
 
 %sidebar {
-	position: absolute;
-	width: 100%;
-	z-index: 100;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
 }
 
 #content {
-	width: 100%;
-	padding: $max-margin $percent-margin;
-	line-height: 1.8;
+    width: 100%;
+    padding: $max-margin $percent-margin;
+    line-height: 1.8;
 }
 
 %footer {
-	@extend %clear-both;
+    @extend %clear-both;
 }
 
 
 /****************************************
-	Heading Tags
+    Heading Tags
 ****************************************/
 
-#title, h1,h2,h3,h4,h5,h6 {
-	@extend %clear-both;
-	font-variant: small-caps;
-	font-weight: normal;
-	text-align: left;
+%title, h1,h2,h3,h4,h5,h6 {
+    @extend %clear-both;
+    font-variant: small-caps;
+    font-weight: normal;
+    text-align: left;
 }
 
 h1,h2,h3,h4,h5,h6 {
-	padding-bottom: 10px;
+    padding-bottom: 10px;
 }
 
 article,
 .comment-content {
-	h2,h3,h4,h5,h6 {
-		@extend %standard-bottom-border;
-		margin: 30px 0;
-	}
+    h2,h3,h4,h5,h6 {
+        @extend %standard-bottom-border;
+        margin: 30px 0;
+    }
 }
 
 .post-header h1 {
-	// h1 is for post titles only
-	clear: none;
-	@extend %standard-bottom-border;
-	margin-bottom: 10px;
-	font-size: 2.2em;
+    // h1 is for post titles only
+    position: relative;
+    clear: none;
+    @extend %standard-bottom-border;
+    margin-bottom: 10px;
+    font-size: 2.2em;
 }
 
-#title, h1,h2,h3 {
-	line-height: 1.3;
+%title,
+h1,h2,h3 {
+    line-height: 1.3;
 }
 
-#title {
-	font-size: 2em;
+%title {
+    font-size: 2em;
 }
 
 h2 {
-	font-size: 1.7em;
+    font-size: 1.7em;
 }
 
 h3 {
-	font-size: 1.5em;
+    font-size: 1.5em;
 }
 
 h4 {
-	font-size: 1.5em;
+    font-size: 1.5em;
 }
 
 h5 {
-	font-size: 1.3em;
+    font-size: 1.3em;
 }
 
 h6 {
-	font-style: bold;
+    font-style: bold;
 }
 
-// applies to .post-title
-%post-title-headings {
-	h2 {
-		margin: 0;
-		padding: 0.5em;
-		border: none;
-		background: none;
-		padding-right: 0;
-	}
-}
-
-// applies to .archive-thumbnail
-%thumbnail-heading {
-	h3 {
-		font-size: 1.5em;
-	}
+#comments,
+#reply-title,
+#post h2 {
+    position: relative;
+    @extend %circle-right;
 }
 
 
 /****************************************
-	Header/Footer Styles
+    Header/Footer Styles
 ****************************************/
 
 #header {
-	@extend %header;
-	@include prefix(box-shadow, 0 3px 1px -2px, ('-webkit-','-moz-'));
-}
-
-.title-link {
-	display: inline-block;
-	color: $primary-color;
-	line-height: 80px;
-	
-	&:hover {
-		color: darken($primary-color, 20%);
-	}
+    @extend %header;
+    border-bottom: 2px solid $primary-color;
+    &:before {
+        z-index: 1000;
+        @include circle(12px);
+        position: absolute;
+        bottom: -7px;
+        left: calc(50% - 7px);
+        border: 2px solid $primary-color;
+    }
 }
 
 #title {
-	display: inline-block;
-	font-size: 1.8em;
-	padding: 0 $percent-margin;
+    @extend %title;
+    display: inline-block;
+    font-size: 1.8em;
+    padding: 0 $percent-margin;
+}
+
+.title-link {
+    display: inline-block;
+    color: $primary-color;
+    line-height: 80px;
 }
 
 .menu-toggle {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	width: 40px;
-	font-size: 2em;
-	line-height: 40px;
-	@extend %text-align-center;
-	@extend %transition-200ms;
-	@extend %button-dark;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2em;
+    line-height: 40px;
+    @extend %text-align-center;
+    @extend %transition-200ms;
+    @extend %button-dark;
 }
 
 #footer {
-	@extend %footer;
-	padding: 20px;
-	@include prefix(box-shadow, 0 -3px 1px -2px, ('-webkit-','-moz-'));
-	line-height: 1.6em;
+    position: relative;
+    @extend %footer;
+    padding: 20px;
+    border-top: 2px solid $primary-color;
+    line-height: 1.6em;
+    &:before {
+        z-index: 1000;
+        @include circle(12px);
+        position: absolute;
+        top: -7px;
+        left: calc(50% - 7px);
+        border: 2px solid $primary-color;
+    }
 }
 
 
 /****************************************
-	Sidebar, Main Navigation
+    Sidebar, Main Navigation
 ****************************************/
 
 %menu-hover {
-	padding-right: 7px;
-	border-right: 6px solid $link-hover !important;
-	color: $link-hover;
+    padding-right: 7px;
+    border-right: 6px solid $link-hover !important;
+    color: $link-hover;
 }
 
 #sidebar {
-	@extend %sidebar;
-	top: 2px;
-	@extend %hidden;
-	padding: 2em 4em;
-	background: rgba($bg-color,0.94);
-	@extend %standard-bottom-border;
-	&.active {
-		@extend %display-block;
-	}
+    @extend %sidebar;
+    top: 2px;
+    @extend %hidden;
+    padding: 2em 4em;
+    background: rgba($bg-color,0.94);
+    @extend %standard-bottom-border;
+    &.active {
+        @extend %display-block;
+    }
 }
 
 #site-nav .menu {
-	position: relative;
-	width: 100%;
-	a {
-		@extend %display-block;
-		padding: 14px 1px 14px 6px;
-		color: $primary-color;
-		line-height: 1.4;
-		@extend %glitch-fix;
-		&:hover {
-			@extend %menu-hover;
-		}
-	}
+    position: relative;
+    width: 100%;
+    a {
+        @extend %display-block;
+        padding: 14px 1px 14px 6px;
+        color: $primary-color;
+        line-height: 1.4;
+        @extend %glitch-fix;
+        &:hover {
+            @extend %menu-hover;
+        }
+    }
 }
 
 #site-nav .menu-item {
-	text-align: right;
-	@extend %transition-200ms;
-	overflow: hidden;
-	&.active {
-		> a {
-			@extend %menu-hover;
-		}
-		> .sub-menu {
-			height: auto;
-			> .menu-item > a {
-				padding-right: 7px;
-				border-right: 6px solid rgba(#000,0.12);
-			}
-		}
-	}
-	&.inactive > a {
-		opacity: 0.3;
-		border-right: none;
-	}
+    text-align: right;
+    @extend %transition-200ms;
+    overflow: hidden;
+    &.active {
+        > a {
+            @extend %menu-hover;
+        }
+        > .sub-menu {
+            height: auto;
+            > .menu-item > a {
+                padding-right: 7px;
+                border-right: 6px solid rgba(#000,0.12);
+            }
+        }
+    }
+    &.inactive > a {
+        opacity: 0.3;
+        border-right: none;
+    }
 }
 
 #site-nav .sub-menu {
-	height: 0;
+    height: 0;
 }
 
 #site-nav .menu-item-has-children {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 
 /****************************************
-	Other Navigation
+    Other Navigation
 ****************************************/
 
 // Adjacent Posts
 .post-nav {
-	margin: $max-margin 0;
-	@extend %clear-both;
-	h3 {
-		margin: 0;
-		padding: 0;
-		border: none;
-		border-top: 2px solid $primary-color;
-		clear: none;
-		font-size: 1.3em;
-	}
+    margin: $max-margin 0;
+    @extend %clear-both;
+    h3 {
+        margin: 0;
+        padding: 0;
+        padding-top: 10px;
+        border: none;
+        border-top: 2px solid $primary-color;
+        clear: none;
+        font-size: 1.3em;
+    }
 }
 
 .next-post-thumb,
 .prev-post-thumb {
-	position: relative;
-	width: 30%;
-	border-radius: 50%;
-	padding-top: 30%;
-	overflow: hidden;
-	@extend %dark-border;
-	a {
-		line-height: 0;
-	}
+    position: relative;
+    width: 30%;
+    border-radius: 50%;
+    padding-top: 30%;
+    overflow: hidden;
+    @extend %dark-border;
+    a {
+        line-height: 0;
+    }
 }
 
 .next-post,
 .prev-post {
-	width: 50% - (50% * $percent-margin / (100% - (2 * $percent-margin)));
-	a {
-		display: block;
-		color: $primary-color;
-	}
-	a:hover {
-		h3,
-		.next-post-thumb,
-		.prev-post-thumb {
-			border-color: $link-hover;
-		}
-	}
+    position: relative;
+    width: 50% - (50% * $percent-margin / (100% - (2 * $percent-margin)));
+    a {
+        display: block;
+        color: $primary-color;
+    }
+    a:hover {
+        h3,
+        h3:before,
+        .next-post-thumb,
+        .prev-post-thumb {
+            border-color: $link-hover;
+        }
+    }
+    h3 {
+        &:before {
+            bottom: auto;
+            top: -5px;
+        }
+    }
 }
 
 .next-post {
-	float: left;
-	h3 {
-		text-align: right;
-		margin-left: 15%;
-	}
+    float: left;
+    h3 {
+        text-align: right;
+        margin-left: 15%;
+        @extend %circle-right;
+    }
 }
 
 .prev-post {
-	float: right;
-	h3 {
-		margin-right: 15%;
-	}
+    float: right;
+    h3 {
+        margin-right: 15%;
+        @extend %circle-left;
+    }
 }
 
 .next-post-thumb {
-	float: left;
-	margin-right: 0.6em;
+    float: left;
+    margin-right: 0.6em;
 }
 .prev-post-thumb {
-	float: right;
-	margin-left: 0.6em;
+    float: right;
+    margin-left: 0.6em;
 }
 
 // Page Numbers
 %pagination {
-	position: relative;
-	@extend %clear-both;
-	@extend %text-align-center;
-	> * {
-		display: inline-block;
-		padding: 0.2em 0.7em;
-		margin: 0 4px 4px 0;
-		&:last-child {
-			margin-right: 0;
-		}
-	}
+    position: relative;
+    @extend %clear-both;
+    @extend %text-align-center;
+    > * {
+        display: inline-block;
+        padding: 0.2em 0.7em;
+        margin: 0 4px 4px 0;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
 }
 
 // For Index/Archive/Comments
 .pagination {
-	@extend %pagination;
-	margin-top: $percent-margin;
-	a {
-		@extend %button-dark;
-	}
-	.current {
-		@extend %button-outline;
-	}
+    @extend %pagination;
+    margin-top: $percent-margin;
+    a {
+        @extend %button-dark;
+    }
+    .current {
+        @extend %button-outline;
+    }
     .next,
     .prev {
-		position: relative;
+        position: relative;
     }
-	.prev {
-		float: left;
-	}
-	.next {
-		float: right;
-	}
-	> *:not(.next):not(.prev) {
-		@extend %hidden;
-	}
-	&:empty {
-		@extend %hidden;
-	}
+    .prev {
+        float: left;
+    }
+    .next {
+        float: right;
+    }
+    > *:not(.next):not(.prev) {
+        @extend %hidden;
+    }
+    &:empty {
+        @extend %hidden;
+    }
 }
 
 // For Paginated Posts
 .post-pagination {
-	@extend %pagination;
-	@extend %standard-margin-em;
-	padding-left: 80px;
-	padding-right: 80px;
-	font-size: 0;
-	
-	> * {
-		font-size: 0.95rem;
-	}
-	> a {
-		@extend %button-dark;
-		
-		&:first-child,
-		&:last-child {
-			position: absolute;
-			top: 1px;
-			bottom: 1px;
-		}
-		&:first-child {
-			left: 0;
-		}
-		&:last-child { 
-			right: 0; 
-		}
-	}
-	> span {
-		@extend %button-outline;
-	}
-	&:empty {
-		@extend %hidden;
-	}
+    @extend %pagination;
+    @extend %standard-margin-em;
+    padding-left: 80px;
+    padding-right: 80px;
+    font-size: 0;
+    
+    > * {
+        font-size: 0.95rem;
+    }
+    > a {
+        @extend %button-dark;
+        
+        &:first-child,
+        &:last-child {
+            position: absolute;
+            top: 1px;
+            bottom: 1px;
+        }
+        &:first-child {
+            left: 0;
+        }
+        &:last-child { 
+            right: 0; 
+        }
+    }
+    > span {
+        @extend %button-outline;
+    }
+    &:empty {
+        @extend %hidden;
+    }
 }
 
+.footer-nav,
+.footer-nav ul {
+    display: inline;
+}
+
+.footer-nav li {
+    display: inline-block;
+    padding: 0 4px;
+    &:not(:last-child):after {
+        content: "\b7";
+        position: relative;
+        left: 6px;
+    }
+}
+
+.footer-nav .submenu {
+    display: inline-block;
+}
 
 /****************************************
-	Post Headers
+    Post Headers
 ****************************************/
 
 .archive-header,
 .attachment-header {
-	text-align: center;
-	h2 {
-		display: inline-block;
-		padding: 0.2em;
-		@extend %standard-bottom-border;
-		color: $primary-color;
-		font-size: 1.5em;
-		font-variant: initial;
-	}
+    text-align: center;
+    h2 {
+        display: inline-block;
+        padding: 0.2em;
+        @extend %standard-bottom-border;
+        color: $primary-color;
+        font-size: 1.5em;
+        font-variant: initial;
+    }
 }
 .attachment-header {
-	margin-bottom: $margin-em;
+    margin-bottom: $margin-em;
 }
 
 .archive-header {
-	margin-bottom: $max-margin;
+    margin-bottom: $max-margin;
 }
 
 .post-thumbnail {
-	@extend %thumbnail-style-1;
-	margin-bottom: $margin-em;
+    z-index: 10;
+    @extend %thumbnail-style-1;
+    margin-bottom: $margin-em;
 }
 
 
 .post-info {
-	z-index: 2;
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	background: rgba(#000, 0.6);
-	padding: 0.4em 0 0.8em 0;
-	overflow: hidden;
-	@extend %text-align-center;
-	color: $bg-color;
-	
-	a {
-		color: $line-color;
-		&:hover {
-			color: darken($line-color, 30%);
-		}
-	}
-	
-	.timestamp {
-		@extend %display-block;
-		font-style: italic;
-		padding-top: 4px;
-	}
+    z-index: 2;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(#000, 0.6);
+    padding: 0.4em 0 0.8em 0;
+    overflow: hidden;
+    @extend %text-align-center;
+    color: $bg-color;
+    
+    a {
+        color: $line-color;
+        &:hover {
+            color: darken($line-color, 30%);
+        }
+    }
+    
+    .timestamp {
+        @extend %display-block;
+        font-style: italic;
+        padding-top: 4px;
+    }
 }
 
 
@@ -600,604 +666,610 @@ h6 {
 }
 
 .post-meta {
-	@extend %display-block;
-	margin-bottom: $margin-em;
-	text-align: left;
+    @extend %display-block;
+    margin-bottom: $margin-em;
+    text-align: left;
 }
 
 #attachment .post-meta {
-	background: none;
-	@extend %text-align-center;
+    background: none;
+    @extend %text-align-center;
 }
 
 
 /****************************************
-	Post Content
+    Post Content
 ****************************************/
 
 #post,
 #archive-page {
-	margin: 0 auto $percent-margin;
+    margin: 0 auto $percent-margin;
 }
 
 #post > p:first-of-type:not(.no-dropcap):first-letter {
-	@extend %display-block;
-	float: left;
-	height: 1em;
-	line-height: 1;
-	font-size: 5.9em;
-	margin: -3px 10px -10px 6px;
+    @extend %display-block;
+    float: left;
+    height: 1em;
+    line-height: 1;
+    font-size: 5.9em;
+    margin: -3px 10px -10px 6px;
 }
 
 
 /****************************************
-	Front-Page, Archives
+    Front-Page, Archives
 ****************************************/
 
 #archive .post,
 #archive .page {
-	width: 100%;
-	margin-bottom: $max-margin;
-	&:hover .cp-tags {
-		opacity: 1;
-	}
+    width: 100%;
+    margin-bottom: $max-margin;
+    &:hover .cp-tags {
+        opacity: 1;
+    }
 }
 
 .archive-post-title {
-	margin: 0 0 30px 0;
-	font-size: 1.8em;
-	a {
-		display: block;
-		color: $primary-color;
-	}
+    margin: 0 0 30px 0;
+    font-size: 1.8em;
+    a {
+        display: block;
+        color: $primary-color;
+    }
 }
 
 .archive-thumbnail {
-	position: relative;
-	@extend %thumbnail-style-1;
-	width: 100%;
-	@extend %thumbnail-heading;
-	@extend %transition-200ms;
-	
-	.thumbnail-link {
-		position: absolute;
-		top: 0;
-		@extend %display-block;
-		width: 100%;
-		padding-top: 100%;
-	}
+    position: relative;
+    @extend %thumbnail-style-1;
+    width: 100%;
+    @extend %transition-200ms;
+    
+    .thumbnail-link {
+        position: absolute;
+        top: 0;
+        @extend %display-block;
+        width: 100%;
+        padding-top: 100%;
+    }
 }
 
 .excerpt {
-	margin-top: $margin-em;
+    margin-top: $margin-em;
 }
 
 .cp-tags {
-	opacity: 0;
-	@extend %standard-margin-em;
-	font-size: 0.85em;
-	@extend %transition-200ms;
+    opacity: 0;
+    @extend %standard-margin-em;
+    font-size: 0.85em;
+    @extend %transition-200ms;
 }
 
 .more-link {
-	display: inline;
-	float: right;
-	padding: 0 8px;
+    display: inline;
+    float: right;
 }
 
 
 /****************************************
-	Comments
+    Comments
 ****************************************/
 
 .comment-subscription-form,
 .form-allowed-tags {
-	@extend %hidden;
+    @extend %hidden;
 }
 
 // these are <h3> tags
 #comments,
 .comment-reply-title {
-	margin: 20px 0;
-	@extend %standard-bottom-border;
+    margin: 20px 0;
+    @extend %standard-bottom-border;
 }
 
 #comments {
-	font-size: 1.8em;
+    font-size: 1.8em;
 }
 
 .comment-reply-title {
-	margin-bottom: 10px;
-	font-size: 1.7em;
+    margin-bottom: 10px;
+    font-size: 1.7em;
 }
 
 .logged-in-as {
-	margin: 10px 0 $margin-em 0;
+    margin: 10px 0 $margin-em 0;
 }
 
 .fn {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .commentlist {
-	@extend %standard-margin-em;
-	font-size: 0.9em;
-	
-	.odd {
-		background: $highlight;
-	}
-	.even {
-		background: $bg-color;
-		> #respond #commentform {
-		}
-	}
+    @extend %standard-margin-em;
+    font-size: 0.9em;
+    
+    .odd {
+        background: $highlight;
+    }
+    .even {
+        background: $bg-color;
+        > #respond #commentform {
+        }
+    }
 }
-	
+    
 .comment, .pingback {
-	padding: $margin-em * (2/3);
-	overflow: auto;
-	.comment {
-		margin: $margin-em * (2/3) 0 0 $margin-em * (2/3);
-	}
+    padding: $margin-em * (2/3);
+    overflow: auto;
+    .comment {
+        margin: $margin-em * (2/3) 0 0 $margin-em * (2/3);
+    }
 }
 
 .pingback .avatar {
-	@extend %hidden;
+    @extend %hidden;
 }
 
 .comment-content {
-	@extend %clear-both;
+    @extend %clear-both;
 }
 
 .vcard {
-	@extend %display-block;
+    @extend %display-block;
 
-	.comment-author-info {
-		padding-top: 3px;
-		float: left;
-	}
-	
-	time {
-		float: right;
-	}
-	
-	img.avatar {
-		float: left;
-		margin-right: $margin-em * (2/3);
-		border: 1px solid $line-color;
-	}
+    .comment-author-info {
+        padding-top: 3px;
+        float: left;
+    }
+    
+    time {
+        float: right;
+    }
+    
+    img.avatar {
+        float: left;
+        margin-right: $margin-em * (2/3);
+        border: 1px solid $line-color;
+    }
 }
 
 .bypostauthor > div > .vcard .comment-author-info cite:after {
-	content: ' (author)';
+    content: ' (author)';
 }
 
 #respond {
-	p {
-		margin: $margin-em * (2/3) 0;
-	}
-	
-	#cancel-comment-reply-link {
-		font-size: 0.6em;
-		font-weight: normal;
-		font-variant: normal;
-		&:before {
-			content: '\20 \00b7 \20';
-			color: $primary-color;
-			&:visited, &:hover {
-				color: $primary-color;
-			}
-		}
-	}
+    p {
+        margin: $margin-em * (2/3) 0;
+    }
+    
+    #cancel-comment-reply-link {
+        font-size: 0.6em;
+        font-weight: normal;
+        font-variant: normal;
+        &:before {
+            content: '\20 \00b7 \20';
+            color: $primary-color;
+            &:visited, &:hover {
+                color: $primary-color;
+            }
+        }
+    }
 
-	label { // Positioned off screen (for screen readers only)
-		position: absolute;
-		left: -999em;
-		width: 1em;
-		overflow: hidden;
-	}
+    label { // Positioned off screen (for screen readers only)
+        position: absolute;
+        left: -999em;
+        width: 1em;
+        overflow: hidden;
+    }
 
-	input[type=text],
-	input[type=email],
-	input[type=url],
-	textarea {
-		@extend %form-input;
-	
-		// form validation //
-		&:invalid {
-			outline: none;
-			border-color: #fb8888;
-			@include prefix(box-shadow, none, ('-webkit-','-moz-'));
-		}
-	}
+    input[type=text],
+    input[type=email],
+    input[type=url],
+    textarea {
+        @extend %form-input;
+    
+        // form validation //
+        &:invalid {
+            outline: none;
+            border-color: #fb8888;
+            @include prefix(box-shadow, none, ('-webkit-','-moz-'));
+        }
+    }
 
-	input[type=text],
-	input[type=email],
-	input[type=url] {
-		width: 400px;
-		min-width: 250px;
-	}
+    input[type=text],
+    input[type=email],
+    input[type=url] {
+        width: 400px;
+        min-width: 250px;
+    }
 
-	.comment-form-comment {
-		line-height: 0;
-	}
-	textarea {
-		resize: none;
-		width: 100%;
-		height: 15em;
-	}
+    .comment-form-comment {
+        line-height: 0;
+    }
+    textarea {
+        resize: none;
+        width: 100%;
+        height: 15em;
+    }
 }
 
 // Styles For Replies To Comments //
 .commentlist {
-	h3#reply-title {
-		margin: 0;
-		margin-bottom: 0.6em;
-		border: none;
-		padding: 0;
-	}
-	.form-submit {
-		margin-bottom: 0;
-	}
-	#respond {
-		padding: $margin-em * (2/3);
-		margin: $margin-em * (2/3) 0 0 $margin-em * (2/3);
-	}
-	.odd > #respond {
-		background: $bg-color;
-	}
-	.even > #respond {
-		@extend %bg-highlight;
-	}
+    h3#reply-title {
+        margin: 0;
+        margin-bottom: 0.6em;
+        border: none;
+        padding: 0;
+    }
+    .form-submit {
+        margin-bottom: 0;
+    }
+    #respond {
+        padding: $margin-em * (2/3);
+        margin: $margin-em * (2/3) 0 0 $margin-em * (2/3);
+    }
+    .odd > #respond {
+        background: $bg-color;
+    }
+    .even > #respond {
+        @extend %bg-highlight;
+    }
 }
 
 
 /****************************************
-	Archive Page
+    Archive Page
 ****************************************/
 
 #archive-page {
-	#searchform {
-		@extend %standard-margin-em;
-		overflow: hidden;
-	}
-	ul {
-		margin: 0;
-		padding: 0;
-	}
-	ul.topics li, ul.monthly li {
-		display: inline;
-	}
-	.tag-cloud {
-		line-height: 1.4;
-	}
-	h3 {
-		clear: none;
-		overflow: hidden;
-	}
+    #searchform {
+        @extend %standard-margin-em;
+        overflow: hidden;
+    }
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+    ul.topics li, ul.monthly li {
+        display: inline;
+    }
+    .tag-cloud {
+        line-height: 1.4;
+    }
+    h3 {
+        clear: none;
+        overflow: hidden;
+    }
 }
 
 
 /****************************************
-	General Styles
+    General Styles
 ****************************************/
 
 // this applies to most bodies of text
 article {
-	text-align: justify;
+    text-align: justify;
 }
 
 a,input,select,textarea {
-	@extend %transition-200ms;
+    @extend %transition-200ms;
 }
 
 a {
-	color: $link-color;
-	&:hover {
-		color: $link-hover;
-	}
+    color: $link-color;
+    &:hover {
+        color: $link-hover;
+    }
 }
 
 .button,
 %button-dark,
 %button-outline {
-	border-radius: 3px;
+    border-radius: 3px;
+    padding: 0 8px;
 }
 
 .button {
-	background: $link-color;
-	color: $bg-color;
-	
-	&:hover {
-		background: darken($link-color, 10%);
-		color: $bg-color;
-	}
+    background: $link-color;
+    color: $bg-color;
+    
+    &:hover {
+        background: darken($link-color, 10%);
+        color: $bg-color;
+    }
 }
 
 %button-dark {
-	background: $primary-color;
-	color: $bg-color;
-	
-	&:hover {
-		background: darken($primary-color, 10%);
-		color: $bg-color;
-	}
+    background: $primary-color;
+    color: $bg-color;
+    
+    &:hover {
+        background: darken($primary-color, 10%);
+        color: $bg-color;
+    }
 }
 
 %button-outline {
-	border: 1px solid $line-color;
+    border: 1px solid $line-color;
 }
 
 img {
-	@extend %max-width;
+    @extend %max-width;
 }
 
 iframe {
-	@extend %display-block;
-	margin-left: auto;
-	margin-right: auto;
-	@extend %max-width;
+    @extend %display-block;
+    margin-left: auto;
+    margin-right: auto;
+    @extend %max-width;
 }
   
 #content p {
-	@extend %standard-margin-em;
+    @extend %standard-margin-em;
 }
 
 pre, code, blockquote {
-	@extend %highlight-box;
+    @extend %highlight-box;
 }
 
 pre, blockquote {
-	@extend %clear-both;
-	@extend %standard-margin-em;
-	padding: $margin-em;
-	border-left: 6px solid $line-color;
+    @extend %clear-both;
+    @extend %standard-margin-em;
+    padding: $margin-em;
+    border-left: 6px solid $line-color;
 }
 
 pre, code {
-	font-family: $monospace;
+    font-family: $monospace;
 }
 
 pre {
-	overflow: auto;
-	line-height: 1.5;
-	-ms-word-wrap: initial;
-	word-wrap: initial;
+    overflow: auto;
+    line-height: 1.5;
+    -ms-word-wrap: initial;
+    word-wrap: initial;
 }
 
 code {
-	display: inline-block;
-	padding: 0 8px;
+    display: inline-block;
+    padding: 0 8px;
 }
 
 kbd {
-	font-family: $monospace;
+    font-family: $monospace;
 }
 
 blockquote { 
-	font-style: italic;
-	quotes: "\201C""\201D""\2018""\2019";
-	p:first-child {
-		display: inline;
-	}
-	&:before {
-		content: open-quote;
-		float: left;
-		height: 0.2em;
-		margin-right: .25em;
-		margin-top: -.1em;
-		font-size: 4em;
-		color: $line-color;
-		line-height: 1;
-	}
-	&:after {
-		content: no-close-quote;
-	}
-	cite {
-		@extend %display-block;
-		text-align: right;
-		&:before {
-			content: '\2014 \20';
-			color: $line-color;
-		}
-	}
+    font-style: italic;
+    quotes: "\201C""\201D""\2018""\2019";
+    p:first-child {
+        display: inline;
+    }
+    &:before {
+        content: open-quote;
+        float: left;
+        height: 0.2em;
+        margin-right: .25em;
+        margin-top: -.1em;
+        font-size: 4em;
+        color: $line-color;
+        line-height: 1;
+    }
+    &:after {
+        content: no-close-quote;
+    }
+    cite {
+        @extend %display-block;
+        text-align: right;
+        &:before {
+            content: '\2014 \20';
+            color: $line-color;
+        }
+    }
 }
 
 hr {
-  @extend %display-block;
-  height: 0;
-  width: 100%;
-  margin: $margin-em auto;
-  border: 1px solid $line-color;
+    width: 100%;
+    height: 0;
+    margin: 30px 0;
+    border: none;
+    border-bottom: 2px solid $line-color;
+    text-align: center;
+    &:before {
+        @include circle(12px);
+        position: relative;
+        border: 2px solid $line-color;
+        top: -11px;
+    }
 }
 
 // displays if a featured image is not set
 .no-featured-image {
-	background: #000;
-	&::before {
-		content: 'No Featured Image';
-		position: absolute;
-		top: 50%;
-		width: 100%;
-		@extend %text-align-center;
-		line-height: 0;
-		color: #666;
-		font-style: italic;
-		white-space: nowrap;
-	}
+    background: #000;
+    &::before {
+        content: 'No Featured Image';
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        @extend %text-align-center;
+        line-height: 0;
+        color: #666;
+        font-style: italic;
+        white-space: nowrap;
+    }
 }
 
 
 /****************************************
-	Wordpress Classes
+    Wordpress Classes
 ****************************************/
 
 // eliminate stupid smiley face at bottom of page
 img#wpstats {
-	@extend %hidden;
+    @extend %hidden;
 }
 
 .aligncenter {
-	@extend %display-block;
-	margin-left: auto;
-	margin-right: auto;
+    @extend %display-block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .alignright {
-	float: right;
+    float: right;
 }
 
 .alignleft {
-	float: left;
+    float: left;
 }
 
 img.alignright, .wp-caption.alignright,
 img.alignleft, .wp-caption.alignleft {
-	max-width: 50% !important;
+    max-width: 50% !important;
 }
 
 img.alignright, .wp-caption.alignright {
-	margin: 0.6em 0 0.6em $margin-em;
+    margin: 0.6em 0 0.6em $margin-em;
 }
 
 img.alignleft, .wp-caption.alignleft {
-	margin: 0.6em $margin-em 0.6em 0;
+    margin: 0.6em $margin-em 0.6em 0;
 }
 
 img.aligncenter {
-	margin-left: $margin-em auto;
+    margin-left: $margin-em auto;
 }
 
 img[class*="align"],
 img[class*="wp-image-"] {
-	height: auto; // Make sure images with WordPress-added height and width attributes are scaled correctly
+    height: auto; // Make sure images with WordPress-added height and width attributes are scaled correctly
 }
 img.size-full {
-	width: auto; // Prevent stretching of full-size images with height and width attributes in IE8
+    width: auto; // Prevent stretching of full-size images with height and width attributes in IE8
 }
 
 .alert {
-	@extend %highlight-box;
+    @extend %highlight-box;
 }
 
 .wp-audio-shortcode {
-	@extend %clear-both;
+    @extend %clear-both;
 }
 
 
 /****************************************
-	Gallery and Captions
+    Gallery and Captions
 ****************************************/
 
 .gallery {
-	@extend %clear-both;
-	margin: auto;
-	width: 100%;
-	img {
-		border: 2px solid $line-color;
-	}
+    @extend %clear-both;
+    margin: auto;
+    width: 100%;
+    img {
+        border: 2px solid $line-color;
+    }
 }
 
 .gallery-item {
-	float: left;
-	margin-top: 10px;
-	@extend %text-align-center;
-	width: 33%;
+    float: left;
+    margin-top: 10px;
+    @extend %text-align-center;
+    width: 33%;
 }
 
 .gallery-caption {
-	margin-left: 0;
-	background: none !important;
+    margin-left: 0;
+    background: none !important;
 }
 
 .wp-caption {
-	line-height: 0;
-	@extend %max-width;
-	img {
-		margin: 0;
-		padding: 0;
-		border: 0 none;
-	}
+    line-height: 0;
+    @extend %max-width;
+    img {
+        margin: 0;
+        padding: 0;
+        border: 0 none;
+    }
 }
 
 .wp-caption-text {
-	@extend %highlight-box;
-	@extend %text-align-center;
-	margin: 0 !important;
-	font-style: italic;
-	line-height: 1.4;
+    @extend %highlight-box;
+    @extend %text-align-center;
+    margin: 0 !important;
+    font-style: italic;
+    line-height: 1.4;
 }
 
 
 /****************************************
-	Tables and Lists
+    Tables and Lists
 ****************************************/
 
 #content table {
-	margin: $margin-em auto;
+    margin: $margin-em auto;
 }
 
 table {
-	@extend %max-width;
-	border-top: 2px solid $primary-color;
-	@extend %standard-bottom-border;
-	border-collapse: collapse;
-	font-size: 0.9em;
-	th, td {
-		padding: 0.6em;
-		border-bottom: 1px solid $line-color;
-		text-align: left;
-	}
-	th {
-		font-weight: bold;
-	}
-	tbody tr:hover {
-		@extend %bg-highlight;
-	}
+    @extend %max-width;
+    border-top: 2px solid $primary-color;
+    @extend %standard-bottom-border;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    th, td {
+        padding: 0.6em;
+        border-bottom: 1px solid $line-color;
+        text-align: left;
+    }
+    th {
+        font-weight: bold;
+    }
+    tbody tr:hover {
+        @extend %bg-highlight;
+    }
 }
 
 article,
 .comment-content,
-#footer {
-	ul,
-	ol {
-		@extend %standard-margin-em;
-		padding-left: 1em;
-		text-indent: -1em;
-	}
-	ul {
-		list-style: disc inside;
-		ul,ol {
-			margin: 0 0 0 1em;
-		}
-	}
-	ol {
-		list-style: decimal inside;
-		ul,ol {
-			margin: 0 0 0 1em;
-		}
-	}
+.widget {
+    ul,
+    ol {
+        @extend %standard-margin-em;
+        padding-left: 1em;
+        text-indent: -1em;
+    }
+    ul {
+        list-style: disc inside;
+        ul,ol {
+            margin: 0 0 0 1em;
+        }
+    }
+    ol {
+        list-style: decimal inside;
+        ul,ol {
+            margin: 0 0 0 1em;
+        }
+    }
 }
 
 
 /****************************************
-	Forms
+    Forms
 ****************************************/
 
 %form-input {
-	@extend %max-width;
-	margin: 0;
-	padding: 0.5em $margin-em * (2/3);
-	line-height: 1.5;
-	font-size: 13px;
+    @extend %max-width;
+    margin: 0;
+    padding: 0.5em $margin-em * (2/3);
+    line-height: 1.5;
+    font-size: 13px;
 }
 
 input,select,textarea {
-	outline: none;
-	border: 2px solid $line-color;
-	&:focus {
-		border-color: #66c2ff;
-	}
+    outline: none;
+    border: 2px solid $line-color;
+    &:focus {
+        border-color: #66c2ff;
+    }
 }
 
 input[type=submit],
@@ -1205,78 +1277,75 @@ input[type=text],
 input[type=email],
 input[type=url],
 textarea {
-	border-radius: 3px;
-	-webkit-appearance: none; // removes iphone shadow //
+    border-radius: 3px;
+    -webkit-appearance: none; // removes iphone shadow //
 }
 
 #searchform {
-	label {
-		@extend %hidden;
-	}
-	input {
-		width: 100%;
-		max-width: 100%;
-		@extend %form-input;
-		line-height: 2;
-	}
+    label {
+        @extend %hidden;
+    }
+    input {
+        width: 100%;
+        max-width: 100%;
+        @extend %form-input;
+        line-height: 2;
+    }
 }
 
 .post-password-form {
-	@extend %clear-both;
-	input[type=password] {
-		width: 200px;
-		@extend %max-width;
-		@extend %form-input;
-	}
-	input[type=submit] {
-		margin-left: $margin-em;
-	}
+    @extend %clear-both;
+    input[type=password] {
+        width: 200px;
+        @extend %max-width;
+        @extend %form-input;
+    }
+    input[type=submit] {
+        margin-left: $margin-em;
+    }
 }
 
 input[type=submit],
 input[type=submit]:visited {
-	display: inline-block;
-	margin: 0;
-	padding: 0 20px;
-	height: 34px;
-	border: none;
-	text-decoration: none;
-	font-size: 13px;
-	cursor: pointer;
-	@extend %button-dark;
+    display: inline-block;
+    margin: 0;
+    padding: 0 20px;
+    height: 34px;
+    border: none;
+    text-decoration: none;
+    font-size: 13px;
+    cursor: pointer;
+    @extend %button-dark;
 }
 
 
 /****************************************
-	Widgets
+    Widgets
 ****************************************/
 
 .header-widget,
 .article-widget {
-	@extend %hidden;
+    @extend %hidden;
 }
 
 .article-widget {
-	@extend %standard-margin-em;
+    @extend %standard-margin-em;
 }
 
 .footer-widget {
-	width: 100%;
-	margin-bottom: $max-margin;
-	padding: 8px;
-	overflow: hidden;
-	h4 {
-		padding-bottom: 20px;
-	}
-	
-	&:last-child {
-		margin-bottom: 0;
-	}
+    float: right;
+    h4 {
+        padding-bottom: 20px;
+    }
+    &:not(:first-of-type) {
+        // only one widget allowed!
+        display: none;
+    }
 }
 
 
 /****************************************
-	Media Queries
+    Media Queries
 ****************************************/
 
 @import '_mq1';

@@ -30,10 +30,10 @@
      * Counterpoint Setup
     */
     
-    if ( ! function_exists( 'counterpoint_setup' ) ) :
+    if ( ! function_exists('counterpoint_setup') ) :
     function counterpoint_setup() {
     
-        load_theme_textdomain( 'counterpoint', get_template_directory_uri() . '/languages' );
+        load_theme_textdomain('counterpoint', get_template_directory_uri() . '/languages');
         
         $locale = get_locale();
         $locale_file = get_template_directory_uri() . "/languages/$locale.php";
@@ -44,11 +44,11 @@
         // Theme Support //
         add_theme_support( 'post-thumbnails' );
         add_theme_support( 'automatic-feed-links' );
-        
+
         
         // Sidebar Menu //
-        register_nav_menu('sidebar',__( 'Sidebar', 'counterpoint' ));
-        
+        register_nav_menu('sidebar', __('Sidebar', 'counterpoint'));
+        register_nav_menu('footer', __('Footer', 'counterpoint'));
         
         // Content Width Setup //
         global $content_width;
@@ -56,9 +56,9 @@
     
     }
     endif; // End Counterpoint Setup
-    add_action( 'after_setup_theme', 'counterpoint_setup' );
+    add_action('after_setup_theme', 'counterpoint_setup');
 
-    add_filter( 'wp_title', 'counterpoint_title', 10, 3 ); 
+    add_filter('wp_title', 'counterpoint_title', 10, 3); 
     function counterpoint_title( $title, $sep, $seplocation ) {
         global $page, $paged;
     
@@ -179,7 +179,7 @@
         ));
     }
     
-    counterpoint_create_widget('Footer Widget', 'footer-widget', 'Area in the footer');
+    counterpoint_create_widget('Footer Widget', 'footer-widget', 'Area in the footer for a single widget. Perfect for a simple text widget, like a copyright notice.');
     counterpoint_create_widget('Article Bottom', 'article-widget', 'Area at the bottom of each post, before the comments.');
     counterpoint_create_widget('Header Right', 'header-widget', 'Area at the right side of the header. Perfect for social icons, search bar, or a site tagline.');
 
