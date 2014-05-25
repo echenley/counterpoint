@@ -367,7 +367,6 @@ h6 {
 
 #sidebar {
     @extend %sidebar;
-    top: 2px;
     @extend %hidden;
     padding: 2em 4em;
     background: rgba($bg-color,0.94);
