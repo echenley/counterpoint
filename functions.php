@@ -6,20 +6,18 @@
     
     Contents
     ----------------------
-    * Theme Support
-    * Translation-Ready Function
+    * Setup Function
     * Small Customizations
-    * Font URL Function (called from enqueue)
-    * Enqueue Scripts and Styles
+    * Fonts
+    * Scripts and Styles
     * Remove Admin Bar
-    * Register Menus
-    * Register Widget Space
-    * Thumbnail Functions
+    * Widgets
+    * Thumbnail-related Functions
     * Comment Layout
+    * Adjacent Post Navigation
+    * Categories
+    * Timestamp (posted_on)
     * Numeric Page Navigation
-    * Next and Previous Post Navigation
-    * Display Categories
-    * Display Timestamp
     * Custom Link Pages
     * Index/Archive Loop Functions
 
@@ -198,12 +196,45 @@
         $first_img = $matches[1][0];
         return $first_img;
     }
+    
+    
+    // Post Header Function Call
+    // Checks for post thumbnail. If none, gets first image. Else, default class 'no-featured-image'
+    
+    function counterpoint_thumbnail_style($post_id, $img_size = 'full') {
+
+        if ( has_post_thumbnail($post_id) ) {
+        
+            $img_id = get_post_thumbnail_id($post_id);
+            $img_src = wp_get_attachment_image_src($img_id, $img_size);
+            $img_url = $img_src[0];
+            $alt_text = get_post_meta($img_id, '_wp_attachment_image_alt', true);
+            if ( !$alt_text ) {
+                $alt_text = get_the_title($post_id);
+            }
+                 
+        } else {
+            
+            // grab the first image from the post
+            $img_url = counterpoint_catch_image($post_id);
+            $alt_text = get_the_title($post_id);
+            
+        }
+        
+        if ( $img_url ) {
+            return '" style="background: #fff url(' . esc_attr( $img_url ) .
+                   '); background-position: center; background-size: cover" title="Image of: ' . esc_attr( $alt_text );
+        }
+        // if no image, apply class no-featured-image
+        return ' no-featured-image" title="' . esc_attr( $alt_text );
+        
+    };
 
 
     // Comment Layout
     
     function counterpoint_comments( $comment, $args, $depth ) {
-     $GLOBALS['comment'] = $comment; ?>
+        $GLOBALS['comment'] = $comment; ?>
         <li <?php comment_class(); ?>>
             <div id="comment-<?php comment_ID(); ?>">
                 <header class="comment-author vcard cf">
@@ -229,6 +260,26 @@
     
     // Next and Previous Post Navigation
     
+    function counterpoint_adjacent_posts_display($nextorprev, $post_id) { 
+        $np_url = get_permalink($post_id);
+        $np_title = get_the_title($post_id);
+        if ($nextorprev === 'next') {
+            $capitalized = 'Next';
+        } else {
+            $capitalized = 'Previous';
+        }
+        ?>
+    
+        <div class="<?php echo $nextorprev; ?>-post">
+            <a href="<?php echo esc_url($np_url); ?>" title="<?php echo $capitalized; ?> Post: <?php echo esc_attr($np_title); ?>" class="cf">
+                <div class="<?php echo $nextorprev; ?>-post-thumb<?php echo counterpoint_thumbnail_style($post_id); ?>"></div>
+                <h3><?php echo esc_html($np_title); ?></h3>
+            </a>
+        </div>
+        
+    <?php
+    };
+    
     function counterpoint_adjacent_posts() {
         $next_post = get_next_post();
         $prev_post = get_previous_post();
@@ -237,33 +288,13 @@
         <nav class="post-nav cf">
             <?php
             
-            function next_prev_display($nextorprev, $post_id) { 
-                $np_url = get_permalink($post_id);
-                $np_title = get_the_title($post_id);
-                if ($nextorprev === 'next') {
-                    $capitalized = 'Next';
-                } else {
-                    $capitalized = 'Previous';
-                }
-                ?>
-            
-                <div class="<?php echo $nextorprev; ?>-post">
-                    <a href="<?php echo esc_url($np_url); ?>" title="<?php echo $capitalized; ?> Post: <?php echo esc_attr($np_title); ?>" class="cf">
-                        <div class="<?php echo $nextorprev; ?>-post-thumb<?php echo counterpoint_thumbnail_style($post_id); ?>"></div>
-                        <h3><?php echo esc_html($np_title); ?></h3>
-                    </a>
-                </div>
-                
-            <?php
-            };
-            
             if ( $is_next && $is_prev ) {
-                next_prev_display('next', $next_post->ID);
-                next_prev_display('prev', $prev_post->ID);
+                counterpoint_adjacent_posts_display('next', $next_post->ID);
+                counterpoint_adjacent_posts_display('prev', $prev_post->ID);
             } else if ( $is_next ) {    // if first post //
-                next_prev_display('next', $next_post->ID);
+                counterpoint_adjacent_posts_display('next', $next_post->ID);
             } else if ( $is_prev ) { // if last post //
-                next_prev_display('prev', $prev_post->ID);
+                counterpoint_adjacent_posts_display('prev', $prev_post->ID);
             } ?>
         </nav>
     <?php
@@ -361,37 +392,6 @@
         }
     }
     
-    // Post Header Function Call
-    // Checks for post thumbnail. If none, gets first image. Else, default class 'no-featured-image'
-    
-    function counterpoint_thumbnail_style($post_id, $img_size = 'full') {
-
-        if ( has_post_thumbnail($post_id) ) {
-        
-            $img_id = get_post_thumbnail_id($post_id);
-            $img_src = wp_get_attachment_image_src($img_id, $img_size);
-            $img_url = $img_src[0];
-            $alt_text = get_post_meta($img_id, '_wp_attachment_image_alt', true);
-            if ( !$alt_text ) {
-                $alt_text = get_the_title($post_id);
-            }
-                 
-        } else {
-            
-            // grab the first image from the post
-            $img_url = counterpoint_catch_image($post_id);
-            $alt_text = get_the_title($post_id);
-            
-        }
-        
-        if ( $img_url ) {
-            return '" style="background: #fff url(' . esc_attr( $img_url ) .
-                   '); background-position: center; background-size: cover" title="Image of: ' . esc_attr( $alt_text );
-        }
-        // if no image, apply class no-featured-image
-        return ' no-featured-image" title="' . esc_attr( $alt_text );
-        
-    };
     
     // Displays the loop
     
