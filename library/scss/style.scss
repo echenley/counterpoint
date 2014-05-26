@@ -304,6 +304,7 @@ h6 {
 #header {
     @extend %header;
     border-bottom: 2px solid $primary-color;
+    padding: 0 $percent-margin;
     &:before {
         z-index: 1000;
         @include circle(12px);
@@ -318,7 +319,6 @@ h6 {
     @extend %title;
     display: inline-block;
     font-size: 1.6em;
-    padding: 0 $percent-margin;
 }
 
 .title-link {
@@ -391,7 +391,8 @@ h6 {
     }
 }
 
-#site-nav .menu-item {
+#site-nav .menu-item,
+#site-nav .page_item {
     text-align: right;
     @extend %transition-200ms;
     overflow: hidden;
@@ -583,17 +584,16 @@ h6 {
 }
 
 .footer-nav,
+.footer-nav .menu,
 .footer-nav ul {
     display: inline;
 }
 
 .footer-nav li {
     display: inline-block;
-    padding: 0 4px;
     &:not(:last-child):after {
         content: "\b7";
-        position: relative;
-        left: 6px;
+        padding: 0 4px;
     }
 }
 
@@ -1335,7 +1335,7 @@ input[type=submit]:visited {
     h4 {
         padding-bottom: 20px;
     }
-    &:not(:first-of-type) {
+    &:not(:first-of-type(.footer-widget)) {
         // only one widget allowed!
         display: none;
     }

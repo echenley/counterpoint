@@ -41,6 +41,10 @@
         margin: 0 $desktop-vw;
     }
     
+    #header {
+        padding: 0 20px;
+    }
+    
     #footer {
         padding: $margin-em;
     }
@@ -65,7 +69,6 @@
     }
     
     #title {
-        padding: 0 20px;
         font-size: 2.2em;
     }
     
@@ -121,6 +124,10 @@
         line-height: 80px;
         max-height: 80px;
         overflow: hidden;
+        &:not(:first-of-type(.header-widget)) {
+            // only one widget allowed!
+            display: none;
+        }
     }
     
     .article-widget {

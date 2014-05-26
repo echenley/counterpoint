@@ -179,9 +179,9 @@
         ));
     }
     
-    counterpoint_create_widget('Footer Widget', 'footer-widget', 'Area in the footer for a single widget. Perfect for a simple text widget, like a copyright notice.');
+    counterpoint_create_widget('Footer Widget', 'footer-widget', 'Area in the footer for a single widget. Great for a simple text widget, such as a copyright notice.');
     counterpoint_create_widget('Article Bottom', 'article-widget', 'Area at the bottom of each post, before the comments.');
-    counterpoint_create_widget('Header Right', 'header-widget', 'Area at the right side of the header. Perfect for social icons, search bar, or a site tagline.');
+    counterpoint_create_widget('Header Right', 'header-widget', 'Area at the right side of the header. Holds a single widget. Perfect for social icons, search bar, or a site tagline.');
 
 
     /*
@@ -300,11 +300,11 @@
     add_filter('wp_link_pages_args','counterpoint_link_pages_args');
     function counterpoint_link_pages_args($args){
         $cp_defaults = array(
-            'next_or_number'     => 'next_and_number',
-            'before'                     => '<nav class="post-pagination">',
-            'after'                        => '</nav>',
-            'pagelink'                 => '<span>%</span>',
-            'nextpagelink'         => '<span>' . __('Next &rarr;', 'counterpoint') . '</span>',
+            'next_or_number'   => 'next_and_number',
+            'before'           => '<nav class="post-pagination">',
+            'after'            => '</nav>',
+            'pagelink'         => '<span>%</span>',
+            'nextpagelink'     => '<span>' . __('Next &rarr;', 'counterpoint') . '</span>',
             'previouspagelink' => '<span>' . __('&larr; Prev', 'counterpoint') . '</span>'
         );
         $args = wp_parse_args( $cp_defaults, $args ); // overwrites $args with $cp_defaults //
@@ -341,15 +341,15 @@
         if ( $wp_query->max_num_pages <= 1 )
             return;
         $paginate_links = paginate_links( array(
-            'base'            => str_replace( $bignum, '%#%', esc_url( get_pagenum_link($bignum) ) ),
-            'format'        => '',
-            'current'     => max( 1, get_query_var('paged') ),
-            'total'         => $wp_query->max_num_pages,
+            'base'      => str_replace( $bignum, '%#%', esc_url( get_pagenum_link($bignum) ) ),
+            'format'    => '',
+            'current'   => max( 1, get_query_var('paged') ),
+            'total'     => $wp_query->max_num_pages,
             'prev_text' => __('&larr; Newer', 'counterpoint'),
             'next_text' => __('Older &rarr;', 'counterpoint'),
-            'type'            => 'array',
-            'end_size'    => 1,
-            'mid_size'    => 2
+            'type'      => 'array',
+            'end_size'  => 1,
+            'mid_size'  => 2
         ) );
         
         if ( $paginate_links ) {
@@ -385,7 +385,8 @@
         }
         
         if ( $img_url ) {
-            return '" style="background: #fff url(' . esc_attr( $img_url ) . '); background-position: center; background-size: cover" title="Image of: ' . esc_attr( $alt_text );
+            return '" style="background: #fff url(' . esc_attr( $img_url ) .
+                   '); background-position: center; background-size: cover" title="Image of: ' . esc_attr( $alt_text );
         }
         // if no image, apply class no-featured-image
         return ' no-featured-image" title="' . esc_attr( $alt_text );
@@ -398,8 +399,8 @@
     
         if ($sticky) {
              echo '<header class="archive-header">' .
-                            '<h2>' . __( 'Featured', 'counterpoint' ) . '</h2>' .
-                        '</header>';
+                      '<h2>' . __( 'Featured', 'counterpoint' ) . '</h2>' .
+                  '</header>';
         } ?>
         
         <li <?php post_class($even_or_odd); ?>>
@@ -422,7 +423,8 @@
                     } else {
                         echo get_the_excerpt();
                     }
-                    echo ' &hellip; <a class="more-link button" href="' . get_the_permalink() . '" title="Keep reading ' . get_the_title() . '">' . __('Keep reading &rarr;', 'counterpoint') . '</a>';
+                    echo ' &hellip; <a class="more-link button" href="' . get_the_permalink() .
+                         '" title="Keep reading ' . get_the_title() . '">' . __('Keep reading &rarr;', 'counterpoint') . '</a>';
                     
                 ?>
             </article>
@@ -432,8 +434,8 @@
         <?php
         if ($sticky) {
              echo '<header class="archive-header">' .
-                            '<h2>' . __( 'Recent Posts', 'counterpoint' ) . '</h2>' .
-                        '</header>';
+                      '<h2>' . __( 'Recent Posts', 'counterpoint' ) . '</h2>' .
+                  '</header>';
         }
     }
     
@@ -468,10 +470,10 @@
                 if ( $first_sticky && is_front_page() && !is_paged() ) {
                         
                     // query the most recent sticky post
-                    $most_recent_sticky_post = new WP_Query( 'p=' . $first_sticky );
+                    $most_recent_sticky = new WP_Query( 'p=' . $first_sticky );
                     
                     // and display it
-                    while ($most_recent_sticky_post->have_posts()) : $most_recent_sticky_post->the_post();
+                    while ($most_recent_sticky->have_posts()) : $most_recent_sticky->the_post();
                         counterpoint_archive_layout($post->ID, '', true);
                     endwhile;
                         
@@ -486,11 +488,11 @@
                     Goal: always even number of posts per page, NOT including sticky
                     
                     So, I need to determine where the sticky came from. Best I could come up with was to do
-                    another blank loop and look for the sticky in the first 'n' posts, where 'n' is the
+                    another query and look for the sticky in the first $ppp posts, where $ppp is the
                     user-defined posts-per-page.
                     
                     I know that this is convoluted, and I'm sure there's a better solution out there,
-                    probably using pre_get_posts().
+                    probably using pre_get_posts()...?
                     
                 */
                 
@@ -521,9 +523,9 @@
                     wp_reset_postdata();
                 }
                 
+                
                 // okay, now we have all the variables we need to set up the query
-                
-                
+
                 $cp_args = array(
                     'ignore_sticky_posts' => 1
                 );

@@ -11,17 +11,17 @@ May 25, 2014
   * Added footer menu
   * Less repaint-heavy sidebar handling
   * Moved categories to .post-info inside of thumbnail
-  * Made footer widgets arrange in a basic, responsive grid
-  * footer-widget limited to a single widget
+  * Footer now limited to a single widget
   
   scripts.js
   ----------
+    * Modified sidebar function
     * Added function to resize .post-info to prevent overflow
     
   functions.php
   -------------
     * Added footer menu
-    * Widgets now added in the function counterpoint_create_widget()
+    * Widgets now added via the function counterpoint_create_widget()
 
 
 May 20, 2014
