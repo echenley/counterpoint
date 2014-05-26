@@ -591,6 +591,7 @@ h6 {
 
 .footer-nav li {
     display: inline-block;
+    margin-left: -4px;
     &:not(:last-child):after {
         content: "\b7";
         padding: 0 4px;
