@@ -381,8 +381,7 @@ h6 {
 ****************************************/
 
 %menu-hover {
-    padding-right: 7px;
-    border-right: 4px solid $link-hover !important;
+    @include prefix(transform, translateX(0));
     color: $link-hover;
 }
 
@@ -402,10 +401,12 @@ h6 {
     width: 100%;
     a {
         @extend %display-block;
-        padding: 14px 1px 14px 4px;
+        padding: 14px 7px 14px 4px;
         color: $primary-color;
         line-height: 1.4;
         @extend %glitch-fix;
+        @include prefix(transform, translateX(11px));
+        border-right: 4px solid $link-hover;
         &:hover {
             @extend %menu-hover;
         }
@@ -424,14 +425,20 @@ h6 {
         > .sub-menu {
             height: auto;
             > .menu-item > a {
-                padding-right: 7px;
-                border-right: 4px solid rgba(#000,0.12);
+                border-right-color: rgba(#000,0.12);
+                @include prefix(transform, translateX(0));
+                &:hover {
+                    border-right-color: $link-hover;
+                }
             }
         }
     }
     &.inactive > a {
         opacity: 0.3;
-        border-right: none;
+        @include prefix(transform, translateX(11px));
+        &:hover {
+            @extend %menu-hover;
+        }
     }
 }
 
