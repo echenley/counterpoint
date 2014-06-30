@@ -176,8 +176,8 @@
             'after_title'     => '</h4>'
         ));
     }
-    
-    counterpoint_create_widget('Footer Widget', 'footer-widget', 'Area in the footer for a single widget. Great for a simple text widget, such as a copyright notice.');
+
+    counterpoint_create_widget('Footer Widget', 'footer-widget', 'Area in the Footer.');
     counterpoint_create_widget('Article Bottom', 'article-widget', 'Area at the bottom of each post, before the comments.');
     counterpoint_create_widget('Header Right', 'header-widget', 'Area at the right side of the header. Holds a single widget. Perfect for social icons, search bar, or a site tagline.');
 
@@ -558,7 +558,7 @@
                     counterpoint_archive_layout($post->ID, $even_or_odd);
                 endwhile;
                 
-            } // end if is_front_page()
+            } // end if (is_home())
             ?>
         </ul>
     <?php

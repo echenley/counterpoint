@@ -85,4 +85,17 @@
     .wp-caption-text {
         overflow: hidden;
     }
+
+    .footer-widget {
+        float: left;
+        clear: both;
+        width: 47.5%;
+        &:nth-child(even) {
+            margin-left: 5%;
+            clear: none;
+        }
+        &:nth-child(2) {
+            margin-top: 20px;
+        }
+    }
 }

@@ -7,7 +7,7 @@
                         'depth' => -1
                     ) ); ?>
                 </nav>
-                <?php dynamic_sidebar('footer-widget'); ?>
+                <ul class="grid cf"><?php dynamic_sidebar('footer-widget'); ?></ul>
             </footer>
         </div>
         <?php wp_footer(); ?>

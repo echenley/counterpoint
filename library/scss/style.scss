@@ -164,6 +164,27 @@ $monospace:  Consolas, Monaco, 'Andale Mono', monospace;
     display: block;
 }
 
+%list-styles {
+    ul,
+    ol {
+        @extend %standard-margin-em;
+        padding-left: 1em;
+        text-indent: -1em;
+    }
+    ul {
+        list-style: disc inside;
+        ul,ol {
+            margin: 0 0 0 1em;
+        }
+    }
+    ol {
+        list-style: decimal inside;
+        ul,ol {
+            margin: 0 0 0 1em;
+        }
+    }
+}
+
 %max-width {
     max-width: 100% !important;
 }
@@ -241,8 +262,10 @@ body {
     text-align: left;
 }
 
+
 #post,
 .comment-content {
+
     h2,h3,h4,h5,h6 {
         margin: 40px 0;
     }
@@ -362,7 +385,7 @@ h6 {
 #footer {
     position: relative;
     @extend %footer;
-    padding: 20px;
+    padding: 20px $percent-margin;
     border-top: 1px solid $primary-color;
     line-height: 1.6em;
     &:before {
@@ -655,7 +678,7 @@ h6 {
 .footer-nav {
     display: block;
     text-align: center;
-    font-size: 0.8em;
+    font-size: 0.9em;
 }
 
 .footer-nav .menu,
@@ -718,6 +741,7 @@ h6 {
     overflow: hidden;
     @extend %text-align-center;
     color: $bg-color;
+    font-size: 0.9em;
     
     a {
         color: $line-color;
@@ -1162,24 +1186,7 @@ tbody tr {
 
 article,
 .comment-content {
-    ul,
-    ol {
-        @extend %standard-margin-em;
-        padding-left: 1em;
-        text-indent: -1em;
-    }
-    ul {
-        list-style: disc inside;
-        ul,ol {
-            margin: 0 0 0 1em;
-        }
-    }
-    ol {
-        list-style: decimal inside;
-        ul,ol {
-            margin: 0 0 0 1em;
-        }
-    }
+    @extend %list-styles;
 }
 
 
@@ -1427,6 +1434,14 @@ input[type=submit]:visited {
     Widgets
 ****************************************/
 
+.widget {
+    @extend %list-styles;
+    h4 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}
+
 .header-widget,
 .article-widget {
     @extend %hidden;
@@ -1438,12 +1453,12 @@ input[type=submit]:visited {
 
 .footer-widget {
     display: block;
-    h4 {
-        padding-bottom: 20px;
-    }
-    &:not(:first-of-type(.footer-widget)) {
-        // only one widget allowed!
-        display: none;
+    width: 100%;
+    margin-top: 5%;
+    padding: 20px;
+    border: 1px solid $line-color;
+    &:first-child {
+        margin-top: 20px;
     }
 }
 

@@ -49,5 +49,21 @@
 	.post-thumbnail {
 		margin-left: $max-margin;
 	}
+
+
+	// Other
+
+    .footer-widget {
+        width: 30%;
+        margin-left: 5%;
+        clear: none;
+        &:nth-child(3n+1) {
+            margin-left: 0;
+            clear: left;
+        }
+	    &:nth-child(3) {
+	        margin-top: 20px;
+	    }
+    }
 	
 }
