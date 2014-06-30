@@ -335,8 +335,8 @@
             'before'           => '<nav class="post-pagination">',
             'after'            => '</nav>',
             'pagelink'         => '<span>%</span>',
-            'nextpagelink'     => '<span>' . __('Next &rarr;', 'counterpoint') . '</span>',
-            'previouspagelink' => '<span>' . __('&larr; Prev', 'counterpoint') . '</span>'
+            'nextpagelink'     => '<span>' . __('Next', 'counterpoint') . '</span>',
+            'previouspagelink' => '<span>' . __('Prev', 'counterpoint') . '</span>'
         );
         $args = wp_parse_args( $cp_defaults, $args ); // overwrites $args with $cp_defaults //
         
@@ -376,8 +376,8 @@
             'format'    => '',
             'current'   => max( 1, get_query_var('paged') ),
             'total'     => $wp_query->max_num_pages,
-            'prev_text' => __('&larr; Newer', 'counterpoint'),
-            'next_text' => __('Older &rarr;', 'counterpoint'),
+            'prev_text' => __('Newer', 'counterpoint'),
+            'next_text' => __('Older', 'counterpoint'),
             'type'      => 'array',
             'end_size'  => 1,
             'mid_size'  => 2

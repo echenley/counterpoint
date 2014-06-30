@@ -566,11 +566,25 @@ h6 {
     .prev {
         position: relative;
     }
+    .next:after,
+    .prev:before {
+        display: inline-block;
+        content: '\21E7';
+        font-size: 14px;
+    }
     .prev {
         float: left;
+        &:before {
+            margin-right: 10px;
+            @include prefix(transform, rotate(-90deg));
+        }
     }
     .next {
         float: right;
+        &:after {
+            margin-left: 10px;
+            @include prefix(transform, rotate(90deg));
+        }
     }
     > *:not(.next):not(.prev) {
         @extend %hidden;
@@ -589,7 +603,7 @@ h6 {
     font-size: 0;
     
     > * {
-        font-size: 0.95rem;
+        font-size: 1rem;
     }
     > a {
         @extend %button-dark;
@@ -600,11 +614,27 @@ h6 {
             top: 1px;
             bottom: 1px;
         }
+
+        &:last-child:after,
+        &:first-child:before {
+            display: inline-block;
+            content: '\21E7';
+            font-size: 14px;
+        }
+
         &:first-child {
             left: 0;
+            &:before {
+                margin-right: 10px;
+                @include prefix(transform, rotate(-90deg));
+            }
         }
         &:last-child { 
-            right: 0; 
+            right: 0;
+            &:after {
+                margin-left: 10px;
+                @include prefix(transform, rotate(90deg));
+            }
         }
     }
     > span {
