@@ -237,7 +237,7 @@ body {
     @extend %clear-both;
     font-family: $serif;
     font-variant: small-caps;
-    font-weight: normal;
+    font-weight: 300;
     text-align: left;
 }
 
@@ -1311,7 +1311,7 @@ input[type=submit]:visited {
     
     #cancel-comment-reply-link {
         font-size: 0.6em;
-        font-weight: normal;
+        font-weight: 300;
         font-variant: normal;
         &:before {
             content: '\20 \00b7 \20';
