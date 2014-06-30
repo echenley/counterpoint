@@ -1,8 +1,4 @@
 @media screen and (min-width: nth($breakpoints, 1)) {
-
-    #title {
-        font-size: 2em;
-    }
     
     .pagination {
         padding-left: 90px;
@@ -11,7 +7,6 @@
         .prev {
             position: absolute;
             top: 3px;
-            bottom: 3px;
         }
         .prev {
             left: 0;

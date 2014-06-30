@@ -14,8 +14,7 @@
     
     %sidebar-3 {
         @extend %display-block-3;
-        position: relative;
-        float: left;
+        position: absolute;
         width: $nav-width;
         background: transparent;
     }
@@ -66,10 +65,6 @@
     
     .archive-header {
         margin-bottom: $desktop-vw;
-    }
-    
-    #title {
-        font-size: 2.2em;
     }
     
     .post-nav,

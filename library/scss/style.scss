@@ -11,11 +11,10 @@
 
 $primary-color:   #4f4f4f;  // text color
 $bg-color:        #fff;     // background
-$highlight:       #f6f6f6;  // light gray highlight
+$highlight:       #f5f2f0;  // light beige highlight
 $link-color:      #c44;
 $link-hover:      darken($link-color, 15%);
 $line-color:      #dedede;  // borders and <hr>
-$dark-gray:       #888;
 
 // Array of media query break points
 $breakpoints:     (480px, 640px, 900px, 1100px);
@@ -43,16 +42,16 @@ $margin-em:       1.3em;
     License URI: http://www.apache.org/licenses/LICENSE-2.0.html
 */
 
-$serif:      'Droid Serif', serif;
-$monospace:  'Courier New', Courier, monospace;
+$serif:      'Roboto Slab', serif;
+$sans-serif: 'Open Sans', sans-serif;
+$monospace:  Consolas, Monaco, 'Andale Mono', monospace;
 
 
 /****************************************
     Mixins
 ****************************************/
 
-@mixin prefix($property, $value, $prefixes) {
-    $prefixes: ('-webkit-', '-moz-', '-ie-', '-o-') !default;
+@mixin prefix($property, $value, $prefixes:('-webkit-', '-moz-', '-ie-', '-o-')) {
     @each $prefix in $prefixes {
         #{$prefix}#{$property}: $value;
     }
@@ -64,12 +63,13 @@ $monospace:  'Courier New', Courier, monospace;
     @include prefix('transition', $value, $prefixes);
 }
 
-@mixin circle($diameter) {
+@mixin circle($diameter,$color:$primary-color) {
     content: '';
     display: inline-block;
     width: $diameter;
     height: $diameter;
     background: $bg-color;
+    border: 1px solid $color;
     border-radius: 50%;
 }
 
@@ -97,20 +97,19 @@ $monospace:  'Courier New', Courier, monospace;
 ****************************************/
 
 %dark-border {
-    border: 2px solid $primary-color;
+    border: 1px solid $primary-color;
 }
 
 %bg-highlight {
-    background: rgba(#000,0.05);
+    background: $highlight;
 }
 
 %circle-left,
 %circle-right {
     &:before {
-        @include circle(12px);
+        @include circle(11px, $link-hover);
         position: absolute;
-        bottom: -7px;
-        border: 2px solid $primary-color;
+        bottom: -6px;
     }
 }
 
@@ -128,6 +127,7 @@ $monospace:  'Courier New', Courier, monospace;
 
 %highlight-box {
     @extend %bg-highlight;
+    overflow: hidden;
     padding: 0.4em $margin-em * (2/3);
 }
 
@@ -145,7 +145,7 @@ $monospace:  'Courier New', Courier, monospace;
 }
 
 %standard-bottom-border {
-    border-bottom: 2px solid $primary-color;
+    border-bottom: 1px solid $primary-color;
 }
 
 %standard-margin-em {
@@ -192,8 +192,9 @@ html {
 }
 
 body {
-    font-family: $serif;
-    font-size: 95%;
+    font-family: $sans-serif;
+    font-size: 110%;
+    font-weight: 300;
 }
 
 #container {
@@ -204,7 +205,7 @@ body {
 
 %header {
     position: relative;
-    height: 80px;
+    height: 60px;
 }
 
 #content-container {
@@ -220,7 +221,7 @@ body {
 #content {
     width: 100%;
     padding: $max-margin $percent-margin;
-    line-height: 1.8;
+    line-height: 1.7;
 }
 
 %footer {
@@ -234,20 +235,48 @@ body {
 
 %title, h1,h2,h3,h4,h5,h6 {
     @extend %clear-both;
+    font-family: $serif;
     font-variant: small-caps;
     font-weight: normal;
     text-align: left;
 }
 
-h1,h2,h3,h4,h5,h6 {
-    padding-bottom: 10px;
-}
-
-article,
+#post,
 .comment-content {
     h2,h3,h4,h5,h6 {
+        margin: 40px 0;
+    }
+
+    h2 {
+        position: relative;
+        padding-bottom: 10px;
+        border-bottom: 1px solid $link-hover;
+        color: $link-hover;
+        @extend %circle-right;
+    }
+
+    h3 {
+        position: relative;
+        padding-bottom: 10px;
         @extend %standard-bottom-border;
-        margin: 30px 0;
+        &:before {
+            @include circle(11px);
+            position: absolute;
+            right: 0;
+            bottom: -6px;
+        }
+    }
+
+    h4:before {
+        content: "\25CB\20";
+    }
+
+    h5:before {
+        content: "\25CB\20\25CB\20";
+    }
+
+    h6:before {
+        content: "\25CB\20\25CB\20\25CB\20";
     }
 }
 
@@ -255,45 +284,35 @@ article,
     // h1 is for post titles only
     position: relative;
     clear: none;
-    @extend %standard-bottom-border;
     margin-bottom: 10px;
+    padding-bottom: 20px;
+    @extend %standard-bottom-border;
     font-size: 2.2em;
 }
 
 %title,
 h1,h2,h3 {
-    line-height: 1.3;
-}
-
-%title {
-    font-size: 2em;
+    line-height: 1.2;
 }
 
 h2 {
-    font-size: 1.7em;
+    font-size: 2.4em;
 }
 
 h3 {
-    font-size: 1.5em;
+    font-size: 2em;
 }
 
 h4 {
-    font-size: 1.5em;
+    font-size: 1.8em;
 }
 
 h5 {
-    font-size: 1.3em;
+    font-size: 1.6em;
 }
 
 h6 {
-    font-style: bold;
-}
-
-#comments,
-#reply-title,
-#post h2 {
-    position: relative;
-    @extend %circle-right;
+    font-size: 1.4em;
 }
 
 
@@ -303,36 +322,38 @@ h6 {
 
 #header {
     @extend %header;
-    border-bottom: 2px solid $primary-color;
+    border-bottom: 1px solid $primary-color;
     padding: 0 $percent-margin;
     &:before {
         z-index: 1000;
-        @include circle(12px);
+        @include circle(11px);
         position: absolute;
-        bottom: -7px;
-        left: calc(50% - 7px);
-        border: 2px solid $primary-color;
+        bottom: -6px;
+        left: calc(50% - 6px);
+        border: 1px solid $primary-color;
     }
 }
 
 #title {
     @extend %title;
     display: inline-block;
-    font-size: 1.6em;
+    font-size: 1.3em;
+    text-transform: uppercase;
 }
 
 .title-link {
     display: inline-block;
     color: $primary-color;
-    line-height: 80px;
+    line-height: 60px;
 }
 
 .menu-toggle {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 2em;
-    line-height: 40px;
+    top: 10px;
+    right: $percent-margin;
+    font-size: 1.4em;
+    line-height: 30px;
+    font-family: sans-serif;
     @extend %text-align-center;
     @extend %transition-200ms;
     @extend %button-dark;
@@ -342,15 +363,15 @@ h6 {
     position: relative;
     @extend %footer;
     padding: 20px;
-    border-top: 2px solid $primary-color;
+    border-top: 1px solid $primary-color;
     line-height: 1.6em;
     &:before {
         z-index: 1000;
-        @include circle(12px);
+        @include circle(11px);
         position: absolute;
-        top: -7px;
-        left: calc(50% - 7px);
-        border: 2px solid $primary-color;
+        top: -6px;
+        left: calc(50% - 6px);
+        border: 1px solid $primary-color;
     }
 }
 
@@ -361,7 +382,7 @@ h6 {
 
 %menu-hover {
     padding-right: 7px;
-    border-right: 6px solid $link-hover !important;
+    border-right: 4px solid $link-hover !important;
     color: $link-hover;
 }
 
@@ -381,7 +402,7 @@ h6 {
     width: 100%;
     a {
         @extend %display-block;
-        padding: 14px 1px 14px 6px;
+        padding: 14px 1px 14px 4px;
         color: $primary-color;
         line-height: 1.4;
         @extend %glitch-fix;
@@ -404,7 +425,7 @@ h6 {
             height: auto;
             > .menu-item > a {
                 padding-right: 7px;
-                border-right: 6px solid rgba(#000,0.12);
+                border-right: 4px solid rgba(#000,0.12);
             }
         }
     }
@@ -420,6 +441,23 @@ h6 {
 
 #site-nav .menu-item-has-children {
     cursor: pointer;
+    > a:before {
+        content: "\25BF";
+        display: inline-block;
+        margin-right: 10px;
+
+        @include transition(transform 0.2s);
+        @include transition(-webkit-transform 0.2s);
+        @include transition(-moz-transform 0.2s);
+        @include transition(-o-transform 0.2s);
+        font-size: 16px;
+    }
+    &.active > a:before {
+        display: inline-block;
+        content: "\2715";
+        @include prefix(transform, rotate(-90deg));
+        font-size: 12px;
+    }
 }
 
 
@@ -436,7 +474,7 @@ h6 {
         padding: 0;
         padding-top: 10px;
         border: none;
-        border-top: 2px solid $primary-color;
+        border-top: 1px solid $primary-color;
         clear: none;
         font-size: 1.3em;
     }
@@ -463,15 +501,9 @@ h6 {
         display: block;
         color: $primary-color;
     }
-    a:hover {
-        h3,
-        h3:before,
-        .next-post-thumb,
-        .prev-post-thumb {
-            border-color: $link-hover;
-        }
-    }
     h3 {
+        margin: 0 !important;
+        border-bottom: 0 !important;
         &:before {
             bottom: auto;
             top: -5px;
@@ -483,7 +515,7 @@ h6 {
     float: left;
     h3 {
         text-align: right;
-        margin-left: 15%;
+        margin-left: 15% !important;
         @extend %circle-right;
     }
 }
@@ -491,7 +523,7 @@ h6 {
 .prev-post {
     float: right;
     h3 {
-        margin-right: 15%;
+        margin-right: 15% !important;
         @extend %circle-left;
     }
 }
@@ -583,19 +615,25 @@ h6 {
     }
 }
 
-.footer-nav,
-.footer-nav .menu,
-.footer-nav ul {
-    display: inline;
+.footer-nav {
+    display: block;
+    text-align: center;
+    font-size: 0.8em;
 }
 
-.footer-nav li {
+.footer-nav .menu,
+.footer-nav ul,
+.footer-nav li  {
     display: inline-block;
-    margin-left: -4px;
-    &:not(:last-child):after {
-        content: "\b7";
-        padding: 0 4px;
-    }
+}
+
+.footer-nav li:not(:last-child):after {
+    content: "\b7";
+    padding: 0 4px;
+}
+
+.footer-nav .menu-item:not(:last-child) {
+    margin-right: -4px;
 }
 
 .footer-nav .submenu {
@@ -662,7 +700,7 @@ h6 {
 .cp-cats {
   margin: 0 auto;
   padding-bottom: 4px;
-  border-bottom: 2px solid rgba($bg-color,0.2);
+  border-bottom: 1px solid rgba($bg-color,0.2);
 }
 
 .post-meta {
@@ -686,15 +724,6 @@ h6 {
     margin: 0 auto $percent-margin;
 }
 
-#post > p:first-of-type:not(.no-dropcap):first-letter {
-    @extend %display-block;
-    float: left;
-    height: 1em;
-    line-height: 1;
-    font-size: 5.9em;
-    margin: -3px 10px -10px 6px;
-}
-
 
 /****************************************
     Front-Page, Archives
@@ -711,6 +740,8 @@ h6 {
 
 .archive-post-title {
     margin: 0 0 30px 0;
+    padding-bottom: 10px;
+    @extend %standard-bottom-border;
     font-size: 1.8em;
     a {
         display: block;
@@ -734,6 +765,7 @@ h6 {
 }
 
 .excerpt {
+    text-align: justify;
     margin-top: $margin-em;
 }
 
@@ -745,173 +777,14 @@ h6 {
 }
 
 .more-link {
-    display: inline;
+    display: inline-block;
     float: right;
-}
-
-
-/****************************************
-    Comments
-****************************************/
-
-.comment-subscription-form,
-.form-allowed-tags {
-    @extend %hidden;
-}
-
-// these are <h3> tags
-#comments,
-.comment-reply-title {
-    margin: 20px 0;
-    @extend %standard-bottom-border;
-}
-
-#comments {
-    font-size: 1.8em;
-}
-
-.comment-reply-title {
-    margin-bottom: 10px;
-    font-size: 1.7em;
-}
-
-.logged-in-as {
-    margin: 10px 0 $margin-em 0;
-}
-
-.fn {
-    font-weight: bold;
-}
-
-.commentlist {
-    @extend %standard-margin-em;
-    font-size: 0.9em;
-    
-    .odd {
-        background: $highlight;
-    }
-    .even {
-        background: $bg-color;
-        > #respond #commentform {
-        }
-    }
-}
-    
-.comment, .pingback {
-    padding: $margin-em * (2/3);
-    overflow: auto;
-    .comment {
-        margin: $margin-em * (2/3) 0 0 $margin-em * (2/3);
-    }
-}
-
-.pingback .avatar {
-    @extend %hidden;
-}
-
-.comment-content {
-    @extend %clear-both;
-}
-
-.vcard {
-    @extend %display-block;
-
-    .comment-author-info {
-        padding-top: 3px;
-        float: left;
-    }
-    
-    time {
-        float: right;
-    }
-    
-    img.avatar {
-        float: left;
-        margin-right: $margin-em * (2/3);
-        border: 1px solid $line-color;
-    }
-}
-
-.bypostauthor > div > .vcard .comment-author-info cite:after {
-    content: ' (author)';
-}
-
-#respond {
-    p {
-        margin: $margin-em * (2/3) 0;
-    }
-    
-    #cancel-comment-reply-link {
-        font-size: 0.6em;
-        font-weight: normal;
-        font-variant: normal;
-        &:before {
-            content: '\20 \00b7 \20';
-            color: $primary-color;
-            &:visited, &:hover {
-                color: $primary-color;
-            }
-        }
-    }
-
-    label { // Positioned off screen (for screen readers only)
-        position: absolute;
-        left: -999em;
-        width: 1em;
-        overflow: hidden;
-    }
-
-    input[type=text],
-    input[type=email],
-    input[type=url],
-    textarea {
-        @extend %form-input;
-    
-        // form validation //
-        &:invalid {
-            outline: none;
-            border-color: #fb8888;
-            @include prefix(box-shadow, none, ('-webkit-','-moz-'));
-        }
-    }
-
-    input[type=text],
-    input[type=email],
-    input[type=url] {
-        width: 400px;
-        min-width: 250px;
-    }
-
-    .comment-form-comment {
-        line-height: 0;
-    }
-    textarea {
-        resize: none;
-        width: 100%;
-        height: 15em;
-    }
-}
-
-// Styles For Replies To Comments //
-.commentlist {
-    h3#reply-title {
-        margin: 0;
-        margin-bottom: 0.6em;
-        border: none;
-        padding: 0;
-    }
-    .form-submit {
-        margin-bottom: 0;
-    }
-    #respond {
-        padding: $margin-em * (2/3);
-        margin: $margin-em * (2/3) 0 0 $margin-em * (2/3);
-    }
-    .odd > #respond {
-        background: $bg-color;
-    }
-    .even > #respond {
-        @extend %bg-highlight;
+    &:after {
+        display: inline-block;
+        content: '\21E7';
+        margin-left: 10px;
+        @include prefix(transform, rotate(90deg));
+        font-size: 14px;
     }
 }
 
@@ -948,7 +821,7 @@ h6 {
 
 // this applies to most bodies of text
 article {
-    text-align: justify;
+    text-align: left;
 }
 
 a,input,select,textarea {
@@ -1016,11 +889,12 @@ pre, blockquote {
     @extend %clear-both;
     @extend %standard-margin-em;
     padding: $margin-em;
-    border-left: 6px solid $line-color;
+    border-left: 6px solid rgba($link-hover,0.8);
 }
 
 pre, code {
     font-family: $monospace;
+    font-size: 0.8em;
 }
 
 pre {
@@ -1031,8 +905,8 @@ pre {
 }
 
 code {
-    display: inline-block;
-    padding: 0 8px;
+    display: inline;
+    padding: 4px 6px;
 }
 
 kbd {
@@ -1052,7 +926,7 @@ blockquote {
         margin-right: .25em;
         margin-top: -.1em;
         font-size: 4em;
-        color: $line-color;
+        color: rgba($link-hover,0.8);
         line-height: 1;
     }
     &:after {
@@ -1069,17 +943,35 @@ blockquote {
 }
 
 hr {
-    width: 100%;
-    height: 0;
-    margin: 30px 0;
+    line-height: 1;
+    margin: 60px 0;
     border: none;
-    border-bottom: 2px solid $line-color;
     text-align: center;
+    height: 0;
+    border-bottom: 1px solid $primary-color;
+}
+
+hr:not(.endpost) {
     &:before {
-        @include circle(12px);
+        @include circle(11px);
         position: relative;
-        border: 2px solid $line-color;
-        top: -11px;
+        border: 1px solid $primary-color;
+        top: -10px;
+    }
+}
+
+hr.endpost {
+    margin: 60px 0 80px 0;
+    font-size: 1.5em;
+    &:before {
+        content: "\0E5B";
+        position: relative;
+        display: inline-block;
+        padding: 0 10px;
+        background: $bg-color;
+        font-size: 22px;
+        top: -16px;
+        color: $primary-color;
     }
 }
 
@@ -1166,7 +1058,7 @@ img.size-full {
     margin: auto;
     width: 100%;
     img {
-        border: 2px solid $line-color;
+        border: 1px solid $line-color;
     }
 }
 
@@ -1195,6 +1087,7 @@ img.size-full {
 .wp-caption-text {
     @extend %highlight-box;
     @extend %text-align-center;
+    padding: 0.8em;
     margin: 0 !important;
     font-style: italic;
     line-height: 1.4;
@@ -1205,26 +1098,28 @@ img.size-full {
     Tables and Lists
 ****************************************/
 
-#content table {
-    margin: $margin-em auto;
-}
-
 table {
-    @extend %max-width;
-    border-top: 2px solid $primary-color;
-    @extend %standard-bottom-border;
+    max-width: 100%;
+    margin: $margin-em auto;
+    border-top: 1px solid $primary-color;
+    border-bottom: 1px solid $primary-color;
     border-collapse: collapse;
     font-size: 0.9em;
-    th, td {
-        padding: 0.6em;
-        border-bottom: 1px solid $line-color;
-        text-align: left;
-    }
-    th {
-        font-weight: bold;
-    }
-    tbody tr:hover {
-        @extend %bg-highlight;
+    text-align: left;
+}
+thead {
+    border-bottom: 1px solid $primary-color;
+}
+th,td {
+    padding: 0.6em;
+}
+th {
+    font-weight: 400;
+}
+tbody tr {
+    border-bottom: 1px solid $line-color;
+    &:hover {
+        background: rgba($line-color, 0.1);
     }
 }
 
@@ -1265,7 +1160,7 @@ article,
 
 input,select,textarea {
     outline: none;
-    border: 2px solid $line-color;
+    border: 1px solid $line-color;
     &:focus {
         border-color: #66c2ff;
     }
@@ -1319,6 +1214,179 @@ input[type=submit]:visited {
 
 
 /****************************************
+    Comments
+****************************************/
+
+.comment-subscription-form,
+.form-allowed-tags {
+    @extend %hidden;
+}
+
+// these are <h3> tags
+#comments,
+.comment-reply-title {
+    color: $link-hover;
+    position: relative;
+    margin: 20px 0;
+    @extend %circle-right;
+    @extend %standard-bottom-border;
+    border-bottom: 1px solid $link-hover;
+}
+
+#comments {
+    font-size: 1.8em;
+}
+
+.comment-reply-title {
+    margin-bottom: 10px;
+    padding: 0 0 5px 0;
+    font-size: 1.7em;
+}
+
+.logged-in-as {
+    margin: 10px 0 $margin-em 0;
+}
+
+.fn {
+    font-weight: 400;
+}
+
+.commentlist {
+    @extend %standard-margin-em;
+    font-size: 0.9em;
+    
+    .odd {
+        background: $highlight;
+    }
+    .even {
+        background: $bg-color;
+        > #respond #commentform {
+        }
+    }
+}
+    
+.comment, .pingback {
+    padding: $margin-em * (2/3);
+    overflow: auto;
+    .comment {
+        margin: $margin-em * (2/3) 0 0 $margin-em * (2/3);
+    }
+}
+
+.pingback .avatar {
+    @extend %hidden;
+}
+
+.comment-content {
+    @extend %clear-both;
+}
+
+.vcard {
+    @extend %display-block;
+
+    .comment-author-info {
+        padding-top: 3px;
+        float: left;
+    }
+    
+    time {
+        float: right;
+    }
+    
+    img.avatar {
+        float: left;
+        margin-right: $margin-em * (2/3);
+        border: 1px solid $line-color;
+    }
+}
+
+.bypostauthor > div > .vcard .comment-author-info cite:after {
+    content: ' (author)';
+}
+
+#respond {
+    p {
+        margin: $margin-em * (2/3) 0;
+    }
+    
+    #cancel-comment-reply-link {
+        font-size: 0.6em;
+        font-weight: normal;
+        font-variant: normal;
+        &:before {
+            content: '\20 \00b7 \20';
+            color: $primary-color;
+            &:visited, &:hover {
+                color: $primary-color;
+            }
+        }
+    }
+
+    label {
+        display: inline-block;
+        width: 100px;
+        font-size: 0.8em;
+        font-weight: 400;
+        margin-right: 10px;
+    }
+
+    input[type=text],
+    input[type=email],
+    input[type=url],
+    textarea {
+        @extend %form-input;
+    
+        // form validation //
+        &:invalid {
+            outline: none;
+            border-color: #fb8888;
+            @include prefix(box-shadow, none, ('-webkit-','-moz-'));
+        }
+    }
+
+    input[type=text],
+    input[type=email],
+    input[type=url] {
+        width: 400px;
+        min-width: 250px;
+    }
+    textarea {
+        resize: none;
+        width: 100%;
+        height: 15em;
+        margin-top: 10px;
+    }
+}
+
+.required {
+    color: $link-hover;
+}
+
+// Styles For Replies To Comments //
+.commentlist {
+    .comment-reply-title {
+        margin: 0;
+        margin-bottom: 0.6em;
+        border: none;
+        padding: 0;
+    }
+    .form-submit {
+        margin-bottom: 0;
+    }
+    #respond {
+        padding: $margin-em * (2/3);
+        margin: $margin-em * (2/3) 0 0 $margin-em * (2/3);
+    }
+    .odd > #respond {
+        background: $bg-color;
+    }
+    .even > #respond {
+        @extend %bg-highlight;
+    }
+}
+
+
+/****************************************
     Widgets
 ****************************************/
 
@@ -1332,7 +1400,7 @@ input[type=submit]:visited {
 }
 
 .footer-widget {
-    float: right;
+    display: block;
     h4 {
         padding-bottom: 20px;
     }
@@ -1340,6 +1408,15 @@ input[type=submit]:visited {
         // only one widget allowed!
         display: none;
     }
+}
+
+
+/****************************************
+    Helper Classes
+****************************************/
+
+.highlight {
+    @extend %highlight-box;
 }
 
 

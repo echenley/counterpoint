@@ -15,6 +15,7 @@
       the_content();
       wp_link_pages();
     endwhile; ?>
+    <hr class="endpost">
   </article>
   
   <section id="comments-section">

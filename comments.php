@@ -32,12 +32,12 @@ $aria_req = ( $req ? " aria-required='true'" : '' );
 
 $fields = array(
   'author' =>
-    '<p class="comment-form-author"><label for="author">' . __( 'Name*', 'counterpoint' ) . '</label> ' .
+    '<p class="comment-form-author"><label for="author">' . __( 'Name <span class="required">*</span>', 'counterpoint' ) . '</label>' .
     '<input type="text" id="author" name="author" type="text" placeholder="Your Name*" value="' . esc_attr( $commenter['comment_author'] ) .
     '" size="30"' . $aria_req . ' /></p>',
 
   'email' =>
-    '<p class="comment-form-email"><label for="email">' . __( 'Email*', 'counterpoint' ) . '</label> ' .
+    '<p class="comment-form-email"><label for="email">' . __( 'Email <span class="required">*</span>', 'counterpoint' ) . '</label>' .
     '<input type="email" id="email" name="email" type="text" placeholder="Your Email*" value="' . esc_attr(  $commenter['comment_author_email'] ) .
     '" size="30"' . $aria_req . ' /></p>',
 
@@ -52,7 +52,7 @@ comment_form(
     'fields' => $fields,
     'logged_in_as' => '<div class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>' ), admin_url( 'profile.php' ), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( ) ) ) ) . '</div>',
     'comment_field' =>
-      '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment*', 'noun', 'counterpoint' ) . '</label><textarea id="comment" placeholder="Enter Your Comment Here*" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>',
+      '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment <span class="required">*</span>', 'noun', 'counterpoint' ) . '</label><textarea id="comment" placeholder="Enter Your Comment Here*" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>',
     'label_submit' => __('Post Comment &rarr;', 'counterpoint')
   ), $post->ID
 );

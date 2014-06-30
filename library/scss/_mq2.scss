@@ -54,14 +54,14 @@
                 clear: none;
                 font-size: 2em;
                 margin-left: 25% - (25% * $percent-margin / (100% - (2 * $percent-margin)));
-                border-left: 2px solid $primary-color;
+                border-left: 1px solid $primary-color;
                 border-bottom-left-radius: 10px;
                 &:before{
                     @include circle(12px);
                     position: absolute;
                     bottom: -7px;
                     right: 0;
-                    border: 2px solid $primary-color;
+                    border: 1px solid $primary-color;
                 }
             }
         }
@@ -77,8 +77,8 @@
     .post-header h1 {
         clear: none;
         margin-right: 25%;
-        font-size: 2.4em;
-        border-right: 2px solid $primary-color;
+        font-size: 2.6em;
+        border-right: 1px solid $primary-color;
         border-bottom-right-radius: 10px;
     }
     

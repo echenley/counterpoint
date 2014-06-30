@@ -110,7 +110,7 @@
     add_filter( 'the_content', 'counterpoint_filter_ptags_on_images' );
 
     // Excerpt Length
-    function counterpoint_excerpt_length($length) { return 70; }
+    function counterpoint_excerpt_length($length) { return 60; }
     add_filter('excerpt_length', 'counterpoint_excerpt_length');
     
     // Remove Caption Padding
@@ -141,7 +141,7 @@
          * by the current font, translate this to 'off'. Do not translate into your own language.
          */
         if ( 'off' !== _x( 'on', 'Droid Serif font: on or off', 'counterpoint' ) )
-            $font_url = add_query_arg( 'family', urlencode( 'Droid Serif:400,700,400italic' ), '//fonts.googleapis.com/css' );
+            $font_url = add_query_arg( 'family', urlencode( 'Roboto Slab:300|Open Sans:300,400,300italic' ), '//fonts.googleapis.com/css' );
         
         return $font_url;
     }
@@ -424,7 +424,7 @@
                         echo get_the_excerpt();
                     }
                     echo ' &hellip; <a class="more-link button" href="' . get_the_permalink() .
-                         '" title="Keep reading ' . get_the_title() . '">' . __('Keep reading &rarr;', 'counterpoint') . '</a>';
+                         '" title="Keep reading ' . get_the_title() . '">' . __('Keep reading', 'counterpoint') . '</a>';
                     
                 ?>
             </article>

@@ -1,3 +1,4 @@
+
 <?php get_header(); ?>
 <?php get_sidebar(); ?>
 
@@ -20,6 +21,7 @@
       the_content();
       wp_link_pages();
     endwhile; ?>
+    <hr class="endpost">
     <?php dynamic_sidebar('article-widget'); ?>
     <?php counterpoint_adjacent_posts(); ?>
   </article>
