@@ -51,7 +51,7 @@ $monospace:  Consolas, Monaco, 'Andale Mono', monospace;
     Mixins
 ****************************************/
 
-@mixin prefix($property, $value, $prefixes:('-webkit-', '-moz-', '-ie-', '-o-')) {
+@mixin prefix($property, $value, $prefixes:('-webkit-', '-moz-', '-ms-', '-o-')) {
     @each $prefix in $prefixes {
         #{$prefix}#{$property}: $value;
     }
@@ -398,6 +398,12 @@ h6 {
     }
 }
 
+.theme-credit {
+    margin-top: $margin-em;
+    font-size: 0.7em;
+    text-align: center;
+}
+
 
 /****************************************
     Sidebar, Main Navigation
@@ -428,7 +434,7 @@ h6 {
         color: $primary-color;
         line-height: 1.4;
         @extend %glitch-fix;
-        @include prefix(transform, translateX(11px));
+        @include prefix(transform, translateX(10px));
         border-right: 4px solid $link-hover;
         &:hover {
             @extend %menu-hover;
@@ -458,7 +464,7 @@ h6 {
     }
     &.inactive > a {
         opacity: 0.3;
-        @include prefix(transform, translateX(11px));
+        @include prefix(transform, translateX(10px));
         &:hover {
             @extend %menu-hover;
         }
@@ -1413,6 +1419,9 @@ input[type=submit]:visited {
         margin-bottom: 0.6em;
         border: none;
         padding: 0;
+        &:before {
+            display: none;
+        }
     }
     .form-submit {
         margin-bottom: 0;

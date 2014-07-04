@@ -7,7 +7,9 @@
                         'depth' => -1
                     ) ); ?>
                 </nav>
+                <hr>
                 <ul class="grid cf"><?php dynamic_sidebar('footer-widget'); ?></ul>
+                <p class="theme-credit">Theme design by <a href="http://henleythemes.com/">HenleyThemes</a></p>
             </footer>
         </div>
         <?php wp_footer(); ?>
