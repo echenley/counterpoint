@@ -430,7 +430,7 @@ h6 {
     width: 100%;
     a {
         @extend %display-block;
-        padding: 14px 7px 14px 4px;
+        padding: 10px 7px 10px 4px;
         color: $primary-color;
         line-height: 1.4;
         @extend %glitch-fix;
@@ -1018,6 +1018,10 @@ hr {
     border-bottom: 1px solid $primary-color;
 }
 
+#footer hr {
+    margin: 21px 0;
+}
+
 hr:not(.endpost) {
     &:before {
         @include circle(11px);
@@ -1109,6 +1113,7 @@ img.size-full {
 
 .alert {
     @extend %highlight-box;
+    border: 1px solid #fb8888;
 }
 
 .wp-audio-shortcode {
@@ -1458,6 +1463,10 @@ input[type=submit]:visited {
 
 .article-widget {
     @extend %standard-margin-em;
+}
+
+.footer-widget-area:empty {
+    display: none;
 }
 
 .footer-widget {

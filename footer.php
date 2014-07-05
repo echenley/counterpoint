@@ -8,8 +8,8 @@
                     ) ); ?>
                 </nav>
                 <hr>
-                <ul class="grid cf"><?php dynamic_sidebar('footer-widget'); ?></ul>
-                <p class="theme-credit">Theme design by <a href="http://henleythemes.com/">HenleyThemes</a></p>
+                <div class="footer-widget-area"><?php dynamic_sidebar('footer-widget'); ?></div>
+                <p class="theme-credit">Theme designed by <a href="http://henleythemes.com/">HenleyThemes</a></p>
             </footer>
         </div>
         <?php wp_footer(); ?>
