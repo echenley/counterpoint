@@ -3,6 +3,7 @@ Counterpoint Wordpress Theme
 
 Author:     Evan Henley
 Author URI: http://henleyedition.com
+Theme URI:  http://henleythemes.com
 
 Elegant, understated, and fully responsive theme with fixed sidebar. Featured images are the main visual element and are used for both post headers and front page thumbnails, and are thus encouraged. Perfect for single-user blogs. Looks great on all devices.
 

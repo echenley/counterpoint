@@ -124,15 +124,6 @@
         }
     }
     
-    .article-widget {
-        margin: $max-margin 0;
-        @extend %display-block-3;
-        @extend %text-align-center-3;
-        &:empty {
-            display: none;
-        }
-    }
-    
     .post-nav h3 {
         font-size: 1.6em;
     }

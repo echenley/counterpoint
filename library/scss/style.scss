@@ -429,6 +429,7 @@ h6 {
 #site-nav .menu {
     position: relative;
     width: 100%;
+    @extend %glitch-fix; // fixes 1px shift on hover
     a {
         @extend %display-block;
         padding: 10px 7px 10px 4px;
@@ -1416,13 +1417,8 @@ input[type=submit]:visited {
     }
 }
 
-.header-widget,
-.article-widget {
+.header-widget {
     @extend %hidden;
-}
-
-.article-widget {
-    @extend %standard-margin-em;
 }
 
 .footer-widget-area:empty {

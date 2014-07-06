@@ -22,7 +22,6 @@
       wp_link_pages();
     endwhile; ?>
     <hr class="endpost">
-    <?php dynamic_sidebar('article-widget'); ?>
     <?php counterpoint_adjacent_posts(); ?>
   </article>
   
