@@ -4,6 +4,14 @@ Counterpoint Changelog
 Author:     Evan Henley
 Author URI: http://henleyedition.com
 
+July 6, 2014
+============
+
+  * Typography changed.
+  * Added Helper Classes (see henleythemes.com)
+  * Revamped footer with better widget handling
+
+
 May 25, 2014
 ============
 

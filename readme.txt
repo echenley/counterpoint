@@ -6,10 +6,11 @@ Author URI: http://henleyedition.com
 
 Elegant, understated, and fully responsive theme with fixed sidebar. Featured images are the main visual element and are used for both post headers and front page thumbnails, and are thus encouraged. Perfect for single-user blogs. Looks great on all devices.
 
-Check out http://henleyedition.com for a live demo!
+Check out http://henleythemes.com for a live demo!
 
 - Ev
 
+----------------------------
 
 Typography
 ==========
