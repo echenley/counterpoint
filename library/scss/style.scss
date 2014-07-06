@@ -129,7 +129,7 @@ $monospace:  Consolas, Monaco, 'Andale Mono', monospace;
 %highlight-box {
     @extend %bg-highlight;
     overflow: hidden;
-    padding: 0.4em 0.85em;
+    padding: 0.4em 0.8em;
 }
 
 %transition-200ms {
@@ -1464,6 +1464,10 @@ input[type=submit]:visited {
 .highlight {
     padding: 2px 4px;
     @extend %bg-highlight;
+}
+
+.highlight-box {
+    @extend %highlight-box;
 }
 
 .aligncenter {
