@@ -11,7 +11,7 @@
     die ('Please do not load this page directly. Thanks!');
 
   if ( post_password_required() ) { ?>
-    <div class="alert alert-help">
+    <div class="alert-blue">
       <p class="nocomments"><?php _e('This post is password protected. Enter the password to view comments.', 'counterpoint' ); ?></p>
     </div>
   <?php return;

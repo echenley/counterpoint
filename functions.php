@@ -246,7 +246,7 @@
                     <time datetime="<?php echo comment_time('Y-m-j'); ?>"><a href="<?php echo esc_html( get_comment_link( $comment->comment_ID ) ) ?>"><?php comment_time('F jS, Y'); ?></a></time>
                 </header>
                 <?php if ($comment->comment_approved == '0') : ?>
-                    <p class="alert"><?php _e( 'Your comment is awaiting moderation.', 'counterpoint' ) ?></p>
+                    <p class="alert-blue"><?php _e( 'Your comment is awaiting moderation.', 'counterpoint' ) ?></p>
                 <?php endif; ?>
                 <section class="comment-content">
                     <?php comment_text(); ?>

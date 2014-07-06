@@ -15,6 +15,7 @@ $highlight:       #f5f2f0;  // light beige highlight
 $link-color:      #c44;
 $link-hover:      darken($link-color, 15%);
 $line-color:      #dedede;  // borders and <hr>
+$blue:            #44c;
 
 // Array of media query break points
 $breakpoints:     (480px, 640px, 900px, 1100px);
@@ -128,7 +129,7 @@ $monospace:  Consolas, Monaco, 'Andale Mono', monospace;
 %highlight-box {
     @extend %bg-highlight;
     overflow: hidden;
-    padding: 0.4em $margin-em * (2/3);
+    padding: 0.4em 0.85em;
 }
 
 %transition-200ms {
@@ -267,6 +268,7 @@ body {
 .comment-content {
 
     h2,h3,h4,h5,h6 {
+        @extend %clear-both;
         margin: 40px 0;
     }
 
@@ -974,6 +976,9 @@ pre {
 code {
     display: inline;
     padding: 4px 6px;
+    white-space: pre;
+    word-break: normal;
+    word-wrap: normal;
 }
 
 kbd {
@@ -1070,50 +1075,6 @@ hr.endpost {
 // eliminate stupid smiley face at bottom of page
 img#wpstats {
     @extend %hidden;
-}
-
-.aligncenter {
-    @extend %display-block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.alignright {
-    float: right;
-}
-
-.alignleft {
-    float: left;
-}
-
-img.alignright, .wp-caption.alignright,
-img.alignleft, .wp-caption.alignleft {
-    max-width: 50% !important;
-}
-
-img.alignright, .wp-caption.alignright {
-    margin: 0.6em 0 0.6em $margin-em;
-}
-
-img.alignleft, .wp-caption.alignleft {
-    margin: 0.6em $margin-em 0.6em 0;
-}
-
-img.aligncenter {
-    margin-left: $margin-em auto;
-}
-
-img[class*="align"],
-img[class*="wp-image-"] {
-    height: auto; // Make sure images with WordPress-added height and width attributes are scaled correctly
-}
-img.size-full {
-    width: auto; // Prevent stretching of full-size images with height and width attributes in IE8
-}
-
-.alert {
-    @extend %highlight-box;
-    border: 1px solid #fb8888;
 }
 
 .wp-audio-shortcode {
@@ -1217,7 +1178,7 @@ input,select,textarea {
     outline: none;
     border: 1px solid $line-color;
     &:focus {
-        border-color: #66c2ff;
+        border-color: $blue;
     }
 }
 
@@ -1485,8 +1446,69 @@ input[type=submit]:visited {
     Helper Classes
 ****************************************/
 
+.alert,
+.alert-blue {
+    padding: 0.4em 0.8em;
+    border-top: 1px solid $link-color;
+    border-bottom: 1px solid $link-color;
+    @extend %text-align-center;
+    color: $link-color;
+}
+
+.alert-blue {
+    color: $blue;
+    border-top-color: $blue;
+    border-bottom-color: $blue;
+}
+
 .highlight {
-    @extend %highlight-box;
+    padding: 2px 4px;
+    @extend %bg-highlight;
+}
+
+.aligncenter {
+    @extend %display-block;
+    margin: $margin-em auto;
+}
+
+.alignright {
+    float: right;
+    margin: 0.6em 0 0.6em $margin-em;
+}
+
+.alignleft {
+    float: left;
+    margin: 0.6em $margin-em 0.6em 0;
+}
+
+.textleft {
+    text-align: left;
+}
+
+.textright {
+    text-align: right;
+}
+
+.textcenter {
+    @extend %text-align-center;
+}
+
+img.alignright, .wp-caption.alignright,
+img.alignleft, .wp-caption.alignleft {
+    max-width: 50% !important;
+    &:after {
+        clear:both;
+        content:" ";
+        display:block;
+    }
+}
+
+img[class*="align"],
+img[class*="wp-image-"] {
+    height: auto; // Make sure images with WordPress-added height and width attributes are scaled correctly
+}
+img.size-full {
+    width: auto; // Prevent stretching of full-size images with height and width attributes in IE8
 }
 
 
