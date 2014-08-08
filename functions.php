@@ -165,17 +165,15 @@
     
     // Register Widgets //
     
-    function counterpoint_create_widget($name, $id, $description) {
-        register_sidebar(array(
-            'name'          => __('Footer Widget', 'counterpoint'),
-            'id'            => 'footer-widget',
-            'description'   => __('Area in the Footer.', 'counterpoint'),
-            'before_widget' => '<div class="footer-widget widget %2$s">',
-            'after_widget'  => '</div>',
-            'before_title'  => '<h4>',
-            'after_title'   => '</h4>'
-        ));
-    }
+    register_sidebar(array(
+        'name'          => __('Footer Widget', 'counterpoint'),
+        'id'            => 'footer-widget',
+        'description'   => __('Area in the Footer.', 'counterpoint'),
+        'before_widget' => '<div class="footer-widget widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4>',
+        'after_title'   => '</h4>'
+    ));
 
 
 
