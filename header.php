@@ -12,7 +12,7 @@
         <div id="title">
           <a href="<?php echo esc_url(home_url('/')); ?>" class="title-link"><?php bloginfo('name'); ?></a>
         </div>
-        <?php dynamic_sidebar('header-right'); ?>
+        <div class="tagline"><?php bloginfo('description'); ?></div>
         <a href="#" class="menu-toggle">&#9776;</a>
       </header>
       <div id="content-container" class="cf">

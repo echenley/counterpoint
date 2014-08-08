@@ -163,22 +163,20 @@
     }
     
     
-    // Register Widget Space //
+    // Register Widgets //
     
     function counterpoint_create_widget($name, $id, $description) {
         register_sidebar(array(
-            'name' => __($name, 'counterpoint'),
-            'id'     => $id,
-            'description'     => __($description, 'counterpoint'),
-            'before_widget' => '<div class="' . $id . ' widget %2$s">',
-            'after_widget'    => '</div>',
-            'before_title'    => '<h4>',
-            'after_title'     => '</h4>'
+            'name'          => __('Footer Widget', 'counterpoint'),
+            'id'            => 'footer-widget',
+            'description'   => __('Area in the Footer.', 'counterpoint'),
+            'before_widget' => '<div class="footer-widget widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h4>',
+            'after_title'   => '</h4>'
         ));
     }
 
-    counterpoint_create_widget('Footer Widget', 'footer-widget', 'Area in the Footer.');
-    counterpoint_create_widget('Header Right', 'header-widget', 'Area at the right side of the header. Holds a single widget. Perfect for social icons, search bar, or a site tagline.');
 
 
     /*

@@ -7,7 +7,7 @@ Author URI: http://henleyedition.com
 July 6, 2014 (v1.8)
 ============
 
-  * Typography changed.
+  * Typography changed. (license info updated in readme.txt)
   * Added Helper Classes (see henleythemes.com)
   * Revamped footer with better widget handling
   * New screenshot to match.

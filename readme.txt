@@ -16,13 +16,17 @@ Check out http://henleythemes.com for a live demo!
 Typography
 ==========
 
-  style.scss
-  ----------
-    Font:        Droid Serif
-    Author:      Steve Matteson
-    Author URI:  http://www.droidfonts.com/
-    License:     Apache License, version 2.0
-    License URI: http://www.apache.org/licenses/LICENSE-2.0.html
+  Open Sans
+  ---------
+  Author:      Steve Matteson
+  License:     Apache License, version 2.0
+  License URI: http://www.apache.org/licenses/LICENSE-2.0.html
+
+  Roboto Slab
+  -----------
+  Author:      Christian Robertson
+  License:     Apache License, version 2.0
+  License URI: http://www.apache.org/licenses/LICENSE-2.0.html
 
 
 Images
